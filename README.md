@@ -27,20 +27,20 @@ git remote rm origin
 and run:
 
 ```bash
-npm install
-npm start
+yarn install
+yarn start
 ```
 
 To build the component for production, run:
 
 ```bash
-npm run build
+yarn run build
 ```
 
 To run the unit tests for the components, run:
 
 ```bash
-npm test
+yarn test
 ```
 
 Need help? Check out our docs [here](https://stenciljs.com/docs/my-first-component).
