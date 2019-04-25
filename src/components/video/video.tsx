@@ -11,6 +11,7 @@ export class Video {
   @Prop() src: string;
 
   private ct: HTMLElement;
+  private player: any;
 
   getIFrameURL() {
     return '//player.vimeo.com/video/205404461?loop=0&autoplay=0&muted=0&' +
@@ -21,15 +22,21 @@ export class Video {
   render() {
     return (
       <div>
-        <iframe src={this.getIFrameURL()} ref={e => this.ct = e } frameborder="0" />
+        <div class="video">
+          <iframe src={this.getIFrameURL()} ref={e => this.ct = e } frameborder="0" />
+        </div>
+        <div class="controls">
+          <button onClick={() => this.player.play()}>Play</button>
+          <button onClick={() => this.player.pause()}>Pause</button>
+        </div>
       </div>
     );
   }
 
   async componentDidLoad() {
-    const player = new Player(this.ct);
+    this.player = new Player(this.ct);
 
-    await player.ready();
+    await this.player.ready();
 
     // player.play();
   }
