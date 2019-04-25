@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>Stencil Component Starter</title>
+  <script src="/build/xwc.js"></script>
+  <link href="https://openhpi.azureedge.net/assets/bootstrap-e4613cdc564040c32f7951ed0c8ef5a46b26fb5d66c9f15931f34651ae8283c5.css" rel="stylesheet" />
+  <link href="https://openhpi.azureedge.net/assets/application_openhpi-9211629cd548a808a98ace6b03212b664a4ecf64cc5acf0dff1b145d627ad132.css" rel="stylesheet" />
+  <style>
+    body {
+      background: #eee;
+    }
+
+    section {
+      margin: 0 auto;
+      background: #fff;
+      max-width: 900px;
+      padding: 1em;
+    }
+
+    xwc-video {
+      margin: 0 auto;
+      max-width: 700px;
+      background: black;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h1>Video Player Test</h1>
+    <xwc-video src="static/video.json">
+      <div class="flex-video">
+        <iframe src="//player.vimeo.com/video/205404461" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      </div>
+    </xwc-video>
+  </section>
+</body>
+</html>

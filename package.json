@@ -1,0 +1,35 @@
+{
+  "name": "xwc",
+  "version": "0.0.1",
+  "description": "Stencil Component Starter",
+  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
+  "unpkg": "dist/ionic.js",
+  "types": "dist/types/components.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll"
+  },
+  "dependencies": {
+    "@vimeo/player": "^2.8.2"
+  },
+  "devDependencies": {
+    "@stencil/core": "~0.16.2",
+    "@stencil/postcss": "^0.1.0",
+    "@stencil/sass": "^0.1.1",
+    "@types/autoprefixer": "^9.4.0",
+    "@types/jest": "23.3.14",
+    "@types/puppeteer": "1.12.3",
+    "autoprefixer": "^9.5.1",
+    "jest": "23.6.0",
+    "jest-cli": "23.6.0",
+    "puppeteer": "1.8.0"
+  },
+  "license": "MIT"
+}
