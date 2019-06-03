@@ -6,7 +6,7 @@ import autoprefixer from 'autoprefixer';
 
 
 export const config: Config = {
-  namespace: 'xwc',
+  namespace: 'xmf',
   plugins: [
     sass(),
     postcss({
@@ -14,14 +14,19 @@ export const config: Config = {
     })
   ],
   outputTargets: [
-    { type: 'dist' },
-    { type: 'docs' },
-    {
+    { type: 'dist',
+      esmLoaderPath: '../loader'
+    }, {
+      type: 'docs-readme'
+    }, {
       type: 'www',
-      serviceWorker: null // disable service workers
+      serviceWorker: null
     }
   ],
   copy: [
     { src: 'static' }
-  ]
+  ],
+  devServer: {
+    openBrowser: false
+  },
 };

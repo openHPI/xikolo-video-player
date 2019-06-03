@@ -1,43 +1,119 @@
-import { Component, Prop } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Method,
+  Prop,
+  State,
+  h,
+} from '@stencil/core';
 
-import Player from "@vimeo/player";
+import Player from '@vimeo/player';
+import { ResizeObserver } from 'resize-observer';
 
 @Component({
-  tag: 'xwc-video',
+  tag: 'xmf-video',
   styleUrl: 'video.scss',
   shadow: true
 })
 export class Video {
-  @Prop() src: string;
+  @Element() el: HTMLElement;
+  @Prop() src: number;
+  @Prop() type: string;
+  @Prop() controls: boolean;
 
-  private ct: HTMLElement;
-  private player: any;
+  @State() private ratio: number = 0.5625;
+  @State() private clientHeight: number;
 
-  getIFrameURL() {
-    return '//player.vimeo.com/video/205404461?loop=0&autoplay=0&muted=0&' +
-           'gesture=media&playsinline=true&byline=0&portrait=0&title=0' +
-           'transparent=0&background=1';
-  }
+  @Event({
+    eventName: 'play',
+    bubbles: false,
+    cancelable: false
+  })
+  private _playEvent: EventEmitter;
+
+  private container: HTMLElement;
+  private player: Player;
+  private observer: ResizeObserver;
 
   render() {
-    return (
-      <div>
-        <div class="video">
-          <iframe src={this.getIFrameURL()} ref={e => this.ct = e } frameborder="0" />
-        </div>
-        <div class="controls">
-          <button onClick={() => this.player.play()}>Play</button>
-          <button onClick={() => this.player.pause()}>Pause</button>
-        </div>
-      </div>
-    );
+    let outerStyle = {
+      paddingBottom: `${this.ratio * 100}%`
+    };
+
+    let ctStyle = {
+      height: `${this.clientHeight}px`
+    };
+
+    return <div class="outer" style={outerStyle}>
+      <div ref={(el) => this.container = el} style={ctStyle} />
+    </div>;
   }
 
-  async componentDidLoad() {
-    this.player = new Player(this.ct);
+  @Method()
+  async load(id: number) {
+    this.player = new Player(this.container, {
+      id: id,
+      // @ts-ignore Non-free pro-only oembed parameter not declared in public
+      // types definition.
+      controls: '0'
+    })
+
+    this.player.on('play', (e) => {
+      this._playEvent.emit(e)
+    })
+
+    this.player.on('pause', (e) => {
+      this.el.dispatchEvent(new CustomEvent('pause', e))
+    })
 
     await this.player.ready();
 
-    // player.play();
+    Promise.all([
+      this.player.getVideoWidth(),
+      this.player.getVideoHeight()
+    ]).then((dimensions) => {
+      this.setAspectRatio(dimensions[1] / dimensions[0]);
+    })
+  }
+
+  @Method()
+  async play() {
+    return this.player.play();
+  }
+
+  @Method()
+  async pause() {
+    return this.player.pause();
+  }
+
+  @Method()
+  async getDuration() {
+    return this.player.getDuration();
+  }
+
+  setAspectRatio(ratio: number) {
+    this.ratio = ratio;
+
+    if(this.el.clientHeight > 0) {
+      this.clientHeight = this.el.clientHeight;
+    } else {
+      this.clientHeight = this.el.clientWidth * this.ratio;
+    }
+  }
+
+  async componentDidLoad() {
+    await this.load(this.src)
+
+    this.observer = new ResizeObserver(() => {
+      this.clientHeight = this.el.clientHeight;
+    });
+
+    this.observer.observe(this.el)
+  }
+
+  componentDidUnload() {
+    this.observer.disconnect();
   }
 }

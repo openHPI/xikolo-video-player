@@ -5,52 +5,72 @@
  */
 
 
-import '@stencil/core';
-
-
+import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-
-  interface XwcVideo {
-    'src': string;
+  interface XmfVideo {
+    'controls': boolean;
+    'getDuration': () => Promise<number>;
+    'load': (id: number) => Promise<void>;
+    'pause': () => Promise<void>;
+    'play': () => Promise<void>;
+    'src': number;
+    'type': string;
   }
-  interface XwcVideoAttributes extends StencilHTMLAttributes {
-    'src'?: string;
+  interface XmfVideoPlayer {
+    '_exitFullscreen': () => Promise<void>;
+    '_requestFullscreen': () => Promise<void>;
+    'pause': () => Promise<any>;
+    'play': () => Promise<any>;
+    'src': string;
   }
 }
 
 declare global {
-  interface StencilElementInterfaces {
-    'XwcVideo': Components.XwcVideo;
-  }
-
-  interface StencilIntrinsicElements {
-    'xwc-video': Components.XwcVideoAttributes;
-  }
 
 
-  interface HTMLXwcVideoElement extends Components.XwcVideo, HTMLStencilElement {}
-  var HTMLXwcVideoElement: {
-    prototype: HTMLXwcVideoElement;
-    new (): HTMLXwcVideoElement;
+  interface HTMLXmfVideoElement extends Components.XmfVideo, HTMLStencilElement {}
+  var HTMLXmfVideoElement: {
+    prototype: HTMLXmfVideoElement;
+    new (): HTMLXmfVideoElement;
   };
 
+  interface HTMLXmfVideoPlayerElement extends Components.XmfVideoPlayer, HTMLStencilElement {}
+  var HTMLXmfVideoPlayerElement: {
+    prototype: HTMLXmfVideoPlayerElement;
+    new (): HTMLXmfVideoPlayerElement;
+  };
   interface HTMLElementTagNameMap {
-    'xwc-video': HTMLXwcVideoElement
+    'xmf-video': HTMLXmfVideoElement;
+    'xmf-video-player': HTMLXmfVideoPlayerElement;
   }
-
-  interface ElementTagNameMap {
-    'xwc-video': HTMLXwcVideoElement;
-  }
-
-
-  export namespace JSX {
-    export interface Element {}
-    export interface IntrinsicElements extends StencilIntrinsicElements {
-      [tagName: string]: any;
-    }
-  }
-  export interface HTMLAttributes extends StencilHTMLAttributes {}
-
 }
+
+declare namespace LocalJSX {
+  interface XmfVideo extends JSXBase.HTMLAttributes<HTMLXmfVideoElement> {
+    'controls'?: boolean;
+    'onPlay'?: (event: CustomEvent<any>) => void;
+    'src'?: number;
+    'type'?: string;
+  }
+  interface XmfVideoPlayer extends JSXBase.HTMLAttributes<HTMLXmfVideoPlayerElement> {
+    'src'?: string;
+  }
+
+  interface IntrinsicElements {
+    'xmf-video': XmfVideo;
+    'xmf-video-player': XmfVideoPlayer;
+  }
+}
+
+export { LocalJSX as JSX };
+
+
+declare module "@stencil/core" {
+  export namespace JSX {
+    interface IntrinsicElements extends LocalJSX.IntrinsicElements {}
+  }
+}
+
+

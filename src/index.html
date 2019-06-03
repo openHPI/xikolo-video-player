@@ -4,9 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
-  <script src="/build/xwc.js"></script>
-  <link href="https://openhpi.azureedge.net/assets/bootstrap-e4613cdc564040c32f7951ed0c8ef5a46b26fb5d66c9f15931f34651ae8283c5.css" rel="stylesheet" />
-  <link href="https://openhpi.azureedge.net/assets/application_openhpi-9211629cd548a808a98ace6b03212b664a4ecf64cc5acf0dff1b145d627ad132.css" rel="stylesheet" />
+  <script type="module" src="build/xmf.esm.js"></script>
+  <script nomodule src="build/xmf.js"></script>
   <style>
     body {
       background: #eee;
@@ -19,21 +18,41 @@
       padding: 1em;
     }
 
-    xwc-video {
+    xmf-video {
       margin: 0 auto;
       max-width: 700px;
+      /*max-height: 300px;*/
       background: black;
+
+      color: #fff;
+      background: #333;
+      --slider-color: currentColor;
+    }
+
+    xmf-source {
+      /*height: 300px;*/
     }
   </style>
 </head>
 <body>
   <section>
-    <h1>Video Player Test</h1>
-    <xwc-video src="static/video.json">
+    <h1><a href="#">Video Player Test</a></h1>
+    <!-- <xmf-source src="205404461" type="application/vnd.xmf.vimeo"></xmf-source> -->
+
+    <xmf-video-player controls>
       <div class="flex-video">
         <iframe src="//player.vimeo.com/video/205404461" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </div>
-    </xwc-video>
+    </xmf-video-player>
+
+    <script>
+      let el = document.querySelector('xmf-video-player');
+      // el.play();
+      console.log(el);
+    </script>
+
+    <br />
+    <button>Button</button>
   </section>
 </body>
 </html>
