@@ -21,8 +21,8 @@ export namespace Components {
   interface XmfVideoPlayer {
     '_exitFullscreen': () => Promise<void>;
     '_requestFullscreen': () => Promise<void>;
-    'pause': () => Promise<any>;
-    'play': () => Promise<any>;
+    'pause': () => Promise<[any, any]>;
+    'play': () => Promise<[any, any]>;
     'src': string;
   }
 }

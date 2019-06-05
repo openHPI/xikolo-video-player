@@ -8,7 +8,7 @@ import {
 } from '@stencil/core';
 
 import { format } from '../../utils/duration';
-import * as icon from './icon.js';
+import * as icon from './icon';
 
 @Component({
   tag: 'xmf-video-player',
@@ -21,6 +21,7 @@ export class VideoPlayer {
   @Prop() src: string;
 
   private source: any;
+  private secondary: any;
 
   @State() playing: boolean;
   @State() fullscreen: boolean;
@@ -37,11 +38,18 @@ export class VideoPlayer {
     return (
       <div class={cl}>
         <div class="player__presentation">
-          <xmf-video
-            class="player__source"
-            src={205404461}
-            ref={(e) => this.source = e}>
-          </xmf-video>
+          <div>
+            <xmf-video
+              class="player__source"
+              src={340196868}
+              ref={(e) => this.source = e}>
+            </xmf-video>
+            <xmf-video
+              class="player__source"
+              src={340196788}
+              ref={(e) => this.secondary = e}>
+            </xmf-video>
+          </div>
           <div
             class="player__overlay"
             onClick={(e) => this.handleOverlayClick(e)}
@@ -77,12 +85,18 @@ export class VideoPlayer {
 
   @Method()
   async play() {
-    return await this.source.play();
+    return Promise.all([
+      this.source.play(),
+      this.secondary.play()
+    ]);
   }
 
   @Method()
   async pause() {
-    return await this.source.pause();
+    return Promise.all([
+      this.source.pause(),
+      this.secondary.pause()
+    ]);
   }
 
   @Method()

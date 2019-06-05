@@ -21,8 +21,14 @@
   position: relative;
   overflow: hidden;
 
+  & > div {
+    flex-grow: 1;
+    display: flex;
+    align-items: stretch;
+  }
+
   xmf-video {
-    height: 100%;
+    flex-grow: 1;
   }
 }
 
