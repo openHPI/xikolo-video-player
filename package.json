@@ -23,7 +23,8 @@
   "dependencies": {
     "@stencil/core": "^1.0.0",
     "@vimeo/player": "^2.8.2",
-    "resize-observer": "^1.0.0"
+    "resize-observer": "^1.0.0",
+    "split.js": "^1.5.11"
   },
   "devDependencies": {
     "@stencil/postcss": "^0.1.0",

@@ -1,8 +1,6 @@
 import {
   Component,
   Element,
-  Event,
-  EventEmitter,
   Method,
   Prop,
   State,
@@ -26,13 +24,6 @@ export class Video {
   @State() private ratio: number = 0.5625;
   @State() private clientHeight: number;
 
-  @Event({
-    eventName: 'play',
-    bubbles: false,
-    cancelable: false
-  })
-  private _playEvent: EventEmitter;
-
   private container: HTMLElement;
   private player: Player;
   private observer: ResizeObserver;
@@ -47,25 +38,43 @@ export class Video {
     };
 
     return <div class="outer" style={outerStyle}>
-      <div ref={(el) => this.container = el} style={ctStyle} />
+      <div style={ctStyle} ref={(el) => this.container = el} />
+      <div class="overlay" style={ctStyle}><slot /></div>
     </div>;
   }
 
   @Method()
   async load(id: number) {
+    if(!id) return;
+
     this.player = new Player(this.container, {
       id: id,
       // @ts-ignore Non-free pro-only oembed parameter not declared in public
       // types definition.
-      controls: '0'
+      controls: '0',
+      // @ts-ignore
+      autopause: '0'
     })
 
+    // @ts-ignore
+    this.player.element.tabIndex = -1;
+
     this.player.on('play', (e) => {
-      this._playEvent.emit(e)
+      this.el.dispatchEvent(new CustomEvent('play', {
+        detail: e, bubbles: false, cancelable: false
+      }))
     })
 
     this.player.on('pause', (e) => {
-      this.el.dispatchEvent(new CustomEvent('pause', e))
+      this.el.dispatchEvent(new CustomEvent('pause', {
+        detail: e//, bubbles: false, cancelable: false
+      }))
+    })
+
+    this.player.on('timeupdate', (e) => {
+      this.el.dispatchEvent(new CustomEvent('timeupdate', {
+        detail: e//, bubbles: false, cancelable: false
+      }))
     })
 
     await this.player.ready();
@@ -93,6 +102,11 @@ export class Video {
     return this.player.getDuration();
   }
 
+  @Method()
+  async setCurrentTime(seconds: number) {
+    return this.player.setCurrentTime(seconds);
+  }
+
   setAspectRatio(ratio: number) {
     this.ratio = ratio;
 
@@ -104,13 +118,13 @@ export class Video {
   }
 
   async componentDidLoad() {
-    await this.load(this.src)
-
     this.observer = new ResizeObserver(() => {
       this.clientHeight = this.el.clientHeight;
     });
 
-    this.observer.observe(this.el)
+    this.observer.observe(this.el);
+
+    return this.load(this.src);
   }
 
   componentDidUnload() {

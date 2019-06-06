@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+.outer, .outer > div {
+  height: 100%;
+}
+
 .outer > div {
   position: absolute;
   top: 0;
@@ -16,10 +20,11 @@
   width: 100%;
 }
 
-iframe {
+iframe, .overlay {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
 }
+

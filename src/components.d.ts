@@ -9,26 +9,36 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface XmfScreen {
+    'pip': boolean;
+  }
   interface XmfVideo {
     'controls': boolean;
     'getDuration': () => Promise<number>;
     'load': (id: number) => Promise<void>;
     'pause': () => Promise<void>;
     'play': () => Promise<void>;
+    'setCurrentTime': (seconds: number) => Promise<number>;
     'src': number;
     'type': string;
   }
   interface XmfVideoPlayer {
     '_exitFullscreen': () => Promise<void>;
     '_requestFullscreen': () => Promise<void>;
-    'pause': () => Promise<[any, any]>;
-    'play': () => Promise<[any, any]>;
+    'pause': () => Promise<void>;
+    'play': () => Promise<void>;
     'src': string;
   }
 }
 
 declare global {
 
+
+  interface HTMLXmfScreenElement extends Components.XmfScreen, HTMLStencilElement {}
+  var HTMLXmfScreenElement: {
+    prototype: HTMLXmfScreenElement;
+    new (): HTMLXmfScreenElement;
+  };
 
   interface HTMLXmfVideoElement extends Components.XmfVideo, HTMLStencilElement {}
   var HTMLXmfVideoElement: {
@@ -42,15 +52,18 @@ declare global {
     new (): HTMLXmfVideoPlayerElement;
   };
   interface HTMLElementTagNameMap {
+    'xmf-screen': HTMLXmfScreenElement;
     'xmf-video': HTMLXmfVideoElement;
     'xmf-video-player': HTMLXmfVideoPlayerElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface XmfScreen extends JSXBase.HTMLAttributes<HTMLXmfScreenElement> {
+    'pip'?: boolean;
+  }
   interface XmfVideo extends JSXBase.HTMLAttributes<HTMLXmfVideoElement> {
     'controls'?: boolean;
-    'onPlay'?: (event: CustomEvent<any>) => void;
     'src'?: number;
     'type'?: string;
   }
@@ -59,6 +72,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'xmf-screen': XmfScreen;
     'xmf-video': XmfVideo;
     'xmf-video-player': XmfVideoPlayer;
   }

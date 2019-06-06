@@ -1,0 +1,55 @@
+:host {
+  display: block;
+  background-color: black;
+
+  --gutter-color: #333;
+}
+
+.screen {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+.gutter {
+  background-color: inherit;
+
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+  cursor: col-resize;
+  background-color: var(--gutter-color);
+}
+
+// .pane.secondary {
+//   padding: 0.5em 12em 4em 0.5em;
+// }
+
+.pane {
+  overflow: hidden;
+}
+
+.pip {
+  .gutter { display: none }
+  .pane { width: 100% !important; }
+
+  .pane.primary {
+    position: absolute;
+    z-index: 2;
+
+    bottom: 0.5em;
+    right: 0.5em;
+    width: 35% !important;
+
+    box-shadow: 0 0 8px #333A;
+  }
+}
+
+.pipLeft {
+  .pane.primary {
+    right: auto;
+    left: 0.5em;
+  }
+}

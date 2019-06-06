@@ -11,6 +11,10 @@
       background: #eee;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     section {
       margin: 0 auto;
       background: #fff;
@@ -18,20 +22,26 @@
       padding: 1em;
     }
 
-    xmf-video {
+    xmf-video-player {
       margin: 0 auto;
-      max-width: 700px;
-      /*max-height: 300px;*/
+      width: 860px;
+      /* max-height: 200px; */
       background: black;
 
       color: #fff;
       background: #333;
-      --slider-color: currentColor;
+      --slider-color: orange;
     }
 
-    xmf-source {
-      /*height: 300px;*/
+    /* xmf-video-player::part(slider) {
+      color: red;
+      height: 2px;
+      transition: height .1s ease-in-out;
     }
+
+    xmf-video-player::part(slider):hover {
+      height: 16px;
+    } */
   </style>
 </head>
 <body>
@@ -39,11 +49,13 @@
     <h1><a href="#">Video Player Test</a></h1>
     <!-- <xmf-source src="205404461" type="application/vnd.xmf.vimeo"></xmf-source> -->
 
-    <xmf-video-player controls>
-      <div class="flex-video">
-        <iframe src="//player.vimeo.com/video/205404461" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </div>
-    </xmf-video-player>
+    <div id="wrapper">
+      <xmf-video-player controls>
+        <div class="flex-video" slot="fallback">
+          <iframe src="//player.vimeo.com/video/205404461" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+      </xmf-video-player>
+    </div>
 
     <script>
       let el = document.querySelector('xmf-video-player');

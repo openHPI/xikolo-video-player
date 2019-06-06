@@ -14,30 +14,23 @@
   background: inherit;
 
   height: 100%;
+
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
-.player__presentation {
+xmf-screen {
   flex-grow: 1;
   position: relative;
   overflow: hidden;
 
-  & > div {
-    flex-grow: 1;
-    display: flex;
-    align-items: stretch;
-  }
-
   xmf-video {
-    flex-grow: 1;
+    height: 100%;
   }
-}
 
-.player__overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  // img {
+  //   width: 100%;
+  //   height: 100%;
+  // }
 }
 
 .controls {
@@ -87,7 +80,7 @@
 
   button {
     border: 0;
-    padding: 0.5em 0.6em;
+    padding: 0.6em 0.7em;
     margin: 0;
     background: transparent;
     color: inherit;
@@ -100,8 +93,8 @@
 
   svg {
     display: block;
-    height: 16px;
-    width: 16px;
+    height: 14px;
+    // width: 14px;
     fill: currentColor;
     color: inherit;
   }

@@ -25,6 +25,7 @@ export class VideoPlayer {
 
   @State() playing: boolean;
   @State() fullscreen: boolean;
+  @State() pip: boolean;
 
   @State() seconds: number = 0;
   @State() duration: number = 0;
@@ -37,26 +38,22 @@ export class VideoPlayer {
 
     return (
       <div class={cl}>
-        <div class="player__presentation">
-          <div>
-            <xmf-video
-              class="player__source"
-              src={340196868}
-              ref={(e) => this.source = e}>
-            </xmf-video>
-            <xmf-video
-              class="player__source"
-              src={340196788}
-              ref={(e) => this.secondary = e}>
-            </xmf-video>
-          </div>
-          <div
-            class="player__overlay"
-            onClick={(e) => this.handleOverlayClick(e)}
-          />
-        </div>
+        <xmf-screen pip={this.pip}>
+          <xmf-video
+            src={340196868}
+            ref={(e) => this.source = e}
+            onClick={(e) => this.handleOverlayClick(e)}>
+          </xmf-video>
+          <xmf-video
+            slot="secondary"
+            src={340196788}
+            ref={(e) => this.secondary = e}
+            onClick={(e) => this.handleOverlayClick(e)}>
+          </xmf-video>
+        </xmf-screen>
         <div class="controls">
           <input class="controls__slider"
+            part="slider"
             type="range"
             min="0"
             max={this.duration}
@@ -73,9 +70,13 @@ export class VideoPlayer {
             <span class="controls__time" title={`Time left of ${format(this.duration)}s`}>
               -{format(this.duration - this.seconds)}
             </span>
+            {this.pip
+              ? <button onClick={() => this.pip = false} innerHTML={icon.Columns} />
+              : <button onClick={() => this.pip = true} innerHTML={icon.Clone} />
+            }
             {this.fullscreen
-              ? <button onClick={() => this._exitFullscreen()} innerHTML={icon.Shrink} />
-              : <button onClick={() => this._requestFullscreen()} innerHTML={icon.Enlarge} />
+              ? <button onClick={() => this._exitFullscreen()} innerHTML={icon.Compress} />
+              : <button onClick={() => this._requestFullscreen()} innerHTML={icon.Expand} />
             }
           </div>
         </div>
@@ -85,18 +86,22 @@ export class VideoPlayer {
 
   @Method()
   async play() {
-    return Promise.all([
+    await Promise.all([
       this.source.play(),
       this.secondary.play()
-    ]);
+    ])
+
+    this.playing = true;
   }
 
   @Method()
   async pause() {
-    return Promise.all([
+    await Promise.all([
       this.source.pause(),
       this.secondary.pause()
     ]);
+
+    this.playing = false;
   }
 
   @Method()
@@ -115,24 +120,30 @@ export class VideoPlayer {
     const el = e.srcElement as HTMLInputElement;
     const value = parseFloat(el.value);
 
-    this.seconds = await this.source.setCurrentTime(value)
-    this.playing ? this.source.play() : this.source.pause()
+    let [seconds] = await Promise.all([
+      this.source.setCurrentTime(value),
+      this.secondary.setCurrentTime(value)
+    ]);
+
+    this.seconds = seconds;
+
+    return this.playing ? this.play() : this.pause()
   }
 
   async componentDidLoad() {
     this.duration = await this.source.getDuration();
 
-    this.source.addEventListener('play', () => {
-      this.playing = true;
-    })
+    // this.source.addEventListener('play', () => {
+    //   this.playing = true;
+    // })
 
-    this.source.addEventListener('pause', () => {
-      this.playing = false;
-    })
+    // this.source.addEventListener('pause', () => {
+    //   this.playing = false;
+    // })
 
-    this.source.addEventListener('timeupdate', (e) => {
-      this.seconds = e.seconds;
-      this.duration = e.duration;
+    this.source.addEventListener('timeupdate', (e: CustomEvent) => {
+      this.seconds = e.detail.seconds;
+      this.duration = e.detail.duration;
     })
   }
 
