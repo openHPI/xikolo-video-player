@@ -18,7 +18,7 @@ export class VideoPlayer {
   @Element() el: HTMLElement;
 
   @Prop() pip: boolean;
-  @State() pipLeft: boolean = true;
+  @State() pipFlip: boolean = false;
 
   private screen: HTMLDivElement;
   private engine: Split;
@@ -27,7 +27,7 @@ export class VideoPlayer {
     const clWrp = {
       screen: true,
       pip: this.pip,
-      pipLeft: this.pipLeft
+      flip: this.pipFlip
     };
 
     return (
@@ -54,12 +54,12 @@ export class VideoPlayer {
   _setupPip(newValue: boolean, oldValue: boolean) {
     if(newValue || !oldValue) return;
 
-    this.pipLeft = false;
+    this.pipFlip = false;
   }
 
   private _flipPipLeft() {
     if(!this.pip) return;
 
-    this.pipLeft = !this.pipLeft;
+    this.pipFlip = !this.pipFlip;
   }
 }

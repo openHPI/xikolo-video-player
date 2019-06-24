@@ -39,17 +39,17 @@
     position: absolute;
     z-index: 2;
 
-    bottom: 0.5em;
-    right: 0.5em;
+    top: 0.2em;
+    right: 0.2em;
     width: 35% !important;
 
     box-shadow: 0 0 8px #333A;
   }
 }
 
-.pipLeft {
+.pip.flip {
   .pane.primary {
-    right: auto;
-    left: 0.5em;
+    top: auto;
+    bottom: .2em;
   }
 }
