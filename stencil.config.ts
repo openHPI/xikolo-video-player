@@ -6,7 +6,7 @@ import autoprefixer from 'autoprefixer';
 
 
 export const config: Config = {
-  namespace: 'xmf',
+  namespace: 'xim',
   plugins: [
     sass(),
     postcss({

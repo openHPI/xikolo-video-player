@@ -1,7 +1,7 @@
 {
-  "name": "xwc",
-  "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "name": "@xikolo/media",
+  "version": "0.1.0",
+  "description": "Xikolo Media Framework",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",

@@ -9,6 +9,14 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface XimPlayer {
+    '_exitFullscreen': () => Promise<void>;
+    '_requestFullscreen': () => Promise<void>;
+    'pause': () => Promise<void>;
+    'play': () => Promise<void>;
+    'src': string;
+  }
+  interface XimPlayerControls {}
   interface XmfScreen {
     'pip': boolean;
   }
@@ -22,17 +30,22 @@ export namespace Components {
     'src': number;
     'type': string;
   }
-  interface XmfVideoPlayer {
-    '_exitFullscreen': () => Promise<void>;
-    '_requestFullscreen': () => Promise<void>;
-    'pause': () => Promise<void>;
-    'play': () => Promise<void>;
-    'src': string;
-  }
 }
 
 declare global {
 
+
+  interface HTMLXimPlayerElement extends Components.XimPlayer, HTMLStencilElement {}
+  var HTMLXimPlayerElement: {
+    prototype: HTMLXimPlayerElement;
+    new (): HTMLXimPlayerElement;
+  };
+
+  interface HTMLXimPlayerControlsElement extends Components.XimPlayerControls, HTMLStencilElement {}
+  var HTMLXimPlayerControlsElement: {
+    prototype: HTMLXimPlayerControlsElement;
+    new (): HTMLXimPlayerControlsElement;
+  };
 
   interface HTMLXmfScreenElement extends Components.XmfScreen, HTMLStencilElement {}
   var HTMLXmfScreenElement: {
@@ -45,20 +58,22 @@ declare global {
     prototype: HTMLXmfVideoElement;
     new (): HTMLXmfVideoElement;
   };
-
-  interface HTMLXmfVideoPlayerElement extends Components.XmfVideoPlayer, HTMLStencilElement {}
-  var HTMLXmfVideoPlayerElement: {
-    prototype: HTMLXmfVideoPlayerElement;
-    new (): HTMLXmfVideoPlayerElement;
-  };
   interface HTMLElementTagNameMap {
+    'xim-player': HTMLXimPlayerElement;
+    'xim-player-controls': HTMLXimPlayerControlsElement;
     'xmf-screen': HTMLXmfScreenElement;
     'xmf-video': HTMLXmfVideoElement;
-    'xmf-video-player': HTMLXmfVideoPlayerElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface XimPlayer extends JSXBase.HTMLAttributes<HTMLXimPlayerElement> {
+    'src'?: string;
+  }
+  interface XimPlayerControls extends JSXBase.HTMLAttributes<HTMLXimPlayerControlsElement> {
+    'onPause'?: (event: CustomEvent<any>) => void;
+    'onPlay'?: (event: CustomEvent<any>) => void;
+  }
   interface XmfScreen extends JSXBase.HTMLAttributes<HTMLXmfScreenElement> {
     'pip'?: boolean;
   }
@@ -67,14 +82,12 @@ declare namespace LocalJSX {
     'src'?: number;
     'type'?: string;
   }
-  interface XmfVideoPlayer extends JSXBase.HTMLAttributes<HTMLXmfVideoPlayerElement> {
-    'src'?: string;
-  }
 
   interface IntrinsicElements {
+    'xim-player': XimPlayer;
+    'xim-player-controls': XimPlayerControls;
     'xmf-screen': XmfScreen;
     'xmf-video': XmfVideo;
-    'xmf-video-player': XmfVideoPlayer;
   }
 }
 

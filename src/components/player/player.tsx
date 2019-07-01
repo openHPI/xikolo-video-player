@@ -7,15 +7,12 @@ import {
   h,
 } from '@stencil/core';
 
-import { format } from '../../utils/duration';
-import * as icon from './icon';
-
 @Component({
-  tag: 'xmf-video-player',
-  styleUrl: 'video-player.scss',
+  tag: 'xim-player',
+  styleUrl: 'player.scss',
   shadow: true
 })
-export class VideoPlayer {
+export class Player {
   @Element() el: HTMLElement;
 
   @Prop() src: string;
@@ -38,48 +35,20 @@ export class VideoPlayer {
 
     return (
       <div class={cl}>
-        <xmf-screen pip={this.pip}>
-          <xmf-video
+        <xim-screen pip={this.pip}>
+          <xim-video
             src={340196868}
             ref={(e) => this.source = e}
             onClick={(e) => this.handleOverlayClick(e)}>
-          </xmf-video>
-          <xmf-video
+          </xim-video>
+          <xim-video
             slot="secondary"
             src={340196788}
             ref={(e) => this.secondary = e}
             onClick={(e) => this.handleOverlayClick(e)}>
-          </xmf-video>
-        </xmf-screen>
-        <div class="controls">
-          <input class="controls__slider"
-            part="slider"
-            type="range"
-            min="0"
-            max={this.duration}
-            step="any"
-            autocomplete="off"
-            value={this.seconds}
-            onInput={e => this.handleSliderChange(e)}
-          />
-          <div class="controls__toolbar">
-            {this.playing
-              ? <button onClick={() => this.pause()} title="Pause" innerHTML={icon.Pause} />
-              : <button onClick={() => this.play()} title="Play" innerHTML={icon.Play} />
-            }
-            <span class="controls__time" title={`Time left of ${format(this.duration)}s`}>
-              -{format(this.duration - this.seconds)}
-            </span>
-            {this.pip
-              ? <button onClick={() => this.pip = false} innerHTML={icon.Columns} />
-              : <button onClick={() => this.pip = true} innerHTML={icon.Clone} />
-            }
-            {this.fullscreen
-              ? <button onClick={() => this._exitFullscreen()} innerHTML={icon.Compress} />
-              : <button onClick={() => this._requestFullscreen()} innerHTML={icon.Expand} />
-            }
-          </div>
-        </div>
+          </xim-video>
+        </xim-screen>
+        <xim-player-controls />
       </div>
     );
   }
