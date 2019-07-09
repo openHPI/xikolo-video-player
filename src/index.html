@@ -50,18 +50,29 @@
     <!-- <xmf-source src="205404461" type="application/vnd.xmf.vimeo"></xmf-source> -->
 
     <div id="wrapper">
-      <xmf-video-player controls>
-        <div class="flex-video" slot="fallback">
-          <iframe src="//player.vimeo.com/video/205404461" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-        </div>
-      </xmf-video-player>
+      <!-- <xm-player controls> -->
+        <xm-video src="340196868" controls>
+          <iframe src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </xm-video>
+        <!-- <xm-video slot="media" src="vimeo://340196868"></xm-video>
+      </xm-player> -->
     </div>
 
     <script>
-      let el = document.querySelector('xmf-video-player');
-      // el.play();
-      console.log(el);
-      el.addEventListener('play', (e) => console.log('play', e))
+      let el = document.querySelector('xm-video');
+      const log = (e) => console.log(e.type, e.detail);
+
+
+      el.addEventListener('play', log);
+      el.addEventListener('pause', log);
+      el.addEventListener('seeking', log);
+      el.addEventListener('seeked', log);
+      el.addEventListener('bufferstart', log);
+      el.addEventListener('bufferend', log);
+      el.addEventListener('ended', log);
+
+      // el.addEventListener('timeupdate', log);
+      // el.addEventListener('progress', log);
     </script>
 
     <br />

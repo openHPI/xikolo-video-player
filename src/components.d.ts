@@ -9,85 +9,85 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface XimPlayer {
-    '_exitFullscreen': () => Promise<void>;
-    '_requestFullscreen': () => Promise<void>;
-    'pause': () => Promise<void>;
-    'play': () => Promise<void>;
-    'src': string;
-  }
-  interface XimPlayerControls {}
-  interface XmfScreen {
+  interface XmControls {}
+  interface XmMedia {}
+  interface XmPlayer {}
+  interface XmScreen {
     'pip': boolean;
   }
-  interface XmfVideo {
+  interface XmVideo {
     'controls': boolean;
+    'currentTime': () => Promise<number>;
     'getDuration': () => Promise<number>;
-    'load': (id: number) => Promise<void>;
     'pause': () => Promise<void>;
     'play': () => Promise<void>;
-    'setCurrentTime': (seconds: number) => Promise<number>;
+    'seek': (seconds: number) => Promise<number>;
     'src': number;
-    'type': string;
   }
 }
 
 declare global {
 
 
-  interface HTMLXimPlayerElement extends Components.XimPlayer, HTMLStencilElement {}
-  var HTMLXimPlayerElement: {
-    prototype: HTMLXimPlayerElement;
-    new (): HTMLXimPlayerElement;
+  interface HTMLXmControlsElement extends Components.XmControls, HTMLStencilElement {}
+  var HTMLXmControlsElement: {
+    prototype: HTMLXmControlsElement;
+    new (): HTMLXmControlsElement;
   };
 
-  interface HTMLXimPlayerControlsElement extends Components.XimPlayerControls, HTMLStencilElement {}
-  var HTMLXimPlayerControlsElement: {
-    prototype: HTMLXimPlayerControlsElement;
-    new (): HTMLXimPlayerControlsElement;
+  interface HTMLXmMediaElement extends Components.XmMedia, HTMLStencilElement {}
+  var HTMLXmMediaElement: {
+    prototype: HTMLXmMediaElement;
+    new (): HTMLXmMediaElement;
   };
 
-  interface HTMLXmfScreenElement extends Components.XmfScreen, HTMLStencilElement {}
-  var HTMLXmfScreenElement: {
-    prototype: HTMLXmfScreenElement;
-    new (): HTMLXmfScreenElement;
+  interface HTMLXmPlayerElement extends Components.XmPlayer, HTMLStencilElement {}
+  var HTMLXmPlayerElement: {
+    prototype: HTMLXmPlayerElement;
+    new (): HTMLXmPlayerElement;
   };
 
-  interface HTMLXmfVideoElement extends Components.XmfVideo, HTMLStencilElement {}
-  var HTMLXmfVideoElement: {
-    prototype: HTMLXmfVideoElement;
-    new (): HTMLXmfVideoElement;
+  interface HTMLXmScreenElement extends Components.XmScreen, HTMLStencilElement {}
+  var HTMLXmScreenElement: {
+    prototype: HTMLXmScreenElement;
+    new (): HTMLXmScreenElement;
+  };
+
+  interface HTMLXmVideoElement extends Components.XmVideo, HTMLStencilElement {}
+  var HTMLXmVideoElement: {
+    prototype: HTMLXmVideoElement;
+    new (): HTMLXmVideoElement;
   };
   interface HTMLElementTagNameMap {
-    'xim-player': HTMLXimPlayerElement;
-    'xim-player-controls': HTMLXimPlayerControlsElement;
-    'xmf-screen': HTMLXmfScreenElement;
-    'xmf-video': HTMLXmfVideoElement;
+    'xm-controls': HTMLXmControlsElement;
+    'xm-media': HTMLXmMediaElement;
+    'xm-player': HTMLXmPlayerElement;
+    'xm-screen': HTMLXmScreenElement;
+    'xm-video': HTMLXmVideoElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface XimPlayer extends JSXBase.HTMLAttributes<HTMLXimPlayerElement> {
-    'src'?: string;
-  }
-  interface XimPlayerControls extends JSXBase.HTMLAttributes<HTMLXimPlayerControlsElement> {
+  interface XmControls extends JSXBase.HTMLAttributes<HTMLXmControlsElement> {
     'onPause'?: (event: CustomEvent<any>) => void;
     'onPlay'?: (event: CustomEvent<any>) => void;
   }
-  interface XmfScreen extends JSXBase.HTMLAttributes<HTMLXmfScreenElement> {
+  interface XmMedia extends JSXBase.HTMLAttributes<HTMLXmMediaElement> {}
+  interface XmPlayer extends JSXBase.HTMLAttributes<HTMLXmPlayerElement> {}
+  interface XmScreen extends JSXBase.HTMLAttributes<HTMLXmScreenElement> {
     'pip'?: boolean;
   }
-  interface XmfVideo extends JSXBase.HTMLAttributes<HTMLXmfVideoElement> {
+  interface XmVideo extends JSXBase.HTMLAttributes<HTMLXmVideoElement> {
     'controls'?: boolean;
     'src'?: number;
-    'type'?: string;
   }
 
   interface IntrinsicElements {
-    'xim-player': XimPlayer;
-    'xim-player-controls': XimPlayerControls;
-    'xmf-screen': XmfScreen;
-    'xmf-video': XmfVideo;
+    'xm-controls': XmControls;
+    'xm-media': XmMedia;
+    'xm-player': XmPlayer;
+    'xm-screen': XmScreen;
+    'xm-video': XmVideo;
   }
 }
 

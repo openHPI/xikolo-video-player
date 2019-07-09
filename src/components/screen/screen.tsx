@@ -10,7 +10,7 @@ import {
 import Split from 'split.js'
 
 @Component({
-  tag: 'xmf-screen',
+  tag: 'xm-screen',
   styleUrl: 'screen.scss',
   shadow: true
 })

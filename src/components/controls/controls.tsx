@@ -10,16 +10,18 @@ import {
 
 import { format } from '../../utils/duration';
 import * as icon from '../../utils/icon';
+import { Fullscreen, PlayPause } from './buttons';
+
 
 @Component({
-  tag: 'xim-player-controls',
-  styleUrl: 'player-controls.scss',
+  tag: 'xm-controls',
+  styleUrl: 'controls.scss',
   shadow: true
 })
-export class VideoPlayer {
+export class Controls {
   @Element() el: HTMLElement;
 
-  @Prop({ connect: 'state-manager' }) stateManager: any;
+  @Prop({ connect: 'xm-video' }) stateManager: any;
 
   @State() playing: boolean;
   @State() fullscreen: boolean;
@@ -34,6 +36,7 @@ export class VideoPlayer {
   render() {
     return (
       <div class="controls">
+        {/* <xm-controls-slider /> */}
         <input class="controls__slider"
           part="slider"
           type="range"
@@ -45,10 +48,10 @@ export class VideoPlayer {
           onInput={e => this.seek(e)}
         />
         <div class="controls__toolbar">
-          {this.playing
-            ? <button onClick={() => this.evPause.emit()} title="Pause" innerHTML={icon.Pause} />
-            : <button onClick={() => this.evPlay.emit()} title="Play" innerHTML={icon.Play} />
-          }
+          <PlayPause playing={this.playing}
+            onPlay={() => this.evPlay.emit()}
+            onPause={() => this.evPause.emit()}
+          />
           <span class="controls__time" title={`Time left of ${format(this.duration)}s`}>
             -{format(this.duration - this.seconds)}
           </span>
@@ -56,13 +59,19 @@ export class VideoPlayer {
             ? <button onClick={() => this.pip = false} innerHTML={icon.Columns} />
             : <button onClick={() => this.pip = true} innerHTML={icon.Clone} />
           }
+          <Fullscreen fullscreen={false} onRequest={() => null} onExit={() => null} />
           {/* {this.fullscreen
-            ? <button onClick={() => this._exitFullscreen()} innerHTML={icon.Compress} />
-            : <button onClick={() => this._requestFullscreen()} innerHTML={icon.Expand} />
+            ? <button onClick={this._exitFullscreen} innerHTML={icon.Compress} />
+            : <button onClick={this._requestFullscreen.bind(this)} innerHTML={icon.Expand} />
           } */}
         </div>
       </div>
     );
+  }
+
+  public componentDidLoad() {
+    // debugger;
+    this.stateManager;
   }
 
   private seek(e: Event) {

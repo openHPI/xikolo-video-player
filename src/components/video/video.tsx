@@ -1,32 +1,34 @@
 import {
   Component,
   Element,
+  h,
   Method,
   Prop,
   State,
-  h,
+  Watch,
 } from '@stencil/core';
 
 import Player from '@vimeo/player';
 import { ResizeObserver } from 'resize-observer';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 @Component({
-  tag: 'xmf-video',
+  tag: 'xm-video',
   styleUrl: 'video.scss',
   shadow: true
 })
 export class Video {
   @Element() el: HTMLElement;
+
   @Prop() src: number;
-  @Prop() type: string;
-  @Prop() controls: boolean;
+  @Prop() controls: boolean = false;
 
   @State() private ratio: number = 0.5625;
   @State() private clientHeight: number;
 
   private container: HTMLElement;
-  private player: Player;
-  private observer: ResizeObserver;
+  @State() private player: Player;
+  @State() private observer: ResizeObserver;
 
   render() {
     let outerStyle = {
@@ -39,52 +41,119 @@ export class Video {
 
     return <div class="outer" style={outerStyle}>
       <div style={ctStyle} ref={(el) => this.container = el} />
-      <div class="overlay" style={ctStyle}><slot /></div>
+      {/* <div class="overlay" style={ctStyle}><slot name="overlay" /></div> */}
     </div>;
   }
 
-  @Method()
-  async load(id: number) {
-    if(!id) return;
+  async componentDidLoad() {
+    // With HMR the `load` lifecycle event is triggered but not the `unload`
+    // event. This will lead to reusing the same Vimeo Player and registering
+    // the event over and over again.
+    //
+    // If we detect that the vimeo-initialize data attribute is set we are
+    // probably running on an already initialized DOM. For now manually trigger
+    // an unload here.
+    //
+    // See https://github.com/ionic-team/stencil/issues/1316
+    //
+    if(this.container && this.container.dataset.vimeoInitialized) {
+      this.componentDidUnload();
+    }
 
-    this.player = new Player(this.container, {
-      id: id,
-      // @ts-ignore Non-free pro-only oembed parameter not declared in public
-      // types definition.
-      controls: '0',
-      // @ts-ignore
-      autopause: '0'
+    // Observe the outer container element for size changes. If the outer
+    // container is fixed sized (e.g. due to CSS height or display: flex)
+    // we want the video element to sized as high as the container without
+    // maintaining the aspect ratio.
+    //
+    // If the outer element has no size restriction it will be as high as the
+    // aspect ratio box, otherwise we explicitly set the client height of the
+    // container and iframe boxes. The aspect ratio padding box will overflow
+    // if the outer container is smaller but is hidden anyway.
+    this.observer = new ResizeObserver(() => {
+      this.clientHeight = this.el.clientHeight
     })
 
-    // @ts-ignore
-    this.player.element.tabIndex = -1;
+    this.observer.observe(this.el);
+
+    // Initialize Vimeo Player
+    this.player = new Player(this.container, {
+      id: this.src,
+      controls: this.controls,
+      autopause: false,
+    });
+
+    let lastEventPlayPayload;
 
     this.player.on('play', (e) => {
-      this.el.dispatchEvent(new CustomEvent('play', {
-        detail: e, bubbles: false, cancelable: false
-      }))
-    })
+      if(e !== undefined)
+        this.el.dispatchEvent(new CustomEvent('play', { detail: e }));
+    });
 
     this.player.on('pause', (e) => {
-      this.el.dispatchEvent(new CustomEvent('pause', {
-        detail: e//, bubbles: false, cancelable: false
-      }))
-    })
+      this.el.dispatchEvent(new CustomEvent('pause', { detail: e }));
+    });
+
+    this.player.on('seeking', (e) => {
+      this.el.dispatchEvent(new CustomEvent('seeking', { detail: e }));
+    });
+
+    this.player.on('seeked', (e) => {
+      this.el.dispatchEvent(new CustomEvent('seeked', { detail: e }));
+    });
+
+    this.player.on('ended', (e) => {
+      this.el.dispatchEvent(new CustomEvent('ended'));
+    });
+
+    this.player.on('bufferstart', (e) => {
+      this.el.dispatchEvent(new CustomEvent('bufferstart'));
+    });
+
+    this.player.on('bufferend', (e) => {
+      this.el.dispatchEvent(new CustomEvent('bufferend'));
+    });
 
     this.player.on('timeupdate', (e) => {
-      this.el.dispatchEvent(new CustomEvent('timeupdate', {
-        detail: e//, bubbles: false, cancelable: false
-      }))
-    })
+      this.el.dispatchEvent(new CustomEvent('timeupdate', { detail: e }));
+    });
 
+    this.player.on('progress', (e) => {
+      this.el.dispatchEvent(new CustomEvent('progress', { detail: e }));
+    });
+
+    // Wait for Vimeo Player to be ready to access the actual iframe element
     await this.player.ready();
 
+    // If controls are disabled we do not want the iframe to be
+    // focusable by tabbing
+    if(!this.controls) {
+      // @ts-ignore
+      this.player.element.tabIndex = -1;
+    }
+
+    // Read aspect ratio from video and configure box
     Promise.all([
       this.player.getVideoWidth(),
       this.player.getVideoHeight()
     ]).then((dimensions) => {
-      this.setAspectRatio(dimensions[1] / dimensions[0]);
-    })
+      this.ratio = dimensions[1] / dimensions[0];
+    });
+  }
+
+  async componentDidUnload() {
+    this.observer.disconnect();
+    this.player.destroy();
+  }
+
+  @Watch('src')
+  async srcChanged(value: number) {
+    this.player.loadVideo(value);
+  }
+
+  @Watch('controls')
+  async controlsChanged(value: boolean) {
+    await this.componentDidUnload();
+    return this.componentDidLoad();
   }
 
   @Method()
@@ -103,31 +172,12 @@ export class Video {
   }
 
   @Method()
-  async setCurrentTime(seconds: number) {
+  async seek(seconds: number) {
     return this.player.setCurrentTime(seconds);
   }
 
-  setAspectRatio(ratio: number) {
-    this.ratio = ratio;
-
-    if(this.el.clientHeight > 0) {
-      this.clientHeight = this.el.clientHeight;
-    } else {
-      this.clientHeight = this.el.clientWidth * this.ratio;
-    }
-  }
-
-  async componentDidLoad() {
-    this.observer = new ResizeObserver(() => {
-      this.clientHeight = this.el.clientHeight;
-    });
-
-    this.observer.observe(this.el);
-
-    return this.load(this.src);
-  }
-
-  componentDidUnload() {
-    this.observer.disconnect();
+  @Method()
+  async currentTime() {
+    return this.player.getCurrentTime();
   }
 }
