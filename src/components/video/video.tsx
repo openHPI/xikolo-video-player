@@ -10,7 +10,6 @@ import {
 
 import Player from '@vimeo/player';
 import { ResizeObserver } from 'resize-observer';
-import { textChangeRangeIsUnchanged } from 'typescript';
 
 @Component({
   tag: 'xm-video',
@@ -20,8 +19,10 @@ import { textChangeRangeIsUnchanged } from 'typescript';
 export class Video {
   @Element() el: HTMLElement;
 
+  /**
+   * Vimeo Video ID
+   */
   @Prop() src: number;
-  @Prop() controls: boolean = false;
 
   @State() private ratio: number = 0.5625;
   @State() private clientHeight: number;
@@ -41,7 +42,7 @@ export class Video {
 
     return <div class="outer" style={outerStyle}>
       <div style={ctStyle} ref={(el) => this.container = el} />
-      {/* <div class="overlay" style={ctStyle}><slot name="overlay" /></div> */}
+      <div class="overlay" style={ctStyle}><slot name="overlay" /></div>
     </div>;
   }
 
@@ -78,13 +79,12 @@ export class Video {
     // Initialize Vimeo Player
     this.player = new Player(this.container, {
       id: this.src,
-      controls: this.controls,
+      controls: false,
       autopause: false,
     });
 
-    let lastEventPlayPayload;
-
     this.player.on('play', (e) => {
+      // When seeking a play event is emitted without payload, ignore that.
       if(e !== undefined)
         this.el.dispatchEvent(new CustomEvent('play', { detail: e }));
     });
@@ -124,20 +124,13 @@ export class Video {
     // Wait for Vimeo Player to be ready to access the actual iframe element
     await this.player.ready();
 
-    // If controls are disabled we do not want the iframe to be
+    // As controls are disabled we do not want the iframe to be
     // focusable by tabbing
-    if(!this.controls) {
-      // @ts-ignore
-      this.player.element.tabIndex = -1;
-    }
+    // @ts-ignore
+    this.player.element.tabIndex = -1;
 
-    // Read aspect ratio from video and configure box
-    Promise.all([
-      this.player.getVideoWidth(),
-      this.player.getVideoHeight()
-    ]).then((dimensions) => {
-      this.ratio = dimensions[1] / dimensions[0];
-    });
+    // Read aspect ratio from video to configure view box
+    this.ratio = await this.getAspectRatio();
   }
 
   async componentDidUnload() {
@@ -147,7 +140,7 @@ export class Video {
 
   @Watch('src')
   async srcChanged(value: number) {
-    this.player.loadVideo(value);
+    await this.player.loadVideo(value);
   }
 
   @Watch('controls')
@@ -169,6 +162,23 @@ export class Video {
   @Method()
   async getDuration() {
     return this.player.getDuration();
+  }
+
+  @Method()
+  async getDimensions() {
+    return Promise.all([
+      this.player.getVideoWidth(),
+      this.player.getVideoHeight()
+    ]).then((dimensions) => {
+      return {width: dimensions[0], height: dimensions[1]}
+    });
+  }
+
+  @Method()
+  async getAspectRatio() {
+    return this.getDimensions().then(({width, height}) => {
+      return height / width;
+    });
   }
 
   @Method()

@@ -42,6 +42,12 @@
     xmf-video-player::part(slider):hover {
       height: 16px;
     } */
+
+    .overlay {
+      height: 100%;
+
+      background: #000A;
+    }
   </style>
 </head>
 <body>
@@ -51,7 +57,7 @@
 
     <div id="wrapper">
       <!-- <xm-player controls> -->
-        <xm-video src="340196868" controls>
+        <xm-video src="340196868">
           <iframe src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </xm-video>
         <!-- <xm-video slot="media" src="vimeo://340196868"></xm-video>
@@ -70,6 +76,10 @@
       el.addEventListener('bufferstart', log);
       el.addEventListener('bufferend', log);
       el.addEventListener('ended', log);
+
+      el.addEventListener('click', (e) => {
+        console.log('click', e.target);
+      })
 
       // el.addEventListener('timeupdate', log);
       // el.addEventListener('progress', log);

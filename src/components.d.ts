@@ -16,12 +16,16 @@ export namespace Components {
     'pip': boolean;
   }
   interface XmVideo {
-    'controls': boolean;
     'currentTime': () => Promise<number>;
+    'getAspectRatio': () => Promise<number>;
+    'getDimensions': () => Promise<{ width: number; height: number; }>;
     'getDuration': () => Promise<number>;
     'pause': () => Promise<void>;
     'play': () => Promise<void>;
     'seek': (seconds: number) => Promise<number>;
+    /**
+    * Vimeo Video ID
+    */
     'src': number;
   }
 }
@@ -78,7 +82,9 @@ declare namespace LocalJSX {
     'pip'?: boolean;
   }
   interface XmVideo extends JSXBase.HTMLAttributes<HTMLXmVideoElement> {
-    'controls'?: boolean;
+    /**
+    * Vimeo Video ID
+    */
     'src'?: number;
   }
 
