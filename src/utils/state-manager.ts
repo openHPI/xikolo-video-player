@@ -1,3 +1,3 @@
-class StateManager {
+export class StateManager {
 
 }

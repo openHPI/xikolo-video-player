@@ -42,8 +42,6 @@ export class VideoPlayer {
     this.engine = Split(this.screen.childNodes, {
       gutterSize: 6
     });
-
-    console.log(this.el.childNodes)
   }
 
   componentDidUnload() {

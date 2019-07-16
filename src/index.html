@@ -56,16 +56,15 @@
     <!-- <xmf-source src="205404461" type="application/vnd.xmf.vimeo"></xmf-source> -->
 
     <div id="wrapper">
-      <!-- <xm-player controls> -->
-        <xm-video src="340196868">
-          <iframe src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-        </xm-video>
-        <!-- <xm-video slot="media" src="vimeo://340196868"></xm-video>
-      </xm-player> -->
+      <xm-player>
+        <xm-video slot="primary" src="340196868"></xm-video>
+        <xm-video slot="secondary" src="340196788"></xm-video>
+        <iframe src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      </xm-player>
     </div>
 
     <script>
-      let el = document.querySelector('xm-video');
+      let el = document.querySelector('xm-player');
       const log = (e) => console.log(e.type, e.detail);
 
 
@@ -76,6 +75,8 @@
       el.addEventListener('bufferstart', log);
       el.addEventListener('bufferend', log);
       el.addEventListener('ended', log);
+
+      el.addEventListener('ioc:request', log);
 
       el.addEventListener('click', (e) => {
         console.log('click', e.target);
@@ -88,5 +89,12 @@
     <br />
     <button>Button</button>
   </section>
+  <script>
+    document.querySelectorAll('button').forEach(el => {
+      el.addEventListener('click', e => {
+        document.querySelector('xm-player').requestFullscreen();
+      })
+    })
+  </script>
 </body>
 </html>

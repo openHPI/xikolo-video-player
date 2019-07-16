@@ -6,11 +6,15 @@ import {
   h,
   Event,
   EventEmitter,
+  Watch,
+  Method,
 } from '@stencil/core';
 
 import { format } from '../../utils/duration';
 import * as icon from '../../utils/icon';
 import { Fullscreen, PlayPause } from './buttons';
+import { StateManager } from '../../utils/state-manager';
+import { Inject } from '../../utils/ioc';
 
 
 @Component({
@@ -19,9 +23,10 @@ import { Fullscreen, PlayPause } from './buttons';
   shadow: true
 })
 export class Controls {
-  @Element() el: HTMLElement;
+  @Element() el: HTMLXmControlsElement;
 
-  @Prop({ connect: 'xm-video' }) stateManager: any;
+  @Inject()
+  public stateManager: StateManager;
 
   @State() playing: boolean;
   @State() fullscreen: boolean;
@@ -36,7 +41,6 @@ export class Controls {
   render() {
     return (
       <div class="controls">
-        {/* <xm-controls-slider /> */}
         <input class="controls__slider"
           part="slider"
           type="range"
@@ -48,10 +52,7 @@ export class Controls {
           onInput={e => this.seek(e)}
         />
         <div class="controls__toolbar">
-          <PlayPause playing={this.playing}
-            onPlay={() => this.evPlay.emit()}
-            onPause={() => this.evPause.emit()}
-          />
+        <PlayPause playing={this.playing} onPlay={() => this.evPlay.emit()} onPause={() => this.evPause.emit()} />
           <span class="controls__time" title={`Time left of ${format(this.duration)}s`}>
             -{format(this.duration - this.seconds)}
           </span>
@@ -60,18 +61,13 @@ export class Controls {
             : <button onClick={() => this.pip = true} innerHTML={icon.Clone} />
           }
           <Fullscreen fullscreen={false} onRequest={() => null} onExit={() => null} />
-          {/* {this.fullscreen
-            ? <button onClick={this._exitFullscreen} innerHTML={icon.Compress} />
-            : <button onClick={this._requestFullscreen.bind(this)} innerHTML={icon.Expand} />
-          } */}
         </div>
       </div>
     );
   }
 
-  public componentDidLoad() {
-    // debugger;
-    this.stateManager;
+  connectedCallback() {
+    console.log(this.stateManager);
   }
 
   private seek(e: Event) {
@@ -79,15 +75,5 @@ export class Controls {
     const value = parseFloat(el.value);
 
     console.log(value);
-
-    // let [seconds] = await Promise.all([
-    //   this.source.setCurrentTime(value),
-    //   this.secondary.setCurrentTime(value)
-    // ]);
-
-    // this.seconds = seconds;
-
-    // return this.playing ? this.play() : this.pause()
-    // this.evPlay.emit()
   }
 }

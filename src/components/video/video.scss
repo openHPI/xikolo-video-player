@@ -1,23 +1,10 @@
 :host {
-  display: block;
+  display: flex;
   background-color: black;
 }
 
-.outer {
-  position: relative;
-  box-sizing: border-box;
-}
-
-.outer, .outer > div {
-  height: 100%;
-}
-
-.outer > div {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+xm-aspect-ratio-box {
+  flex-grow: 1;
 }
 
 iframe, .overlay {

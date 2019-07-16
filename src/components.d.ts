@@ -9,6 +9,9 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface XmAspectRatioBox {
+    'ratio': number;
+  }
   interface XmControls {}
   interface XmMedia {}
   interface XmPlayer {}
@@ -32,6 +35,12 @@ export namespace Components {
 
 declare global {
 
+
+  interface HTMLXmAspectRatioBoxElement extends Components.XmAspectRatioBox, HTMLStencilElement {}
+  var HTMLXmAspectRatioBoxElement: {
+    prototype: HTMLXmAspectRatioBoxElement;
+    new (): HTMLXmAspectRatioBoxElement;
+  };
 
   interface HTMLXmControlsElement extends Components.XmControls, HTMLStencilElement {}
   var HTMLXmControlsElement: {
@@ -63,6 +72,7 @@ declare global {
     new (): HTMLXmVideoElement;
   };
   interface HTMLElementTagNameMap {
+    'xm-aspect-ratio-box': HTMLXmAspectRatioBoxElement;
     'xm-controls': HTMLXmControlsElement;
     'xm-media': HTMLXmMediaElement;
     'xm-player': HTMLXmPlayerElement;
@@ -72,6 +82,9 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface XmAspectRatioBox extends JSXBase.HTMLAttributes<HTMLXmAspectRatioBoxElement> {
+    'ratio'?: number;
+  }
   interface XmControls extends JSXBase.HTMLAttributes<HTMLXmControlsElement> {
     'onPause'?: (event: CustomEvent<any>) => void;
     'onPlay'?: (event: CustomEvent<any>) => void;
@@ -89,6 +102,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'xm-aspect-ratio-box': XmAspectRatioBox;
     'xm-controls': XmControls;
     'xm-media': XmMedia;
     'xm-player': XmPlayer;

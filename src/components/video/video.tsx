@@ -9,7 +9,6 @@ import {
 } from '@stencil/core';
 
 import Player from '@vimeo/player';
-import { ResizeObserver } from 'resize-observer';
 
 @Component({
   tag: 'xm-video',
@@ -25,25 +24,17 @@ export class Video {
   @Prop() src: number;
 
   @State() private ratio: number = 0.5625;
-  @State() private clientHeight: number;
 
   private container: HTMLElement;
   @State() private player: Player;
-  @State() private observer: ResizeObserver;
 
   render() {
-    let outerStyle = {
-      paddingBottom: `${this.ratio * 100}%`
-    };
-
-    let ctStyle = {
-      height: `${this.clientHeight}px`
-    };
-
-    return <div class="outer" style={outerStyle}>
-      <div style={ctStyle} ref={(el) => this.container = el} />
-      <div class="overlay" style={ctStyle}><slot name="overlay" /></div>
-    </div>;
+    return (
+      <xm-aspect-ratio-box ratio={this.ratio}>
+        <div ref={(el) => this.container = el} />
+        <div class="overlay"><slot name="overlay" /></div>
+      </xm-aspect-ratio-box>
+    );
   }
 
   async componentDidLoad() {
@@ -60,21 +51,6 @@ export class Video {
     if(this.container && this.container.dataset.vimeoInitialized) {
       this.componentDidUnload();
     }
-
-    // Observe the outer container element for size changes. If the outer
-    // container is fixed sized (e.g. due to CSS height or display: flex)
-    // we want the video element to sized as high as the container without
-    // maintaining the aspect ratio.
-    //
-    // If the outer element has no size restriction it will be as high as the
-    // aspect ratio box, otherwise we explicitly set the client height of the
-    // container and iframe boxes. The aspect ratio padding box will overflow
-    // if the outer container is smaller but is hidden anyway.
-    this.observer = new ResizeObserver(() => {
-      this.clientHeight = this.el.clientHeight
-    })
-
-    this.observer.observe(this.el);
 
     // Initialize Vimeo Player
     this.player = new Player(this.container, {
@@ -134,7 +110,6 @@ export class Video {
   }
 
   async componentDidUnload() {
-    this.observer.disconnect();
     this.player.destroy();
   }
 
