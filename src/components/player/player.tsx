@@ -30,22 +30,14 @@ export class Player {
     );
   }
 
-  connectedCallback() {
-    console.log('connectedCallback: xm-player');
-    this.el.shadowRoot.addEventListener('ioc:request', (e: CustomEvent) => {
-      // switch(e.detail.name) {
-      //   case "state-manager":
-      //     e.detail.result = this.stateManager;
-      //     break;
-      // }
-      console.log('IOC request intercepted', e)
-    });
+  componentDidLoad() {
+    const primary = this.el.querySelector('[slot=primary]') as HTMLXmVideoElement;
+    const secondary = this.el.querySelector('[slot=secondary]') as HTMLXmVideoElement;
+
+    if (primary) this._connect(primary);
   }
 
-  componentDidLoad() {
-    // console.log('didLoad: xm-player');
-    // this.el.addEventListener('ioc:request', e => {
-    //   console.log('ioc:request', e)
-    // })
+  _connect(video: HTMLXmVideoElement) {
+
   }
 }
