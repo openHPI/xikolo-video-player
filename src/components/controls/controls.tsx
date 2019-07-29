@@ -1,20 +1,17 @@
 import {
   Component,
   Element,
-  Prop,
   State,
   h,
   Event,
   EventEmitter,
-  Watch,
-  Method,
 } from '@stencil/core';
 
 import { format } from '../../utils/duration';
 import * as icon from '../../utils/icon';
 import { Fullscreen, PlayPause } from './buttons';
 
-import Tunnel, { Status, Mode } from '../../utils/status';
+import Tunnel, { PlayerState, Mode } from '../../utils/status';
 
 @Component({
   tag: 'xm-controls',
@@ -31,19 +28,19 @@ export class Controls {
   @State() seconds: number = 0;
   @State() duration: number = 0;
 
-  @Event({ eventName: 'play' }) evPlay: EventEmitter;
-  @Event({ eventName: 'pause' }) evPause: EventEmitter;
+  @Event({ eventName: 'control:play' }) evPlay: EventEmitter;
+  @Event({ eventName: 'control:pause' }) evPause: EventEmitter;
 
   render() {
     return (
-      <Tunnel.Consumer>{(status) => this._render(status)}</Tunnel.Consumer>
+      <Tunnel.Consumer>{(state) => this._render(state)}</Tunnel.Consumer>
     );
   }
 
-  private _render(status: Status) {
-    const playing = status.mode === Mode.PLAYING;
+  private _render(state: PlayerState) {
+    const playing = state.mode === Mode.PLAYING;
 
-    console.log(status);
+    console.log(state);
 
     return (
       <div class="controls">
@@ -58,7 +55,7 @@ export class Controls {
           onInput={e => this.seek(e)}
         />
         <div class="controls__toolbar">
-          <PlayPause playing={playing} onPlay={this.play} onPause={this.pause} />
+          <PlayPause playing={playing} onPlay={this.play.bind(this)} onPause={this.pause.bind(this)} />
           <span class="controls__time" title={`Time left of ${format(this.duration)}s`}>
             -{format(this.duration - this.seconds)}
           </span>

@@ -81,8 +81,8 @@ declare namespace LocalJSX {
     'ratio'?: number;
   }
   interface XmControls extends JSXBase.HTMLAttributes<HTMLXmControlsElement> {
-    'onPause'?: (event: CustomEvent<any>) => void;
-    'onPlay'?: (event: CustomEvent<any>) => void;
+    'onControl:pause'?: (event: CustomEvent<any>) => void;
+    'onControl:play'?: (event: CustomEvent<any>) => void;
   }
   interface XmPlayer extends JSXBase.HTMLAttributes<HTMLXmPlayerElement> {}
   interface XmScreen extends JSXBase.HTMLAttributes<HTMLXmScreenElement> {

@@ -9,17 +9,17 @@ export enum Mode {
   FINISHED,
 }
 
-export interface Status {
+export interface PlayerState {
   mode: Mode,
   fullscreen: boolean,
 }
 
-const defaultState: Status = {
+const defaultState: PlayerState = {
   mode: Mode.PAUSED,
   fullscreen: false,
 };
 
-export default createProviderConsumer<Status>(
+export default createProviderConsumer<PlayerState>(
   defaultState,
   (subscribe, child) => {
     return (<context-consumer subscribe={subscribe} renderer={child} />);

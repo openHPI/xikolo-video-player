@@ -2,11 +2,12 @@ import {
   Component,
   Element,
   h,
+  Listen,
   Method,
   State,
 } from '@stencil/core';
 
-import Tunnel, { Status, Mode } from '../../utils/status';
+import Tunnel, { PlayerState, Mode } from '../../utils/status';
 
 @Component({
   tag: 'xm-player',
@@ -18,13 +19,13 @@ export class Player {
   private el: HTMLElement;
 
   @State()
-  private status: Status;
+  private state: PlayerState;
 
   private primary: HTMLXmVideoElement | undefined;
   private secondary: HTMLXmVideoElement | undefined;
 
   constructor() {
-    this.status = {
+    this.state = {
       mode: Mode.PAUSED,
       fullscreen: false,
     };
@@ -32,7 +33,7 @@ export class Player {
 
   protected render() {
     return (
-      <Tunnel.Provider state={this.status}>
+      <Tunnel.Provider state={this.state}>
         <div class="player">
           <xm-screen>
             <slot name="primary"></slot>
@@ -53,15 +54,25 @@ export class Player {
 
   }
 
+  @Listen('control:play')
+  public async handlePlay() {
+    return this.play();
+  }
+
+  @Listen('control:pause')
+  public async handlePause() {
+    return this.pause();
+  }
+
   @Method()
   public async play() {
-    // this.status = {...this.status, mode: Mode.PLAYING};
-    this.status.mode = Mode.PLAYING;
-    console.log(this.status);
+    await Promise.all([this.primary.play(), this.secondary.play()]);
+    this.state = {...this.state, mode: Mode.PLAYING};
   }
 
   @Method()
   public async pause() {
-
+    await Promise.all([this.primary.pause(), this.secondary.pause()]);
+    this.state = {...this.state, mode: Mode.PAUSED};
   }
 }
