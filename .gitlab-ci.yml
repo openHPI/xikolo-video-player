@@ -9,6 +9,11 @@ before_script:
   - yarn install
 
 
+test:
+  script:
+    - yarn run test
+
+
 pages:
   script:
     - yarn run build
