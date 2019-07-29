@@ -7,33 +7,54 @@
 
 ## Properties
 
-| Property   | Attribute  | Description | Type      | Default     |
-| ---------- | ---------- | ----------- | --------- | ----------- |
-| `controls` | `controls` |             | `boolean` | `undefined` |
-| `src`      | `src`      |             | `number`  | `undefined` |
-| `type`     | `type`     |             | `string`  | `undefined` |
-
-
-## Events
-
-| Event  | Description | Type               |
-| ------ | ----------- | ------------------ |
-| `play` |             | `CustomEvent<any>` |
+| Property | Attribute | Description    | Type     | Default     |
+| -------- | --------- | -------------- | -------- | ----------- |
+| `src`    | `src`     | Vimeo Video ID | `number` | `undefined` |
 
 
 ## Methods
 
-### `getDuration() => Promise<any>`
+### `currentTime() => Promise<number>`
 
 
 
 #### Returns
 
-Type: `Promise<any>`
+Type: `Promise<number>`
 
 
 
-### `load(id: any) => Promise<void>`
+### `getAspectRatio() => Promise<number>`
+
+
+
+#### Returns
+
+Type: `Promise<number>`
+
+
+
+### `getDimensions() => Promise<{ width: number; height: number; }>`
+
+
+
+#### Returns
+
+Type: `Promise<{ width: number; height: number; }>`
+
+
+
+### `getDuration() => Promise<number>`
+
+
+
+#### Returns
+
+Type: `Promise<number>`
+
+
+
+### `pause() => Promise<void>`
 
 
 
@@ -43,38 +64,38 @@ Type: `Promise<void>`
 
 
 
-### `pause() => Promise<any>`
+### `play() => Promise<void>`
 
 
 
 #### Returns
 
-Type: `Promise<any>`
+Type: `Promise<void>`
 
 
 
-### `play() => Promise<any>`
+### `seek(seconds: number) => Promise<number>`
 
 
 
 #### Returns
 
-Type: `Promise<any>`
+Type: `Promise<number>`
 
 
 
 
 ## Dependencies
 
-### Used by
+### Depends on
 
- - [xmf-video](../video)
+- [xm-aspect-ratio-box](../aspect-ratio-box)
 
 ### Graph
 ```mermaid
 graph TD;
-  xmf-video --> xmf-source
-  style xmf-source fill:#f9f,stroke:#333,stroke-width:4px
+  xm-video --> xm-aspect-ratio-box
+  style xm-video fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

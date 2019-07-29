@@ -5,16 +5,9 @@
 <!-- Auto Generated Below -->
 
 
-## Properties
-
-| Property | Attribute | Description | Type     | Default     |
-| -------- | --------- | ----------- | -------- | ----------- |
-| `src`    | `src`     |             | `string` | `undefined` |
-
-
 ## Methods
 
-### `_exitFullscreen() => Promise<void>`
+### `pause() => Promise<void>`
 
 
 
@@ -24,33 +17,13 @@ Type: `Promise<void>`
 
 
 
-### `_requestFullscreen() => Promise<void>`
+### `play() => Promise<void>`
 
 
 
 #### Returns
 
 Type: `Promise<void>`
-
-
-
-### `pause() => Promise<any>`
-
-
-
-#### Returns
-
-Type: `Promise<any>`
-
-
-
-### `play() => Promise<any>`
-
-
-
-#### Returns
-
-Type: `Promise<any>`
 
 
 
@@ -59,13 +32,18 @@ Type: `Promise<any>`
 
 ### Depends on
 
-- [xmf-source](../source)
+- [xm-screen](../screen)
+- [xm-controls](../controls)
+- context-consumer
 
 ### Graph
 ```mermaid
 graph TD;
-  xmf-video --> xmf-source
-  style xmf-video fill:#f9f,stroke:#333,stroke-width:4px
+  xm-player --> xm-screen
+  xm-player --> xm-controls
+  xm-player --> context-consumer
+  xm-controls --> context-consumer
+  style xm-player fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
