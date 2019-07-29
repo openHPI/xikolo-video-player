@@ -2,10 +2,11 @@ import {
   Component,
   Element,
   h,
+  Method,
+  State,
 } from '@stencil/core';
 
-import { StateManager } from '../../utils/state-manager';
-import { Service } from '../../utils/ioc';
+import Tunnel, { Status, Mode } from '../../utils/status';
 
 @Component({
   tag: 'xm-player',
@@ -13,31 +14,54 @@ import { Service } from '../../utils/ioc';
   shadow: true
 })
 export class Player {
-  @Element() el: HTMLElement;
+  @Element()
+  private el: HTMLElement;
 
-  @Service()
-  private stateManager: StateManager = new StateManager();
+  @State()
+  private status: Status;
 
-  render() {
+  private primary: HTMLXmVideoElement | undefined;
+  private secondary: HTMLXmVideoElement | undefined;
+
+  constructor() {
+    this.status = {
+      mode: Mode.PAUSED,
+      fullscreen: false,
+    };
+  }
+
+  protected render() {
     return (
-      <div class="player">
-        <xm-screen>
-          <slot name="primary"></slot>
-          <slot slot="secondary" name="secondary"></slot>
-        </xm-screen>
-        <xm-controls />
-      </div>
+      <Tunnel.Provider state={this.status}>
+        <div class="player">
+          <xm-screen>
+            <slot name="primary"></slot>
+            <slot slot="secondary" name="secondary"></slot>
+          </xm-screen>
+          <xm-controls />
+        </div>
+      </Tunnel.Provider>
     );
   }
 
-  componentDidLoad() {
-    const primary = this.el.querySelector('[slot=primary]') as HTMLXmVideoElement;
-    const secondary = this.el.querySelector('[slot=secondary]') as HTMLXmVideoElement;
-
-    if (primary) this._connect(primary);
+  protected componentDidLoad() {
+    this.primary = this.el.querySelector('[slot=primary]') as HTMLXmVideoElement;
+    this.secondary = this.el.querySelector('[slot=secondary]') as HTMLXmVideoElement;
   }
 
-  _connect(video: HTMLXmVideoElement) {
+  protected componentWillUnload() {
+
+  }
+
+  @Method()
+  public async play() {
+    // this.status = {...this.status, mode: Mode.PLAYING};
+    this.status.mode = Mode.PLAYING;
+    console.log(this.status);
+  }
+
+  @Method()
+  public async pause() {
 
   }
 }

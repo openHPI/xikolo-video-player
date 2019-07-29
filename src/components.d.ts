@@ -13,7 +13,10 @@ export namespace Components {
     'ratio': number;
   }
   interface XmControls {}
-  interface XmPlayer {}
+  interface XmPlayer {
+    'pause': () => Promise<void>;
+    'play': () => Promise<void>;
+  }
   interface XmScreen {
     'pip': boolean;
   }

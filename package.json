@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@stencil/core": "^1.0.1",
+    "@stencil/state-tunnel": "^1.0.1",
     "@vimeo/player": "^2.8.2",
     "split.js": "^1.5.11"
   },
