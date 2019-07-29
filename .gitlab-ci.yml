@@ -1,0 +1,18 @@
+image: node:11
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+before_script:
+  - yarn install
+
+
+pages:
+  script:
+    - yarn run build
+    - mv www public
+  artifacts:
+    paths:
+      - public
