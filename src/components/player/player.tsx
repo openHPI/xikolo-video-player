@@ -8,6 +8,7 @@ import {
 } from '@stencil/core';
 
 import Tunnel, { PlayerState, Mode } from '../../utils/status';
+import { bind } from '../../utils/bind';
 
 @Component({
   tag: 'xm-player',
@@ -48,19 +49,28 @@ export class Player {
   protected componentDidLoad() {
     this.primary = this.el.querySelector('[slot=primary]') as HTMLXmVideoElement;
     this.secondary = this.el.querySelector('[slot=secondary]') as HTMLXmVideoElement;
+
+    this.primary.addEventListener('click', this._handleVideoClick);
+    this.secondary.addEventListener('click', this._handleVideoClick);
   }
 
   protected componentWillUnload() {
+    this.primary.removeEventListener('click', this._handleVideoClick);
+    this.secondary.removeEventListener('click', this._handleVideoClick);
+  }
 
+  @bind()
+  protected async _handleVideoClick(e: MouseEvent) {
+    return this.state.mode === Mode.PLAYING ? this.pause() : this.play();
   }
 
   @Listen('control:play')
-  public async handlePlay() {
+  protected async _handlePlay() {
     return this.play();
   }
 
   @Listen('control:pause')
-  public async handlePause() {
+  protected async _handlePause() {
     return this.pause();
   }
 
