@@ -25,6 +25,13 @@ export const config: Config = {
     { src: 'static' }
   ],
   devServer: {
+    // With HMR the `load` lifecycle event is triggered but not the `unload`
+    // event. This will lead to non removing event listeners but only adding
+    // more and more new listeners.
+    //
+    // See https://github.com/ionic-team/stencil/issues/1316
+    //
+    reloadStrategy: 'pageReload',
     openBrowser: false
   },
 };

@@ -38,20 +38,6 @@ export class Video {
   }
 
   async componentDidLoad() {
-    // With HMR the `load` lifecycle event is triggered but not the `unload`
-    // event. This will lead to reusing the same Vimeo Player and registering
-    // the event over and over again.
-    //
-    // If we detect that the vimeo-initialize data attribute is set we are
-    // probably running on an already initialized DOM. For now manually trigger
-    // an unload here.
-    //
-    // See https://github.com/ionic-team/stencil/issues/1316
-    //
-    if(this.container && this.container.dataset.vimeoInitialized) {
-      this.componentDidUnload();
-    }
-
     // Initialize Vimeo Player
     this.player = new Player(this.container, {
       id: this.src,
