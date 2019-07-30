@@ -14,7 +14,7 @@ import Split from 'split.js'
   styleUrl: 'screen.scss',
   shadow: true
 })
-export class VideoPlayer {
+export class Screen {
   @Element() el: HTMLElement;
 
   @Prop() pip: boolean;

@@ -7,8 +7,9 @@ import {
   State,
 } from '@stencil/core';
 
-import { PlayerState, Mode } from '../../utils/state';
+import { Mode, Status, defaultStatus } from '../../utils/status';
 import { bind } from '../../utils/bind';
+import { isThisTypeNode } from 'typescript';
 
 @Component({
   tag: 'xm-player',
@@ -20,17 +21,10 @@ export class Player {
   private el: HTMLElement;
 
   @State()
-  private state: PlayerState;
+  private status: Status = defaultStatus;
 
   private primary: HTMLXmVideoElement | undefined;
   private secondary: HTMLXmVideoElement | undefined;
-
-  constructor() {
-    this.state = {
-      mode: Mode.PAUSED,
-      fullscreen: false,
-    };
-  }
 
   protected render() {
     return (
@@ -39,7 +33,7 @@ export class Player {
           <slot name="primary"></slot>
           <slot slot="secondary" name="secondary"></slot>
         </xm-screen>
-        <xm-controls />
+        <xm-controls status={this.status} />
       </div>
     );
   }
@@ -49,21 +43,20 @@ export class Player {
     this.secondary = this.el.querySelector('[slot=secondary]') as HTMLXmVideoElement;
 
     this.primary.addEventListener('click', this._handleVideoClick);
+    this.primary.addEventListener('timeupdate', this._handleVideoTimeUpdate);
+    this.primary.addEventListener('progress', this._handleVideoProgress);
     this.secondary.addEventListener('click', this._handleVideoClick);
   }
 
   protected componentWillUnload() {
     this.primary.removeEventListener('click', this._handleVideoClick);
+    this.primary.removeEventListener('timeupdate', this._handleVideoTimeUpdate);
     this.secondary.removeEventListener('click', this._handleVideoClick);
   }
 
   @bind()
   protected async _handleVideoClick(e: MouseEvent) {
-    console.log('_handleVideoClick', e);
-
-    if(e.defaultPrevented) return;
-
-    switch(this.state.mode) {
+    switch(this.status.mode) {
       case Mode.PAUSED:
       case Mode.FINISHED:
         return this.play();
@@ -72,25 +65,32 @@ export class Player {
     }
   }
 
-  @Listen('control:play')
-  protected async _handlePlay() {
-    return this.play();
+  @bind()
+  protected async _handleVideoTimeUpdate(e: CustomEvent) {
+    const { seconds, percent, duration } = e.detail;
+    this.status = {
+      ...this.status,
+      duration: duration,
+      progress: {seconds: seconds, percent: percent},
+    };
   }
 
-  @Listen('control:pause')
-  protected async _handlePause() {
-    return this.pause();
+  @bind()
+  protected async _handleVideoProgress(e: CustomEvent) {
+    console.log(e.detail);
   }
 
   @Method()
+  @Listen('control:play')
   public async play() {
     await Promise.all([this.primary.play(), this.secondary.play()]);
-    this.state = {...this.state, mode: Mode.PLAYING};
+    this.status = {...this.status, mode: Mode.PLAYING};
   }
 
   @Method()
+  @Listen('control:pause')
   public async pause() {
     await Promise.all([this.primary.pause(), this.secondary.pause()]);
-    this.state = {...this.state, mode: Mode.PAUSED};
+    this.status = {...this.status, mode: Mode.PAUSED};
   }
 }

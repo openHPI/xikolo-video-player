@@ -86,6 +86,16 @@ export class Video {
     // Wait for Vimeo Player to be ready to access the actual iframe element
     await this.player.ready();
 
+    // Emit one default timeupdate event to update player with duration
+    this.player.getDuration().then(duration => {
+      const e = new CustomEvent('timeupdate', {
+        detail: { duration: duration, seconds: 0, percent: 0 }
+      });
+
+      this.el.dispatchEvent(e);
+    })
+
+
     // As controls are disabled we do not want the iframe to be
     // focusable by tabbing
     // @ts-ignore

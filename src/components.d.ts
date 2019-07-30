@@ -6,13 +6,17 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  Status,
+} from './utils/status';
 
 export namespace Components {
   interface XmAspectRatioBox {
     'ratio': number;
   }
-  interface XmControls {}
+  interface XmControls {
+    'status': Status;
+  }
   interface XmPlayer {
     'pause': () => Promise<void>;
     'play': () => Promise<void>;
@@ -83,6 +87,7 @@ declare namespace LocalJSX {
   interface XmControls extends JSXBase.HTMLAttributes<HTMLXmControlsElement> {
     'onControl:pause'?: (event: CustomEvent<any>) => void;
     'onControl:play'?: (event: CustomEvent<any>) => void;
+    'status'?: Status;
   }
   interface XmPlayer extends JSXBase.HTMLAttributes<HTMLXmPlayerElement> {}
   interface XmScreen extends JSXBase.HTMLAttributes<HTMLXmScreenElement> {
