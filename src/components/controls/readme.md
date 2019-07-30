@@ -7,10 +7,10 @@
 
 ## Events
 
-| Event   | Description | Type               |
-| ------- | ----------- | ------------------ |
-| `pause` |             | `CustomEvent<any>` |
-| `play`  |             | `CustomEvent<any>` |
+| Event           | Description | Type               |
+| --------------- | ----------- | ------------------ |
+| `control:pause` |             | `CustomEvent<any>` |
+| `control:play`  |             | `CustomEvent<any>` |
 
 
 ## Dependencies

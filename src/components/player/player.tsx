@@ -7,7 +7,7 @@ import {
   State,
 } from '@stencil/core';
 
-import Tunnel, { PlayerState, Mode } from '../../utils/status';
+import { PlayerState, Mode } from '../../utils/state';
 import { bind } from '../../utils/bind';
 
 @Component({
@@ -34,15 +34,13 @@ export class Player {
 
   protected render() {
     return (
-      <Tunnel.Provider state={this.state}>
-        <div class="player">
-          <xm-screen>
-            <slot name="primary"></slot>
-            <slot slot="secondary" name="secondary"></slot>
-          </xm-screen>
-          <xm-controls />
-        </div>
-      </Tunnel.Provider>
+      <div class="player">
+        <xm-screen>
+          <slot name="primary"></slot>
+          <slot slot="secondary" name="secondary"></slot>
+        </xm-screen>
+        <xm-controls />
+      </div>
     );
   }
 
@@ -61,7 +59,17 @@ export class Player {
 
   @bind()
   protected async _handleVideoClick(e: MouseEvent) {
-    return this.state.mode === Mode.PLAYING ? this.pause() : this.play();
+    console.log('_handleVideoClick', e);
+
+    if(e.defaultPrevented) return;
+
+    switch(this.state.mode) {
+      case Mode.PAUSED:
+      case Mode.FINISHED:
+        return this.play();
+      default:
+        return this.pause();
+    }
   }
 
   @Listen('control:play')

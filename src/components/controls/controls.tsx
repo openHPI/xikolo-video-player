@@ -11,7 +11,6 @@ import { format } from '../../utils/duration';
 import * as icon from '../../utils/icon';
 import { Fullscreen, PlayPause } from './buttons';
 
-import Tunnel, { PlayerState, Mode } from '../../utils/status';
 
 @Component({
   tag: 'xm-controls',
@@ -33,16 +32,6 @@ export class Controls {
 
   render() {
     return (
-      <Tunnel.Consumer>{(state) => this._render(state)}</Tunnel.Consumer>
-    );
-  }
-
-  private _render(state: PlayerState) {
-    const playing = state.mode === Mode.PLAYING;
-
-    console.log(state);
-
-    return (
       <div class="controls">
         <input class="controls__slider"
           part="slider"
@@ -55,7 +44,7 @@ export class Controls {
           onInput={e => this.seek(e)}
         />
         <div class="controls__toolbar">
-          <PlayPause playing={playing} onPlay={this.play.bind(this)} onPause={this.pause.bind(this)} />
+          <PlayPause playing={false} onPlay={this.play.bind(this)} onPause={this.pause.bind(this)} />
           <span class="controls__time" title={`Time left of ${format(this.duration)}s`}>
             -{format(this.duration - this.seconds)}
           </span>

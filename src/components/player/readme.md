@@ -9,7 +9,7 @@
 
 ### `pause() => Promise<void>`
 
-
+hhhhf
 
 #### Returns
 
