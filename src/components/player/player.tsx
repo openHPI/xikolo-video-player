@@ -73,11 +73,18 @@ export class Player {
       duration: duration,
       progress: {seconds: seconds, percent: percent},
     };
+
+    this.secondary.currentTime().then((currentTime) => {
+      const skew = Math.abs(currentTime - seconds);
+      if(skew > 1.0) {
+        this.secondary.seek(seconds);
+      }
+    })
   }
 
   @bind()
   protected async _handleVideoProgress(e: CustomEvent) {
-    console.log(e.detail);
+    console.log('progress', e.detail);
   }
 
   @Method()
