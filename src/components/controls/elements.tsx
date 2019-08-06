@@ -52,11 +52,16 @@ export const CurrentTime: FunctionalComponent<CurrentTimeProps> = props => {
 
 interface SliderProps {
   status: Status;
-  onSeek: (e: Event) => void;
+  onSeek: (seconds: number) => void;
 }
 
 export const Slider: FunctionalComponent<SliderProps> = props => {
   const { duration, progress } = props.status;
+
+  const fnSeek = (e: Event) => {
+    const el = e.target as HTMLInputElement;
+    props.onSeek(parseFloat(el.value));
+  };
 
   return (
     <input class="controls__slider"
@@ -70,7 +75,7 @@ export const Slider: FunctionalComponent<SliderProps> = props => {
       // not rendered at all. This will show a default progress
       // bar of around 50%.
       value={progress.seconds.toString()}
-      onInput={props.onSeek}
+      onInput={fnSeek}
     />
   );
 }

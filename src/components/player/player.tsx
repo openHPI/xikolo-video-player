@@ -93,4 +93,14 @@ export class Player {
     await Promise.all([this.primary.pause(), this.secondary.pause()]);
     this.status = {...this.status, mode: Mode.PAUSED};
   }
+
+  @Method()
+  public async seek(seconds: number) {
+    await Promise.all([this.primary.seek(seconds), this.secondary.seek(seconds)]);
+  }
+
+  @Listen('control:seek')
+  public async _seek(e: CustomEvent) {
+    await this.seek(e.detail.seconds);
+  }
 }

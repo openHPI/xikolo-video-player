@@ -20,6 +20,7 @@ export namespace Components {
   interface XmPlayer {
     'pause': () => Promise<void>;
     'play': () => Promise<void>;
+    'seek': (seconds: number) => Promise<void>;
   }
   interface XmScreen {
     'pip': boolean;
@@ -87,6 +88,7 @@ declare namespace LocalJSX {
   interface XmControls extends JSXBase.HTMLAttributes<HTMLXmControlsElement> {
     'onControl:pause'?: (event: CustomEvent<any>) => void;
     'onControl:play'?: (event: CustomEvent<any>) => void;
+    'onControl:seek'?: (event: CustomEvent<any>) => void;
     'status'?: Status;
   }
   interface XmPlayer extends JSXBase.HTMLAttributes<HTMLXmPlayerElement> {}
