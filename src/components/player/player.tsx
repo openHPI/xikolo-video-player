@@ -9,7 +9,6 @@ import {
 
 import { Mode, Status, defaultStatus } from '../../utils/status';
 import { bind } from '../../utils/bind';
-import { isThisTypeNode } from 'typescript';
 
 @Component({
   tag: 'xm-player',
@@ -42,20 +41,20 @@ export class Player {
     this.primary = this.el.querySelector('[slot=primary]') as HTMLXmVideoElement;
     this.secondary = this.el.querySelector('[slot=secondary]') as HTMLXmVideoElement;
 
-    this.primary.addEventListener('click', this._handleVideoClick);
-    this.primary.addEventListener('timeupdate', this._handleVideoTimeUpdate);
-    this.primary.addEventListener('progress', this._handleVideoProgress);
-    this.secondary.addEventListener('click', this._handleVideoClick);
+    this.primary.addEventListener('click', this._click);
+    this.primary.addEventListener('timeupdate', this._timeUpdate);
+    this.primary.addEventListener('progress', this._progress);
+    this.secondary.addEventListener('click', this._click);
   }
 
   protected componentWillUnload() {
-    this.primary.removeEventListener('click', this._handleVideoClick);
-    this.primary.removeEventListener('timeupdate', this._handleVideoTimeUpdate);
-    this.secondary.removeEventListener('click', this._handleVideoClick);
+    this.primary.removeEventListener('click', this._click);
+    this.primary.removeEventListener('timeupdate', this._timeUpdate);
+    this.secondary.removeEventListener('click', this._click);
   }
 
   @bind()
-  protected async _handleVideoClick(e: MouseEvent) {
+  protected async _click(e: MouseEvent) {
     switch(this.status.mode) {
       case Mode.PAUSED:
       case Mode.FINISHED:
@@ -66,7 +65,7 @@ export class Player {
   }
 
   @bind()
-  protected async _handleVideoTimeUpdate(e: CustomEvent) {
+  protected async _timeUpdate(e: CustomEvent) {
     const { seconds, percent, duration } = e.detail;
     this.status = {
       ...this.status,
@@ -83,7 +82,7 @@ export class Player {
   }
 
   @bind()
-  protected async _handleVideoProgress(e: CustomEvent) {
+  protected async _progress(e: CustomEvent) {
     console.log('progress', e.detail);
   }
 

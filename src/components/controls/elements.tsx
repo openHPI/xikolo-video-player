@@ -72,7 +72,7 @@ export const Slider: FunctionalComponent<SliderProps> = props => {
       step="any"
       autocomplete="off"
       // Convert to string as zero (0) is otherwise ignored and
-      // not rendered at all. This will show a default progress
+      // not rendered at all. This would show a default progress
       // bar of around 50%.
       value={progress.seconds.toString()}
       onInput={fnSeek}
