@@ -103,6 +103,9 @@ export class Player {
   @Method()
   public async seek(seconds: number) {
     await Promise.all([this.primary.seek(seconds), this.secondary.seek(seconds)]);
+    // Sometimes seeking starts playing the video too.
+    // Reset state to current stored player state.
+    this.status.mode === Mode.PLAYING ? this.play() : this.pause();
   }
 
   @Listen('control:seek')
