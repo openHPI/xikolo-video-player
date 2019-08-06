@@ -6,17 +6,17 @@ cache:
     - node_modules/
 
 before_script:
-  - yarn install
+  - npm install
 
 
 test:
   script:
-    - yarn run test
+    - npm run test
 
 
 pages:
   script:
-    - yarn run build
+    - npm run build
     - mv www public
   artifacts:
     paths:

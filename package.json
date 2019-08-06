@@ -35,7 +35,7 @@
     "autoprefixer": "^9.5.1",
     "jest": "^24.8.0",
     "jest-cli": "^24.8.0",
-    "puppeteer": "^1.17.0",
+    "puppeteer": "1.17.0",
     "stencil-inline-svg": "^0.0.2",
     "typescript": "^3.4.5"
   },
