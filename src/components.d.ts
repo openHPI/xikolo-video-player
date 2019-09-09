@@ -86,6 +86,8 @@ declare namespace LocalJSX {
     'ratio'?: number;
   }
   interface XmControls extends JSXBase.HTMLAttributes<HTMLXmControlsElement> {
+    'onControl:enterFullscreen'?: (event: CustomEvent<any>) => void;
+    'onControl:exitFullscreen'?: (event: CustomEvent<any>) => void;
     'onControl:pause'?: (event: CustomEvent<any>) => void;
     'onControl:play'?: (event: CustomEvent<any>) => void;
     'onControl:seek'?: (event: CustomEvent<any>) => void;

@@ -18,6 +18,8 @@ export class Controls {
   @Event({eventName: 'control:play'}) playEvent: EventEmitter;
   @Event({eventName: 'control:pause'}) pauseEvent: EventEmitter;
   @Event({eventName: 'control:seek'}) seekEvent: EventEmitter;
+  @Event({eventName: 'control:enterFullscreen'}) enterFullscreenEvent: EventEmitter;
+  @Event({eventName: 'control:exitFullscreen'}) exitFullscreenEvent: EventEmitter;
 
   protected render() {
     return (
@@ -26,7 +28,7 @@ export class Controls {
         <div class="controls__toolbar">
           <Control status={this.status} onPause={this._pause} onPlay={this._play} />
           <CurrentTime status={this.status} />
-          <Fullscreen fullscreen={false} onRequest={() => null} onExit={() => null} />
+          <Fullscreen status={this.status} onRequest={this._enterFullscreen} onExit={this._exitFullscreen} />
         </div>
       </div>
     );
@@ -40,6 +42,16 @@ export class Controls {
   @bind()
   private _pause() {
     this.pauseEvent.emit();
+  }
+
+  @bind()
+  private _enterFullscreen() {
+    this.enterFullscreenEvent.emit();
+  }
+
+  @bind()
+  private _exitFullscreen() {
+    this.exitFullscreenEvent.emit();
   }
 
   @bind()

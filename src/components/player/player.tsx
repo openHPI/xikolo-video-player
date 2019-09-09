@@ -45,6 +45,8 @@ export class Player {
     this.primary.addEventListener('timeupdate', this._timeUpdate);
     this.primary.addEventListener('progress', this._progress);
     this.secondary.addEventListener('click', this._click);
+
+    document.addEventListener('fullscreenchange', this._fullscreenchange)
   }
 
   protected componentWillUnload() {
@@ -81,11 +83,6 @@ export class Player {
     })
   }
 
-  @bind()
-  protected async _progress(e: CustomEvent) {
-    console.log('progress', e.detail);
-  }
-
   @Method()
   @Listen('control:play')
   public async play() {
@@ -108,8 +105,29 @@ export class Player {
     this.status.mode === Mode.PLAYING ? this.play() : this.pause();
   }
 
+  @bind()
+  protected async _progress(e: CustomEvent) {
+    console.log('progress', e.detail);
+  }
+
+  @bind()
+  protected _fullscreenchange() {
+    this.status = {...this.status, fullscreen: document.fullscreenElement !== null}
+  }
+
   @Listen('control:seek')
-  public async _seek(e: CustomEvent) {
+  protected async _seek(e: CustomEvent) {
     await this.seek(e.detail.seconds);
+  }
+
+  @Listen('control:enterFullscreen')
+  protected async _enterFullscreen() {
+    return this.el.requestFullscreen();
+  }
+
+  @Listen('control:exitFullscreen')
+  protected async _exitFullscreen() {
+    if (document.fullscreenElement !== null)
+      return document.exitFullscreen();
   }
 }

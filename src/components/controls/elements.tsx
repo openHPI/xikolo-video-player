@@ -6,16 +6,16 @@ import { format } from '../../utils/duration';
 
 
 interface FullscreenProps {
-  fullscreen: boolean;
+  status: Status;
   onRequest: (e: Event) => void;
   onExit: (e: Event) => void;
 }
 
 export const Fullscreen: FunctionalComponent<FullscreenProps> = props => {
-  if(props.fullscreen) {
-    return <button onClick={props.onRequest} innerHTML={icon.Compress} />
+  if(props.status.fullscreen) {
+    return <button onClick={props.onExit} innerHTML={icon.Compress} />
   } else {
-    return <button onClick={props.onExit} innerHTML={icon.Expand} />
+    return <button onClick={props.onRequest} innerHTML={icon.Expand} />
   }
 }
 
