@@ -1,27 +1,59 @@
-image: node:11
+stages:
+  - build
+  - test
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
+Docker E2E:
+  stage: build
+  image: docker:stable
 
-before_script:
-  - npm install
+  services:
+    - docker:dind
+
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+
+  before_script:
+    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+  only:
+    changes:
+      - Dockerfile
+
+
+.base:
+  stage: test
+  image: $CI_REGISTRY_IMAGE:latest
+
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules
+
+  before_script:
+    - sudo sysctl -w kernel.unprivileged_userns_clone=1
+    - sudo chown -R user:user /builds/gitlab
+    - npm install --no-audit --prefer-offline --progress=false
 
 
 test:
-  before_script:
-    - npm install
-    - apt-get update --quiet
-    - apt-get install --yes --quiet chromium
+  extends: .base
   script:
-    - npm run test
+    - npm test
 
 
 pages:
+  extends: .base
   script:
     - npm run build
     - mv www public
   artifacts:
     paths:
       - public
+
+
