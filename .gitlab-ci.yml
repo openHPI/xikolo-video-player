@@ -10,6 +10,10 @@ before_script:
 
 
 test:
+  before_script:
+    - npm install
+    - apt-get update --quiet
+    - apt-get install --yes --quiet chromium
   script:
     - npm run test
 
