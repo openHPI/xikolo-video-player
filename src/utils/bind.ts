@@ -1,5 +1,6 @@
-// https://github.com/NoHomey/bind-decorator/blob/master/src/index.ts
-
+/**
+ * https://github.com/NoHomey/bind-decorator/blob/master/src/index.ts
+ */
 export function bind() {
   return function bind<T extends Function>(
     target: Object,
