@@ -98,6 +98,15 @@ declare namespace LocalJSX {
     'pip'?: boolean;
   }
   interface XmVideo extends JSXBase.HTMLAttributes<HTMLXmVideoElement> {
+    'onBuffered'?: (event: CustomEvent<any>) => void;
+    'onBuffering'?: (event: CustomEvent<any>) => void;
+    'onEnded'?: (event: CustomEvent<any>) => void;
+    'onPause'?: (event: CustomEvent<any>) => void;
+    'onPlay'?: (event: CustomEvent<any>) => void;
+    'onProgress'?: (event: CustomEvent<any>) => void;
+    'onSeeked'?: (event: CustomEvent<any>) => void;
+    'onSeeking'?: (event: CustomEvent<any>) => void;
+    'onTimeupdate'?: (event: CustomEvent<any>) => void;
     /**
     * Vimeo Video ID
     */

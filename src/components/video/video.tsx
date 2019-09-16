@@ -6,6 +6,8 @@ import {
   Prop,
   State,
   Watch,
+  Event,
+  EventEmitter,
 } from '@stencil/core';
 
 import Player from '@vimeo/player';
@@ -28,6 +30,17 @@ export class Video {
   private container: HTMLElement;
   @State() private player: Player;
 
+  @Event({eventName: 'play'}) playEvent: EventEmitter;
+  @Event({eventName: 'pause'}) pauseEvent: EventEmitter;
+  @Event({eventName: 'timeupdate'}) timeUpdateEvent: EventEmitter;
+  @Event({eventName: 'progress'}) progressEvent: EventEmitter;
+  @Event({eventName: 'seeking'}) seekingEvent: EventEmitter;
+  @Event({eventName: 'seeked'}) seekedEvent: EventEmitter;
+  @Event({eventName: 'ended'}) endedEvent: EventEmitter;
+
+  @Event({eventName: 'buffering'}) bufferingEvent: EventEmitter;
+  @Event({eventName: 'buffered'}) bufferedEvent: EventEmitter;
+
   render() {
     return (
       <xm-aspect-ratio-box ratio={this.ratio}>
@@ -48,40 +61,18 @@ export class Video {
     this.player.on('play', (e) => {
       // When seeking a play event is emitted without payload, ignore that.
       if(e !== undefined)
-        this.el.dispatchEvent(new CustomEvent('play', { detail: e }));
+        this.playEvent.emit(e);
     });
 
-    this.player.on('pause', (e) => {
-      this.el.dispatchEvent(new CustomEvent('pause', { detail: e }));
-    });
+    this.player.on('pause', e => this.pauseEvent.emit(e));
+    this.player.on('timeupdate', e => this.timeUpdateEvent.emit(e));
+    this.player.on('progress', e => this.progressEvent.emit(e));
+    this.player.on('seeking', e => this.seekingEvent.emit(e));
+    this.player.on('seeked', e => this.seekedEvent.emit(e));
+    this.player.on('ended', e => this.endedEvent.emit(e));
 
-    this.player.on('seeking', (e) => {
-      this.el.dispatchEvent(new CustomEvent('seeking', { detail: e }));
-    });
-
-    this.player.on('seeked', (e) => {
-      this.el.dispatchEvent(new CustomEvent('seeked', { detail: e }));
-    });
-
-    this.player.on('ended', (e) => {
-      this.el.dispatchEvent(new CustomEvent('ended'));
-    });
-
-    this.player.on('bufferstart', (e) => {
-      this.el.dispatchEvent(new CustomEvent('bufferstart'));
-    });
-
-    this.player.on('bufferend', (e) => {
-      this.el.dispatchEvent(new CustomEvent('bufferend'));
-    });
-
-    this.player.on('timeupdate', (e) => {
-      this.el.dispatchEvent(new CustomEvent('timeupdate', { detail: e }));
-    });
-
-    this.player.on('progress', (e) => {
-      this.el.dispatchEvent(new CustomEvent('progress', { detail: e }));
-    });
+    this.player.on('bufferstart', e => this.bufferingEvent.emit(e));
+    this.player.on('bufferend', e => this.bufferedEvent.emit(e));
 
     // Wait for Vimeo Player to be ready to access the actual iframe element
     await this.player.ready();

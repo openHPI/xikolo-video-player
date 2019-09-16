@@ -12,6 +12,21 @@
 | `src`    | `src`     | Vimeo Video ID | `number` | `undefined` |
 
 
+## Events
+
+| Event        | Description | Type               |
+| ------------ | ----------- | ------------------ |
+| `buffered`   |             | `CustomEvent<any>` |
+| `buffering`  |             | `CustomEvent<any>` |
+| `ended`      |             | `CustomEvent<any>` |
+| `pause`      |             | `CustomEvent<any>` |
+| `play`       |             | `CustomEvent<any>` |
+| `progress`   |             | `CustomEvent<any>` |
+| `seeked`     |             | `CustomEvent<any>` |
+| `seeking`    |             | `CustomEvent<any>` |
+| `timeupdate` |             | `CustomEvent<any>` |
+
+
 ## Methods
 
 ### `currentTime() => Promise<number>`
