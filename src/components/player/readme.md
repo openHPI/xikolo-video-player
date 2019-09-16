@@ -9,7 +9,7 @@
 
 ### `pause() => Promise<void>`
 
-hhhhf
+
 
 #### Returns
 
@@ -27,6 +27,16 @@ Type: `Promise<void>`
 
 
 
+### `seek(seconds: number) => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 
 ## Dependencies
 
@@ -34,15 +44,12 @@ Type: `Promise<void>`
 
 - [xm-screen](../screen)
 - [xm-controls](../controls)
-- context-consumer
 
 ### Graph
 ```mermaid
 graph TD;
   xm-player --> xm-screen
   xm-player --> xm-controls
-  xm-player --> context-consumer
-  xm-controls --> context-consumer
   style xm-player fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

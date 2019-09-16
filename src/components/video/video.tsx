@@ -103,6 +103,9 @@ export class Video {
 
     // Read aspect ratio from video to configure view box
     this.ratio = await this.getAspectRatio();
+
+    // This event indicates the video component is loaded and ready
+    this.el.dispatchEvent(new CustomEvent('ready'));
   }
 
   async componentDidUnload() {

@@ -34,4 +34,12 @@ export const config: Config = {
     reloadStrategy: 'pageReload',
     openBrowser: false
   },
+  testing: (() => {
+    switch(process.env.DEBUG) {
+      case "1":
+        return {browserHeadless: false, browserSlowMo: 2000};
+      default:
+        return {};
+    }
+  })()
 };
