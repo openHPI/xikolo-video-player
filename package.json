@@ -33,7 +33,7 @@
     "@types/puppeteer": "^1.19.1",
     "@types/vimeo__player": "^2.6.2",
     "autoprefixer": "^9.5.1",
-    "jest": "24.8.0",
+    "jest": "24.9.0",
     "jest-cli": "24.8.0",
     "puppeteer": "1.19.0",
     "stencil-inline-svg": "^0.0.2",
