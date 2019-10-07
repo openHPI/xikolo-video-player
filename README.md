@@ -51,3 +51,7 @@ Components are named `xm-*`.
 ### SVG Icons
 
 SVG icons are taken from the free icomoon font at https://icomoon.io, cleaned up SVG and added `role="presentation" focusable="false"` attributes.
+
+### Branding
+
+The video player needs to support simple color customization. Components should use `currentColor` and custom CSS variables if appropriate.
