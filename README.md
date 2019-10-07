@@ -20,7 +20,7 @@ npm install
 npm start
 ```
 
-You can open a demo page on https://localhost:3333 now. This page is automatically reloaded with newly code when you save a file.
+You can open a demo page on http://localhost:3333 now. This page is automatically reloaded with newly code when you save a file.
 
 To build the component for production, run:
 
