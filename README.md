@@ -47,3 +47,7 @@ Stencil components are just Web Components, so they work in any major framework 
 ### Naming Components
 
 Components are named `xm-*`.
+
+### SVG Icons
+
+SVG icons are taken from the free icomoon font at https://icomoon.io, cleaned up SVG and added `role="presentation" focusable="false"` attributes.
