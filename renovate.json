@@ -3,5 +3,6 @@
   "automerge": true,
   "major": {
     "automerge": false
-  }
+  },
+  "ignoreDeps": ["jest", "jest-cli", "puppeteer", "@types/puppeteer"]
 }
