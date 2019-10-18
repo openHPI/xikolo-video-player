@@ -21,7 +21,7 @@
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
   "dependencies": {
-    "@stencil/core": "^1.4.0",
+    "@stencil/core": "^1.7.2",
     "@vimeo/player": "^2.8.2",
     "split.js": "^1.5.11"
   },
