@@ -1,7 +1,7 @@
 import { newE2EPage, E2EPage } from '@stencil/core/testing';
 
 describe('xm-player', () => {
-  let page: E2EPage;
+ let page: E2EPage;
 
   beforeEach(async () => {
     page = await newE2EPage();
@@ -27,6 +27,9 @@ describe('xm-player', () => {
     `);
 
     const player = await page.find('xm-player');
-    expect(player.shadowRoot.querySelector('xm-controls')).not.toBeNull();
+    const controls = player.shadowRoot.querySelector('xm-controls');
+    expect(controls).not.toBeNull();
+    expect(controls).toHaveClass('hydrated');
   })
+
 });

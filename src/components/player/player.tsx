@@ -5,6 +5,8 @@ import {
   Listen,
   Method,
   State,
+  Prop,
+  Watch,
 } from '@stencil/core';
 
 import { Mode, Status, defaultStatus } from '../../utils/status';
@@ -19,13 +21,15 @@ export class Player {
   @Element()
   private el: HTMLElement;
 
+  @Prop({mutable: true}) volume: number = defaultStatus.volume;
+
   @State()
   private status: Status = defaultStatus;
 
   private primary: HTMLXmVideoElement | undefined;
   private secondary: HTMLXmVideoElement | undefined;
 
-  protected render() {
+  public render() {
     return (
       <div class="player">
         <xm-screen>
@@ -37,7 +41,7 @@ export class Player {
     );
   }
 
-  protected componentDidLoad() {
+  public componentDidLoad() {
     this.primary = this.el.querySelector('[slot=primary]') as HTMLXmVideoElement;
     this.secondary = this.el.querySelector('[slot=secondary]') as HTMLXmVideoElement;
 
@@ -46,10 +50,12 @@ export class Player {
     this.primary.addEventListener('progress', this._progress);
     this.secondary.addEventListener('click', this._click);
 
-    document.addEventListener('fullscreenchange', this._fullscreenchange)
+    document.addEventListener('fullscreenchange', this._fullscreenchange);
+
+    this._setupVolume(this.el.volume, '' + defaultStatus.volume);
   }
 
-  protected componentWillUnload() {
+  public componentWillUnload() {
     this.primary.removeEventListener('click', this._click);
     this.primary.removeEventListener('timeupdate', this._timeUpdate);
     this.secondary.removeEventListener('click', this._click);
@@ -129,5 +135,44 @@ export class Player {
   protected async _exitFullscreen() {
     if (document.fullscreenElement !== null)
       return document.exitFullscreen();
+  }
+
+  @Method()
+  @Listen('control:mute')
+  public async mute() {
+    this.primary.volume = 0;
+    this.status = {...this.status, muted: true};
+  }
+
+  @Method()
+  @Listen('control:unmute')
+  public async unmute() {
+    this.primary.volume = this.status.volume;
+    this.status = {...this.status, muted: false};
+  }
+
+
+  @bind()
+  public async _setVolume(volume: number) {
+    this.volume = volume;
+    this.primary.volume = this.volume;
+    this.status = {
+      ...this.status,
+      volume: this.volume,
+      muted: this.volume === 0
+    };
+  }
+
+  @Listen('control:changeVolume')
+  public async _changeVolume(e: CustomEvent) {
+    this._setVolume(e.detail.volume);
+  }
+
+  @Watch('volume')
+  _setupVolume(newValue: string, oldValue: string) {
+    const volume = parseFloat(newValue);
+    if( !isNaN(volume ) && newValue != oldValue ) {
+      this._setVolume(volume);
+    }
   }
 }

@@ -31,6 +31,10 @@
 
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+
+  &--volume {
+    border: 1px solid black;
+  }
 }
 
 .controls__toolbar {

@@ -49,6 +49,47 @@ export const CurrentTime: FunctionalComponent<CurrentTimeProps> = props => {
   );
 }
 
+interface VolumeProps {
+  status: Status;
+  onMute: (e: Event) => void;
+  onUnmute: (e: Event) => void;
+  onChangeVolume: (volume: number) => void;
+}
+
+export const Volume: FunctionalComponent<VolumeProps> = props => {
+  const { muted, volume } = props.status;
+
+  const fnSetVolume = (e: Event) => {
+    const el = e.target as HTMLInputElement;
+    props.onChangeVolume(parseFloat(el.value));
+  };
+
+  const volumeSlider = (
+    <input class="controls__slider controls__slider--volume"
+      type="range"
+      min="0"
+      max="1"
+      step="0.1"
+      value={volume}
+      onInput={fnSetVolume}
+/>);
+
+  if(muted) {
+    return (
+      <div class="controls-volume">
+        <button class="controls__unmute" onClick={props.onUnmute} innerHTML={icon.VolumeOff} />
+        {volumeSlider}
+      </div>
+    )
+  } else {
+    return (
+      <div class="controls-volume">
+        <button class="controls__mute" onClick={props.onMute} innerHTML={icon.VolumeOn } />
+        {volumeSlider}
+      </div>
+    )
+  }
+}
 
 interface SliderProps {
   status: Status;

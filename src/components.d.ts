@@ -18,9 +18,12 @@ export namespace Components {
     'status': Status;
   }
   interface XmPlayer {
+    'mute': () => Promise<void>;
     'pause': () => Promise<void>;
     'play': () => Promise<void>;
     'seek': (seconds: number) => Promise<void>;
+    'unmute': () => Promise<void>;
+    'volume': number;
   }
   interface XmScreen {
     'pip': boolean;
@@ -37,6 +40,7 @@ export namespace Components {
     * Vimeo Video ID
     */
     'src': number;
+    'volume': number;
   }
 }
 
@@ -86,14 +90,19 @@ declare namespace LocalJSX {
     'ratio'?: number;
   }
   interface XmControls extends JSXBase.HTMLAttributes<HTMLXmControlsElement> {
+    'onControl:changeVolume'?: (event: CustomEvent<any>) => void;
     'onControl:enterFullscreen'?: (event: CustomEvent<any>) => void;
     'onControl:exitFullscreen'?: (event: CustomEvent<any>) => void;
+    'onControl:mute'?: (event: CustomEvent<any>) => void;
     'onControl:pause'?: (event: CustomEvent<any>) => void;
     'onControl:play'?: (event: CustomEvent<any>) => void;
     'onControl:seek'?: (event: CustomEvent<any>) => void;
+    'onControl:unmute'?: (event: CustomEvent<any>) => void;
     'status'?: Status;
   }
-  interface XmPlayer extends JSXBase.HTMLAttributes<HTMLXmPlayerElement> {}
+  interface XmPlayer extends JSXBase.HTMLAttributes<HTMLXmPlayerElement> {
+    'volume'?: number;
+  }
   interface XmScreen extends JSXBase.HTMLAttributes<HTMLXmScreenElement> {
     'pip'?: boolean;
   }
@@ -111,6 +120,7 @@ declare namespace LocalJSX {
     * Vimeo Video ID
     */
     'src'?: number;
+    'volume'?: number;
   }
 
   interface IntrinsicElements {
