@@ -24,6 +24,7 @@ export class Video {
    * Vimeo Video ID
    */
   @Prop() src: number;
+  @Prop() volume: number;
 
   @State() private ratio: number = 0.5625;
 
@@ -108,6 +109,12 @@ export class Video {
     await this.player.loadVideo(value);
   }
 
+
+  @Watch('volume')
+  async volumeChanged(volume: number) {
+    return this.player.setVolume(volume);
+  }
+
   @Watch('controls')
   async controlsChanged(value: boolean) {
     await this.componentDidUnload();
@@ -155,4 +162,5 @@ export class Video {
   async currentTime() {
     return this.player.getCurrentTime();
   }
+
 }

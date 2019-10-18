@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`xm-player with props should render 1`] = `
+<xm-player volume="0.3">
+  <mock:shadow-root>
+    <div class="player">
+      <xm-screen>
+        <slot name="primary"></slot>
+        <slot name="secondary" slot="secondary"></slot>
+      </xm-screen>
+      <xm-controls>
+        <mock:shadow-root>
+          <div class="controls">
+            <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
+            <div class="controls__toolbar">
+              <button>
+                <svg focusable="false" role="presentation" viewBox="0 0 22 28">
+                  <path d="M21.625 14.484l-20.75 11.531c-0.484 0.266-0.875 0.031-0.875-0.516v-23c0-0.547 0.391-0.781 0.875-0.516l20.75 11.531c0.484 0.266 0.484 0.703 0 0.969z"></path>
+                </svg>
+              </button>
+              <div class="controls-volume">
+                <button class="controls__unmute">
+                  <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                    <path d="M30 19.348v2.652h-2.652l-3.348-3.348-3.348 3.348h-2.652v-2.652l3.348-3.348-3.348-3.348v-2.652h2.652l3.348 3.348 3.348-3.348h2.652v2.652l-3.348 3.348 3.348 3.348z"></path>
+                    <path d="M13 30c-0.26 0-0.516-0.102-0.707-0.293l-7.707-7.707h-3.586c-0.552 0-1-0.448-1-1v-10c0-0.552 0.448-1 1-1h3.586l7.707-7.707c0.286-0.286 0.716-0.372 1.090-0.217s0.617 0.519 0.617 0.924v26c0 0.404-0.244 0.769-0.617 0.924-0.124 0.051-0.254 0.076-0.383 0.076z"></path>
+                  </svg>
+                </button>
+                <input class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="0">
+              </div>
+              <span class="controls__time" title="Time left of 00:00s">
+                -00:00
+              </span>
+              <button>
+                <svg focusable="false" role="presentation" viewBox="0 0 24 28">
+                  <path d="M11.797 16.5c0 0.125-0.063 0.266-0.156 0.359l-5.187 5.187 2.25 2.25c0.187 0.187 0.297 0.438 0.297 0.703 0 0.547-0.453 1-1 1h-7c-0.547 0-1-0.453-1-1v-7c0-0.547 0.453-1 1-1 0.266 0 0.516 0.109 0.703 0.297l2.25 2.25 5.187-5.187c0.094-0.094 0.234-0.156 0.359-0.156s0.266 0.063 0.359 0.156l1.781 1.781c0.094 0.094 0.156 0.234 0.156 0.359zM24 3v7c0 0.547-0.453 1-1 1-0.266 0-0.516-0.109-0.703-0.297l-2.25-2.25-5.187 5.187c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-1.781-1.781c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l5.187-5.187-2.25-2.25c-0.187-0.187-0.297-0.438-0.297-0.703 0-0.547 0.453-1 1-1h7c0.547 0 1 0.453 1 1z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </mock:shadow-root>
+      </xm-controls>
+    </div>
+  </mock:shadow-root>
+  <xm-video slot="primary" src="340196868"></xm-video>
+  <xm-video slot="secondary" src="340196788"></xm-video>
+</xm-player>
+`;
+
+exports[`xm-player with props should render with volume 1`] = `
+<xm-player volume="0.3">
+  <mock:shadow-root>
+    <div class="player">
+      <xm-screen>
+        <slot name="primary"></slot>
+        <slot name="secondary" slot="secondary"></slot>
+      </xm-screen>
+      <xm-controls>
+        <mock:shadow-root>
+          <div class="controls">
+            <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
+            <div class="controls__toolbar">
+              <button>
+                <svg focusable="false" role="presentation" viewBox="0 0 22 28">
+                  <path d="M21.625 14.484l-20.75 11.531c-0.484 0.266-0.875 0.031-0.875-0.516v-23c0-0.547 0.391-0.781 0.875-0.516l20.75 11.531c0.484 0.266 0.484 0.703 0 0.969z"></path>
+                </svg>
+              </button>
+              <div class="controls-volume">
+                <button class="controls__unmute">
+                  <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                    <path d="M30 19.348v2.652h-2.652l-3.348-3.348-3.348 3.348h-2.652v-2.652l3.348-3.348-3.348-3.348v-2.652h2.652l3.348 3.348 3.348-3.348h2.652v2.652l-3.348 3.348 3.348 3.348z"></path>
+                    <path d="M13 30c-0.26 0-0.516-0.102-0.707-0.293l-7.707-7.707h-3.586c-0.552 0-1-0.448-1-1v-10c0-0.552 0.448-1 1-1h3.586l7.707-7.707c0.286-0.286 0.716-0.372 1.090-0.217s0.617 0.519 0.617 0.924v26c0 0.404-0.244 0.769-0.617 0.924-0.124 0.051-0.254 0.076-0.383 0.076z"></path>
+                  </svg>
+                </button>
+                <input class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="0">
+              </div>
+              <span class="controls__time" title="Time left of 00:00s">
+                -00:00
+              </span>
+              <button>
+                <svg focusable="false" role="presentation" viewBox="0 0 24 28">
+                  <path d="M11.797 16.5c0 0.125-0.063 0.266-0.156 0.359l-5.187 5.187 2.25 2.25c0.187 0.187 0.297 0.438 0.297 0.703 0 0.547-0.453 1-1 1h-7c-0.547 0-1-0.453-1-1v-7c0-0.547 0.453-1 1-1 0.266 0 0.516 0.109 0.703 0.297l2.25 2.25 5.187-5.187c0.094-0.094 0.234-0.156 0.359-0.156s0.266 0.063 0.359 0.156l1.781 1.781c0.094 0.094 0.156 0.234 0.156 0.359zM24 3v7c0 0.547-0.453 1-1 1-0.266 0-0.516-0.109-0.703-0.297l-2.25-2.25-5.187 5.187c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-1.781-1.781c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l5.187-5.187-2.25-2.25c-0.187-0.187-0.297-0.438-0.297-0.703 0-0.547 0.453-1 1-1h7c0.547 0 1 0.453 1 1z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </mock:shadow-root>
+      </xm-controls>
+    </div>
+  </mock:shadow-root>
+  <xm-video slot="primary" src="340196868"></xm-video>
+  <xm-video slot="secondary" src="340196788"></xm-video>
+</xm-player>
+`;
