@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - deploy
 
 Docker E2E:
   stage: build
@@ -43,15 +44,21 @@ test:
   script:
     - npm test
 
-
-pages:
+build:
   extends: .base
   script:
     - npm run build
+  artifacts:
+    paths: [www]
+    expire_in: 1 month
+
+deploy to pages:
+  extends: .base
+  stage: deploy
+  script:
     - mv www public
   artifacts:
-    paths:
-      - public
+    paths: [public]
   only:
     - master
 
