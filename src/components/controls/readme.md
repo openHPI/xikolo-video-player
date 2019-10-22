@@ -16,11 +16,14 @@
 
 | Event                     | Description | Type               |
 | ------------------------- | ----------- | ------------------ |
+| `control:changeVolume`    |             | `CustomEvent<any>` |
 | `control:enterFullscreen` |             | `CustomEvent<any>` |
 | `control:exitFullscreen`  |             | `CustomEvent<any>` |
+| `control:mute`            |             | `CustomEvent<any>` |
 | `control:pause`           |             | `CustomEvent<any>` |
 | `control:play`            |             | `CustomEvent<any>` |
 | `control:seek`            |             | `CustomEvent<any>` |
+| `control:unmute`          |             | `CustomEvent<any>` |
 
 
 ## Dependencies
