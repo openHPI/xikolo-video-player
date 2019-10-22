@@ -5,7 +5,24 @@
 <!-- Auto Generated Below -->
 
 
+## Properties
+
+| Property | Attribute | Description | Type     | Default                |
+| -------- | --------- | ----------- | -------- | ---------------------- |
+| `volume` | `volume`  |             | `number` | `defaultStatus.volume` |
+
+
 ## Methods
+
+### `mute() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
 
 ### `pause() => Promise<void>`
 
@@ -28,6 +45,16 @@ Type: `Promise<void>`
 
 
 ### `seek(seconds: number) => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `unmute() => Promise<void>`
 
 
 

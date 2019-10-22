@@ -19,7 +19,7 @@ import { bind } from '../../utils/bind';
 })
 export class Player {
   @Element()
-  private el: HTMLElement;
+  private el: HTMLXmPlayerElement;
 
   @Prop({mutable: true}) volume: number = defaultStatus.volume;
 
@@ -52,7 +52,7 @@ export class Player {
 
     document.addEventListener('fullscreenchange', this._fullscreenchange);
 
-    this._setupVolume(this.el.volume, '' + defaultStatus.volume);
+    this._setVolume(this.volume);
   }
 
   public componentWillUnload() {
@@ -154,13 +154,15 @@ export class Player {
 
   @bind()
   public async _setVolume(volume: number) {
-    this.volume = volume;
-    this.primary.volume = this.volume;
-    this.status = {
-      ...this.status,
-      volume: this.volume,
-      muted: this.volume === 0
-    };
+    if( !isNaN(volume) ) {
+      this.volume = volume;
+      this.primary.volume = this.volume;
+      this.status = {
+        ...this.status,
+        volume: this.volume,
+        muted: this.volume === 0
+      };
+    }
   }
 
   @Listen('control:changeVolume')
@@ -171,7 +173,7 @@ export class Player {
   @Watch('volume')
   _setupVolume(newValue: string, oldValue: string) {
     const volume = parseFloat(newValue);
-    if( !isNaN(volume ) && newValue != oldValue ) {
+    if( newValue != oldValue ) {
       this._setVolume(volume);
     }
   }

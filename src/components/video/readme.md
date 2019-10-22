@@ -10,6 +10,7 @@
 | Property | Attribute | Description    | Type     | Default     |
 | -------- | --------- | -------------- | -------- | ----------- |
 | `src`    | `src`     | Vimeo Video ID | `number` | `undefined` |
+| `volume` | `volume`  |                | `number` | `undefined` |
 
 
 ## Events

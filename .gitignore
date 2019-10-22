@@ -1,7 +1,5 @@
 dist/
 loader/
-__snapshots__/*
-!__snapshots__/.gitkeep
 www/
 
 *~
