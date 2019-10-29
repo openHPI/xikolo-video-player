@@ -100,6 +100,16 @@ Type: `Promise<number>`
 
 
 
+### `setPlaybackRate(playbackRate: number) => Promise<number>`
+
+
+
+#### Returns
+
+Type: `Promise<number>`
+
+
+
 
 ## Dependencies
 

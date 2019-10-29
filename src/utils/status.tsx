@@ -7,6 +7,10 @@ export enum Mode {
   FINISHED,
 }
 
+export interface Settings {
+  playbackRate: number;
+}
+
 export interface Progress {
   seconds: number;
   percent: number;
@@ -19,6 +23,7 @@ export interface Status {
   progress: Progress;
   muted: boolean;
   volume: number;
+  settings: Settings;
 }
 
 export const defaultStatus: Status = {
@@ -30,5 +35,8 @@ export const defaultStatus: Status = {
   progress: {
     seconds: 0,
     percent: 0,
+  },
+  settings: {
+    playbackRate: 1,
   }
 }

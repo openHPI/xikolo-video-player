@@ -163,4 +163,8 @@ export class Video {
     return this.player.getCurrentTime();
   }
 
+  @Method()
+  async setPlaybackRate(playbackRate: number) {
+    return this.player.setPlaybackRate(playbackRate);
+  }
 }
