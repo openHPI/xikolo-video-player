@@ -15,6 +15,10 @@
       box-sizing: border-box;
     }
 
+    h1 a, h2 a {
+      color: inherit;
+    }
+
     section {
       margin: 0 auto;
       background: #fff;
@@ -53,12 +57,20 @@
 <body>
   <section>
     <h1><a href="#">Video Player Test</a></h1>
-    <!-- <xmf-source src="205404461" type="application/vnd.xmf.vimeo"></xmf-source> -->
+
+    <h2>Dual Stream</h2>
 
     <div id="wrapper">
       <xm-player volume="0.3">
         <xm-video slot="primary" src="340196868"></xm-video>
         <xm-video slot="secondary" src="340196788"></xm-video>
+        <iframe src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      </xm-player>
+
+      <h2><a href="#">Single Stream</a></h2>
+
+      <xm-player volume="1.0">
+        <xm-video slot="primary" src="340196868"></xm-video>
         <iframe src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </xm-player>
     </div>
