@@ -52,7 +52,7 @@ build:
     paths: [www]
     expire_in: 1 month
 
-deploy to pages:
+pages:
   extends: .base
   stage: deploy
   script:
