@@ -77,6 +77,7 @@ Type: `Promise<void>`
 graph TD;
   xm-player --> xm-screen
   xm-player --> xm-controls
+  xm-controls --> xm-settings-menu
   style xm-player fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

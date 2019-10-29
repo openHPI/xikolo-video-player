@@ -177,4 +177,19 @@ export class Player {
       this._setVolume(volume);
     }
   }
+
+
+  @Listen('setting:changePlaybackRate')
+  protected async _setPlaybackRate(e: CustomEvent) {
+    const playbackRate = e.detail.playbackRate;
+    await this.primary.setPlaybackRate(playbackRate);
+    this.status = {
+      ...this.status,
+      settings: {
+        ...this.status.settings,
+        playbackRate: playbackRate,
+      }
+    };
+  }
+
 }

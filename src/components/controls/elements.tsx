@@ -120,3 +120,25 @@ export const Slider: FunctionalComponent<SliderProps> = props => {
     />
   );
 }
+
+interface SettingsMenuToggleButtonProps {
+  status: Status;
+  openedSettingsMenu: boolean;
+  onOpenSettingsMenu: (e: Event) => void;
+  onCloseSettingsMenu: (e: Event) => void;
+}
+
+export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleButtonProps> = props => {
+  if(props.openedSettingsMenu) {
+    return (
+      <button onClick={props.onCloseSettingsMenu}>
+        <span class="controls__settings-icon--open" innerHTML={icon.Settings} />
+      </button>
+    )
+  }
+  return (
+    <button onClick={props.onOpenSettingsMenu}>
+      <span class="controls__settings-icon" innerHTML={icon.Settings} />
+    </button>
+  )
+}

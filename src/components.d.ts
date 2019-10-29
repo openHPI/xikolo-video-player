@@ -29,6 +29,10 @@ export namespace Components {
   interface XmScreen {
     'pip': boolean;
   }
+  interface XmSettingsMenu {
+    'isOpen': boolean;
+    'status': Status;
+  }
   interface XmVideo {
     'currentTime': () => Promise<number>;
     'getAspectRatio': () => Promise<number>;
@@ -37,6 +41,7 @@ export namespace Components {
     'pause': () => Promise<void>;
     'play': () => Promise<void>;
     'seek': (seconds: number) => Promise<number>;
+    'setPlaybackRate': (playbackRate: number) => Promise<number>;
     /**
     * Vimeo Video ID
     */
@@ -49,31 +54,37 @@ declare global {
 
 
   interface HTMLXmAspectRatioBoxElement extends Components.XmAspectRatioBox, HTMLStencilElement {}
-  const HTMLXmAspectRatioBoxElement: {
+  var HTMLXmAspectRatioBoxElement: {
     prototype: HTMLXmAspectRatioBoxElement;
     new (): HTMLXmAspectRatioBoxElement;
   };
 
   interface HTMLXmControlsElement extends Components.XmControls, HTMLStencilElement {}
-  const HTMLXmControlsElement: {
+  var HTMLXmControlsElement: {
     prototype: HTMLXmControlsElement;
     new (): HTMLXmControlsElement;
   };
 
   interface HTMLXmPlayerElement extends Components.XmPlayer, HTMLStencilElement {}
-  const HTMLXmPlayerElement: {
+  var HTMLXmPlayerElement: {
     prototype: HTMLXmPlayerElement;
     new (): HTMLXmPlayerElement;
   };
 
   interface HTMLXmScreenElement extends Components.XmScreen, HTMLStencilElement {}
-  const HTMLXmScreenElement: {
+  var HTMLXmScreenElement: {
     prototype: HTMLXmScreenElement;
     new (): HTMLXmScreenElement;
   };
 
+  interface HTMLXmSettingsMenuElement extends Components.XmSettingsMenu, HTMLStencilElement {}
+  var HTMLXmSettingsMenuElement: {
+    prototype: HTMLXmSettingsMenuElement;
+    new (): HTMLXmSettingsMenuElement;
+  };
+
   interface HTMLXmVideoElement extends Components.XmVideo, HTMLStencilElement {}
-  const HTMLXmVideoElement: {
+  var HTMLXmVideoElement: {
     prototype: HTMLXmVideoElement;
     new (): HTMLXmVideoElement;
   };
@@ -82,6 +93,7 @@ declare global {
     'xm-controls': HTMLXmControlsElement;
     'xm-player': HTMLXmPlayerElement;
     'xm-screen': HTMLXmScreenElement;
+    'xm-settings-menu': HTMLXmSettingsMenuElement;
     'xm-video': HTMLXmVideoElement;
   }
 }
@@ -92,9 +104,11 @@ declare namespace LocalJSX {
   }
   interface XmControls {
     'onControl:changeVolume'?: (event: CustomEvent<any>) => void;
+    'onControl:closeSettingsMenu'?: (event: CustomEvent<any>) => void;
     'onControl:enterFullscreen'?: (event: CustomEvent<any>) => void;
     'onControl:exitFullscreen'?: (event: CustomEvent<any>) => void;
     'onControl:mute'?: (event: CustomEvent<any>) => void;
+    'onControl:openSettingsMenu'?: (event: CustomEvent<any>) => void;
     'onControl:pause'?: (event: CustomEvent<any>) => void;
     'onControl:play'?: (event: CustomEvent<any>) => void;
     'onControl:seek'?: (event: CustomEvent<any>) => void;
@@ -106,6 +120,11 @@ declare namespace LocalJSX {
   }
   interface XmScreen {
     'pip'?: boolean;
+  }
+  interface XmSettingsMenu {
+    'isOpen'?: boolean;
+    'onSetting:changePlaybackRate'?: (event: CustomEvent<any>) => void;
+    'status'?: Status;
   }
   interface XmVideo {
     'onBuffered'?: (event: CustomEvent<any>) => void;
@@ -129,6 +148,7 @@ declare namespace LocalJSX {
     'xm-controls': XmControls;
     'xm-player': XmPlayer;
     'xm-screen': XmScreen;
+    'xm-settings-menu': XmSettingsMenu;
     'xm-video': XmVideo;
   }
 }
@@ -143,6 +163,7 @@ declare module "@stencil/core" {
       'xm-controls': LocalJSX.XmControls & JSXBase.HTMLAttributes<HTMLXmControlsElement>;
       'xm-player': LocalJSX.XmPlayer & JSXBase.HTMLAttributes<HTMLXmPlayerElement>;
       'xm-screen': LocalJSX.XmScreen & JSXBase.HTMLAttributes<HTMLXmScreenElement>;
+      'xm-settings-menu': LocalJSX.XmSettingsMenu & JSXBase.HTMLAttributes<HTMLXmSettingsMenuElement>;
       'xm-video': LocalJSX.XmVideo & JSXBase.HTMLAttributes<HTMLXmVideoElement>;
     }
   }
