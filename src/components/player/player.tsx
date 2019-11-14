@@ -48,6 +48,7 @@ export class Player {
     this.primary.addEventListener('click', this._click);
     this.primary.addEventListener('timeupdate', this._timeUpdate);
     this.primary.addEventListener('progress', this._progress);
+    this.primary.addEventListener('ended', this._ended);
     this.secondary.addEventListener('click', this._click);
 
     document.addEventListener('fullscreenchange', this._fullscreenchange);
@@ -114,6 +115,11 @@ export class Player {
   @bind()
   protected async _progress(e: CustomEvent) {
     console.log('progress', e.detail);
+  }
+
+  @bind()
+  protected async _ended(e: CustomEvent) {
+    this.status = {...this.status, mode: Mode.FINISHED};
   }
 
   @bind()
