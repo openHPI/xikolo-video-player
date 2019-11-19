@@ -59,7 +59,13 @@ export const ArrowRight = `
 `;
 
 export const ArrowLeft = `
-<svg id="icon-left-open" viewBox="0 0 11 32" role="presentation" focusable="false">
+<svg viewBox="0 0 11 32" role="presentation" focusable="false">
   <path d="M7.744 7.168q0.448-0.512 1.248-0.512t1.312 0.512q1.216 1.152 0 2.56l-5.952 6.272 5.952 6.208q1.216 1.408 0 2.56-0.512 0.512-1.28 0.512t-1.28-0.512l-7.232-7.552q-0.512-0.512-0.512-1.216 0-0.768 0.512-1.28 6.592-6.848 7.232-7.552z"></path>
+</svg>
+`;
+
+export const Restart = `
+<svg viewBox="0 0 30 32" role="presentation" focusable="false">
+  <path d="M17.024 3.648q5.44 0 9.248 3.84t3.808 9.28-3.808 9.28-9.248 3.84q-4.544 0-8.064-2.816l2.24-2.368q2.688 1.92 5.824 1.92 4.032 0 6.912-2.88t2.88-6.976-2.88-6.976-6.912-2.88q-3.968 0-6.848 2.784t-2.944 6.752h4.544l-5.888 6.528-5.888-6.528h3.968q0.064-5.312 3.904-9.056t9.152-3.744z"></path>
 </svg>
 `;

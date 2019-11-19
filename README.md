@@ -51,6 +51,7 @@ Components are named `xm-*`.
 ### SVG Icons
 
 SVG icons are taken from the free icomoon font at https://icomoon.io, cleaned up SVG and added `role="presentation" focusable="false"` attributes.
+(Or they are taken from http://fontello.com/ and imported to icomoon.io)
 
 ### Branding
 

@@ -27,10 +27,10 @@ interface ControlProps {
 }
 
 export const Control: FunctionalComponent<ControlProps> = props => {
-  if(!(props.status.mode === Mode.PLAYING)) {
-    return <button onClick={props.onPlay} innerHTML={icon.Play} />
-  } else {
+  if(props.status.mode === Mode.PLAYING) {
     return <button onClick={props.onPause} innerHTML={icon.Pause} />
+  } else {
+    return <button onClick={props.onPlay} innerHTML={props.status.mode === Mode.FINISHED ? icon.Restart : icon.Play} />
   }
 }
 
