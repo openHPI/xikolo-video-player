@@ -1,4 +1,5 @@
-import { h } from '@stencil/core';
+import { Cue } from './webVTT';
+import { textTrackDefault } from './settings';
 
 export enum Mode {
   PLAYING,
@@ -7,13 +8,21 @@ export enum Mode {
   FINISHED,
 }
 
-export interface Settings {
-  playbackRate: number;
-}
-
 export interface Progress {
   seconds: number;
   percent: number;
+}
+
+export interface Subtitle {
+  enabled: boolean;
+  language: string;
+  activeCues: Array<Cue>;
+}
+
+
+export interface Settings {
+  playbackRate: number;
+  textTrack: string;
 }
 
 export interface Status {
@@ -23,6 +32,7 @@ export interface Status {
   progress: Progress;
   muted: boolean;
   volume: number;
+  subtitle: Subtitle;
   settings: Settings;
 }
 
@@ -36,7 +46,13 @@ export const defaultStatus: Status = {
     seconds: 0,
     percent: 0,
   },
+  subtitle: {
+    enabled: false,
+    language: 'de',
+    activeCues: null,
+  },
   settings: {
     playbackRate: 1,
+    textTrack: textTrackDefault,
   }
 }

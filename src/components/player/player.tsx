@@ -10,6 +10,7 @@ import {
 } from '@stencil/core';
 
 import { Mode, Status, defaultStatus } from '../../utils/status';
+import { TextTrack } from '../../utils/webVTT';
 import { bind } from '../../utils/bind';
 
 @Component({
@@ -28,6 +29,7 @@ export class Player {
 
   private primary: HTMLXmVideoElement | undefined;
   private secondary: HTMLXmVideoElement | undefined;
+  private textTrack: TextTrack = new TextTrack();
 
   public render() {
     return (
@@ -36,7 +38,7 @@ export class Player {
           <slot name="primary"></slot>
           <slot slot="secondary" name="secondary"></slot>
         </xm-screen>
-        <xm-controls status={this.status} />
+        <xm-controls status={this.status} textTrack={this.textTrack} />
       </div>
     );
   }
@@ -76,6 +78,7 @@ export class Player {
   @bind()
   protected async _timeUpdate(e: CustomEvent) {
     const { seconds, percent, duration } = e.detail;
+    this._cueUpdate(seconds);
     this.status = {
       ...this.status,
       duration: duration,
@@ -88,6 +91,27 @@ export class Player {
         this.secondary.seek(seconds);
       }
     })
+  }
+
+  @bind()
+  protected _cueUpdate(seconds: number, refresh?: boolean) {
+    const { activeCues } = this.status.subtitle;
+    const cues = this.textTrack.getActiveCues(seconds, this.status.subtitle.language);
+    if(refresh || !this.textTrack.compareCueLists(cues, activeCues)) {
+      this.status = {
+        ...this.status,
+        subtitle: {
+          ...this.status.subtitle,
+          activeCues: cues
+        }
+      };
+    }
+  }
+
+  @bind()
+  @Listen('texttrack:loaded')
+  protected _addSubtitle(e: CustomEvent) {
+    this.textTrack.addWebVTT(e.detail.webVTT);
   }
 
   @Method()
@@ -198,4 +222,67 @@ export class Player {
     };
   }
 
+  @Method()
+  @Listen('control:enableTextTrack')
+  public async enableTextTrack() {
+    this.status = {
+      ...this.status,
+      subtitle: {
+        ...this.status.subtitle,
+        enabled: true,
+      },
+      settings: {
+        ...this.status.settings,
+        textTrack: this.status.subtitle.language,
+      }
+    };
+  }
+
+  @Method()
+  @Listen('control:disableTextTrack')
+  public async disableTextTrack() {
+    this.status = {
+      ...this.status,
+      subtitle: {
+        ...this.status.subtitle,
+        enabled: false,
+      },
+      settings: {
+        ...this.status.settings,
+        textTrack: 'off',
+      }
+    };
+  }
+
+  @Listen('setting:changeTextTrack')
+  public _setTextTrack(e: CustomEvent) {
+    const textTrack = e.detail.textTrack;
+    if(textTrack === 'off') {
+      this.status = {
+        ...this.status,
+        subtitle: {
+          ...this.status.subtitle,
+          enabled: false,
+        }
+      };
+    } else {
+      this._cueUpdate(this.status.progress.seconds, true);
+      this.status = {
+        ...this.status,
+        subtitle: {
+          ...this.status.subtitle,
+          language: textTrack,
+          enabled: true,
+        }
+      };
+    }
+    this.status = {
+      ...this.status,
+      settings: {
+        ...this.status.settings,
+        textTrack: textTrack,
+      }
+    };
+
+  }
 }

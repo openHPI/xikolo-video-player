@@ -14,6 +14,26 @@
 
 ## Methods
 
+### `disableTextTrack() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `enableTextTrack() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 ### `mute() => Promise<void>`
 
 

@@ -10,6 +10,9 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
   Status,
 } from './utils/status';
+import {
+  TextTrack,
+} from './utils/webVTT';
 
 export namespace Components {
   interface XmAspectRatioBox {
@@ -17,8 +20,11 @@ export namespace Components {
   }
   interface XmControls {
     'status': Status;
+    'textTrack': TextTrack;
   }
   interface XmPlayer {
+    'disableTextTrack': () => Promise<void>;
+    'enableTextTrack': () => Promise<void>;
     'mute': () => Promise<void>;
     'pause': () => Promise<void>;
     'play': () => Promise<void>;
@@ -32,6 +38,12 @@ export namespace Components {
   interface XmSettingsMenu {
     'isOpen': boolean;
     'status': Status;
+    'textTrack': TextTrack;
+  }
+  interface XmTextTrack {
+    'label': string;
+    'language': string;
+    'src': string;
   }
   interface XmVideo {
     'currentTime': () => Promise<number>;
@@ -83,6 +95,12 @@ declare global {
     new (): HTMLXmSettingsMenuElement;
   };
 
+  interface HTMLXmTextTrackElement extends Components.XmTextTrack, HTMLStencilElement {}
+  var HTMLXmTextTrackElement: {
+    prototype: HTMLXmTextTrackElement;
+    new (): HTMLXmTextTrackElement;
+  };
+
   interface HTMLXmVideoElement extends Components.XmVideo, HTMLStencilElement {}
   var HTMLXmVideoElement: {
     prototype: HTMLXmVideoElement;
@@ -94,6 +112,7 @@ declare global {
     'xm-player': HTMLXmPlayerElement;
     'xm-screen': HTMLXmScreenElement;
     'xm-settings-menu': HTMLXmSettingsMenuElement;
+    'xm-text-track': HTMLXmTextTrackElement;
     'xm-video': HTMLXmVideoElement;
   }
 }
@@ -104,16 +123,17 @@ declare namespace LocalJSX {
   }
   interface XmControls {
     'onControl:changeVolume'?: (event: CustomEvent<any>) => void;
-    'onControl:closeSettingsMenu'?: (event: CustomEvent<any>) => void;
+    'onControl:disableTextTrack'?: (event: CustomEvent<any>) => void;
+    'onControl:enableTextTrack'?: (event: CustomEvent<any>) => void;
     'onControl:enterFullscreen'?: (event: CustomEvent<any>) => void;
     'onControl:exitFullscreen'?: (event: CustomEvent<any>) => void;
     'onControl:mute'?: (event: CustomEvent<any>) => void;
-    'onControl:openSettingsMenu'?: (event: CustomEvent<any>) => void;
     'onControl:pause'?: (event: CustomEvent<any>) => void;
     'onControl:play'?: (event: CustomEvent<any>) => void;
     'onControl:seek'?: (event: CustomEvent<any>) => void;
     'onControl:unmute'?: (event: CustomEvent<any>) => void;
     'status'?: Status;
+    'textTrack'?: TextTrack;
   }
   interface XmPlayer {
     'volume'?: number;
@@ -124,7 +144,15 @@ declare namespace LocalJSX {
   interface XmSettingsMenu {
     'isOpen'?: boolean;
     'onSetting:changePlaybackRate'?: (event: CustomEvent<any>) => void;
+    'onSetting:changeTextTrack'?: (event: CustomEvent<any>) => void;
     'status'?: Status;
+    'textTrack'?: TextTrack;
+  }
+  interface XmTextTrack {
+    'label'?: string;
+    'language'?: string;
+    'onTexttrack:loaded'?: (event: CustomEvent<any>) => void;
+    'src'?: string;
   }
   interface XmVideo {
     'onBuffered'?: (event: CustomEvent<any>) => void;
@@ -149,6 +177,7 @@ declare namespace LocalJSX {
     'xm-player': XmPlayer;
     'xm-screen': XmScreen;
     'xm-settings-menu': XmSettingsMenu;
+    'xm-text-track': XmTextTrack;
     'xm-video': XmVideo;
   }
 }
@@ -164,6 +193,7 @@ declare module "@stencil/core" {
       'xm-player': LocalJSX.XmPlayer & JSXBase.HTMLAttributes<HTMLXmPlayerElement>;
       'xm-screen': LocalJSX.XmScreen & JSXBase.HTMLAttributes<HTMLXmScreenElement>;
       'xm-settings-menu': LocalJSX.XmSettingsMenu & JSXBase.HTMLAttributes<HTMLXmSettingsMenuElement>;
+      'xm-text-track': LocalJSX.XmTextTrack & JSXBase.HTMLAttributes<HTMLXmTextTrackElement>;
       'xm-video': LocalJSX.XmVideo & JSXBase.HTMLAttributes<HTMLXmVideoElement>;
     }
   }

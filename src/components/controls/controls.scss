@@ -6,6 +6,26 @@
   flex-direction: column;
 }
 
+.controls__subtitle {
+  position: absolute;
+  z-index: 1;
+  bottom: 60px;
+  align-self: center;
+  text-align: center;
+
+  &-row {
+    background: rgba(50,50,50,0.7);
+    padding: 5px;
+    margin: 0.2em;
+    border-radius: 10px;
+    display: inline-block;
+    white-space: pre-wrap;
+    max-width: 90%;
+    font-size: 0.9em;
+    line-height: 1.3em;
+  }
+}
+
 .controls__slider {
   appearance: none;
   overflow: hidden;
@@ -57,7 +77,16 @@
 
     &--open, &:hover {
       transform: rotate(90deg);
-      -webkit-transform: rotate(90deg);
+    }
+  }
+
+  .controls__subtitle-icon {
+    display: block;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease-in-out;
+
+    &--active, &:hover {
+      box-shadow: 0px 2px 1px -1px rgba(231,166,26,0.72);
     }
   }
 
@@ -70,10 +99,11 @@
     cursor: pointer;
 
     &:hover {
-      background: rgba(255,255,255,0.2);
       & .controls__settings-icon {
         transform: rotate(90deg);
-        -webkit-transform: rotate(90deg);
+      }
+      & .controls__subtitle-icon {
+        box-shadow: 0px 2px 1px -1px rgba(231,166,26,0.72);
       }
     }
   }
