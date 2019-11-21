@@ -4,6 +4,7 @@ import { Submenu, SubmenuToggleButton } from './elements';
 import { Status } from '../../utils/status';
 import { SettingsSubmenuStatus, defaultSettingsSubmenuStatus, SettingNames, settingList } from '../../utils/settings';
 import { bind } from '../../utils/bind';
+import { TextTrack } from '../../utils/webVTT';
 
 @Component({
   tag: 'xm-settings-menu',
@@ -15,11 +16,13 @@ export class SettingsMenu {
 
   @Prop() status: Status;
   @Prop() isOpen: boolean;
+  @Prop({mutable: true}) textTrack: TextTrack;
 
   @State()
   private submenuStatus: SettingsSubmenuStatus = defaultSettingsSubmenuStatus;
 
   @Event({eventName: 'setting:changePlaybackRate'}) changePlaybackRateEvent: EventEmitter;
+  @Event({eventName: 'setting:changeTextTrack'}) changeTextTrackEvent: EventEmitter;
 
   public render() {
     return (
@@ -30,6 +33,12 @@ export class SettingsMenu {
             onCloseSubmenu={this._onCloseSubmenu}
           />
           <div class={this.submenuStatus.isOpen ? "settings-menu__content hide": "settings-menu__content show"}>
+            <SubmenuToggleButton
+              status={this.submenuStatus}
+              setting={this._getSetting(SettingNames.TEXTTRACK)}
+              onOpenSubmenu={()=>this._onOpenSubmenu(SettingNames.TEXTTRACK)}
+              onCloseSubmenu={this._onCloseSubmenu}
+            />
             <SubmenuToggleButton
               status={this.submenuStatus}
               setting={this._getSetting(SettingNames.PLAYBACKRATE)}
@@ -45,6 +54,10 @@ export class SettingsMenu {
   private _getSetting(settingName:string) {
     let setting = settingList.find(setting => setting.name === settingName);
     setting.currentValue = this.status.settings[settingName];
+    if(settingName === SettingNames.TEXTTRACK) {
+      setting.values = this.textTrack.getTextTrackValues();
+      setting.valueLabels = this.textTrack.getTextTrackLabels();
+    }
     return setting;
   }
 
@@ -68,6 +81,7 @@ export class SettingsMenu {
   private _setSetting(value: any) {
     switch(this.submenuStatus.currentSetting.name) {
       case SettingNames.PLAYBACKRATE: this._setPlaybackRate(value); break;
+      case SettingNames.TEXTTRACK: this._setTextTrack(value); break;
     }
     this._onCloseSubmenu();
   }
@@ -75,5 +89,10 @@ export class SettingsMenu {
   @bind()
   private _setPlaybackRate(playbackRate: number) {
     this.changePlaybackRateEvent.emit({playbackRate: playbackRate});
+  }
+
+  @bind()
+  private _setTextTrack(textTrack: string) {
+    this.changeTextTrackEvent.emit({textTrack: textTrack});
   }
 }

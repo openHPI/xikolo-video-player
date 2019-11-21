@@ -87,7 +87,6 @@ export class Video {
       this.el.dispatchEvent(e);
     })
 
-
     // As controls are disabled we do not want the iframe to be
     // focusable by tabbing
     // @ts-ignore
@@ -167,4 +166,5 @@ export class Video {
   async setPlaybackRate(playbackRate: number) {
     return this.player.setPlaybackRate(playbackRate);
   }
+
 }

@@ -1,0 +1,1584 @@
+WEBVTT
+kind: subtitle
+language: en
+label: English
+
+1
+00:00:05.800 --> 00:00:11.900 A:middle
+Welcome back to the Prepare for Your SAP HANA Certification Development Associate course.
+
+2
+00:00:11.900 --> 00:00:16.100 A:middle
+This is unit 2, Exam Preparation – Tips and Tricks,
+
+3
+00:00:16.100 --> 00:00:20.366 A:middle
+where we're going to talk more about the content you can review
+
+4
+00:00:20.366 --> 00:00:28.399 A:middle
+and be sure that you're comfortable with in order to successfully pass the certification exam.
+
+5
+00:00:28.400 --> 00:00:32.000 A:middle
+So although you should certainly go through all of the courses,
+
+6
+00:00:32.000 --> 00:00:35.900 A:middle
+and if it's been a while since you took one of the earlier courses,
+
+7
+00:00:35.900 --> 00:00:39.266 A:middle
+run through them again in order to refresh your memory.
+
+8
+00:00:39.266 --> 00:00:44.466 A:middle
+I want to take a few minutes here in this unit to point out some of the key concepts
+
+9
+00:00:44.466 --> 00:00:48.899 A:middle
+you need to make sure that you're comfortable with
+
+10
+00:00:48.900 --> 00:00:51.966 A:middle
+before taking the certification exam.
+
+11
+00:00:51.966 --> 00:00:57.799 A:middle
+Now first and foremost is really the core understanding of
+
+12
+00:00:57.800 --> 00:01:01.633 A:middle
+the major architectural changes that we've gone through,
+
+13
+00:01:01.633 --> 00:01:05.633 A:middle
+in HANA development in general,
+
+14
+00:01:05.633 --> 00:01:10.499 A:middle
+specifically with HANA 1.0 SPS 11 and higher.
+
+15
+00:01:10.500 --> 00:01:15.933 A:middle
+And let's review a few of these right here.
+
+16
+00:01:15.933 --> 00:01:22.133 A:middle
+So first of all, the major architectural shift has to do with the application server architecture.
+
+17
+00:01:22.133 --> 00:01:26.799 A:middle
+So going back to HANA 1.0, SPS 05,
+
+18
+00:01:26.800 --> 00:01:30.200 A:middle
+that's where we first introduced the embedded application server,
+
+19
+00:01:30.200 --> 00:01:35.566 A:middle
+the XS application server, inside of the HANA environment.
+
+20
+00:01:35.566 --> 00:01:42.666 A:middle
+And we originally did this in order to give our customers and our partners a choice of development environment,
+
+21
+00:01:42.666 --> 00:01:48.566 A:middle
+and one which would be completely self-contained within HANA itself.
+
+22
+00:01:48.566 --> 00:01:52.366 A:middle
+You know, as we were doing code push-down and promoting code push-down,
+
+23
+00:01:52.366 --> 00:01:57.732 A:middle
+meaning writing as much of your application logic inside the database as possible,
+
+24
+00:01:57.733 --> 00:02:03.199 A:middle
+we saw the opportunity to introduce a really lightweight application server
+
+25
+00:02:03.200 --> 00:02:10.166 A:middle
+that could enable these applications that already did 80 or 90 percent
+
+26
+00:02:10.166 --> 00:02:12.466 A:middle
+of their logic in the database anyway,
+
+27
+00:02:12.466 --> 00:02:15.866 A:middle
+to really do the rest of the logic,
+
+28
+00:02:15.866 --> 00:02:20.299 A:middle
+the little bit of service-enablement and web application serving
+
+29
+00:02:20.300 --> 00:02:24.800 A:middle
+without the need to add an additional application server to their architecture.
+
+30
+00:02:24.800 --> 00:02:29.800 A:middle
+And this had several advantages, one of which being a lower cost of ownership,
+
+31
+00:02:29.800 --> 00:02:37.533 A:middle
+easier getting started, less administration tasks and things that had to be taken care of.
+
+32
+00:02:37.533 --> 00:02:40.599 A:middle
+And our customers were very receptive to this idea.
+
+33
+00:02:40.600 --> 00:02:45.600 A:middle
+Particularly in really lightweight scenarios, maybe where they just wanted to
+
+34
+00:02:45.600 --> 00:02:49.600 A:middle
+service-enable a little bit of data very quickly.
+
+35
+00:02:49.600 --> 00:02:54.666 A:middle
+But what we saw over time is that that lightweight application server architecture
+
+36
+00:02:54.666 --> 00:03:00.899 A:middle
+that we had originally introduced didn't necessarily scale for all customer scenarios.
+
+37
+00:03:00.900 --> 00:03:09.733 A:middle
+It didn't necessarily take advantage of the kind of cloud computing with its elastic computing nature
+
+38
+00:03:09.733 --> 00:03:14.666 A:middle
+the way that we want it to for moving to cloud-based applications.
+
+39
+00:03:14.666 --> 00:03:19.832 A:middle
+So we saw an opportunity to re-design the architecture.
+
+40
+00:03:19.833 --> 00:03:26.766 A:middle
+And with this, with HANA 1.0 SPS 11, we introduced what we now refer to as XSA,
+
+41
+00:03:26.766 --> 00:03:32.332 A:middle
+or SAP HANA extended application services, advanced model.
+
+42
+00:03:32.333 --> 00:03:36.999 A:middle
+And we renamed the existing XS to XS classic.
+
+43
+00:03:37.000 --> 00:03:41.833 A:middle
+And we do that because both are still delivered inside of HANA.
+
+44
+00:03:41.833 --> 00:03:47.266 A:middle
+And that's the first very important thing to note and remember coming into this course
+
+45
+00:03:47.266 --> 00:03:51.732 A:middle
+is that XS classic is still there in your HANA 2.0 system,
+
+46
+00:03:51.733 --> 00:03:55.566 A:middle
+the HANA repository is still there, the HANA studio is still supported,
+
+47
+00:03:55.566 --> 00:03:59.566 A:middle
+and actually all of your content is still wherever it was before.
+
+48
+00:03:59.566 --> 00:04:04.299 A:middle
+It's still there in the old environment in XS classic.
+
+49
+00:04:04.300 --> 00:04:08.800 A:middle
+Because you'll see here the architecture is so different in this new environment
+
+50
+00:04:08.800 --> 00:04:13.833 A:middle
+that we couldn't just automate the process of moving it over.
+
+51
+00:04:13.833 --> 00:04:18.133 A:middle
+It is a manual process, and often requires re-design,
+
+52
+00:04:18.133 --> 00:04:24.033 A:middle
+certainly of the core architecture of your application, often of the security model
+
+53
+00:04:24.033 --> 00:04:30.133 A:middle
+within your application. Therefore the two application servers are delivered in parallel
+
+54
+00:04:30.133 --> 00:04:36.499 A:middle
+in HANA 1.0 SPS 11 and higher, and that includes HANA 2.0.
+
+55
+00:04:36.500 --> 00:04:43.166 A:middle
+So you can upgrade to HANA 2.0 and it not be disruptive to your existing custom-developed applications
+
+56
+00:04:43.166 --> 00:04:46.899 A:middle
+because they're going to stay in place in the old environment.
+
+57
+00:04:46.900 --> 00:04:50.466 A:middle
+Now what's in this new environment to take advantage of?
+
+58
+00:04:50.466 --> 00:04:57.299 A:middle
+Well first of all, we really looked at what we wanted to do in the cloud architecture.
+
+59
+00:04:57.300 --> 00:05:00.600 A:middle
+And already a few years ago, we knew that we were going to be moving
+
+60
+00:05:00.600 --> 00:05:06.100 A:middle
+the SAP Cloud Platform to be based upon Cloud Foundry.
+
+61
+00:05:06.100 --> 00:05:09.500 A:middle
+And we looked at this technology of Cloud Foundry.
+
+62
+00:05:09.500 --> 00:05:15.000 A:middle
+It's microservice-based architecture, it has multiple runtimes that can be plugged into it,
+
+63
+00:05:15.000 --> 00:05:19.566 A:middle
+and we saw a lot of technological advantages to this environment.
+
+64
+00:05:19.566 --> 00:05:25.032 A:middle
+So we've decided to base XS advanced on-premise on Cloud Foundry as well.
+
+65
+00:05:25.033 --> 00:05:29.833 A:middle
+Now this has a really great benefit that we use the same core technology
+
+66
+00:05:29.833 --> 00:05:33.766 A:middle
+both in the SAP Cloud Platform and on-premise,
+
+67
+00:05:33.766 --> 00:05:39.899 A:middle
+which means that you can develop applications once, and with little or no code changes to them
+
+68
+00:05:39.900 --> 00:05:43.666 A:middle
+deploy them both in the cloud and on-premise.
+
+69
+00:05:43.666 --> 00:05:50.366 A:middle
+So that was one of the major benefits and design criteria for this new development environment.
+
+70
+00:05:50.366 --> 00:05:56.299 A:middle
+Now one of the other criteria would be more options for the development environment.
+
+71
+00:05:56.300 --> 00:05:59.300 A:middle
+In XS classic we have just JavaScript.
+
+72
+00:05:59.300 --> 00:06:02.833 A:middle
+And that JavaScript is based upon Mozilla SpiderMonkey,
+
+73
+00:06:02.833 --> 00:06:10.199 A:middle
+so it's synchronous JavaScript. There's no threading model, there's no eventing model.
+
+74
+00:06:10.200 --> 00:06:15.966 A:middle
+So we wanted to continue to support JavaScript as a programming language
+
+75
+00:06:15.966 --> 00:06:19.966 A:middle
+that would give us good transition out of XS classic,
+
+76
+00:06:19.966 --> 00:06:22.966 A:middle
+but also expand what we support there.
+
+77
+00:06:22.966 --> 00:06:25.232 A:middle
+And Cloud Foundry gives us tons of options.
+
+78
+00:06:25.233 --> 00:06:33.066 A:middle
+There's over 15 buildpacks - that's what they call the various runtimes in the Cloud Foundry environment.
+
+79
+00:06:33.066 --> 00:06:36.766 A:middle
+So we had over 15 buildpacks to choose from.
+
+80
+00:06:36.766 --> 00:06:42.099 A:middle
+We couldn't support them all, so that obviously we wanted to focus on a couple of key ones
+
+81
+00:06:42.100 --> 00:06:45.533 A:middle
+for our development, for our customers' development.
+
+82
+00:06:45.533 --> 00:06:51.366 A:middle
+First of all, JavaScript was a no-brainer, because we needed to have backwards compatibility
+
+83
+00:06:51.366 --> 00:06:55.566 A:middle
+with the XS classic environment, which was JavaScript-based.
+
+84
+00:06:55.566 --> 00:06:59.866 A:middle
+But we moved from Mozilla SpiderMonkey to Google V8,
+
+85
+00:06:59.866 --> 00:07:03.366 A:middle
+and with that, we get full Node.js support.
+
+86
+00:07:03.366 --> 00:07:06.399 A:middle
+It brings the asynchronous programming model of Node.js,
+
+87
+00:07:06.400 --> 00:07:09.833 A:middle
+the highly evented programming model,
+
+88
+00:07:09.833 --> 00:07:17.599 A:middle
+and also opens this up to the world of hundreds of thousands of open-source npm modules
+
+89
+00:07:17.600 --> 00:07:22.066 A:middle
+that we can re-use in the HANA development environment now.
+
+90
+00:07:22.066 --> 00:07:25.099 A:middle
+So there are lots of important technology shifts there,
+
+91
+00:07:25.100 --> 00:07:31.533 A:middle
+even if you're a current JavaScript developer, you're already familiar with JavaScript XSJS
+
+92
+00:07:31.533 --> 00:07:35.899 A:middle
+from the XS classic environment, there's still lots in these courses to absorb
+
+93
+00:07:35.900 --> 00:07:40.133 A:middle
+about the differences as you move to Node.js.
+
+94
+00:07:40.133 --> 00:07:43.033 A:middle
+Next, we also introduced support for Java.
+
+95
+00:07:43.033 --> 00:07:47.366 A:middle
+This made sense as some of our customers were wanting to migrate off NetWeaver Java
+
+96
+00:07:47.366 --> 00:07:49.466 A:middle
+and move to something more standard.
+
+97
+00:07:49.466 --> 00:07:55.799 A:middle
+Java remains a well-used programming model in the enterprise environment.
+
+98
+00:07:55.800 --> 00:08:01.333 A:middle
+But the major difference here with this Java, as opposed to what we at SAP have done in the past is
+
+99
+00:08:01.333 --> 00:08:08.299 A:middle
+this is all pure open source Apache, Tomcat, and TomEE Java.
+
+100
+00:08:08.300 --> 00:08:11.866 A:middle
+So it is not NetWeaver Java or SAP version of Java,
+
+101
+00:08:11.866 --> 00:08:15.699 A:middle
+This is the standard Apache Java.
+
+102
+00:08:15.700 --> 00:08:19.700 A:middle
+And finally, all those other buildpacks that I talked about.
+
+103
+00:08:19.700 --> 00:08:26.133 A:middle
+You're able to use them in this environment, through what we call Bring Your Own Language support,
+
+104
+00:08:26.133 --> 00:08:28.866 A:middle
+but we don't offer the primary support for those.
+
+105
+00:08:28.866 --> 00:08:34.966 A:middle
+So SAP primarily offers the primary support for Node.js, JavaScript, Java.
+
+106
+00:08:34.966 --> 00:08:38.566 A:middle
+That means if you have a problem in those runtimes, you can enter a ticket with SAP
+
+107
+00:08:38.566 --> 00:08:40.599 A:middle
+and we'll provide fixes for them.
+
+108
+00:08:40.600 --> 00:08:44.833 A:middle
+But with the Bring Your Own Language, you can use one of the other many buildpacks,
+
+109
+00:08:44.833 --> 00:08:49.733 A:middle
+like Google Go, or PHP, or .NET Core,
+
+110
+00:08:49.733 --> 00:08:54.466 A:middle
+and we'll support the fact that they'll start up and stop in the environment,
+
+111
+00:08:54.466 --> 00:09:00.132 A:middle
+but everything else that goes on inside that runtime is your responsibility.
+
+112
+00:09:00.133 --> 00:09:04.033 A:middle
+Now an interesting thing to note here is that we have Python -
+
+113
+00:09:04.033 --> 00:09:09.099 A:middle
+that's currently one of the Bring Your Own Language-supported buildpacks -
+
+114
+00:09:09.100 --> 00:09:16.733 A:middle
+but with HANA 2.0, SPS 11, we will promote that up to being supported
+
+115
+00:09:16.733 --> 00:09:21.266 A:middle
+similar to the way that JavaScript and Java is supported in this environment.
+
+116
+00:09:21.266 --> 00:09:27.666 A:middle
+So this also shows the promise over time, as certain languages and runtimes become more popular,
+
+117
+00:09:27.666 --> 00:09:29.832 A:middle
+and there's customer or partner demand for them,
+
+118
+00:09:29.833 --> 00:09:32.666 A:middle
+we can promote them up out of that Bring Your Own Language
+
+119
+00:09:32.666 --> 00:09:37.332 A:middle
+to the primary supported model as well.
+
+120
+00:09:37.333 --> 00:09:42.033 A:middle
+So that really offers more choice in this environment,
+
+121
+00:09:42.033 --> 00:09:46.833 A:middle
+and as you take the course, you definitely want to focus in on all these changes
+
+122
+00:09:46.833 --> 00:09:50.366 A:middle
+and the additions of the Java environment,
+
+123
+00:09:50.366 --> 00:09:54.832 A:middle
+but we also wanted to look at scaling better.
+
+124
+00:09:54.833 --> 00:10:01.633 A:middle
+So the XS classic environment currently only really scales with HANA.
+
+125
+00:10:01.633 --> 00:10:08.066 A:middle
+We can't add additional instances of the XS classic process, the XS engine,
+
+126
+00:10:08.066 --> 00:10:10.432 A:middle
+independent of a HANA node.
+
+127
+00:10:10.433 --> 00:10:15.666 A:middle
+In this environment, we wanted to build something that scaled independent of the HANA database,
+
+128
+00:10:15.666 --> 00:10:19.999 A:middle
+that could be installed on a separate piece of hardware, if you want it to.
+
+129
+00:10:20.000 --> 00:10:23.200 A:middle
+It doesn't have to be installed on your HANA hardware.
+
+130
+00:10:23.200 --> 00:10:25.633 A:middle
+It doesn't have to be on HANA certified hardware,
+
+131
+00:10:25.633 --> 00:10:29.666 A:middle
+so it can be installed on lower-cost commodity hardware.
+
+132
+00:10:29.666 --> 00:10:34.299 A:middle
+So you can have a single node HANA system with 10 nodes of XS in front of it,
+
+133
+00:10:34.300 --> 00:10:37.600 A:middle
+or, if you're not using XS that much,
+
+134
+00:10:37.600 --> 00:10:41.033 A:middle
+you can still do the all-in-one-box experience,
+
+135
+00:10:41.033 --> 00:10:44.766 A:middle
+where you just install HANA on the primary node of the HANA cluster.
+
+136
+00:10:44.766 --> 00:10:46.799 A:middle
+So kind of the best of both worlds.
+
+137
+00:10:46.800 --> 00:10:51.133 A:middle
+If you like the really easy to get started, low cost of maintenance,
+
+138
+00:10:51.133 --> 00:10:56.566 A:middle
+just there and available, all in one box, you have that by default.
+
+139
+00:10:56.566 --> 00:11:02.732 A:middle
+But if you need to scale, if you start using it more and you need higher scale options,
+
+140
+00:11:02.733 --> 00:11:06.999 A:middle
+then absolutely, you can switch to that, add more nodes.
+
+141
+00:11:07.000 --> 00:11:09.866 A:middle
+It can be installed outside the firewall.
+
+142
+00:11:09.866 --> 00:11:16.266 A:middle
+You can put a firewall between the XS app server and the database now,
+
+143
+00:11:16.266 --> 00:11:21.032 A:middle
+so a lot of the security architecture and setup and scaling,
+
+144
+00:11:21.033 --> 00:11:24.533 A:middle
+and this being a three-tier architecture now,
+
+145
+00:11:24.533 --> 00:11:30.833 A:middle
+meets a lot of the requirements that we heard from our customers from the old XS environment.
+
+146
+00:11:30.833 --> 00:11:33.299 A:middle
+It gives you many more options.
+
+147
+00:11:33.300 --> 00:11:37.366 A:middle
+So certainly going into the certification exam, you want to be familiar with
+
+148
+00:11:37.366 --> 00:11:43.466 A:middle
+all the different architectural setup options that we have with XS advanced now.
+
+149
+00:11:43.466 --> 00:11:47.666 A:middle
+And also, the other part of this, going along with the buildpacks,
+
+150
+00:11:47.666 --> 00:11:51.299 A:middle
+is the fact that this is a microservice architecture.
+
+151
+00:11:51.300 --> 00:11:56.033 A:middle
+This means that... microservice doesn't mean that it's necessarily small
+
+152
+00:11:56.033 --> 00:11:58.499 A:middle
+and that it takes up less resources.
+
+153
+00:11:58.500 --> 00:12:05.033 A:middle
+It means that each service that you build deploys its own private application server.
+
+154
+00:12:05.033 --> 00:12:10.666 A:middle
+It takes its own copy of the runtime, the Java or the Node.js runtime.
+
+155
+00:12:10.666 --> 00:12:13.532 A:middle
+So you get better isolation.
+
+156
+00:12:13.533 --> 00:12:17.433 A:middle
+Even at the operating system level there's no single XS engine process
+
+157
+00:12:17.433 --> 00:12:19.733 A:middle
+that all your apps are running inside of.
+
+158
+00:12:19.733 --> 00:12:24.666 A:middle
+Every service that you deploy gets its own operating system process,
+
+159
+00:12:24.666 --> 00:12:27.899 A:middle
+which means that if you have a bad performing server, there's a service failure,
+
+160
+00:12:27.900 --> 00:12:30.533 A:middle
+it doesn't take out any of the other services.
+
+161
+00:12:30.533 --> 00:12:33.599 A:middle
+It means that you can scale individual services,
+
+162
+00:12:33.600 --> 00:12:38.066 A:middle
+you can allocate the memory and CPU to two particular services,
+
+163
+00:12:38.066 --> 00:12:42.066 A:middle
+so when you need to tune your system, you can tune it very precisely
+
+164
+00:12:42.066 --> 00:12:44.399 A:middle
+to individual services.
+
+165
+00:12:44.400 --> 00:12:48.633 A:middle
+And it also means that over time, because we take a copy of the runtime
+
+166
+00:12:48.633 --> 00:12:53.699 A:middle
+with each service when we deploy it, it means it's stable when you perform upgrades.
+
+167
+00:12:53.700 --> 00:12:57.466 A:middle
+So you might put on a patch or an SPS on your HANA system
+
+168
+00:12:57.466 --> 00:13:00.666 A:middle
+and then upgrade the core XSA runtime,
+
+169
+00:13:00.666 --> 00:13:04.266 A:middle
+and maybe there's a new version of Node or Java available,
+
+170
+00:13:04.266 --> 00:13:08.066 A:middle
+but that doesn't immediately change your already deployed applications.
+
+171
+00:13:08.066 --> 00:13:12.532 A:middle
+It's not until you rebuild them and redeploy them that they would pick up the new version.
+
+172
+00:13:12.533 --> 00:13:17.433 A:middle
+And now what that should do is give you better stability over time,
+
+173
+00:13:17.433 --> 00:13:22.299 A:middle
+and you can feel more comfortable applying system patches,
+
+174
+00:13:22.300 --> 00:13:25.500 A:middle
+knowing that it isn't going to change your already deployed applications,
+
+175
+00:13:25.500 --> 00:13:28.766 A:middle
+since its only when you're ready to redeploy them and re-test them
+
+176
+00:13:28.766 --> 00:13:35.366 A:middle
+that you can take on the new functionality that might be provided in an upgraded runtime.
+
+177
+00:13:35.366 --> 00:13:40.899 A:middle
+Now finally, the last point that I want to make here is the change to the lifecycle management,
+
+178
+00:13:40.900 --> 00:13:45.433 A:middle
+particularly the source code management in this development environment.
+
+179
+00:13:45.433 --> 00:13:50.266 A:middle
+Today, whether you're doing XS, or calculation views, or stored procedures,
+
+180
+00:13:50.266 --> 00:13:53.166 A:middle
+everything is stored in the HANA repository.
+
+181
+00:13:53.166 --> 00:13:59.766 A:middle
+All your design time artifacts, the source code, the XML files, whatever,
+
+182
+00:13:59.766 --> 00:14:05.666 A:middle
+they're all stored in the HANA database of whatever system that they're deployed to.
+
+183
+00:14:05.666 --> 00:14:09.232 A:middle
+Well in this new environment, we move away from that completely,
+
+184
+00:14:09.233 --> 00:14:13.366 A:middle
+and we go to centralized source code management using Git.
+
+185
+00:14:13.366 --> 00:14:18.032 A:middle
+Now that's a pretty big change conceptually, for us as developers.
+
+186
+00:14:18.033 --> 00:14:21.899 A:middle
+It means moving the source code out of the system that it's evolved in,
+
+187
+00:14:21.900 --> 00:14:25.066 A:middle
+having one centralized copy of the source code,
+
+188
+00:14:25.066 --> 00:14:29.499 A:middle
+having to learn about Git concepts like branching.
+
+189
+00:14:29.500 --> 00:14:35.933 A:middle
+They're very powerful concepts here that we'll talk about throughout the openSAP courses,
+
+190
+00:14:35.933 --> 00:14:41.066 A:middle
+and that you need to be sure you're familiar with before you take the certification exam.
+
+191
+00:14:41.066 --> 00:14:43.666 A:middle
+And along with that concept of branching,
+
+192
+00:14:43.666 --> 00:14:48.532 A:middle
+being able to maintain two different versions of the same development artifacts
+
+193
+00:14:48.533 --> 00:14:51.133 A:middle
+in the same development system,
+
+194
+00:14:51.133 --> 00:14:57.599 A:middle
+in order for that to really work, we also had to introduce containers within the database.
+
+195
+00:14:57.600 --> 00:15:03.433 A:middle
+This is a major new concept inside of HDI, the HANA Deployment Infrastructure,
+
+196
+00:15:03.433 --> 00:15:09.233 A:middle
+that allows us to deploy the same calculation views, or the same tables
+
+197
+00:15:09.233 --> 00:15:14.866 A:middle
+from two different developers at the same time on the same HANA development system,
+
+198
+00:15:14.866 --> 00:15:17.999 A:middle
+even inside the same MDC container.
+
+199
+00:15:18.000 --> 00:15:22.800 A:middle
+And what this will do is, it really just creates separate schemas for the content
+
+200
+00:15:22.800 --> 00:15:26.466 A:middle
+so they don't overwrite each other and we don't have name conflicts.
+
+201
+00:15:26.466 --> 00:15:29.466 A:middle
+But now all of our development is schema-less,
+
+202
+00:15:29.466 --> 00:15:31.866 A:middle
+meaning we can't reference the schema name,
+
+203
+00:15:31.866 --> 00:15:34.266 A:middle
+because otherwise that would break the concept of containers,
+
+204
+00:15:34.266 --> 00:15:39.066 A:middle
+and branching your database development objects.
+
+205
+00:15:39.066 --> 00:15:42.799 A:middle
+We have to be able to deploy independently into a generated schema,
+
+206
+00:15:42.800 --> 00:15:46.433 A:middle
+and then have nothing in our code that references that schema name.
+
+207
+00:15:46.433 --> 00:15:52.999 A:middle
+So this is also a topic that we go into great detail about in the openSAP courses.
+
+208
+00:15:53.000 --> 00:15:56.400 A:middle
+We talk about more complex scenarios like what happens when I have some content
+
+209
+00:15:56.400 --> 00:15:59.400 A:middle
+that's in a container and some content that's not?
+
+210
+00:15:59.400 --> 00:16:03.966 A:middle
+That would be the case with an ERP schema or BW schema.
+
+211
+00:16:03.966 --> 00:16:09.332 A:middle
+We talk about how do we set up more complex scenarios for cross-container access,
+
+212
+00:16:09.333 --> 00:16:12.599 A:middle
+because not everything is going to exist inside one container.
+
+213
+00:16:12.600 --> 00:16:16.000 A:middle
+So you want to pay particular attention to these topics,
+
+214
+00:16:16.000 --> 00:16:21.000 A:middle
+because one, they're really important to this new environment,
+
+215
+00:16:21.000 --> 00:16:24.500 A:middle
+two, they are relatively complex.
+
+216
+00:16:24.500 --> 00:16:27.533 A:middle
+There's a lot of new concepts, a lot of new terminology,
+
+217
+00:16:27.533 --> 00:16:32.666 A:middle
+it really changes the security aspects of the system.
+
+218
+00:16:32.666 --> 00:16:38.232 A:middle
+So you want to make sure you have a really good grip on the whole container concept
+
+219
+00:16:38.233 --> 00:16:42.433 A:middle
+before taking this certification exam.
+
+220
+00:16:42.433 --> 00:16:45.833 A:middle
+Now what I have here is a little bit of an architectural diagram
+
+221
+00:16:45.833 --> 00:16:50.699 A:middle
+that shows you how this looks. You know, a lot of the concepts that I've just talked about
+
+222
+00:16:50.700 --> 00:16:53.900 A:middle
+on the previous slide are now laid out graphically.
+
+223
+00:16:53.900 --> 00:16:56.700 A:middle
+We see that we have the XS engine off to the side.
+
+224
+00:16:56.700 --> 00:17:01.700 A:middle
+It has its own web dispatcher, which means it has its own http endpoint.
+
+225
+00:17:01.700 --> 00:17:04.133 A:middle
+It's not sharing anything with XS advanced.
+
+226
+00:17:04.133 --> 00:17:06.766 A:middle
+The two are completely independent.
+
+227
+00:17:06.766 --> 00:17:11.432 A:middle
+And this XS classic in the old HANA repository in the HANA studio,
+
+228
+00:17:11.433 --> 00:17:13.699 A:middle
+that's all going to remain for a little while.
+
+229
+00:17:13.700 --> 00:17:19.100 A:middle
+We have announced a deprecation, that in the next major release of HANA after HANA 2.0
+
+230
+00:17:19.100 --> 00:17:21.033 A:middle
+we will be taking that away.
+
+231
+00:17:21.033 --> 00:17:23.966 A:middle
+But in the meantime, it stays for backwards compatibility
+
+232
+00:17:23.966 --> 00:17:28.699 A:middle
+and to give you some time to be able to migrate your content over.
+
+233
+00:17:28.700 --> 00:17:33.600 A:middle
+Now what we see here, when we look at the flow of an application when a request comes in,
+
+234
+00:17:33.600 --> 00:17:40.266 A:middle
+it first really comes in, it's not drawn on this diagram, but the upper layer of the XS advanced box,
+
+235
+00:17:40.266 --> 00:17:42.999 A:middle
+you could consider that the platform router.
+
+236
+00:17:43.000 --> 00:17:48.000 A:middle
+So all requests come in from there and get directed to individual applications.
+
+237
+00:17:48.000 --> 00:17:51.600 A:middle
+Now inside your individual application it's a microservice architecture,
+
+238
+00:17:51.600 --> 00:17:56.500 A:middle
+so you might have multiple services made up of both Node.js and Java
+
+239
+00:17:56.500 --> 00:17:59.633 A:middle
+and maybe other, the Bring Your Own Language runtime,
+
+240
+00:17:59.633 --> 00:18:02.499 A:middle
+or now in SPS 03, Python.
+
+241
+00:18:02.500 --> 00:18:07.900 A:middle
+But we don't want to have to do security processing in each of the runtimes.
+
+242
+00:18:07.900 --> 00:18:11.700 A:middle
+So what we do is, all your individual runtime services
+
+243
+00:18:11.700 --> 00:18:15.100 A:middle
+have an application router that sits in front of them.
+
+244
+00:18:15.100 --> 00:18:19.866 A:middle
+And this is just an SAP-supplied Node.js application
+
+245
+00:18:19.866 --> 00:18:26.799 A:middle
+that acts as a reverse proxy in front of your individual application services.
+
+246
+00:18:26.800 --> 00:18:29.333 A:middle
+So it does a couple of things.
+
+247
+00:18:29.333 --> 00:18:32.599 A:middle
+It has the central security service processing inside of it.
+
+248
+00:18:32.600 --> 00:18:39.366 A:middle
+It will re-direct to the UAA, and process the logon, and generate the security tokens.
+
+249
+00:18:39.366 --> 00:18:44.699 A:middle
+It then injects those security tokens into the individual runtimes.
+
+250
+00:18:44.700 --> 00:18:49.800 A:middle
+That way, we don't have to have security processing libraries implemented in each of these runtimes,
+
+251
+00:18:49.800 --> 00:18:52.433 A:middle
+which really helps, particularly with the Bring Your Own Language,
+
+252
+00:18:52.433 --> 00:18:57.566 A:middle
+where we wouldn't be able to write libraries for every possible runtime
+
+253
+00:18:57.566 --> 00:19:00.066 A:middle
+that could be plugged into the environment.
+
+254
+00:19:00.066 --> 00:19:03.099 A:middle
+But what we do is, we inject the security into these runtimes
+
+255
+00:19:03.100 --> 00:19:07.600 A:middle
+as a JWT token, a JSON Web Token.
+
+256
+00:19:07.600 --> 00:19:12.200 A:middle
+So it's just a JSON object that can be parsed to look at the security information.
+
+257
+00:19:12.200 --> 00:19:16.533 A:middle
+Therefore you can do additional security checks in all of these environments.
+
+258
+00:19:16.533 --> 00:19:20.633 A:middle
+You don't have to have special SAML or OAuth processing libraries.
+
+259
+00:19:20.633 --> 00:19:24.699 A:middle
+You just have to be able to parse JSON, which just about any language or runtime
+
+260
+00:19:24.700 --> 00:19:28.733 A:middle
+is going to have some tools or capabilities to do.
+
+261
+00:19:28.733 --> 00:19:31.499 A:middle
+Now the other thing that this application router does is
+
+262
+00:19:31.500 --> 00:19:34.766 A:middle
+it can serve out your static HTML content.
+
+263
+00:19:34.766 --> 00:19:38.199 A:middle
+But more importantly, it acts as a reverse proxy,
+
+264
+00:19:38.200 --> 00:19:42.200 A:middle
+meaning the browser only ever sees the application router,
+
+265
+00:19:42.200 --> 00:19:46.433 A:middle
+so it only sees its URL or its port.
+
+266
+00:19:46.433 --> 00:19:51.066 A:middle
+And the application router proxies all the URL reports
+
+267
+00:19:51.066 --> 00:19:53.232 A:middle
+of the individual application services.
+
+268
+00:19:53.233 --> 00:19:57.799 A:middle
+The browser doesn't see them. So this also helps us to avoid CORS -
+
+269
+00:19:57.800 --> 00:20:00.966 A:middle
+cross-origin scripting checks in the browser.
+
+270
+00:20:00.966 --> 00:20:07.266 A:middle
+So browsers are designed to protect the end user from redirecting a page
+
+271
+00:20:07.266 --> 00:20:10.032 A:middle
+that would redirect internally to a different web site.
+
+272
+00:20:10.033 --> 00:20:13.299 A:middle
+Because that's how malicious web sites steal your information.
+
+273
+00:20:13.300 --> 00:20:16.500 A:middle
+You think you're going to a trusted web site, but inside there,
+
+274
+00:20:16.500 --> 00:20:20.800 A:middle
+there's a secret redirect to a malicious web site.
+
+275
+00:20:20.800 --> 00:20:24.700 A:middle
+Well the browser can't know that in a microservice environment
+
+276
+00:20:24.700 --> 00:20:27.400 A:middle
+that those other sites are safe.
+
+277
+00:20:27.400 --> 00:20:31.033 A:middle
+Now there are some mechanisms that we can use to tell the browser that they're safe,
+
+278
+00:20:31.033 --> 00:20:34.466 A:middle
+but it's actually easier if we just hide that fact from the browser.
+
+279
+00:20:34.466 --> 00:20:38.199 A:middle
+And this is what the application router allows us to do.
+
+280
+00:20:38.200 --> 00:20:40.133 A:middle
+Now coming back to the security token,
+
+281
+00:20:40.133 --> 00:20:44.133 A:middle
+remember, we injected that security token into our runtimes,
+
+282
+00:20:44.133 --> 00:20:47.833 A:middle
+so it knows all the information about our user:
+
+283
+00:20:47.833 --> 00:20:50.899 A:middle
+our user name, our e-mail address.
+
+284
+00:20:50.900 --> 00:20:55.700 A:middle
+And these users don't any longer have to be HANA database users,
+
+285
+00:20:55.700 --> 00:20:58.100 A:middle
+because we're now going to connect to the database
+
+286
+00:20:58.100 --> 00:21:03.100 A:middle
+from our Node or Java application service using a technical user.
+
+287
+00:21:03.100 --> 00:21:08.533 A:middle
+So this gives us better technical capabilities like connection pooling.
+
+288
+00:21:08.533 --> 00:21:12.966 A:middle
+It also means that our application users don't have to be set up in the database.
+
+289
+00:21:12.966 --> 00:21:18.299 A:middle
+We separate the idea of a business user from a database user.
+
+290
+00:21:18.300 --> 00:21:22.200 A:middle
+So it exposes our database less, yet at the same time,
+
+291
+00:21:22.200 --> 00:21:25.933 A:middle
+when we connect to the database, we take that same JWT token
+
+292
+00:21:25.933 --> 00:21:28.933 A:middle
+and we inject it into the database as well.
+
+293
+00:21:28.933 --> 00:21:32.966 A:middle
+So we can still see that information -
+
+294
+00:21:32.966 --> 00:21:37.499 A:middle
+it's available in the session context inside the database -
+
+295
+00:21:37.500 --> 00:21:42.066 A:middle
+and we can use it for authorization checks inside the database.
+
+296
+00:21:42.066 --> 00:21:49.032 A:middle
+For instance, analytic privileges or structured privileges on calculation views and CDS views
+
+297
+00:21:49.033 --> 00:21:53.999 A:middle
+can use this information for instance-based filtering or role-based security.
+
+298
+00:21:54.000 --> 00:21:57.733 A:middle
+So even without your user actually being set up in the database,
+
+299
+00:21:57.733 --> 00:22:02.966 A:middle
+we can still do authorization checks within the database against your external user
+
+300
+00:22:02.966 --> 00:22:07.199 A:middle
+from wherever we're getting it from, the external user store.
+
+301
+00:22:07.200 --> 00:22:09.500 A:middle
+So this is something our customers asked us for, you know,
+
+302
+00:22:09.500 --> 00:22:13.400 A:middle
+simplify the maintenance, don't make us set up all of our users in the database,
+
+303
+00:22:13.400 --> 00:22:18.600 A:middle
+but yet don't give up any authorization checks within the database.
+
+304
+00:22:18.600 --> 00:22:23.100 A:middle
+And this is once again kind of the best of both worlds approach.
+
+305
+00:22:23.100 --> 00:22:25.800 A:middle
+So for the purpose of taking the certification exam,
+
+306
+00:22:25.800 --> 00:22:29.333 A:middle
+I think it's very important to understand this relationship
+
+307
+00:22:29.333 --> 00:22:35.699 A:middle
+between the app router and the individual application service processes.
+
+308
+00:22:35.700 --> 00:22:39.633 A:middle
+And it's also super important to understand this new security model
+
+309
+00:22:39.633 --> 00:22:44.033 A:middle
+and how the technical user works, how the security injection works,
+
+310
+00:22:44.033 --> 00:22:47.966 A:middle
+how we can still do analytic privileges and structured privileges.
+
+311
+00:22:47.966 --> 00:22:51.132 A:middle
+These are all things you need to have a good grasp on
+
+312
+00:22:51.133 --> 00:22:54.566 A:middle
+in order to take this exam.
+
+313
+00:22:54.566 --> 00:23:00.066 A:middle
+Now next we can see, in order to prepare for the exam, you want to take the courses,
+
+314
+00:23:00.066 --> 00:23:03.566 A:middle
+but the courses also have hands-on exercises.
+
+315
+00:23:03.566 --> 00:23:08.766 A:middle
+Now I can't stress enough how important it is to complete some hands-on.
+
+316
+00:23:08.766 --> 00:23:11.666 A:middle
+Now none of the questions that are on the exam are going to
+
+317
+00:23:11.666 --> 00:23:15.466 A:middle
+absolutely require you to have done the hands-on.
+
+318
+00:23:15.466 --> 00:23:20.932 A:middle
+It's not going to ask you like: In this exercise, what did you do?
+
+319
+00:23:20.933 --> 00:23:23.066 A:middle
+You know, there isn't going to be anything like that.
+
+320
+00:23:23.066 --> 00:23:27.032 A:middle
+But the hands-on exercises are so important, I think,
+
+321
+00:23:27.033 --> 00:23:31.966 A:middle
+for really making the concepts concrete
+
+322
+00:23:31.966 --> 00:23:35.332 A:middle
+and helping you see exactly what we're talking about.
+
+323
+00:23:35.333 --> 00:23:39.833 A:middle
+You know, for us as developers, until we sit down and we actually use the tools
+
+324
+00:23:39.833 --> 00:23:44.599 A:middle
+and we develop something, we see it build, and we can then query it in the database,
+
+325
+00:23:44.600 --> 00:23:47.033 A:middle
+and things like that, it's just abstract.
+
+326
+00:23:47.033 --> 00:23:51.299 A:middle
+And although you can pass the exam with abstract knowledge,
+
+327
+00:23:51.300 --> 00:23:54.566 A:middle
+I think you'll have a much easier time passing the exam
+
+328
+00:23:54.566 --> 00:23:59.099 A:middle
+if you also have concrete experience using all these new concepts.
+
+329
+00:23:59.100 --> 00:24:05.100 A:middle
+And that's why we provide hands-on exercises, quite detailed hands-on exercises.
+
+330
+00:24:05.100 --> 00:24:08.600 A:middle
+And even if you don't have access to a system, I strongly encourage you
+
+331
+00:24:08.600 --> 00:24:11.666 A:middle
+to read through the hands-on exercise document.
+
+332
+00:24:11.666 --> 00:24:14.499 A:middle
+It's very detailed, it's got lots of screenshots,
+
+333
+00:24:14.500 --> 00:24:17.833 A:middle
+and you can learn a ton just by reading it.
+
+334
+00:24:17.833 --> 00:24:21.699 A:middle
+But if you want to do the exercises and you don't have access,
+
+335
+00:24:21.700 --> 00:24:24.566 A:middle
+like your company doesn't provide you a HANA 2.0 system
+
+336
+00:24:24.566 --> 00:24:28.899 A:middle
+with XSA and the SAP Web IDE, and things like that,
+
+337
+00:24:28.900 --> 00:24:32.466 A:middle
+you can go get the HANA, express edition.
+
+338
+00:24:32.466 --> 00:24:36.199 A:middle
+Now HANA express is a lightweight installation of HANA,
+
+339
+00:24:36.200 --> 00:24:41.466 A:middle
+designed to install on a developer's own laptop or desktop computer,
+
+340
+00:24:41.466 --> 00:24:46.499 A:middle
+and it requires a minimal amount of memory, like 16 GB of memory.
+
+341
+00:24:46.500 --> 00:24:49.933 A:middle
+So it's an acceptable amount. You know, it's large.
+
+342
+00:24:49.933 --> 00:24:52.166 A:middle
+Not everybody's machine has that amount,
+
+343
+00:24:52.166 --> 00:24:57.532 A:middle
+but many do, and it's possible to get a machine that has that amount.
+
+344
+00:24:57.533 --> 00:25:01.699 A:middle
+But it's got full HANA capabilities. You can do all the exercises in it.
+
+345
+00:25:01.700 --> 00:25:04.700 A:middle
+You could even build productive applications,
+
+346
+00:25:04.700 --> 00:25:07.166 A:middle
+meaning you can take them live or re-sell them.
+
+347
+00:25:07.166 --> 00:25:10.766 A:middle
+Up to 32 GB of memory in this environment.
+
+348
+00:25:10.766 --> 00:25:14.066 A:middle
+Now we offer this as both a binary installation,
+
+349
+00:25:14.066 --> 00:25:18.432 A:middle
+if you already have your own Linux OS that you can install yourself,
+
+350
+00:25:18.433 --> 00:25:25.233 A:middle
+or more people choose option B, which is a fully built VM, a virtual machine,
+
+351
+00:25:25.233 --> 00:25:29.099 A:middle
+that you can run on your own system in a VM player.
+
+352
+00:25:29.100 --> 00:25:33.633 A:middle
+So that doesn't require you to have a... you know, you can have a host OS of Windows
+
+353
+00:25:33.633 --> 00:25:38.566 A:middle
+or Mac and then run the entire virtual machine inside there.
+
+354
+00:25:38.566 --> 00:25:40.999 A:middle
+So that's a very attractive option.
+
+355
+00:25:41.000 --> 00:25:43.666 A:middle
+The third option is we offer it in the cloud.
+
+356
+00:25:43.666 --> 00:25:47.666 A:middle
+So if you don't have a machine with the necessary 16 GB of memory
+
+357
+00:25:47.666 --> 00:25:55.932 A:middle
+then you can run it in the cloud. We make it available in Google Cloud, Azure, AWS,
+
+358
+00:25:55.933 --> 00:25:59.633 A:middle
+so there's lots of options. Now of course, that will cost you something.
+
+359
+00:25:59.633 --> 00:26:05.833 A:middle
+HANA express itself is free, there's no licensing cost, up to 32 GB of memory,
+
+360
+00:26:05.833 --> 00:26:08.933 A:middle
+but if you're going to run it in the cloud then you have to pay the cloud provider
+
+361
+00:26:08.933 --> 00:26:10.699 A:middle
+for whatever hardware that you're running it on.
+
+362
+00:26:10.700 --> 00:26:17.100 A:middle
+So you're not paying SAP anything, but you're paying the cloud provider for whatever time you run it.
+
+363
+00:26:17.100 --> 00:26:21.200 A:middle
+But a little tip there is, only run it the hours that you're using it.
+
+364
+00:26:21.200 --> 00:26:26.166 A:middle
+Shut it down other times, and then you only pay for the hours that you need.
+
+365
+00:26:26.166 --> 00:26:30.366 A:middle
+And the final point that I want to make is in this new development environment
+
+366
+00:26:30.366 --> 00:26:32.766 A:middle
+we're no longer using the HANA studio.
+
+367
+00:26:32.766 --> 00:26:36.799 A:middle
+HANA studio is not compatible with Git-based development,
+
+368
+00:26:36.800 --> 00:26:42.633 A:middle
+with HDI, with XS advanced. It doesn't understand any of the new development artifacts.
+
+369
+00:26:42.633 --> 00:26:45.233 A:middle
+It just absolutely cannot be used.
+
+370
+00:26:45.233 --> 00:26:50.233 A:middle
+The new development tool that we have is the SAP Web IDE for SAP HANA.
+
+371
+00:26:50.233 --> 00:26:53.433 A:middle
+Now this is a browser-based development tooling environment
+
+372
+00:26:53.433 --> 00:26:57.699 A:middle
+that covers the full range of HANA capabilities:
+
+373
+00:26:57.700 --> 00:27:02.266 A:middle
+modeling, calculation views, CDS, stored procedures,
+
+374
+00:27:02.266 --> 00:27:07.932 A:middle
+but it also has very rich development capabilities for Node.js and Java development,
+
+375
+00:27:07.933 --> 00:27:11.766 A:middle
+as well as SAPUI5 and Fiori development.
+
+376
+00:27:11.766 --> 00:27:13.866 A:middle
+And it has full Git integration.
+
+377
+00:27:13.866 --> 00:27:16.432 A:middle
+So really, it surpasses both the HANA studio
+
+378
+00:27:16.433 --> 00:27:19.599 A:middle
+and the SAP HANA Web-based Development Workbench,
+
+379
+00:27:19.600 --> 00:27:22.833 A:middle
+adds new capabilities that we've never had before,
+
+380
+00:27:22.833 --> 00:27:26.599 A:middle
+and it fully supports all the new programming models.
+
+381
+00:27:26.600 --> 00:27:29.966 A:middle
+So obviously, as you take the certification exam
+
+382
+00:27:29.966 --> 00:27:33.966 A:middle
+you need to be familiar with the SAP Web IDE for SAP HANA,
+
+383
+00:27:33.966 --> 00:27:36.766 A:middle
+the development approaches that are available there,
+
+384
+00:27:36.766 --> 00:27:39.032 A:middle
+how the tooling works in that environment.
+
+385
+00:27:39.033 --> 00:27:42.366 A:middle
+Only having knowledge of HANA studio or Web-based Development Workbench
+
+386
+00:27:42.366 --> 00:27:47.132 A:middle
+would not be enough to pass the certification exam.
+
+387
+00:27:47.133 --> 00:27:51.599 A:middle
+And going through the openSAP courses, you'll get an excellent introduction
+
+388
+00:27:51.600 --> 00:27:55.066 A:middle
+to the SAP Web IDE for SAP HANA.
+
+389
+00:27:55.066 --> 00:27:59.699 A:middle
+So I hope with this little recap of the courses
+
+390
+00:27:59.700 --> 00:28:02.066 A:middle
+I've helped to give you some focus points,
+
+391
+00:28:02.066 --> 00:28:06.732 A:middle
+or some review points that you want to be well prepared on
+
+392
+00:28:06.733 --> 00:28:10.199 A:middle
+in order to take the certification exam.
+
+393
+00:28:10.200 --> 00:28:15.333 A:middle
+For everyone that plans to take the certification exam, I wish you luck,
+
+394
+00:28:15.333 --> 00:28:21.699 A:middle
+and look forward to seeing all the new certified HANA development people
+
+395
+00:28:21.700 --> 00:28:25.300 A:middle
+that we have in the community in the future.

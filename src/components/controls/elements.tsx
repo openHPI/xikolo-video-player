@@ -1,7 +1,7 @@
 import { FunctionalComponent, h } from '@stencil/core';
 
 import * as icon from '../../utils/icon';
-import { Status, Mode } from '../../utils/status';
+import { Status, Mode, Subtitle } from '../../utils/status';
 import { format } from '../../utils/duration';
 
 
@@ -132,7 +132,7 @@ export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleBut
   if(props.openedSettingsMenu) {
     return (
       <button onClick={props.onCloseSettingsMenu}>
-        <span class="controls__settings-icon--open" innerHTML={icon.Settings} />
+        <span class="controls__settings-icon controls__settings-icon--open" innerHTML={icon.Settings} />
       </button>
     )
   }
@@ -141,4 +141,45 @@ export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleBut
       <span class="controls__settings-icon" innerHTML={icon.Settings} />
     </button>
   )
+}
+
+interface SubtitleButtonProps {
+  status: Status;
+  visible: boolean;
+  onEnable: (e: Event) => void;
+  onDisable: (e: Event) => void;
+}
+
+export const SubtitleButton: FunctionalComponent<SubtitleButtonProps> = props => {
+  if(!props.visible) return;
+  if(props.status.subtitle.enabled) {
+    return (
+      <button onClick={props.onDisable}>
+        <span class="controls__subtitle-icon controls__subtitle-icon--active" innerHTML={icon.Subtitle} />
+      </button>
+    )
+  } else {
+    return (
+      <button onClick={props.onEnable}>
+        <span class="controls__subtitle-icon" innerHTML={icon.Subtitle} />
+      </button>
+    )
+  }
+}
+
+interface SubtitlesProps {
+  status: Status;
+}
+
+export const Subtitles: FunctionalComponent<SubtitlesProps> = props => {
+  const { enabled, activeCues } = props.status.subtitle;
+  if(enabled && activeCues && activeCues.length) {
+    return (
+      <div class="controls__subtitle">
+          {activeCues.map(cue => (
+            <span class="controls__subtitle-row" innerHTML={cue.text} />
+          ))}
+      </div>
+    );
+  }
 }

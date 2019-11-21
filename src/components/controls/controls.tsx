@@ -1,9 +1,9 @@
 import { Component, Element, h, Prop, EventEmitter, Event, State } from '@stencil/core';
 
-import { Fullscreen, Control, CurrentTime, Volume, Slider, SettingsMenuToggleButton } from './elements';
+import { Fullscreen, Control, CurrentTime, Volume, Slider, SettingsMenuToggleButton, Subtitles, SubtitleButton } from './elements';
 import { Status } from '../../utils/status';
 import { bind } from '../../utils/bind';
-
+import { TextTrack } from '../../utils/webVTT';
 
 @Component({
   tag: 'xm-controls',
@@ -14,6 +14,7 @@ export class Controls {
   @Element() el: HTMLXmControlsElement;
 
   @Prop() status: Status;
+  @Prop({mutable: true}) textTrack: TextTrack;
 
   @State()
   private openedSettingsMenu: boolean = false;
@@ -26,18 +27,20 @@ export class Controls {
   @Event({eventName: 'control:mute'}) muteEvent: EventEmitter;
   @Event({eventName: 'control:unmute'}) unmuteEvent: EventEmitter;
   @Event({eventName: 'control:changeVolume'}) changeVolumeEvent: EventEmitter;
-  @Event({eventName: 'control:openSettingsMenu'}) openSettingsMenuEvent: EventEmitter;
-  @Event({eventName: 'control:closeSettingsMenu'}) closeSettingsMenuEvent: EventEmitter;
+  @Event({eventName: 'control:enableTextTrack'}) enableTextTrackEvent: EventEmitter;
+  @Event({eventName: 'control:disableTextTrack'}) disableTextTrackEvent: EventEmitter;
 
   public render() {
     return (
       <div class="controls">
-        <xm-settings-menu status={this.status} isOpen={this.openedSettingsMenu} />
+        <Subtitles status={this.status} />
+        <xm-settings-menu status={this.status} isOpen={this.openedSettingsMenu} textTrack={this.textTrack} />
         <Slider status={this.status} onSeek={this._seek} />
         <div class="controls__toolbar">
           <Control status={this.status} onPause={this._pause} onPlay={this._play} />
           <Volume status={this.status} onMute={this._mute} onUnmute={this._unmute} onChangeVolume={this._setVolume} />
           <CurrentTime status={this.status} />
+          <SubtitleButton status={this.status} visible={this.textTrack && this.textTrack.getTextTracks()!==null} onEnable={this._enableTextTrack} onDisable={this._disableTextTrack} />
           <SettingsMenuToggleButton
             status={this.status}
             openedSettingsMenu={this.openedSettingsMenu}
@@ -100,4 +103,14 @@ export class Controls {
     this.openedSettingsMenu = false;
   }
 
+
+  @bind()
+  private _enableTextTrack() {
+    this.enableTextTrackEvent.emit();
+  }
+
+  @bind()
+  private _disableTextTrack() {
+    this.disableTextTrackEvent.emit();
+  }
 }

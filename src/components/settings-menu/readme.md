@@ -7,10 +7,11 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type      | Default     |
-| -------- | --------- | ----------- | --------- | ----------- |
-| `isOpen` | `is-open` |             | `boolean` | `undefined` |
-| `status` | --        |             | `Status`  | `undefined` |
+| Property    | Attribute | Description | Type        | Default     |
+| ----------- | --------- | ----------- | ----------- | ----------- |
+| `isOpen`    | `is-open` |             | `boolean`   | `undefined` |
+| `status`    | --        |             | `Status`    | `undefined` |
+| `textTrack` | --        |             | `TextTrack` | `undefined` |
 
 
 ## Events
@@ -18,6 +19,7 @@
 | Event                        | Description | Type               |
 | ---------------------------- | ----------- | ------------------ |
 | `setting:changePlaybackRate` |             | `CustomEvent<any>` |
+| `setting:changeTextTrack`    |             | `CustomEvent<any>` |
 
 
 ## Dependencies

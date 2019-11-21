@@ -67,10 +67,22 @@
         <iframe src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </xm-player>
 
-      <h2><a href="#">Single Stream</a></h2>
+      <h2><a href="#">Dual Stream with TextTrack</a></h2>
 
       <xm-player volume="1.0">
-        <xm-video slot="primary" src="340196868"></xm-video>
+        <xm-video slot="primary" src="264584278"></xm-video>
+        <xm-video slot="secondary" src="340196788"></xm-video>
+        <xm-text-track language="de" src="/static/de.vtt" label="Deutsch"></xm-text-track>
+        <xm-text-track language="en" src="/static/en.vtt" label="English"></xm-text-track>
+        <iframe src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      </xm-player>
+
+      <h2><a href="#">Single Stream</a></h2>
+
+      <xm-player volume="0">
+        <xm-video slot="primary" src="264584278"></xm-video>
+        <xm-text-track language="de" src="/static/de.vtt" label="Deutsch"></xm-text-track>
+        <xm-text-track language="en" src="/static/en.vtt" label="English"></xm-text-track>
         <iframe src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </xm-player>
     </div>

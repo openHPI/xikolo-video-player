@@ -10,21 +10,24 @@ interface SubmenuProps {
 }
 
 export const Submenu: FunctionalComponent<SubmenuProps> = props => {
-  if(props.status.currentSetting) {
+  const setting = props.status.currentSetting;
+  if(setting) {
     return (
       <div class={props.status.isOpen ? "settings-menu__submenu menu menu--open" : "settings-menu__submenu menu hide"}>
         <div class="settings-menu__submenu-header">
           <button class="settings-menu__button" onClick={props.onCloseSubmenu}>
             <span class="settings-menu__arrow settings-menu__arrow--left" innerHTML={icon.ArrowLeft} />
-            <span class="settings-menu__button-label" innerHTML={props.status.currentSetting.label} />
-            <span class="settings-menu__button-value" innerHTML={props.status.currentSetting.currentValue} />
+            <span class="settings-menu__button-label" innerHTML={setting.label} />
+            <span class="settings-menu__button-value" innerHTML={setting.currentValue} />
           </button>
         </div>
         <div class="settings-menu__submenu-content">
-          { props.status.currentSetting.values.map((value) => (
+          { setting.values.map((value, index) =>(
             <button
-              class={value === props.status.currentSetting.currentValue ? "settings-menu__button settings-menu__button--current" : 'settings-menu__button'}
-              onClick={()=>props.onChangeSetting(value)} innerHTML={value}
+              class={value === setting.currentValue ? "settings-menu__button settings-menu__button--current" : 'settings-menu__button'}
+              onClick={()=>props.onChangeSetting(value)} innerHTML={
+                (setting.valueLabels && setting.valueLabels[index]) ? setting.valueLabels[index] : value
+              }
             />
           )) }
         </div>
