@@ -1,13 +1,10 @@
 :host {
   display: block;
-
-  color: white;
-  background: #333;
-  border: 1px solid black;
+  color: var(--vp-main-color);
+  background: rgba(var(--vp-bg-color-rgb), 0.75);
+  border: 1px solid var(--vp-bg-color);
 
   font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-
-  --slider-color: currentColor;
 }
 
 .player {
@@ -26,3 +23,5 @@
     }
   }
 }
+
+@import './vars';

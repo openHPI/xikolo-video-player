@@ -1,8 +1,6 @@
 :host {
   display: block;
-  background-color: black;
-
-  --gutter-color: #333;
+  background-color: var(--vp-bg-color);
 }
 
 .screen {
@@ -20,7 +18,7 @@
 
 .gutter.gutter-horizontal {
   cursor: col-resize;
-  background-color: var(--gutter-color);
+  background-color: var(--vp-gutter-color);
 }
 
 .pane {
@@ -39,7 +37,7 @@
     right: 0.2em;
     width: 35% !important;
 
-    box-shadow: 0 0 8px #333A;
+    box-shadow: 0 0 8px rgba(var(--vp-bg-color-rgb), 0.75);
   }
 }
 

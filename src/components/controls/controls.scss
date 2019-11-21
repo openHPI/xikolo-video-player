@@ -33,7 +33,7 @@
   height: 1em;
 
   background: transparent;
-  color: var(--slider-color);
+  color: var(--vp-slider-color);
   margin: 0;
 
   &::-webkit-slider-thumb {
@@ -49,14 +49,14 @@
     border: 0;
   }
 
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border-top: 1px solid var(--vp-bg-color);
+  border-bottom: 1px solid var(--vp-bg-color);
 
   &--volume {
-    border: 1px solid black;
+    border: 1px solid var(--vp-bg-color);
 
     &:focus {
-      border: 1px dotted white;
+      border: 1px dotted var(--vp-main-color);
     }
 
   }
