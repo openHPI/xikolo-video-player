@@ -54,6 +54,11 @@
 
   &--volume {
     border: 1px solid black;
+
+    &:focus {
+      border: 1px dotted white;
+    }
+
   }
 }
 
