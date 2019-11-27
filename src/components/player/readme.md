@@ -1,5 +1,9 @@
 # video-player
 
+All css variables are defined in the _vars.scss partial file.
+The namespae for :root or xm-player definitions from the outside is: "--vps-variable-name" eg --vps-slider-color.
+And intern we used: "--vp-variable-name" eg --vp-slider-color.
+Now you can define default values for all used variables. :)
 
 
 <!-- Auto Generated Below -->
