@@ -30,17 +30,26 @@ export class Player {
   private primary: HTMLXmVideoElement | undefined;
   private secondary: HTMLXmVideoElement | undefined;
   private textTrack: TextTrack = new TextTrack();
+  private hasSecondarySlot: boolean;
 
   public render() {
     return (
       <div class="player">
-        <xm-screen>
+        { this.hasSecondarySlot ?
+          <xm-screen>
+            <slot name="primary"></slot>
+            <slot slot="secondary" name="secondary"></slot>
+          </xm-screen>
+          :
           <slot name="primary"></slot>
-          <slot slot="secondary" name="secondary"></slot>
-        </xm-screen>
+        }
         <xm-controls status={this.status} textTrack={this.textTrack} />
       </div>
     );
+  }
+
+  componentWillLoad() {
+    this.hasSecondarySlot = !!this.el.querySelector('[slot="secondary"]');
   }
 
   public componentDidLoad() {
@@ -51,7 +60,7 @@ export class Player {
     this.primary.addEventListener('timeupdate', this._timeUpdate);
     this.primary.addEventListener('progress', this._progress);
     this.primary.addEventListener('ended', this._ended);
-    this.secondary.addEventListener('click', this._click);
+    if(this.secondary) this.secondary.addEventListener('click', this._click);
 
     document.addEventListener('fullscreenchange', this._fullscreenchange);
 
@@ -61,7 +70,22 @@ export class Player {
   public componentWillUnload() {
     this.primary.removeEventListener('click', this._click);
     this.primary.removeEventListener('timeupdate', this._timeUpdate);
-    this.secondary.removeEventListener('click', this._click);
+    if(this.secondary) this.secondary.removeEventListener('click', this._click);
+  }
+
+  /**
+   * Call a method on all videos.
+   *
+   * Use this when you want to call on all videos being rendered, without having to check how many there are.
+   * @param functionName
+   * @param params
+   */
+  @bind()
+  private async _invokePlayerFunction(functionName:string, params?: any) {
+    return Promise.all([
+      this.primary[functionName].apply(this.primary, params),
+      this.secondary ? this.secondary[functionName].apply(this.secondary, params) : null
+    ]);
   }
 
   @bind()
@@ -84,13 +108,14 @@ export class Player {
       duration: duration,
       progress: {seconds: seconds, percent: percent},
     };
-
-    this.secondary.currentTime().then((currentTime) => {
-      const skew = Math.abs(currentTime - seconds);
-      if(skew > 1.0) {
-        this.secondary.seek(seconds);
-      }
-    })
+    if(this.secondary) {
+      this.secondary.currentTime().then((currentTime) => {
+        const skew = Math.abs(currentTime - seconds);
+        if(skew > 1.0) {
+          this.secondary.seek(seconds);
+        }
+      })
+    }
   }
 
   @bind()
@@ -117,20 +142,20 @@ export class Player {
   @Method()
   @Listen('control:play')
   public async play() {
-    await Promise.all([this.primary.play(), this.secondary.play()]);
+    await this._invokePlayerFunction('play');
     this.status = {...this.status, mode: Mode.PLAYING};
   }
 
   @Method()
   @Listen('control:pause')
   public async pause() {
-    await Promise.all([this.primary.pause(), this.secondary.pause()]);
+    await this._invokePlayerFunction('pause');
     this.status = {...this.status, mode: Mode.PAUSED};
   }
 
   @Method()
   public async seek(seconds: number) {
-    await Promise.all([this.primary.seek(seconds), this.secondary.seek(seconds)]);
+    await this._invokePlayerFunction('seek',[seconds]);
     // Sometimes seeking starts playing the video too.
     // Reset state to current stored player state.
     this.status.mode === Mode.PLAYING ? this.play() : this.pause();
@@ -212,7 +237,7 @@ export class Player {
   @Listen('setting:changePlaybackRate')
   protected async _setPlaybackRate(e: CustomEvent) {
     const playbackRate = e.detail.playbackRate;
-    await this.primary.setPlaybackRate(playbackRate);
+    await this._invokePlayerFunction('setPlaybackRate',[playbackRate]);
     this.status = {
       ...this.status,
       settings: {
