@@ -48,7 +48,7 @@ export const defaultStatus: Status = {
   },
   subtitle: {
     enabled: false,
-    language: 'de',
+    language: 'en',
     activeCues: null,
   },
   settings: {
