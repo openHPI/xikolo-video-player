@@ -1,0 +1,358 @@
+WEBVTT
+
+1
+00:00:11.066 --> 00:00:15.099 A:middle
+Welcome to the openSAP course on Enterprise
+Machine Learning.
+
+2
+00:00:15.100 --> 00:00:17.100 A:middle
+My name is Markus Noga.
+
+3
+00:00:17.100 --> 00:00:20.466 A:middle
+My Machine Learning team is part of SAP's
+Innovation Center Network.
+
+4
+00:00:20.466 --> 00:00:25.899 A:middle
+And we're on a mission to make all enterprise
+applications intelligent.
+
+5
+00:00:25.900 --> 00:00:31.600 A:middle
+This first installment of the course will help you
+understand recent advances in machine learning.
+
+6
+00:00:31.600 --> 00:00:36.900 A:middle
+It will give you an overview of what this means for
+enterprise computing and for knowledge work in
+general.
+
+7
+00:00:36.900 --> 00:00:44.366 A:middle
+And it will help you understand the module
+structure so you can navigate through the rest of
+the course more effectively.
+
+8
+00:00:44.366 --> 00:00:50.799 A:middle
+Machine learning is about computers learning
+from data rather than being explicitly
+programmed.
+
+9
+00:00:50.800 --> 00:00:53.733 A:middle
+And this makes software progressively more
+intelligent.
+
+10
+00:00:53.733 --> 00:00:56.766 A:middle
+Examples of this surround us in our daily lives.
+
+11
+00:00:56.766 --> 00:00:59.566 A:middle
+Whether it's the intelligent assistants on our
+smartphones,
+
+12
+00:00:59.566 --> 00:01:02.132 A:middle
+whether it's the smart thermostats in our homes,
+
+13
+00:01:02.133 --> 00:01:05.399 A:middle
+or whether it's the self-driving cars all over the
+press,
+
+14
+00:01:05.400 --> 00:01:08.433 A:middle
+we're seeing evidence of computers becoming
+more intelligent.
+
+15
+00:01:08.433 --> 00:01:12.566 A:middle
+And this is possible now because of advances in
+machine learning.
+
+16
+00:01:12.566 --> 00:01:15.699 A:middle
+Computers are dealing with unstructured
+information,
+
+17
+00:01:15.700 --> 00:01:18.433 A:middle
+natural-language text, images, and videos
+
+18
+00:01:18.433 --> 00:01:24.133 A:middle
+rather than the neat rows and tables of structured
+information that were the computers' domain
+before.
+
+19
+00:01:24.133 --> 00:01:29.299 A:middle
+And computers are learning complex functions
+on this unstructured data from examples
+
+20
+00:01:29.300 --> 00:01:33.366 A:middle
+rather than with explicit programming.
+
+21
+00:01:33.366 --> 00:01:36.366 A:middle
+One example of this is computer vision.
+
+22
+00:01:36.366 --> 00:01:39.732 A:middle
+When I started studying computer science in the
+late nineties,
+
+23
+00:01:39.733 --> 00:01:44.999 A:middle
+any two-year-old was better at looking at an
+image and saying what it's about.
+
+24
+00:01:45.000 --> 00:01:48.733 A:middle
+Today, we can toss an image into a search box or
+a dialog
+
+25
+00:01:48.733 --> 00:01:56.233 A:middle
+and we will readily see labels and descriptions,
+like people or dog, coming up.
+
+26
+00:01:56.233 --> 00:02:01.499 A:middle
+And for the first time since late 2015, computers
+are actually better than humans at this
+
+27
+00:02:01.500 --> 00:02:03.933 A:middle
+as measured on popular benchmarks.
+
+28
+00:02:03.933 --> 00:02:13.599 A:middle
+So progressively, unstructured information is
+becoming available for us to do interesting things
+with also in an enterprise context.
+
+29
+00:02:13.600 --> 00:02:19.933 A:middle
+This is because we're not trying to hand-code or
+hard-code decision rules about what to do:
+
+30
+00:02:19.933 --> 00:02:26.533 A:middle
+If the left upper pixel of the image is red, do this.
+Otherwise, do that.
+
+31
+00:02:26.533 --> 00:02:32.966 A:middle
+It's unfeasible to get to a good image-processing
+algorithm with hand-coded rules like that.
+
+32
+00:02:32.966 --> 00:02:38.732 A:middle
+Instead, what we do is throw lots of examples at
+the machine and have them learn fuzzy decision
+functions
+
+33
+00:02:38.733 --> 00:02:44.399 A:middle
+from that data with an appropriate training
+regimen.
+
+34
+00:02:44.400 --> 00:02:46.600 A:middle
+This has huge potential.
+
+35
+00:02:46.600 --> 00:02:51.833 A:middle
+Machine learning for the enterprise is projected to
+grow at over 50% year over year
+
+36
+00:02:51.833 --> 00:02:56.233 A:middle
+towards a $4 billion market by 2020.
+
+37
+00:02:56.233 --> 00:03:00.699 A:middle
+This has the potential to transform knowledge
+work as we know it.
+
+38
+00:03:00.700 --> 00:03:05.700 A:middle
+Already today in blue collar work, humans and
+machines are working together on production
+
+39
+00:03:05.700 --> 00:03:10.300 A:middle
+and assembly lines and together doing better
+than each could be doing individually.
+
+40
+00:03:10.300 --> 00:03:15.300 A:middle
+We will see the same in knowledge work with
+repetitive, high-volume,
+
+41
+00:03:15.300 --> 00:03:21.300 A:middle
+high-frequency tasks increasingly becoming
+automated and humans focusing on value-added
+tasks.
+
+42
+00:03:21.300 --> 00:03:25.700 A:middle
+And together, humans and machines doing even
+better than before.
+
+43
+00:03:25.700 --> 00:03:29.700 A:middle
+This also enables us to do what has been
+hitherto impossible.
+
+44
+00:03:29.700 --> 00:03:34.233 A:middle
+Think of scenarios like taking out your mobile
+phone, taking a picture of a part,
+
+45
+00:03:34.233 --> 00:03:39.499 A:middle
+and being able to reorder immediately via the
+Ariba network at the click of a button.
+
+46
+00:03:39.500 --> 00:03:46.100 A:middle
+These kinds of scenarios would not be possible
+without machine learning.
+
+47
+00:03:46.100 --> 00:03:49.366 A:middle
+Why are we at an inflection point for machine
+learning today?
+
+48
+00:03:49.366 --> 00:03:51.199 A:middle
+It's because of three main factors:
+
+49
+00:03:51.200 --> 00:03:53.500 A:middle
+Number one, we have the data.
+
+50
+00:03:53.500 --> 00:03:54.833 A:middle
+Big Data.
+
+51
+00:03:54.833 --> 00:03:59.833 A:middle
+Volumes that were unattainable even a couple of
+years ago allow us to train much larger
+
+52
+00:03:59.833 --> 00:04:03.199 A:middle
+networks with many more variables.
+
+53
+00:04:03.200 --> 00:04:05.366 A:middle
+Big Compute.
+
+54
+00:04:05.366 --> 00:04:09.966 A:middle
+Substantial improvements in the amount of
+computational horsepower available to us,
+
+55
+00:04:09.966 --> 00:04:14.966 A:middle
+especially on graphics cards or so-called GPUs,
+enable us to actually crunch
+
+56
+00:04:14.966 --> 00:04:19.066 A:middle
+and process the massive amounts of sample
+data and training sets.
+
+57
+00:04:19.066 --> 00:04:25.132 A:middle
+Number three – improvements in machine learning algorithms, especially in deep learning and reinforcement learning.
+
+58
+00:04:25.133 --> 00:04:29.233 A:middle
+You will learn about these in the following
+installments of the course.
+
+59
+00:04:29.233 --> 00:04:34.799 A:middle
+Taken together, this creates an inflection point
+also for enterprise computing
+
+60
+00:04:34.800 --> 00:04:39.800 A:middle
+as machine learning enables us to leverage the
+wealth of information
+
+61
+00:04:39.800 --> 00:04:44.800 A:middle
+that the digital transformation provides to us and to bring together
+
+62
+00:04:44.800 --> 00:04:49.500 A:middle
+the data assets of different enterprises in clouds
+and on business networks
+
+63
+00:04:49.500 --> 00:04:56.500 A:middle
+creating even larger pools of information to learn
+from.
+
+64
+00:04:56.500 --> 00:05:01.000 A:middle
+This course on Enterprise Machine Learning is
+organized in seven modules.
+
+65
+00:05:01.000 --> 00:05:05.600 A:middle
+The next session will help you understand basic
+concepts behind machine learning
+
+66
+00:05:05.600 --> 00:05:10.866 A:middle
+so that deep learning and reinforcement learning
+are terms that have meaning to you.
+
+67
+00:05:10.866 --> 00:05:17.066 A:middle
+The third section will help you understand how to
+take an arbitrary business challenge
+
+68
+00:05:17.066 --> 00:05:23.932 A:middle
+and to turn that into a tractable machine learning
+problem that machine learning engineers can
+actually work on
+
+69
+00:05:23.933 --> 00:05:28.866 A:middle
+The fourth installment will help you understand
+how machine learning fits into corporate
+
+70
+00:05:28.866 --> 00:05:33.132 A:middle
+computing landscapes and how to interface with
+existing applications.
+
+71
+00:05:33.133 --> 00:05:39.933 A:middle
+And Units 5 and 6 of this course provide end-to-
+end examples of taking a use case
+
+72
+00:05:39.933 --> 00:05:43.399 A:middle
+and turning that into a concrete machine learning
+solution.
+
+73
+00:05:43.400 --> 00:05:49.300 A:middle
+Section 7 wraps up with key takeaways and next
+steps, as well as future learning resources.

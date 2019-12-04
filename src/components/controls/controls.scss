@@ -12,6 +12,7 @@
   bottom: 60px;
   align-self: center;
   text-align: center;
+  max-width: 90%;
 
   &-row {
     background: rgba(50,50,50,0.7);
@@ -20,7 +21,6 @@
     border-radius: 10px;
     display: inline-block;
     white-space: pre-wrap;
-    max-width: 90%;
     font-size: 0.9em;
     line-height: 1.3em;
   }
