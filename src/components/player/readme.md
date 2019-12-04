@@ -13,6 +13,7 @@ Now you can define default values for all used variables. :)
 
 | Property | Attribute | Description | Type     | Default                |
 | -------- | --------- | ----------- | -------- | ---------------------- |
+| `lang`   | `lang`    |             | `string` | `undefined`            |
 | `volume` | `volume`  |             | `number` | `defaultStatus.volume` |
 
 

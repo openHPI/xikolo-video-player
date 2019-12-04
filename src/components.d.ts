@@ -25,6 +25,7 @@ export namespace Components {
   interface XmPlayer {
     'disableTextTrack': () => Promise<void>;
     'enableTextTrack': () => Promise<void>;
+    'lang': string;
     'mute': () => Promise<void>;
     'pause': () => Promise<void>;
     'play': () => Promise<void>;
@@ -136,6 +137,7 @@ declare namespace LocalJSX {
     'textTrack'?: TextTrack;
   }
   interface XmPlayer {
+    'lang'?: string;
     'volume'?: number;
   }
   interface XmScreen {

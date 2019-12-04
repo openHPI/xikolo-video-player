@@ -10,8 +10,10 @@ import {
 } from '@stencil/core';
 
 import { Mode, Status, defaultStatus } from '../../utils/status';
-import { TextTrack } from '../../utils/webVTT';
+import { TextTrack, WebVTT } from '../../utils/webVTT';
 import { bind } from '../../utils/bind';
+import locales from "../../utils/locales";
+import { textTrackDefault } from '../../utils/settings';
 
 @Component({
   tag: 'xm-player',
@@ -23,6 +25,7 @@ export class Player {
   private el: HTMLXmPlayerElement;
 
   @Prop({mutable: true}) volume: number = defaultStatus.volume;
+  @Prop({attribute: 'lang'}) lang: string;
 
   @State()
   private status: Status = defaultStatus;
@@ -65,6 +68,7 @@ export class Player {
     document.addEventListener('fullscreenchange', this._fullscreenchange);
 
     this._setVolume(this.volume);
+    this._setLanguage(this.lang);
   }
 
   public componentWillUnload() {
@@ -136,7 +140,17 @@ export class Player {
   @bind()
   @Listen('texttrack:loaded')
   protected _addSubtitle(e: CustomEvent) {
-    this.textTrack.addWebVTT(e.detail.webVTT);
+    const vtt:WebVTT = e.detail.webVTT;
+    this.textTrack.addWebVTT(vtt);
+    if(vtt.meta.language === this.status.language) {
+      this.status = {
+        ...this.status,
+        subtitle: {
+          ...this.status.subtitle,
+          language: this.status.language
+        }
+      }
+    }
   }
 
   @Method()
@@ -233,6 +247,31 @@ export class Player {
     }
   }
 
+  @Watch('lang')
+  _setupLanguage(newValue: string, oldValue: string) {
+    if( newValue != oldValue ) {
+      this._setLanguage(newValue);
+    }
+  }
+
+  @bind()
+  public _setLanguage(language: string) {
+    if(!language || !locales[language]) {
+      if(navigator && navigator.language && locales[navigator.language]) {
+        language = navigator.language;
+      } else {
+        const element = this.el.closest('[lang]');
+        if(element) {
+          const lang = element.getAttribute('lang').substr(0, 2);
+          language = locales[lang] ? lang : defaultStatus.language;
+        }
+      }
+    }
+    this.status = {
+      ...this.status,
+      language: language
+    }
+  }
 
   @Listen('setting:changePlaybackRate')
   protected async _setPlaybackRate(e: CustomEvent) {
@@ -274,7 +313,7 @@ export class Player {
       },
       settings: {
         ...this.status.settings,
-        textTrack: 'off',
+        textTrack: textTrackDefault,
       }
     };
   }
@@ -282,7 +321,7 @@ export class Player {
   @Listen('setting:changeTextTrack')
   public _setTextTrack(e: CustomEvent) {
     const textTrack = e.detail.textTrack;
-    if(textTrack === 'off') {
+    if(textTrack === textTrackDefault) {
       this.status = {
         ...this.status,
         subtitle: {
