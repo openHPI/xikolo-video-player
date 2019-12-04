@@ -40,7 +40,7 @@ export class Controls {
           <Control status={this.status} onPause={this._pause} onPlay={this._play} />
           <Volume status={this.status} onMute={this._mute} onUnmute={this._unmute} onChangeVolume={this._setVolume} />
           <CurrentTime status={this.status} />
-          <SubtitleButton status={this.status} visible={this.textTrack && this.textTrack.getTextTracks()!==null} onEnable={this._enableTextTrack} onDisable={this._disableTextTrack} />
+          <SubtitleButton status={this.status} visible={!!this.status.subtitle.language} onEnable={this._enableTextTrack} onDisable={this._disableTextTrack} />
           <SettingsMenuToggleButton
             status={this.status}
             openedSettingsMenu={this.openedSettingsMenu}

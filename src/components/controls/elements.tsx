@@ -3,6 +3,7 @@ import { FunctionalComponent, h } from '@stencil/core';
 import * as icon from '../../utils/icon';
 import { Status, Mode, Subtitle } from '../../utils/status';
 import { format } from '../../utils/duration';
+import locales from '../../utils/locales';
 
 
 interface FullscreenProps {
@@ -13,9 +14,9 @@ interface FullscreenProps {
 
 export const Fullscreen: FunctionalComponent<FullscreenProps> = props => {
   if(props.status.fullscreen) {
-    return <button onClick={props.onExit} innerHTML={icon.Compress} />
+    return <button onClick={props.onExit} innerHTML={icon.Compress} title={locales[props.status.language].exitFullscreen} />
   } else {
-    return <button onClick={props.onRequest} innerHTML={icon.Expand} />
+    return <button onClick={props.onRequest} innerHTML={icon.Expand} title={locales[props.status.language].enterFullscreen} />
   }
 }
 
@@ -28,9 +29,11 @@ interface ControlProps {
 
 export const Control: FunctionalComponent<ControlProps> = props => {
   if(props.status.mode === Mode.PLAYING) {
-    return <button onClick={props.onPause} innerHTML={icon.Pause} />
+    return <button onClick={props.onPause} innerHTML={icon.Pause} title={locales[props.status.language].pause} />
+  } else if(props.status.mode === Mode.FINISHED) {
+    return <button onClick={props.onPlay} innerHTML={icon.Restart} title={locales[props.status.language].restart} />
   } else {
-    return <button onClick={props.onPlay} innerHTML={props.status.mode === Mode.FINISHED ? icon.Restart : icon.Play} />
+    return <button onClick={props.onPlay} innerHTML={icon.Play} title={locales[props.status.language].play} />
   }
 }
 
@@ -77,14 +80,14 @@ export const Volume: FunctionalComponent<VolumeProps> = props => {
   if(muted) {
     return (
       <div class="controls-volume">
-        <button class="controls__unmute" onClick={props.onUnmute} innerHTML={icon.VolumeOff} />
+        <button class="controls__unmute" onClick={props.onUnmute} innerHTML={icon.VolumeOff} title={locales[props.status.language].unmute} />
         {volumeSlider}
       </div>
     )
   } else {
     return (
       <div class="controls-volume">
-        <button class="controls__mute" onClick={props.onMute} innerHTML={icon.VolumeOn } />
+        <button class="controls__mute" onClick={props.onMute} innerHTML={icon.VolumeOn} title={locales[props.status.language].mute}/>
         {volumeSlider}
       </div>
     )
@@ -131,13 +134,13 @@ interface SettingsMenuToggleButtonProps {
 export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleButtonProps> = props => {
   if(props.openedSettingsMenu) {
     return (
-      <button onClick={props.onCloseSettingsMenu}>
+      <button onClick={props.onCloseSettingsMenu} title={locales[props.status.language].settings}>
         <span class="controls__settings-icon controls__settings-icon--open" innerHTML={icon.Settings} />
       </button>
     )
   }
   return (
-    <button onClick={props.onOpenSettingsMenu}>
+    <button onClick={props.onOpenSettingsMenu} title={locales[props.status.language].settings}>
       <span class="controls__settings-icon" innerHTML={icon.Settings} />
     </button>
   )
@@ -154,13 +157,13 @@ export const SubtitleButton: FunctionalComponent<SubtitleButtonProps> = props =>
   if(!props.visible) return;
   if(props.status.subtitle.enabled) {
     return (
-      <button onClick={props.onDisable}>
+      <button onClick={props.onDisable} title={locales[props.status.language].disableSubtitles}>
         <span class="controls__subtitle-icon controls__subtitle-icon--active" innerHTML={icon.Subtitle} />
       </button>
     )
   } else {
     return (
-      <button onClick={props.onEnable}>
+      <button onClick={props.onEnable} title={locales[props.status.language].enableSubtitles}>
         <span class="controls__subtitle-icon" innerHTML={icon.Subtitle} />
       </button>
     )

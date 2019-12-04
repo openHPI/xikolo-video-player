@@ -26,6 +26,7 @@ export interface Settings {
 }
 
 export interface Status {
+  language: string;
   duration: number;
   fullscreen: boolean;
   mode: Mode;
@@ -37,6 +38,7 @@ export interface Status {
 }
 
 export const defaultStatus: Status = {
+  language: 'en',
   duration: 0,
   volume: 1.0,
   muted: false,
@@ -48,7 +50,7 @@ export const defaultStatus: Status = {
   },
   subtitle: {
     enabled: false,
-    language: 'en',
+    language: null,
     activeCues: null,
   },
   settings: {

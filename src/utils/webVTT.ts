@@ -1,4 +1,5 @@
 import { textTrackDefault } from "./settings";
+import locales from "./locales";
 
 export interface Cue {
   end: number;
@@ -58,8 +59,8 @@ export class TextTrack {
     return [textTrackDefault].concat(this.textTracks.map(meta => meta.language));
   }
 
-  public getTextTrackLabels() {
-    return ['aus'].concat(this.textTracks.map(meta => meta.label));
+  public getTextTrackLabels(language) {
+    return [locales[language].textTrackDefault].concat(this.textTracks.map(meta => meta.label));
   }
 
   public compareCueLists(a: Array<Cue>, b: Array<Cue>) {

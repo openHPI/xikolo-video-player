@@ -5,6 +5,7 @@ import { Status } from '../../utils/status';
 import { SettingsSubmenuStatus, defaultSettingsSubmenuStatus, SettingNames, settingList } from '../../utils/settings';
 import { bind } from '../../utils/bind';
 import { TextTrack } from '../../utils/webVTT';
+import locales from "../../utils/locales";
 
 @Component({
   tag: 'xm-settings-menu',
@@ -54,9 +55,10 @@ export class SettingsMenu {
   private _getSetting(settingName:string) {
     let setting = settingList.find(setting => setting.name === settingName);
     setting.currentValue = this.status.settings[settingName];
+    setting.label = locales[this.status.language][settingName];
     if(settingName === SettingNames.TEXTTRACK) {
       setting.values = this.textTrack.getTextTrackValues();
-      setting.valueLabels = this.textTrack.getTextTrackLabels();
+      setting.valueLabels = this.textTrack.getTextTrackLabels(this.status.language);
     }
     return setting;
   }

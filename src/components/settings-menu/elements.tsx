@@ -18,7 +18,12 @@ export const Submenu: FunctionalComponent<SubmenuProps> = props => {
           <button class="settings-menu__button" onClick={props.onCloseSubmenu}>
             <span class="settings-menu__arrow settings-menu__arrow--left" innerHTML={icon.ArrowLeft} />
             <span class="settings-menu__button-label" innerHTML={setting.label} />
-            <span class="settings-menu__button-value" innerHTML={setting.currentValue} />
+            <span class="settings-menu__button-value" innerHTML={
+              setting.valueLabels ?
+                setting.valueLabels[setting.values.findIndex((value) => setting.currentValue === value)]
+              :
+                setting.currentValue
+            } />
           </button>
         </div>
         <div class="settings-menu__submenu-content">
@@ -47,7 +52,12 @@ export const SubmenuToggleButton: FunctionalComponent<SubmenuToggleButtonProps> 
   return (
     <button class="settings-menu__button" onClick={props.status.isOpen ? props.onCloseSubmenu : props.onOpenSubmenu}>
       <span class="settings-menu__button-label" innerHTML={props.setting.label} />
-      <span class="settings-menu__button-value" innerHTML={props.setting.currentValue} />
+      <span class="settings-menu__button-value" innerHTML={
+        props.setting.valueLabels ?
+          props.setting.valueLabels[props.setting.values.findIndex((value) => props.setting.currentValue === value)]
+        :
+          props.setting.currentValue
+      } />
       <span class="settings-menu__arrow settings-menu__arrow--right" innerHTML={icon.ArrowRight} />
     </button>
   )

@@ -15,7 +15,7 @@ describe('xm-player with props', () => {
   beforeEach(async () => {
     page = await newSpecPage({
       html: `
-      <xm-player volume="0.3">
+      <xm-player volume="0.3" lang="en">
         <xm-video slot="primary" src="340196868"></xm-video>
         <xm-video slot="secondary" src="340196788"></xm-video>
       </xm-player>
