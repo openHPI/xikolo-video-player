@@ -78,6 +78,9 @@ export class Video {
     // Wait for Vimeo Player to be ready to access the actual iframe element
     await this.player.ready();
 
+    // Sometimes vimeo videos has texttrack enabled per default
+    await this.player.disableTextTrack();
+
     // Emit one default timeupdate event to update player with duration
     this.player.getDuration().then(duration => {
       const e = new CustomEvent('timeupdate', {
