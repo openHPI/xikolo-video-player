@@ -66,6 +66,7 @@ export class Player {
     if(this.secondary) this.secondary.addEventListener('click', this._click);
 
     document.addEventListener('fullscreenchange', this._fullscreenchange);
+    document.addEventListener('click', this._hideSettingsMenuOnClickOutside);
 
     this._setVolume(this.volume);
     this._setLanguage(this.lang);
@@ -74,7 +75,12 @@ export class Player {
   public componentWillUnload() {
     this.primary.removeEventListener('click', this._click);
     this.primary.removeEventListener('timeupdate', this._timeUpdate);
+    this.primary.removeEventListener('progress', this._progress);
+    this.primary.removeEventListener('ended', this._ended);
     if(this.secondary) this.secondary.removeEventListener('click', this._click);
+
+    document.removeEventListener('fullscreenchange', this._fullscreenchange);
+    document.removeEventListener('click', this._hideSettingsMenuOnClickOutside);
   }
 
   /**
@@ -94,12 +100,21 @@ export class Player {
 
   @bind()
   protected async _click(e: MouseEvent) {
-    switch(this.status.mode) {
-      case Mode.PAUSED:
-      case Mode.FINISHED:
-        return this.play();
-      default:
-        return this.pause();
+    if(!this.status.openedSettingsMenu) {
+      switch(this.status.mode) {
+        case Mode.PAUSED:
+        case Mode.FINISHED:
+          return this.play();
+        default:
+          return this.pause();
+      }
+    }
+  }
+
+  @bind()
+  protected async _hideSettingsMenuOnClickOutside(e: MouseEvent) {
+    if(this.status.openedSettingsMenu) {
+      this._closeSettingsMenu();
     }
   }
 
@@ -204,6 +219,16 @@ export class Player {
   protected async _exitFullscreen() {
     if (document.fullscreenElement !== null)
       return document.exitFullscreen();
+  }
+
+  @Listen('control:openSettingsMenu')
+  protected async _openSettingsMenu() {
+    this.status = {...this.status, openedSettingsMenu: true};
+  }
+
+  @Listen('control:closeSettingsMenu')
+  protected async _closeSettingsMenu() {
+    this.status = {...this.status, openedSettingsMenu: false};
   }
 
   @Method()

@@ -28,11 +28,12 @@ export interface Settings {
 export interface Status {
   language: string;
   duration: number;
+  volume: number;
+  muted: boolean;
   fullscreen: boolean;
   mode: Mode;
+  openedSettingsMenu: boolean;
   progress: Progress;
-  muted: boolean;
-  volume: number;
   subtitle: Subtitle;
   settings: Settings;
 }
@@ -44,6 +45,7 @@ export const defaultStatus: Status = {
   muted: false,
   fullscreen: false,
   mode: Mode.PAUSED,
+  openedSettingsMenu: false,
   progress: {
     seconds: 0,
     percent: 0,

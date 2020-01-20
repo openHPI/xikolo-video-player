@@ -126,13 +126,12 @@ export const Slider: FunctionalComponent<SliderProps> = props => {
 
 interface SettingsMenuToggleButtonProps {
   status: Status;
-  openedSettingsMenu: boolean;
   onOpenSettingsMenu: (e: Event) => void;
   onCloseSettingsMenu: (e: Event) => void;
 }
 
 export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleButtonProps> = props => {
-  if(props.openedSettingsMenu) {
+  if(props.status.openedSettingsMenu) {
     return (
       <button onClick={props.onCloseSettingsMenu} title={locales[props.status.language].settings}>
         <span class="controls__settings-icon controls__settings-icon--open" innerHTML={icon.Settings} />

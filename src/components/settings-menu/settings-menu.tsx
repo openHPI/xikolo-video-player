@@ -1,4 +1,4 @@
-import { Component, Element, h, Prop, State, EventEmitter, Event } from '@stencil/core';
+import { Component, Element, h, Prop, State, EventEmitter, Event, Watch } from '@stencil/core';
 
 import { Submenu, SubmenuToggleButton } from './elements';
 import { Status } from '../../utils/status';
@@ -16,7 +16,6 @@ export class SettingsMenu {
   @Element() el: HTMLXmSettingsMenuElement;
 
   @Prop() status: Status;
-  @Prop() isOpen: boolean;
   @Prop({mutable: true}) textTrack: TextTrack;
 
   @State()
@@ -27,7 +26,7 @@ export class SettingsMenu {
 
   public render() {
     return (
-      <div class={this.isOpen ? "settings-menu menu menu--open" : "settings-menu menu"}>
+      <div class={this.status.openedSettingsMenu ? "settings-menu menu menu--open" : "settings-menu menu"} onClick={(e)=> e.stopPropagation()}>
           <Submenu
             status={this.submenuStatus}
             onChangeSetting={this._setSetting}
@@ -71,12 +70,20 @@ export class SettingsMenu {
     };
   }
 
+
   @bind()
   private _onCloseSubmenu() {
     this.submenuStatus = {
       ...this.submenuStatus,
       isOpen: false
     };
+  }
+
+  @Watch('status')
+  protected _checkSettingsMenuOpenningState(newState, oldState) {
+    if(!newState.openedSettingsMenu){
+      this._onCloseSubmenu();
+    }
   }
 
   @bind()

@@ -37,7 +37,6 @@ export namespace Components {
     'pip': boolean;
   }
   interface XmSettingsMenu {
-    'isOpen': boolean;
     'status': Status;
     'textTrack': TextTrack;
   }
@@ -124,11 +123,13 @@ declare namespace LocalJSX {
   }
   interface XmControls {
     'onControl:changeVolume'?: (event: CustomEvent<any>) => void;
+    'onControl:closeSettingsMenu'?: (event: CustomEvent<any>) => void;
     'onControl:disableTextTrack'?: (event: CustomEvent<any>) => void;
     'onControl:enableTextTrack'?: (event: CustomEvent<any>) => void;
     'onControl:enterFullscreen'?: (event: CustomEvent<any>) => void;
     'onControl:exitFullscreen'?: (event: CustomEvent<any>) => void;
     'onControl:mute'?: (event: CustomEvent<any>) => void;
+    'onControl:openSettingsMenu'?: (event: CustomEvent<any>) => void;
     'onControl:pause'?: (event: CustomEvent<any>) => void;
     'onControl:play'?: (event: CustomEvent<any>) => void;
     'onControl:seek'?: (event: CustomEvent<any>) => void;
@@ -144,7 +145,6 @@ declare namespace LocalJSX {
     'pip'?: boolean;
   }
   interface XmSettingsMenu {
-    'isOpen'?: boolean;
     'onSetting:changePlaybackRate'?: (event: CustomEvent<any>) => void;
     'onSetting:changeTextTrack'?: (event: CustomEvent<any>) => void;
     'status'?: Status;

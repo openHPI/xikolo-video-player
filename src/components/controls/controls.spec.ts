@@ -42,12 +42,17 @@ describe('xm-controls', () => {
   });
 
   it('should render the settings-menu', async () => {
+    const status = {
+      ...controls.status,
+      openedSettingsMenu: true,
+    };
     expect(settingsMenu.shadowRoot.querySelector('.settings-menu')).toBeTruthy();
     expect(settingsMenu.shadowRoot.querySelector('.settings-menu.menu--open')).not.toBeTruthy();
     expect(shadowRoot.querySelector('.controls__settings-icon')).not.toHaveClass('controls__settings-icon--open');
     let button = shadowRoot.querySelector('.controls__settings-icon').parentNode;
     expect(button).toBeTruthy();
     button.click();
+    controls.status = status;
     await page.waitForChanges();
     expect(shadowRoot.querySelector('.controls__settings-icon')).toHaveClass('controls__settings-icon--open');
     expect(settingsMenu.shadowRoot.querySelector('.settings-menu.menu--open')).toBeTruthy();
