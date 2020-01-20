@@ -1,13 +1,14 @@
-
-
 .controls {
-  background: inherit;
+  background: transparent;
   display: flex;
-  flex-direction: column;
+  flex: 1 0 auto;
+  flex-flow: row wrap;
 }
 
 .controls__subtitle {
   position: absolute;
+  left: 0px;
+  right: 0px;
   z-index: 1;
   bottom: 60px;
   align-self: center;
@@ -27,14 +28,19 @@
 }
 
 .controls__slider {
+  flex: 1 1 100%;
   appearance: none;
   overflow: hidden;
   margin: 0;
   height: 1em;
-
   background: transparent;
+  color: orange;
   color: var(--vp-slider-color);
   margin: 0;
+  border-top: 1px solid black;
+  border-top-color: var(--vp-bg-color);
+  border-bottom: 1px solid black;
+  border-bottom-color: var(--vp-bg-color);
 
   &::-webkit-slider-thumb {
     appearance: none;
@@ -49,14 +55,35 @@
     border: 0;
   }
 
-  border-top: 1px solid var(--vp-bg-color);
-  border-bottom: 1px solid var(--vp-bg-color);
+  &::-ms-thumb {
+    appearance: none;
+    box-shadow: -100vw 0 0 100vw orange;
+    width: 0;
+    border: 0;
+  }
+
+  &::-ms-fill-upper {
+    background: #333;
+  }
+
+  &::-ms-track {
+    color: #333;
+  }
+
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    /* IE10+ specific styles go here */
+    height: inherit;
+    padding: 0px;
+  }
 
   &--volume {
-    border: 1px solid var(--vp-bg-color);
+    border: 1px solid black;
+    border-color: var(--vp-bg-color);
 
     &:focus {
-      border: 1px dotted var(--vp-main-color);
+      border: 1px solid white;
+      border-color: var(--vp-main-color);
     }
 
   }
@@ -64,14 +91,25 @@
 
 .controls__toolbar {
   margin: 1px;
-  display: flex;
   color: inherit;
+
+
+  display: flex;
+  flex: 1 1 100%;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  .controls-volume {
+    display: flex;
+    flex: 1 0 auto;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
 
   .controls__time {
     flex-grow: 1;
     text-align: right;
     font-size: 0.9em;
-    padding: 0.5em 0.5em 0 0.5em;
   }
 
   .controls__settings-icon {
@@ -113,10 +151,10 @@
     }
   }
 
-  svg {
+  svg, .svg {
     display: block;
     height: 14px;
-    /* width: 14px; */
+    width: 14px;
     fill: currentColor;
     color: inherit;
   }

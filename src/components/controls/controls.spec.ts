@@ -89,7 +89,7 @@ describe('xm-controls', () => {
     };
     expect(shadowRoot.querySelector('.controls__subtitle-icon')).not.toBeTruthy();
     let textTrackValue = settingsMenu.shadowRoot.querySelector('.settings-menu__button-value').firstChild;
-    expect(textTrackValue.nodeValue).toBe('Off');
+    expect(textTrackValue.nodeValue.trim()).toBe('Off');
     expect(settingsMenu.status.settings.textTrack).toBe('off');
     expect(textTrack.getTextTracks()).toBe(null);
     textTrack.addWebVTT(de);
@@ -102,7 +102,7 @@ describe('xm-controls', () => {
     expect(settingsMenu.status.settings.textTrack).toBe('de');
     // must reselect it for testing !
     textTrackValue = settingsMenu.shadowRoot.querySelector('.settings-menu__button-value').firstChild;
-    expect(textTrackValue.nodeValue).toBe('Deutsch');
+    expect(textTrackValue.nodeValue.trim()).toBe('Deutsch');
     const subtitleSubmenubutton = settingsMenu.shadowRoot.querySelector('.settings-menu__button').firstChild;
     subtitleSubmenubutton.click();
     await page.waitForChanges();
