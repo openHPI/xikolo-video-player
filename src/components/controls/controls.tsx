@@ -16,9 +16,6 @@ export class Controls {
   @Prop() status: Status;
   @Prop({mutable: true}) textTrack: TextTrack;
 
-  @State()
-  private openedSettingsMenu: boolean = false;
-
   @Event({eventName: 'control:play'}) playEvent: EventEmitter;
   @Event({eventName: 'control:pause'}) pauseEvent: EventEmitter;
   @Event({eventName: 'control:seek'}) seekEvent: EventEmitter;
@@ -29,12 +26,14 @@ export class Controls {
   @Event({eventName: 'control:changeVolume'}) changeVolumeEvent: EventEmitter;
   @Event({eventName: 'control:enableTextTrack'}) enableTextTrackEvent: EventEmitter;
   @Event({eventName: 'control:disableTextTrack'}) disableTextTrackEvent: EventEmitter;
+  @Event({eventName: 'control:openSettingsMenu'}) openSettingsMenuEvent: EventEmitter;
+  @Event({eventName: 'control:closeSettingsMenu'}) closeSettingsMenuEvent: EventEmitter;
 
   public render() {
     return (
       <div class="controls">
         <Subtitles status={this.status} />
-        <xm-settings-menu status={this.status} isOpen={this.openedSettingsMenu} textTrack={this.textTrack} />
+        <xm-settings-menu status={this.status} textTrack={this.textTrack} />
         <Slider status={this.status} onSeek={this._seek} />
         <div class="controls__toolbar">
           <Control status={this.status} onPause={this._pause} onPlay={this._play} />
@@ -43,7 +42,6 @@ export class Controls {
           <SubtitleButton status={this.status} visible={!!this.status.subtitle.language} onEnable={this._enableTextTrack} onDisable={this._disableTextTrack} />
           <SettingsMenuToggleButton
             status={this.status}
-            openedSettingsMenu={this.openedSettingsMenu}
             onOpenSettingsMenu={this._openSettingsMenu}
             onCloseSettingsMenu={this._closeSettingsMenu}
           />
@@ -94,13 +92,15 @@ export class Controls {
   }
 
   @bind()
-  private _openSettingsMenu() {
-    this.openedSettingsMenu = true;
+  private _openSettingsMenu(e:MouseEvent) {
+    e.stopPropagation();
+    this.openSettingsMenuEvent.emit();
   }
 
   @bind()
-  private _closeSettingsMenu() {
-    this.openedSettingsMenu = false;
+  private _closeSettingsMenu(e:MouseEvent) {
+    e.stopPropagation();
+    this.closeSettingsMenuEvent.emit();
   }
 
 
