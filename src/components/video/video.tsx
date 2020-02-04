@@ -42,10 +42,21 @@ export class Video {
   @Event({eventName: 'buffering'}) bufferingEvent: EventEmitter;
   @Event({eventName: 'buffered'}) bufferedEvent: EventEmitter;
 
+
+  /**
+   * <iframe src="https://player.vimeo.com/video/340196868?autopause=0&amp;controls=0&amp;app_id=122963" allow="autoplay; fullscreen" allowfullscreen="" title="email2019-w1-10-lecturer" data-ready="true" tabindex="-1" width="426" height="240" frameborder="0"></iframe>
+   */
   render() {
     return (
       <xm-aspect-ratio-box ratio={this.ratio}>
-        <div ref={(el) => this.container = el} />
+        <iframe
+          ref={(el) => this.container = el}
+          src={`https://player.vimeo.com/video/${this.src}/?autopause=0&controls=0&amp;app_id=122963`}
+          width="426"
+          height="240"
+          frameBorder="0"
+          allowFullScreen
+        ></iframe>
         <div class="overlay"><slot name="overlay" /></div>
       </xm-aspect-ratio-box>
     );
@@ -58,6 +69,7 @@ export class Video {
       controls: false,
       autopause: false,
     });
+    this.player.getVideoTitle().then((title) => this.container.setAttribute('title', title));
 
     this.player.on('play', (e) => {
       // When seeking a play event is emitted without payload, ignore that.

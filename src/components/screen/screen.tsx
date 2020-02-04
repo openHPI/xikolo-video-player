@@ -32,7 +32,7 @@ export class Screen {
 
     return (
       <div class={clWrp} ref={(e) => this.screen = e}>
-        <div class="pane primary" onMouseEnter={() => this._flipPipLeft()}><slot /></div>
+        <div class="pane primary" onMouseEnter={() => this._flipPipLeft()}><slot name="primary"/></div>
         <div class="pane secondary"><slot name="secondary" /></div>
       </div>
     );
@@ -40,7 +40,14 @@ export class Screen {
 
   componentDidLoad() {
     this.engine = Split(this.screen.childNodes, {
-      gutterSize: 6
+      gutterSize: 6,
+      gutterStyle: (dimension, gutterSize) => ({
+        'flex-basis':  `${gutterSize}px`,
+        'background-repeat': 'no-repeat',
+        'background-position': '50%',
+        'cursor': 'col-resize',
+        'background-color': '#333',
+      }),
     });
   }
 

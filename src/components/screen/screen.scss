@@ -1,5 +1,6 @@
 :host {
   display: block;
+  background-color: black;
   background-color: var(--vp-bg-color);
 }
 
@@ -11,14 +12,14 @@
 
 .gutter {
   background-color: inherit;
-
   background-repeat: no-repeat;
   background-position: 50%;
 }
 
 .gutter.gutter-horizontal {
   cursor: col-resize;
-  background-color: var(--vp-gutter-color);
+  /* Have to be important because of the inline css hack for IE11! */
+  background-color: var(--vp-gutter-color) !important;
 }
 
 .pane {
@@ -37,6 +38,7 @@
     right: 0.2em;
     width: 35% !important;
 
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.75);
     box-shadow: 0 0 8px rgba(var(--vp-bg-color-rgb), 0.75);
   }
 }

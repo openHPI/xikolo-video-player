@@ -40,11 +40,11 @@ export class Player {
       <div class="player">
         { this.hasSecondarySlot ?
           <xm-screen>
-            <slot name="primary"></slot>
+            <slot slot="primary" name="primary"></slot>
             <slot slot="secondary" name="secondary"></slot>
           </xm-screen>
           :
-          <slot name="primary"></slot>
+          <slot slot="primary" name="primary"></slot>
         }
         <xm-controls status={this.status} textTrack={this.textTrack} />
       </div>
@@ -66,6 +66,7 @@ export class Player {
     if(this.secondary) this.secondary.addEventListener('click', this._click);
 
     document.addEventListener('fullscreenchange', this._fullscreenchange);
+    document.addEventListener('MSFullscreenChange', this._fullscreenchange);
     document.addEventListener('click', this._hideSettingsMenuOnClickOutside);
 
     this._setVolume(this.volume);
@@ -202,7 +203,9 @@ export class Player {
 
   @bind()
   protected _fullscreenchange() {
-    this.status = {...this.status, fullscreen: document.fullscreenElement !== null}
+    const doc = (document as any);
+    const fullscreen = !!doc.fullscreenElement || !!doc.webkitFullscreenElement || !!doc.mozFullScreenElement || !!doc.msFullscreenElement;
+    this.status = {...this.status, fullscreen: fullscreen};
   }
 
   @Listen('control:seek')
@@ -212,13 +215,22 @@ export class Player {
 
   @Listen('control:enterFullscreen')
   protected async _enterFullscreen() {
-    return this.el.requestFullscreen();
+    const element = (this.el as any);
+    const requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullscreen;
+    if (requestMethod) {
+        return requestMethod.call(element);
+    }
   }
 
   @Listen('control:exitFullscreen')
   protected async _exitFullscreen() {
-    if (document.fullscreenElement !== null)
-      return document.exitFullscreen();
+    const doc = (document as any);
+    if (doc.fullscreenElement !== null) {
+      const requestMethod = doc.exitFullscreen || doc.webkitExitFullscreen || doc.mozCancelFullScreen || doc.msExitFullscreen;
+      if (requestMethod) {
+        return requestMethod.call(doc);
+      }
+    }
   }
 
   @Listen('control:openSettingsMenu')

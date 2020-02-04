@@ -1,5 +1,8 @@
 :host {
   display: flex;
+  flex: 1 0 auto;
+  flex-flow: row nowrap;
+  background-color: black;
   background-color: var(--vp-bg-color);
 }
 

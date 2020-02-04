@@ -2,6 +2,7 @@
 <html dir="ltr" lang="en-US-x-opensap">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=Edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
   <script type="module" src="build/xmf.esm.js"></script>
@@ -24,6 +25,10 @@
       background: #fff;
       max-width: 900px;
       padding: 1em;
+    }
+
+    xm-player .vimeo-iframe {
+      display: none;
     }
 
     /* a red test :D */
@@ -54,7 +59,7 @@
         <xm-video slot="primary" src="340196868"></xm-video>
         <xm-video slot="secondary" src="340196788"></xm-video>
         <xm-text-track language="en" src="/static/en-openSAP.vtt" label="English openSAP"></xm-text-track>
-        <iframe src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <iframe class="vimeo-iframe" src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </xm-player>
 
       <h2><a href="#">Dual Stream with TextTrack</a></h2>
@@ -64,7 +69,7 @@
         <xm-video slot="secondary" src="340196788"></xm-video>
         <xm-text-track language="de" src="/static/de.vtt" label="Deutsch"></xm-text-track>
         <xm-text-track language="en" src="/static/en.vtt" label="English"></xm-text-track>
-        <iframe src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <iframe class="vimeo-iframe" src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </xm-player>
 
       <h2><a href="#">Single Stream</a></h2>
@@ -73,13 +78,15 @@
         <xm-video slot="primary" src="264584278"></xm-video>
         <xm-text-track language="de" src="/static/de.vtt" label="Deutsch"></xm-text-track>
         <xm-text-track language="en" src="/static/en.vtt" label="English"></xm-text-track>
-        <iframe src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <iframe class="vimeo-iframe" src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </xm-player>
     </div>
 
     <script>
       let el = document.querySelector('xm-player');
-      const log = (e) => console.log(e.type, e.detail);
+      const log = function(e) {
+        console.log(e.type, e.detail);
+      }
 
 
       el.addEventListener('play', log);
@@ -92,7 +99,7 @@
 
       el.addEventListener('ioc:request', log);
 
-      el.addEventListener('click', (e) => {
+      el.addEventListener('click', function(e) {
         console.log('click', e.target);
       })
 
@@ -104,8 +111,8 @@
     <button>Button</button>
   </section>
   <script>
-    document.querySelectorAll('button').forEach(el => {
-      el.addEventListener('click', e => {
+    document.querySelectorAll('button').forEach(function(el) {
+      el.addEventListener('click', function(e) {
         document.querySelector('xm-player').requestFullscreen();
       })
     })
