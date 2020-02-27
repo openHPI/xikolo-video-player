@@ -39,7 +39,7 @@ export class Player {
     return (
       <div class="player">
         { this.hasSecondarySlot ?
-          <xm-screen>
+          <xm-screen fullscreen={this.status.fullscreen}>
             <slot slot="primary" name="primary"></slot>
             <slot slot="secondary" name="secondary"></slot>
           </xm-screen>
@@ -67,6 +67,8 @@ export class Player {
 
     document.addEventListener('fullscreenchange', this._fullscreenchange);
     document.addEventListener('MSFullscreenChange', this._fullscreenchange);
+    document.addEventListener('webkitfullscreenchange', this._fullscreenchange);
+
     document.addEventListener('click', this._hideSettingsMenuOnClickOutside);
 
     this._setVolume(this.volume);
@@ -81,6 +83,9 @@ export class Player {
     if(this.secondary) this.secondary.removeEventListener('click', this._click);
 
     document.removeEventListener('fullscreenchange', this._fullscreenchange);
+    document.removeEventListener('MSFullscreenChange', this._fullscreenchange);
+    document.removeEventListener('webkitfullscreenchange', this._fullscreenchange);
+
     document.removeEventListener('click', this._hideSettingsMenuOnClickOutside);
   }
 
@@ -101,7 +106,7 @@ export class Player {
 
   @bind()
   protected async _click(e: MouseEvent) {
-    if(!this.status.openedSettingsMenu) {
+    if(!this.status.openedSettingsMenu && !this.status.showPlaybackRate) {
       switch(this.status.mode) {
         case Mode.PAUSED:
         case Mode.FINISHED:
@@ -114,8 +119,9 @@ export class Player {
 
   @bind()
   protected async _hideSettingsMenuOnClickOutside(e: MouseEvent) {
-    if(this.status.openedSettingsMenu) {
+    if(this.status.openedSettingsMenu || this.status.showPlaybackRate) {
       this._closeSettingsMenu();
+      this._hidePlaybackRate();
     }
   }
 
@@ -204,7 +210,7 @@ export class Player {
   @bind()
   protected _fullscreenchange() {
     const doc = (document as any);
-    const fullscreen = !!doc.fullscreenElement || !!doc.webkitFullscreenElement || !!doc.mozFullScreenElement || !!doc.msFullscreenElement;
+    const fullscreen = doc.fullScreen || doc.mozFullScreen || doc.webkitIsFullScreen;
     this.status = {...this.status, fullscreen: fullscreen};
   }
 
@@ -216,8 +222,8 @@ export class Player {
   @Listen('control:enterFullscreen')
   protected async _enterFullscreen() {
     const element = (this.el as any);
-    const requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullscreen;
-    if (requestMethod) {
+    const requestMethod = element.requestFullscreen || element.webkitRequestFullScreen || element.webkitEnterFullscreen || element.mozRequestFullScreen || element.msRequestFullscreen;
+    if (requestMethod && !this.status.fullscreen) {
         return requestMethod.call(element);
     }
   }
@@ -225,9 +231,10 @@ export class Player {
   @Listen('control:exitFullscreen')
   protected async _exitFullscreen() {
     const doc = (document as any);
-    if (doc.fullscreenElement !== null) {
+    const fullscreen = doc.fullScreen || doc.mozFullScreen || doc.webkitIsFullScreen;
+    if(fullscreen) {
       const requestMethod = doc.exitFullscreen || doc.webkitExitFullscreen || doc.mozCancelFullScreen || doc.msExitFullscreen;
-      if (requestMethod) {
+      if (requestMethod && this.status.fullscreen) {
         return requestMethod.call(doc);
       }
     }
@@ -311,6 +318,7 @@ export class Player {
   }
 
   @Listen('setting:changePlaybackRate')
+  @Listen('control:changePlaybackRate')
   protected async _setPlaybackRate(e: CustomEvent) {
     const playbackRate = e.detail.playbackRate;
     await this._invokePlayerFunction('setPlaybackRate',[playbackRate]);
@@ -321,6 +329,16 @@ export class Player {
         playbackRate: playbackRate,
       }
     };
+  }
+
+  @Listen('control:showPlaybackRate')
+  protected async _showPlaybackRate() {
+    this.status = {...this.status, showPlaybackRate: true};
+  }
+
+  @Listen('control:hidePlaybackRate')
+  protected async _hidePlaybackRate() {
+    this.status = {...this.status, showPlaybackRate: false};
   }
 
   @Method()

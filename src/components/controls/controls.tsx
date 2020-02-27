@@ -4,6 +4,7 @@ import { Fullscreen, Control, CurrentTime, Volume, Slider, SettingsMenuToggleBut
 import { Status } from '../../utils/status';
 import { bind } from '../../utils/bind';
 import { TextTrack } from '../../utils/webVTT';
+import { PlaybackRateToggleButton, PlaybackRate } from './setting-elements';
 
 @Component({
   tag: 'xm-controls',
@@ -28,10 +29,13 @@ export class Controls {
   @Event({eventName: 'control:disableTextTrack'}) disableTextTrackEvent: EventEmitter;
   @Event({eventName: 'control:openSettingsMenu'}) openSettingsMenuEvent: EventEmitter;
   @Event({eventName: 'control:closeSettingsMenu'}) closeSettingsMenuEvent: EventEmitter;
+  @Event({eventName: 'control:changePlaybackRate'}) changePlaybackRateEvent: EventEmitter;
+  @Event({eventName: 'control:showPlaybackRate'}) showPlaybackRateEvent: EventEmitter;
+  @Event({eventName: 'control:hidePlaybackRate'}) hidePlaybackRateEvent: EventEmitter;
 
   public render() {
     return (
-      <div class="controls">
+      <div class={this.status.fullscreen ? "controls controls--fullscreen-mode" : "controls"}>
         <Subtitles status={this.status} />
         <xm-settings-menu status={this.status} textTrack={this.textTrack} />
         <Slider status={this.status} onSeek={this._seek} />
@@ -39,6 +43,10 @@ export class Controls {
           <Control status={this.status} onPause={this._pause} onPlay={this._play} />
           <Volume status={this.status} onMute={this._mute} onUnmute={this._unmute} onChangeVolume={this._setVolume} />
           <CurrentTime status={this.status} />
+          <div class="controls__playback-rate">
+            <PlaybackRate status={this.status} onChange={this._setPlaybackRate} />
+            <PlaybackRateToggleButton status={this.status} onShow={this._showPlaybackRate} onHide={this._hidePlaybackRate} />
+          </div>
           <SubtitleButton status={this.status} visible={!!this.status.subtitle.language} onEnable={this._enableTextTrack} onDisable={this._disableTextTrack} />
           <SettingsMenuToggleButton
             status={this.status}
@@ -94,6 +102,7 @@ export class Controls {
   @bind()
   private _openSettingsMenu(e:MouseEvent) {
     e.stopPropagation();
+    this.hidePlaybackRateEvent.emit();
     this.openSettingsMenuEvent.emit();
   }
 
@@ -112,5 +121,24 @@ export class Controls {
   @bind()
   private _disableTextTrack() {
     this.disableTextTrackEvent.emit();
+  }
+
+  @bind()
+  private _setPlaybackRate(playbackRate: number) {
+    this.changePlaybackRateEvent.emit({playbackRate: playbackRate});
+    this.hidePlaybackRateEvent.emit();
+  }
+
+  @bind()
+  private _showPlaybackRate(e:MouseEvent) {
+    e.stopPropagation();
+    this.closeSettingsMenuEvent.emit();
+    this.showPlaybackRateEvent.emit();
+  }
+
+  @bind()
+  private _hidePlaybackRate(e:MouseEvent) {
+    e.stopPropagation();
+    this.hidePlaybackRateEvent.emit();
   }
 }

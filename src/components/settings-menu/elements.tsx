@@ -20,12 +20,6 @@ export const Submenu: FunctionalComponent<SubmenuProps> = props => {
               <span class="svg" innerHTML={icon.ArrowLeft} />
             </span>
             <span class="settings-menu__button-label" innerHTML={setting.label} />
-            <span class="settings-menu__button-value" innerHTML={
-              setting.valueLabels ?
-                setting.valueLabels[setting.values.findIndex((value) => setting.currentValue === value)]
-              :
-                setting.currentValue
-            } />
           </button>
         </div>
         <div class="settings-menu__submenu-content">

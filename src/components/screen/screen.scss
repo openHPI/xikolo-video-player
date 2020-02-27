@@ -8,22 +8,75 @@
   display: flex;
   align-items: stretch;
   height: 100%;
+
+  &.fullscreen {
+    @media only screen and (min-width: 992px) {
+      .pane__arrow {
+        font-size: 2em;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 576px) {
+    .pane__arrow {
+      font-size: 1.1em;
+      right: 0.5em;
+      padding: 0.1em 0.2em;
+
+      &--right {
+        left: 0.5em;
+      }
+    }
+  }
+
+  &:hover .pane__arrow {
+    display: block;
+  }
 }
 
 .gutter {
   background-color: inherit;
   background-repeat: no-repeat;
   background-position: 50%;
+  position: relative;
+  background-color: #353535;
+  background-color: var(--vp-gutter-color);
 }
 
 .gutter.gutter-horizontal {
   cursor: col-resize;
-  /* Have to be important because of the inline css hack for IE11! */
-  background-color: var(--vp-gutter-color) !important;
+}
+
+svg, .svg {
+  display: block;
+  height: 1em;
+  width: 1em;
+  fill: currentColor;
+  color: inherit;
 }
 
 .pane {
+  position: relative;
   overflow: hidden;
+
+  &__arrow {
+    position: absolute;
+    z-index: 2;
+    display: none;
+    font-size: 1.5em;
+    padding: 0.2em;
+    top: calc(50% - 1em);
+    right: 1em;
+    color: white;
+    color: var(--vp-main-color);
+    background: rgba(50, 50, 50, 0.9);
+    background: rgba(var(--vp-menu-color-rgb), 0.9);
+
+    &--right {
+      right: inherit;
+      left: 1em;
+    }
+  }
 }
 
 .pip {

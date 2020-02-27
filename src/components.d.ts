@@ -34,6 +34,7 @@ export namespace Components {
     'volume': number;
   }
   interface XmScreen {
+    'fullscreen': boolean;
     'pip': boolean;
   }
   interface XmSettingsMenu {
@@ -122,17 +123,20 @@ declare namespace LocalJSX {
     'ratio'?: number;
   }
   interface XmControls {
+    'onControl:changePlaybackRate'?: (event: CustomEvent<any>) => void;
     'onControl:changeVolume'?: (event: CustomEvent<any>) => void;
     'onControl:closeSettingsMenu'?: (event: CustomEvent<any>) => void;
     'onControl:disableTextTrack'?: (event: CustomEvent<any>) => void;
     'onControl:enableTextTrack'?: (event: CustomEvent<any>) => void;
     'onControl:enterFullscreen'?: (event: CustomEvent<any>) => void;
     'onControl:exitFullscreen'?: (event: CustomEvent<any>) => void;
+    'onControl:hidePlaybackRate'?: (event: CustomEvent<any>) => void;
     'onControl:mute'?: (event: CustomEvent<any>) => void;
     'onControl:openSettingsMenu'?: (event: CustomEvent<any>) => void;
     'onControl:pause'?: (event: CustomEvent<any>) => void;
     'onControl:play'?: (event: CustomEvent<any>) => void;
     'onControl:seek'?: (event: CustomEvent<any>) => void;
+    'onControl:showPlaybackRate'?: (event: CustomEvent<any>) => void;
     'onControl:unmute'?: (event: CustomEvent<any>) => void;
     'status'?: Status;
     'textTrack'?: TextTrack;
@@ -142,6 +146,7 @@ declare namespace LocalJSX {
     'volume'?: number;
   }
   interface XmScreen {
+    'fullscreen'?: boolean;
     'pip'?: boolean;
   }
   interface XmSettingsMenu {
@@ -163,6 +168,7 @@ declare namespace LocalJSX {
     'onPause'?: (event: CustomEvent<any>) => void;
     'onPlay'?: (event: CustomEvent<any>) => void;
     'onProgress'?: (event: CustomEvent<any>) => void;
+    'onRatioLoaded'?: (event: CustomEvent<any>) => void;
     'onSeeked'?: (event: CustomEvent<any>) => void;
     'onSeeking'?: (event: CustomEvent<any>) => void;
     'onTimeupdate'?: (event: CustomEvent<any>) => void;
