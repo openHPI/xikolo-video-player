@@ -25,27 +25,34 @@ export class SettingsMenu {
   @Event({eventName: 'setting:changeTextTrack'}) changeTextTrackEvent: EventEmitter;
 
   public render() {
+    let classes = "settings-menu menu";
+    if(this.status.fullscreen) {
+      classes += " settings-menu--fullscreen-mode";
+    }
+    if(this.status.openedSettingsMenu) {
+      classes += " menu--open";
+    }
     return (
-      <div class={this.status.openedSettingsMenu ? "settings-menu menu menu--open" : "settings-menu menu"} onClick={(e)=> e.stopPropagation()}>
-          <Submenu
+      <div class={classes} onClick={(e)=> e.stopPropagation()} >
+        <Submenu
+          status={this.submenuStatus}
+          onChangeSetting={this._setSetting}
+          onCloseSubmenu={this._onCloseSubmenu}
+        />
+        <div class={this.submenuStatus.isOpen ? "settings-menu__content hide": "settings-menu__content show"}>
+          <SubmenuToggleButton
             status={this.submenuStatus}
-            onChangeSetting={this._setSetting}
+            setting={this._getSetting(SettingNames.TEXTTRACK)}
+            onOpenSubmenu={()=>this._onOpenSubmenu(SettingNames.TEXTTRACK)}
             onCloseSubmenu={this._onCloseSubmenu}
           />
-          <div class={this.submenuStatus.isOpen ? "settings-menu__content hide": "settings-menu__content show"}>
-            <SubmenuToggleButton
-              status={this.submenuStatus}
-              setting={this._getSetting(SettingNames.TEXTTRACK)}
-              onOpenSubmenu={()=>this._onOpenSubmenu(SettingNames.TEXTTRACK)}
-              onCloseSubmenu={this._onCloseSubmenu}
-            />
-            <SubmenuToggleButton
-              status={this.submenuStatus}
-              setting={this._getSetting(SettingNames.PLAYBACKRATE)}
-              onOpenSubmenu={()=>this._onOpenSubmenu(SettingNames.PLAYBACKRATE)}
-              onCloseSubmenu={this._onCloseSubmenu}
-            />
-          </div>
+          <SubmenuToggleButton
+            status={this.submenuStatus}
+            setting={this._getSetting(SettingNames.PLAYBACKRATE)}
+            onOpenSubmenu={()=>this._onOpenSubmenu(SettingNames.PLAYBACKRATE)}
+            onCloseSubmenu={this._onCloseSubmenu}
+          />
+        </div>
       </div>
     );
   }

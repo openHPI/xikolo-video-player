@@ -97,8 +97,8 @@ describe('xm-controls', () => {
     expect(textTrack.getTextTracks().length).toBe(1);
     controls.status = status;
     await page.waitForChanges();
-    expect(shadowRoot.querySelector('.controls__subtitle-icon')).toBeTruthy();
-    expect(shadowRoot.querySelector('.controls__subtitle-icon')).toHaveClass('controls__subtitle-icon--active');
+    expect(shadowRoot.querySelector('.controls__subtitle-button').querySelector('.controls__shortcut-icon')).toBeTruthy();
+    expect(shadowRoot.querySelector('.controls__subtitle-button').querySelector('.controls__shortcut-icon')).toHaveClass('controls__shortcut-icon--active');
     expect(settingsMenu.status.settings.textTrack).toBe('de');
     // must reselect it for testing !
     textTrackValue = settingsMenu.shadowRoot.querySelector('.settings-menu__button-value').firstChild;

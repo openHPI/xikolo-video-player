@@ -9,7 +9,6 @@
 
 | Property    | Attribute | Description | Type        | Default     |
 | ----------- | --------- | ----------- | ----------- | ----------- |
-| `isOpen`    | `is-open` |             | `boolean`   | `undefined` |
 | `status`    | --        |             | `Status`    | `undefined` |
 | `textTrack` | --        |             | `TextTrack` | `undefined` |
 

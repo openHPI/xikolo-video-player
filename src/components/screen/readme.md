@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type      | Default     |
-| -------- | --------- | ----------- | --------- | ----------- |
-| `pip`    | `pip`     |             | `boolean` | `undefined` |
+| Property     | Attribute    | Description | Type      | Default     |
+| ------------ | ------------ | ----------- | --------- | ----------- |
+| `fullscreen` | `fullscreen` |             | `boolean` | `undefined` |
+| `pip`        | `pip`        |             | `boolean` | `undefined` |
 
 
 ## Dependencies

@@ -1,8 +1,121 @@
 .controls {
-  background: transparent;
+  background-color: '#353535';
+  background-color: var(--vp-gutter-color);
   display: flex;
   flex: 1 0 auto;
   flex-flow: row wrap;
+
+  &--fullscreen-mode {
+    @media only screen and (min-width: 992px) {
+      .controls__subtitle-row {
+        font-size: 1.7em;
+      }
+      .controls__toolbar {
+        .controls__playback-rate {
+          &__menu {
+            bottom: 80px;
+          }
+
+          &__button {
+            font-size: 1em;
+          }
+        }
+
+        .controls__time {
+          font-size: 1.2em;
+        }
+
+        svg, .svg {
+          height: 2em;
+          width: 2em;
+        }
+      }
+    }
+  }
+
+  @media only screen and (min-width: 992px) {
+    .controls__toolbar .controls__slider--volume {
+      width: 0;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.5s linear,opacity 0.5s ease-in-out;
+      border: none;
+    }
+  }
+
+  @media only screen and (max-width: 576px) {
+    .controls__subtitle{
+      bottom: 40px;
+
+      &-row {
+        font-size: 0.8em;
+        line-height: 1em;
+        padding: 5px;
+      }
+    }
+    .controls__toolbar {
+      .controls__slider--volume {
+        max-width: 80px;
+      }
+
+      .controls__time {
+        font-size: 0.5em;
+      }
+
+      .controls__playback-rate, .controls__subtitle-button {
+        display: none;
+      }
+
+      button {
+        padding: 0.3em 0.4em;
+      }
+
+      svg, .svg {
+        height: 1.1em;
+        width: 1.1em;
+      }
+    }
+  }
+}
+
+.controls__playback-rate {
+  position: relative;
+
+  &__menu {
+    position: absolute;
+    z-index: 1;
+    bottom: 60px;
+    right: -5px;
+    background: rgba(50, 50, 50 , 0.9);
+    background: rgba(var(--vp-menu-color-rgb), 0.9);
+    font-size: 0.9em;
+    line-height: 0.9em;
+    padding: 0.2em;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s linear,opacity 0.3s linear;
+
+    &--open {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &__button {
+    font-size: 0.9em;
+    line-height: 0.9em;
+    width: 28px;
+    box-sizing: content-box;
+    text-align: left;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    &--current {
+      font-weight: 600;
+    }
+  }
 }
 
 .controls__subtitle {
@@ -14,15 +127,16 @@
   align-self: center;
   text-align: center;
   max-width: 90%;
+  margin: auto;
 
   &-row {
     background: rgba(50,50,50,0.7);
-    padding: 5px;
+    padding: 10px;
     margin: 0.2em;
     border-radius: 10px;
     display: inline-block;
     white-space: pre-wrap;
-    font-size: 0.9em;
+    font-size: 1em;
     line-height: 1.3em;
   }
 }
@@ -32,7 +146,7 @@
   appearance: none;
   overflow: hidden;
   margin: 0;
-  height: 1em;
+  height: 0.5em;
   background: transparent;
   color: orange;
   color: var(--vp-slider-color);
@@ -41,6 +155,7 @@
   border-top-color: var(--vp-bg-color);
   border-bottom: 1px solid black;
   border-bottom-color: var(--vp-bg-color);
+  cursor: pointer;
 
   &::-webkit-slider-thumb {
     appearance: none;
@@ -63,29 +178,35 @@
   }
 
   &::-ms-fill-upper {
-    background: #333;
+    background: #353535;
   }
 
   &::-ms-track {
-    color: #333;
+    color: #353535;
   }
 
-
   @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-    /* IE10+ specific styles go here */
+    /* IE11 has a strange height for sliders, so we have to fix it */
     height: inherit;
     padding: 0px;
   }
 
   &--volume {
     border: 1px solid black;
-    border-color: var(--vp-bg-color);
+
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      /* IE11 can not animate fadein / fadeout within a flexbox correctly */
+      width: auto;
+      visibility: visible;
+      opacity: 1;
+      transition: unset;
+      border: 1px solid black;
+    }
 
     &:focus {
       border: 1px solid white;
       border-color: var(--vp-main-color);
     }
-
   }
 }
 
@@ -101,15 +222,28 @@
 
   .controls-volume {
     display: flex;
-    flex: 1 0 auto;
     flex-flow: row nowrap;
     align-items: center;
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      /* IE11 can not animate fadein / fadeout within a flexbox correctly */
+      flex: 1 1 0%;
+    }
+
+    &:hover {
+      .controls__slider--volume {
+        border: 1px solid black;
+        border-color: var(--vp-bg-color);
+        opacity: 1;
+        width: auto;
+        visibility: visible;
+      }
+    }
   }
 
   .controls__time {
     flex-grow: 1;
-    text-align: right;
     font-size: 0.9em;
+    padding: 0.6em 0.7em;
   }
 
   .controls__settings-icon {
@@ -119,11 +253,11 @@
     transition-property: transform;
 
     &--open, &:hover {
-      transform: rotate(90deg);
+      transform: rotate(90deg) translate(1px,1px);
     }
   }
 
-  .controls__subtitle-icon {
+  .controls__shortcut-icon {
     display: block;
     overflow: hidden;
     transition: box-shadow 0.3s ease-in-out;
@@ -143,7 +277,7 @@
 
     &:hover {
       & .controls__settings-icon {
-        transform: rotate(90deg);
+        transform: rotate(90deg) translate(1px,1px);
       }
       & .controls__subtitle-icon {
         box-shadow: 0px 2px 1px -1px rgba(231,166,26,0.72);
@@ -153,8 +287,8 @@
 
   svg, .svg {
     display: block;
-    height: 14px;
-    width: 14px;
+    height: 1.5em;
+    width: 1.5em;
     fill: currentColor;
     color: inherit;
   }

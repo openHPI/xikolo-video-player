@@ -1,5 +1,4 @@
 .settings-menu {
-  width: 40%;
   max-height: 40%;
   position: absolute;
   z-index: 1;
@@ -12,6 +11,26 @@
   padding: 0.2em;
   @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     height: 100%;
+  }
+
+  &--fullscreen-mode {
+    @media only screen and (min-width: 992px) {
+      bottom: 80px;
+      font-size: 1em;
+
+      & .settings-menu__button {
+        font-size: 1em;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 576px) {
+    bottom: 40px;
+    font-size: 0.8em;
+
+    & .settings-menu__button {
+      font-size: 0.8em;
+    }
   }
 
   &__button {
@@ -30,6 +49,8 @@
 
     &-value {
       margin-left: auto;
+      padding-left: 0.6em;
+      font-weight: 600;
     }
 
     &:hover {
@@ -52,7 +73,7 @@
     scrollbar-color: var(--vp-slider-color) rgba(var(--vp-menu-color-rgb) , 0.5);
 
     .settings-menu__button {
-      padding-left: 1.7em;
+      padding-left: 1.8em;
     }
   }
 
@@ -60,11 +81,13 @@
     margin-top: -1px;
 
     &--right {
-      margin-left: 0.8em;
+      margin-left: 0.4em;
+      margin-right: -0.4em;
     }
 
     &--left {
-      margin-right: 0.8em;
+      margin-right: 0.4em;
+      margin-left: -0.4em;
     }
 
     svg, .svg {

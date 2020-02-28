@@ -33,6 +33,7 @@ export interface Status {
   fullscreen: boolean;
   mode: Mode;
   openedSettingsMenu: boolean;
+  showPlaybackRate: boolean;
   progress: Progress;
   subtitle: Subtitle;
   settings: Settings;
@@ -46,6 +47,7 @@ export const defaultStatus: Status = {
   fullscreen: false,
   mode: Mode.PAUSED,
   openedSettingsMenu: false,
+  showPlaybackRate: false,
   progress: {
     seconds: 0,
     percent: 0,

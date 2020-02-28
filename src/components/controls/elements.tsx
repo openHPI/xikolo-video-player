@@ -4,6 +4,7 @@ import * as icon from '../../utils/icon';
 import { Status, Mode } from '../../utils/status';
 import { format } from '../../utils/duration';
 import locales from '../../utils/locales';
+import { settingList, SettingNames } from '../../utils/settings';
 
 
 interface FullscreenProps {
@@ -67,7 +68,7 @@ export const CurrentTime: FunctionalComponent<CurrentTimeProps> = props => {
 
   return (
     <span class="controls__time" title={`Time left of ${format(duration)}s`}>
-      -{format(duration - progress.seconds)}
+      {format(progress.seconds)} / {format(duration)}
     </span>
   );
 }
@@ -95,6 +96,7 @@ export const Volume: FunctionalComponent<VolumeProps> = props => {
       step="0.1"
       value={volume}
       onChange={fnSetVolume}
+      onInput={fnSetVolume}
 />);
 
   if(muted) {
@@ -144,6 +146,7 @@ export const Slider: FunctionalComponent<SliderProps> = props => {
       // bar of around 50%.
       value={progress.seconds.toString()}
       onChange={fnSeek}
+      onInput={fnSeek}
     />
   );
 }
@@ -180,14 +183,14 @@ export const SubtitleButton: FunctionalComponent<SubtitleButtonProps> = props =>
   if(!props.visible) return;
   if(props.status.subtitle.enabled) {
     return (
-      <button onClick={props.onDisable} title={locales[props.status.language].disableSubtitles}>
-        <span class="controls__subtitle-icon controls__subtitle-icon--active svg" innerHTML={icon.Subtitle} />
+      <button class="controls__subtitle-button" onClick={props.onDisable} title={locales[props.status.language].disableSubtitles}>
+        <span class="controls__shortcut-icon controls__shortcut-icon--active svg" innerHTML={icon.Subtitle} />
       </button>
     )
   } else {
     return (
-      <button onClick={props.onEnable} title={locales[props.status.language].enableSubtitles}>
-        <span class="controls__subtitle-icon svg" innerHTML={icon.Subtitle} />
+      <button class="controls__subtitle-button" onClick={props.onEnable} title={locales[props.status.language].enableSubtitles}>
+        <span class="controls__shortcut-icon svg" innerHTML={icon.Subtitle} />
       </button>
     )
   }

@@ -26,7 +26,7 @@ export class Video {
   @Prop() src: number;
   @Prop() volume: number;
 
-  @State() private ratio: number = 0.5625;
+  @State() private ratio: number; // = 0.5625;
 
   private container: HTMLElement;
   @State() private player: Player;
@@ -41,6 +41,8 @@ export class Video {
 
   @Event({eventName: 'buffering'}) bufferingEvent: EventEmitter;
   @Event({eventName: 'buffered'}) bufferedEvent: EventEmitter;
+
+  @Event({eventName: 'ratioLoaded'}) ratioLoadedEvent: EventEmitter;
 
 
   /**
@@ -70,6 +72,14 @@ export class Video {
       autopause: false,
     });
     this.player.getVideoTitle().then((title) => this.container.setAttribute('title', title));
+
+    Promise.all([this.player.getVideoWidth(), this.player.getVideoHeight()]).then((dimensions) => {
+      this.ratio = dimensions[1] / dimensions[0];
+      this.ratioLoadedEvent.emit({
+        name: this.el.getAttribute('slot'),
+        ratio: this.ratio
+      });
+    });
 
     this.player.on('play', (e) => {
       // When seeking a play event is emitted without payload, ignore that.
