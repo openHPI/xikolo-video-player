@@ -65,12 +65,16 @@ export class Video {
   }
 
   async componentDidLoad() {
+    // hack "allow" to the TypeScript iframe component
+    this.container.setAttribute('allow', "autoplay; fullscreen");
+
     // Initialize Vimeo Player
     this.player = new Player(this.container, {
       id: this.src,
       controls: false,
       autopause: false,
     });
+
     this.player.getVideoTitle().then((title) => this.container.setAttribute('title', title));
 
     Promise.all([this.player.getVideoWidth(), this.player.getVideoHeight()]).then((dimensions) => {
@@ -139,11 +143,6 @@ export class Video {
     return this.player.setVolume(volume);
   }
 
-  @Watch('controls')
-  async controlsChanged(value: boolean) {
-    await this.componentDidUnload();
-    return this.componentDidLoad();
-  }
 
   @Method()
   async play() {
