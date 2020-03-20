@@ -23,15 +23,37 @@ export class Screen {
   @Prop() fullscreen: boolean;
   @Prop() pip: boolean;
   @State() pipFlip: boolean = false;
+  @State() orientationVertical: boolean;
 
   private screen: HTMLDivElement;
   private engine: Split;
   private primaryRatio: number = null;
   private secondaryRatio: number = null;
 
+  setSplitScreen() {
+    if(window.innerWidth < 768){
+      this.orientationVertical = true;
+      this.engine = Split(this.screen.childNodes, {
+        sizes: [this.secondaryRatio, this.primaryRatio],
+        gutterSize: 6,
+        direction: 'vertical',
+        cursor: 'row-resize'
+      });
+    } else {
+      this.orientationVertical = false;
+      this.engine = Split(this.screen.childNodes, {
+        sizes: [this.secondaryRatio, this.primaryRatio],
+        gutterSize: 6,
+        direction: 'horizontal',
+        cursor: 'col-resize'
+      });
+    }
+  }
+
   render() {
     const clWrp = {
-      screen: true,
+      landscape: !this.orientationVertical,
+      portrait: this.orientationVertical,
       fullscreen: this.fullscreen,
       pip: this.pip,
       flip: this.pipFlip
@@ -67,6 +89,16 @@ export class Screen {
    * @param e CustomEvent
    */
   @bind()
+
+  @Listen('resize',{target: 'window'})
+  handleScreenSize(ev: CustomEvent) {
+    if((window.innerWidth < 768 && !this.orientationVertical) || (window.innerWidth >= 768 && this.orientationVertical)) {
+      this.engine.destroy();
+      this.setSplitScreen();
+    }
+    
+  }
+
   @Listen('ratioLoaded')
   _resizeScreen(e: CustomEvent) {
     if(e.detail.name === 'primary') {
@@ -86,10 +118,9 @@ export class Screen {
       if(gutterPlaceholder) {
         gutterPlaceholder.remove();
       }
-      this.engine = Split(this.screen.childNodes, {
-        sizes: [this.secondaryRatio, this.primaryRatio],
-        gutterSize: 6,
-      });
+      // Initialization of video orientation when first rendered
+      this.setSplitScreen();
+
       const gutter = this.el.shadowRoot.querySelector('.gutter');
       if(gutter) {
         gutter.className += ' '+ classesForIE11;
