@@ -4,7 +4,7 @@
   background-color: var(--vp-bg-color);
 }
 
-.screen {
+.landscape, .portrait {
   display: flex;
   align-items: stretch;
   height: 100%;
@@ -17,7 +17,7 @@
     }
   }
 
-  @media only screen and (max-width: 576px) {
+  @media only screen and (max-width: 768px) {
     .pane__arrow {
       font-size: 1.1em;
       right: 0.5em;
@@ -28,9 +28,22 @@
       }
     }
   }
+}
+
+.landscape {
+  flex-direction: row;
 
   &:hover .pane__arrow {
     display: block;
+  }
+}
+
+.portrait {
+  flex-direction: column;
+  width: 100%;
+
+  .pane__arrow {
+    display: none;
   }
 }
 
