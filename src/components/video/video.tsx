@@ -45,28 +45,29 @@ export class Video {
   @Event({eventName: 'ratioLoaded'}) ratioLoadedEvent: EventEmitter;
 
 
-  /**
-   * <iframe src="https://player.vimeo.com/video/340196868?autopause=0&amp;controls=0&amp;app_id=122963" allow="autoplay; fullscreen" allowfullscreen="" title="email2019-w1-10-lecturer" data-ready="true" tabindex="-1" width="426" height="240" frameborder="0"></iframe>
-   */
   render() {
     return (
       <xm-aspect-ratio-box ratio={this.ratio}>
-        <iframe
-          ref={(el) => this.container = el}
-          src={`https://player.vimeo.com/video/${this.src}/?autopause=0&controls=0&amp;app_id=122963`}
-          width="426"
-          height="240"
-          frameBorder="0"
-          allowFullScreen
-        ></iframe>
+          <div ref={(el) => this.container = el} >
+            <iframe class="video-iframe" />
+          </div>
+
         <div class="overlay"><slot name="overlay" /></div>
       </xm-aspect-ratio-box>
     );
   }
 
   async componentDidLoad() {
-    // hack "allow" to the TypeScript iframe component
-    this.container.setAttribute('allow', "autoplay; fullscreen");
+    /**
+     * IE11 hack:
+     * We need to save the given stencil 'magic' class from our placeholder to
+     * place it to the new js generated iframe.
+     */
+    const iframePlaceholder = this.container.querySelector('iframe');
+    const classesForIE11 = iframePlaceholder.getAttribute('class');
+    if(iframePlaceholder) {
+      iframePlaceholder.remove();
+    }
 
     // Initialize Vimeo Player
     this.player = new Player(this.container, {
@@ -74,8 +75,6 @@ export class Video {
       controls: false,
       autopause: false,
     });
-
-    this.player.getVideoTitle().then((title) => this.container.setAttribute('title', title));
 
     Promise.all([this.player.getVideoWidth(), this.player.getVideoHeight()]).then((dimensions) => {
       this.ratio = dimensions[1] / dimensions[0];
@@ -103,6 +102,12 @@ export class Video {
 
     // Wait for Vimeo Player to be ready to access the actual iframe element
     await this.player.ready();
+
+    // add classes for IE11
+    const iframe = this.container.querySelector('iframe');
+    if(iframe) {
+      iframe.className += ' '+ classesForIE11;
+    }
 
     // Sometimes vimeo videos has texttrack enabled per default
     await this.player.disableTextTrack();
