@@ -38,7 +38,7 @@
     "jest-cli": "24.9.0",
     "puppeteer": "1.19.0",
     "stencil-inline-svg": "1.0.1",
-    "typescript": "3.8.3"
+    "typescript": "3.9.2"
   },
   "license": "MIT"
 }
