@@ -50,9 +50,56 @@ Components are named `xm-*`.
 
 ### SVG Icons
 
-SVG icons are taken from the free icomoon font at https://icomoon.io, cleaned up SVG and added `role="presentation" focusable="false"` attributes.
-(Or they are taken from http://fontello.com/ and imported to icomoon.io)
+SVG icons are taken from the xikolo font and FontAwesome which are imported to [icomoon.io](https://icomoon.io). From there you can easily export them as cleaned SVG.
 
 ### Branding
 
 The video player needs to support simple color customization. Components should use `currentColor` and custom CSS variables if appropriate.
+
+
+
+## Hint for deploying
+
+At the moment we have to copy&paste the dist and loader folder manually from the master branch to update the build branch.
+To generate the needed files you can run the following comand:
+
+```bash
+npm run build
+```
+
+
+## Deploying
+
+If the build branch should get a new stable version you have to give it a new tag:
+
+```bash
+git checkout build
+git fetch
+git pull
+git tag -a v1.0.1 -m 'version 1.0.1'
+git push --tags
+```
+
+After that you can use it as a git dependency in other projects like openHPI with the following command or add it manually.
+
+With yarn (we use yarn at openHPI):
+```bash
+yarn add git+https://gitlab+deploy-token-<TOKEN_NUMBER>:<PASSWORD>@dev.xikolo.de/gitlab/xikolo/video-player#semver:<semver>
+
+
+```
+
+With npm:
+```bash
+npm install git+https://gitlab+deploy-token-<TOKEN_NUMBER>:<PASSWORD>@dev.xikolo.de/gitlab/xikolo/video-player#semver:<semver>
+```
+
+If you already have it installed, then you only have to update the semver in your package.json:
+
+```bash
+"dependencies": {
+    ...
+    "@xikolo/video-player2019": "git+https://gitlab+deploy-token-<TOKEN_NUMBER>:<PASSWORD>@dev.xikolo.de/gitlab/xikolo/video-player#semver:v1.0.1",
+    ...
+  },
+```

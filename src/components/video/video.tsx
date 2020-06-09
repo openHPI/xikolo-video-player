@@ -148,7 +148,6 @@ export class Video {
     return this.player.setVolume(volume);
   }
 
-
   @Method()
   async play() {
     return this.player.play();
