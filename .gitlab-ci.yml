@@ -5,7 +5,7 @@ stages:
 
 Docker E2E:
   stage: build
-  image: docker:stable@sha256:13ac93a28fec12fec2efad68351b10ec1bd9fa5929a0a98283597a506180b708
+  image: docker:stable@sha256:5ed3b31d3b1e5ac2f06187bb3e1aadcb6b9b9cb5ddb18f1dc25c80ce1047acb7
 
   services:
     - docker:dind@sha256:3647cc3d7bbdfc3ae2952b03cfd44f1a2706368f4b82c82eee6ea4f9e48d42be
