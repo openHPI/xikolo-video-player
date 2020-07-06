@@ -63,7 +63,10 @@ export class Player {
     this.primary.addEventListener('timeupdate', this._timeUpdate);
     this.primary.addEventListener('progress', this._progress);
     this.primary.addEventListener('ended', this._ended);
-    if(this.secondary) this.secondary.addEventListener('click', this._click);
+    if(this.secondary) {
+      this.secondary.addEventListener('click', this._click);
+      this.secondary.volume = 0;
+    }
 
     document.addEventListener('fullscreenchange', this._fullscreenchange);
     document.addEventListener('MSFullscreenChange', this._fullscreenchange);
