@@ -4,8 +4,6 @@ import * as icon from '../../utils/icon';
 import { Status, Mode } from '../../utils/status';
 import { format } from '../../utils/duration';
 import locales from '../../utils/locales';
-import { settingList, SettingNames } from '../../utils/settings';
-
 
 interface FullscreenProps {
   status: Status;
@@ -94,7 +92,7 @@ export const Volume: FunctionalComponent<VolumeProps> = props => {
       min="0"
       max="1"
       step="0.1"
-      value={volume}
+      value={muted ? 0 : volume}
       onChange={fnSetVolume}
       onInput={fnSetVolume}
 />);
