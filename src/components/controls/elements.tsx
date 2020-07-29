@@ -204,7 +204,7 @@ export const Subtitles: FunctionalComponent<SubtitlesProps> = props => {
     return (
       <div class="controls__subtitle">
           {activeCues.map(cue => (
-            <span class="controls__subtitle-row">{cue.text}</span>
+            <span class="controls__subtitle-row" dir="auto">{cue.text}</span>
           ))}
       </div>
     );
