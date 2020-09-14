@@ -4,5 +4,8 @@
   "major": {
     "automerge": false
   },
-  "ignoreDeps": ["jest", "jest-cli", "puppeteer", "@types/puppeteer"]
+  "ignoreDeps": ["jest", "jest-cli", "puppeteer", "@types/puppeteer"],
+  "lockFileMaintenance": {
+    "enabled": true
+  }
 }
