@@ -165,8 +165,13 @@ export class Player {
   @bind()
   @Listen('texttrack:loaded')
   protected _addSubtitle(e: CustomEvent) {
-    const vtt:WebVTT = e.detail.webVTT;
-    this.textTrack.addWebVTT(vtt);
+    const vtt: WebVTT = e.detail.webVTT;
+    const total: number = e.detail.total;
+    if(!vtt) {
+      this.textTrack.increaseLoadedFiles();
+      return;
+    }
+    this.textTrack.addWebVTT(vtt, total);
     if(vtt.meta.language === this.status.language) {
       this.status = {
         ...this.status,

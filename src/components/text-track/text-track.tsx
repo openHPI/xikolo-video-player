@@ -29,11 +29,18 @@ export class TextTrack {
       this.vtt = webvtt.parse(data, {meta: true});
       this.extendMeta();
       if(this.vtt.valid) {
-        this.textTrackLoadedEvent.emit({webVTT: this.vtt});
+        // Determines the index position of the current text track component in the HTML.
+        const textTrackCollection = Array.from(this.el.parentNode.children).filter(element => element.hasAttribute('language'));
+        this.vtt.index = textTrackCollection.indexOf(this.el);
+        this.textTrackLoadedEvent.emit({ webVTT: this.vtt, total: textTrackCollection.length });
       } else {
         console.error(`Failed to load text track file: Check the meta data of the VTT file ${this.src} or set the <xm-text-track> attributes label and language.`);
+        this.textTrackLoadedEvent.emit({ webVTT: null });
       }
-    }).catch(error => console.error(`Failed to load text track file ${this.src}:  ${error}`));
+    }).catch(error => {
+      console.error(`Failed to load text track file ${this.src}:  ${error}`);
+      this.textTrackLoadedEvent.emit({ webVTT: null });
+    });
   }
 
   @bind()
