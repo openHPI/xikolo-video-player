@@ -21,6 +21,7 @@ export interface WebVTT {
   meta: Meta;
   strict: boolean;
   valid: boolean;
+  index: number;
 }
 
 export class TextTrack {
@@ -29,10 +30,31 @@ export class TextTrack {
   protected textTracks: Array<Meta> = [];
   protected currentCues: Array<Cue> = null;
   protected currentLanguage: null;
+  protected loadedFiles: number = 0;
+  protected totalFiles: number = 0;
 
-  public addWebVTT(webVTT: WebVTT) {
-    this.vttList.push(webVTT);
-    this.textTracks.push(webVTT.meta);
+  public addWebVTT(webVTT: WebVTT, total: number) {
+    // Inserts the new webVTT file at the HTML index position (presort).
+    this.vttList.splice(webVTT.index, 0, webVTT);
+    this.textTracks.splice(webVTT.index, 0, webVTT.meta);
+
+    this.loadedFiles ++;
+    this.totalFiles = total;
+    this.sortAndInitLists();
+  }
+
+  public increaseLoadedFiles() {
+    this.loadedFiles ++;
+    if(this.totalFiles > 0) this.sortAndInitLists();
+  }
+
+  protected sortAndInitLists() {
+    // Sort list after all files are loaded
+    if(this.loadedFiles === this.totalFiles) {
+      this.textTracks = [];
+      this.vttList.sort(this.compareWebVTTList);
+      this.vttList.forEach(webVTT => this.textTracks.push(webVTT.meta));
+    }
   }
 
   protected collectCues(language: string) {
@@ -44,7 +66,7 @@ export class TextTrack {
     this.currentCues = null;
   }
 
-  public getActiveCues(seconds:number, language: string) {
+  public getActiveCues(seconds: number, language: string) {
     if(language !== this.currentLanguage) this.collectCues(language);
     if(this.currentCues === null) return null;
     const cues: Array<Cue> = this.currentCues.filter(cue => cue.start <= seconds && cue.end >= seconds);
@@ -69,6 +91,10 @@ export class TextTrack {
         return false;
     }
     return true;
+  }
+
+  public compareWebVTTList(a: WebVTT, b: WebVTT) {
+    return (a.index > b.index) ? 1 : -1;
   }
 
 }
