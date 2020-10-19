@@ -61,7 +61,6 @@ export class Player {
 
     this.primary.addEventListener('click', this._click);
     this.primary.addEventListener('timeupdate', this._timeUpdate);
-    this.primary.addEventListener('progress', this._progress);
     this.primary.addEventListener('ended', this._ended);
     if(this.secondary) {
       this.secondary.addEventListener('click', this._click);
@@ -81,7 +80,6 @@ export class Player {
   public componentWillUnload() {
     this.primary.removeEventListener('click', this._click);
     this.primary.removeEventListener('timeupdate', this._timeUpdate);
-    this.primary.removeEventListener('progress', this._progress);
     this.primary.removeEventListener('ended', this._ended);
     if(this.secondary) this.secondary.removeEventListener('click', this._click);
 
@@ -203,11 +201,6 @@ export class Player {
     // Sometimes seeking starts playing the video too.
     // Reset state to current stored player state.
     this.status.mode === Mode.PLAYING ? this.play() : this.pause();
-  }
-
-  @bind()
-  protected async _progress(e: CustomEvent) {
-    console.log('progress', e.detail);
   }
 
   @bind()
