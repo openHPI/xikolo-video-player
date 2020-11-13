@@ -3,7 +3,7 @@ import { Component, Element, h, Prop, EventEmitter, Event, State } from '@stenci
 import { Fullscreen, Control, CurrentTime, Volume, Slider, SettingsMenuToggleButton, Subtitles, SubtitleButton } from './elements';
 import { Status } from '../../utils/status';
 import { bind } from '../../utils/bind';
-import { TextTrack } from '../../utils/webVTT';
+import { TextTrackList } from '../../utils/webVTT';
 import { PlaybackRateToggleButton, PlaybackRate } from './setting-elements';
 
 @Component({
@@ -15,7 +15,7 @@ export class Controls {
   @Element() el: HTMLXmControlsElement;
 
   @Prop() status: Status;
-  @Prop({mutable: true}) textTrack: TextTrack;
+  @Prop({mutable: true}) textTracks: TextTrackList;
 
   @Event({eventName: 'control:play'}) playEvent: EventEmitter;
   @Event({eventName: 'control:pause'}) pauseEvent: EventEmitter;
@@ -37,7 +37,7 @@ export class Controls {
     return (
       <div class={this.status.fullscreen ? "controls controls--fullscreen-mode" : "controls"}>
         <Subtitles status={this.status} />
-        <xm-settings-menu status={this.status} textTrack={this.textTrack} />
+        <xm-settings-menu status={this.status} textTracks={this.textTracks} />
         <Slider status={this.status} onSeek={this._seek} />
         <div class="controls__toolbar">
           <Control status={this.status} onPause={this._pause} onPlay={this._play} />

@@ -2,10 +2,10 @@ import { newSpecPage } from "@stencil/core/testing";
 import { Controls } from '../controls/controls';
 import { SettingsMenu } from "../settings-menu/settings-menu";
 import { defaultStatus } from '../../utils/status';
-import { TextTrack, WebVTT } from '../../utils/webVTT';
+import { TextTrackList, WebVTT } from '../../utils/webVTT';
 
 describe('xm-controls', () => {
-  let page, textTrack: TextTrack, shadowRoot, controls, settingsMenu;
+  let page, textTracks: TextTrackList, shadowRoot, controls, settingsMenu;
 
   it('should build', () => {
     expect(new Controls()).toBeTruthy();
@@ -19,10 +19,10 @@ describe('xm-controls', () => {
       supportsShadowDom: true
     });
 
-    textTrack = new TextTrack();
+    textTracks = new TextTrackList();
     controls = page.doc.createElement('xm-controls');
     controls.status = defaultStatus;
-    controls.textTrack = textTrack;
+    controls.textTracks = textTracks;
     page.root.appendChild(controls);
     await page.waitForChanges();
     expect(page.rootInstance).toBeTruthy();
@@ -35,7 +35,7 @@ describe('xm-controls', () => {
     let settingsInstance = new SettingsMenu();
     settingsInstance.status = defaultStatus;
     settingsInstance.isOpen = false;
-    settingsInstance.textTrack = textTrack;
+    settingsInstance.textTracks = textTracks;
     settingsMenu.innerHTML = settingsInstance.render();
     await page.waitForChanges();
     expect(settingsMenu.shadowRoot).toBeTruthy();
@@ -74,11 +74,12 @@ describe('xm-controls', () => {
       }],
       strict: true,
       valid: true,
+      index: 0,
     };
     const status = {
       ...controls.status,
       subtitle: {
-        ...controls.status.subtitle,
+        ...controls.status.textTrack,
         enabled: true,
         language: 'de',
       },
@@ -91,10 +92,10 @@ describe('xm-controls', () => {
     let textTrackValue = settingsMenu.shadowRoot.querySelector('.settings-menu__button-value').firstChild;
     expect(textTrackValue.nodeValue.trim()).toBe('Off');
     expect(settingsMenu.status.settings.textTrack).toBe('off');
-    expect(textTrack.getTextTracks()).toBe(null);
-    textTrack.addWebVTT(de);
+    expect(textTracks.getTextTracks()).toBe(null);
+    textTracks.addWebVTT(de, 1);
     await page.waitForChanges();
-    expect(textTrack.getTextTracks().length).toBe(1);
+    expect(textTracks.getTextTracks().length).toBe(1);
     controls.status = status;
     await page.waitForChanges();
     expect(shadowRoot.querySelector('.controls__subtitle-button').querySelector('.controls__shortcut-icon')).toBeTruthy();
@@ -109,7 +110,7 @@ describe('xm-controls', () => {
     const submenu = settingsMenu.shadowRoot.querySelector('.settings-menu__submenu-content');
     expect(submenu.querySelector('.settings-menu__button')).toBeTruthy();
     expect(submenu.childNodes.length).toBe(2);
-    expect(textTrack.getTextTrackValues().length).toBe(2);
+    expect(textTracks.getTextTrackValues().length).toBe(2);
     expect(page.root).toMatchSnapshot();
   });
 

@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property   | Attribute  | Description | Type     | Default     |
-| ---------- | ---------- | ----------- | -------- | ----------- |
-| `label`    | `label`    |             | `string` | `undefined` |
-| `language` | `language` |             | `string` | `undefined` |
-| `src`      | `src`      |             | `string` | `undefined` |
+| Property   | Attribute  | Description | Type      | Default     |
+| ---------- | ---------- | ----------- | --------- | ----------- |
+| `default`  | `default`  |             | `boolean` | `undefined` |
+| `label`    | `label`    |             | `string`  | `undefined` |
+| `language` | `language` |             | `string`  | `undefined` |
+| `src`      | `src`      |             | `string`  | `undefined` |
 
 
 ## Events

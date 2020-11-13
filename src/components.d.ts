@@ -11,7 +11,7 @@ import {
   Status,
 } from './utils/status';
 import {
-  TextTrack,
+  TextTrackList,
 } from './utils/webVTT';
 
 export namespace Components {
@@ -20,7 +20,7 @@ export namespace Components {
   }
   interface XmControls {
     'status': Status;
-    'textTrack': TextTrack;
+    'textTracks': TextTrackList;
   }
   interface XmPlayer {
     'disableTextTrack': () => Promise<void>;
@@ -29,7 +29,9 @@ export namespace Components {
     'mute': () => Promise<void>;
     'pause': () => Promise<void>;
     'play': () => Promise<void>;
+    'playbackrate': number;
     'seek': (seconds: number) => Promise<void>;
+    'showsubtitle': boolean;
     'unmute': () => Promise<void>;
     'volume': number;
   }
@@ -39,9 +41,10 @@ export namespace Components {
   }
   interface XmSettingsMenu {
     'status': Status;
-    'textTrack': TextTrack;
+    'textTracks': TextTrackList;
   }
   interface XmTextTrack {
+    'default': boolean;
     'label': string;
     'language': string;
     'src': string;
@@ -139,10 +142,12 @@ declare namespace LocalJSX {
     'onControl:showPlaybackRate'?: (event: CustomEvent<any>) => void;
     'onControl:unmute'?: (event: CustomEvent<any>) => void;
     'status'?: Status;
-    'textTrack'?: TextTrack;
+    'textTracks'?: TextTrackList;
   }
   interface XmPlayer {
     'lang'?: string;
+    'playbackrate'?: number;
+    'showsubtitle'?: boolean;
     'volume'?: number;
   }
   interface XmScreen {
@@ -153,9 +158,10 @@ declare namespace LocalJSX {
     'onSetting:changePlaybackRate'?: (event: CustomEvent<any>) => void;
     'onSetting:changeTextTrack'?: (event: CustomEvent<any>) => void;
     'status'?: Status;
-    'textTrack'?: TextTrack;
+    'textTracks'?: TextTrackList;
   }
   interface XmTextTrack {
+    'default'?: boolean;
     'label'?: string;
     'language'?: string;
     'onTexttrack:loaded'?: (event: CustomEvent<any>) => void;

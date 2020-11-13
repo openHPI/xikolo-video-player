@@ -11,10 +11,12 @@ Now you can define default values for all used variables. :)
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default                |
-| -------- | --------- | ----------- | -------- | ---------------------- |
-| `lang`   | `lang`    |             | `string` | `undefined`            |
-| `volume` | `volume`  |             | `number` | `defaultStatus.volume` |
+| Property       | Attribute      | Description | Type      | Default                               |
+| -------------- | -------------- | ----------- | --------- | ------------------------------------- |
+| `lang`         | `lang`         |             | `string`  | `undefined`                           |
+| `playbackrate` | `playbackrate` |             | `number`  | `defaultStatus.settings.playbackRate` |
+| `showsubtitle` | `showsubtitle` |             | `boolean` | `defaultStatus.subtitle.enabled`      |
+| `volume`       | `volume`       |             | `number`  | `defaultStatus.volume`                |
 
 
 ## Methods
