@@ -10,10 +10,9 @@ import {
 } from '@stencil/core';
 
 import { Mode, Status, defaultStatus } from '../../utils/status';
-import { TextTrack, WebVTT } from '../../utils/webVTT';
+import { TextTrackList, WebVTT } from '../../utils/webVTT';
 import { bind } from '../../utils/bind';
 import locales from "../../utils/locales";
-import { textTrackDefault } from '../../utils/settings';
 
 @Component({
   tag: 'xm-player',
@@ -25,6 +24,9 @@ export class Player {
   private el: HTMLXmPlayerElement;
 
   @Prop({mutable: true}) volume: number = defaultStatus.volume;
+  @Prop({mutable: true}) playbackrate: number = defaultStatus.settings.playbackRate;
+  @Prop() showsubtitle: boolean = defaultStatus.subtitle.enabled;
+
   @Prop({attribute: 'lang'}) lang: string;
 
   @State()
@@ -32,8 +34,9 @@ export class Player {
 
   private primary: HTMLXmVideoElement | undefined;
   private secondary: HTMLXmVideoElement | undefined;
-  private textTrack: TextTrack = new TextTrack();
+  private textTracks: TextTrackList = new TextTrackList();
   private hasSecondarySlot: boolean;
+  private hasDefaultTexttrack:boolean = false;
 
   public render() {
     return (
@@ -46,7 +49,7 @@ export class Player {
           :
           <slot slot="primary" name="primary"></slot>
         }
-        <xm-controls status={this.status} textTrack={this.textTrack} />
+        <xm-controls status={this.status} textTracks={this.textTracks} />
       </div>
     );
   }
@@ -74,7 +77,7 @@ export class Player {
     document.addEventListener('click', this._hideSettingsMenuOnClickOutside);
 
     this._setVolume(this.volume);
-    this._setLanguage(this.lang);
+    this._setPlaybackRate(this.playbackrate);
   }
 
   public componentWillUnload() {
@@ -99,6 +102,7 @@ export class Player {
    */
   @bind()
   private async _invokePlayerFunction(functionName:string, params?: any) {
+    if(!this.primary[functionName]) return;
     return Promise.all([
       this.primary[functionName].apply(this.primary, params),
       this.secondary ? this.secondary[functionName].apply(this.secondary, params) : null
@@ -148,8 +152,8 @@ export class Player {
   @bind()
   protected _cueUpdate(seconds: number, refresh?: boolean) {
     const { activeCues } = this.status.subtitle;
-    const cues = this.textTrack.getActiveCues(seconds, this.status.subtitle.language);
-    if(refresh || !this.textTrack.compareCueLists(cues, activeCues)) {
+    const cues = this.textTracks.getActiveCues(seconds, this.status.subtitle.language);
+    if(refresh || !this.textTracks.compareCueLists(cues, activeCues)) {
       this.status = {
         ...this.status,
         subtitle: {
@@ -162,21 +166,23 @@ export class Player {
 
   @bind()
   @Listen('texttrack:loaded')
-  protected _addSubtitle(e: CustomEvent) {
-    const vtt: WebVTT = e.detail.webVTT;
-    const total: number = e.detail.total;
+  protected _addTextTrack(e: CustomEvent) {
+    const vtt:WebVTT = e.detail.webVTT;
+    const {total, isDefault} = e.detail;
     if(!vtt) {
-      this.textTrack.increaseLoadedFiles();
+      this.textTracks.increaseLoadedFiles();
       return;
     }
-    this.textTrack.addWebVTT(vtt, total);
-    if(vtt.meta.language === this.status.language) {
-      this.status = {
-        ...this.status,
-        subtitle: {
-          ...this.status.subtitle,
-          language: this.status.language
-        }
+    this.textTracks.addWebVTT(vtt, total);
+    if(!this.hasDefaultTexttrack) {
+      this._setLanguage(this.lang);
+      // Use the default text track
+      if(isDefault) {
+        this.hasDefaultTexttrack = true;
+        this._setTextTrack(vtt.meta.language, this.showsubtitle);
+      // Use the player language as default text track language
+      } else if(vtt.meta.language === this.status.language) {
+        this._setTextTrack(vtt.meta.language, this.showsubtitle);
       }
     }
   }
@@ -292,13 +298,6 @@ export class Player {
     }
   }
 
-  @Watch('lang')
-  _setupLanguage(newValue: string, oldValue: string) {
-    if( newValue != oldValue ) {
-      this._setLanguage(newValue);
-    }
-  }
-
   @bind()
   public _setLanguage(language: string) {
     if(!language || !locales[language]) {
@@ -318,18 +317,39 @@ export class Player {
     }
   }
 
+  @Watch('lang')
+  _setupLanguage(newValue: string, oldValue: string) {
+    if( newValue != oldValue ) {
+      this._setLanguage(newValue);
+    }
+  }
+
+  @bind()
+  public async _setPlaybackRate(playbackRate: number) {
+    if( !isNaN(playbackRate) ) {
+      await this._invokePlayerFunction('setPlaybackRate',[playbackRate]);
+      this.status = {
+        ...this.status,
+        settings: {
+          ...this.status.settings,
+          playbackRate: playbackRate,
+        }
+      };
+    }
+  }
+
   @Listen('setting:changePlaybackRate')
   @Listen('control:changePlaybackRate')
-  protected async _setPlaybackRate(e: CustomEvent) {
-    const playbackRate = e.detail.playbackRate;
-    await this._invokePlayerFunction('setPlaybackRate',[playbackRate]);
-    this.status = {
-      ...this.status,
-      settings: {
-        ...this.status.settings,
-        playbackRate: playbackRate,
-      }
-    };
+  protected async _changePlaybackRate(e: CustomEvent) {
+    this._setPlaybackRate(e.detail.playbackRate);
+  }
+
+  @Watch('playbackrate')
+  _setupPlaybackRate(newValue: string, oldValue: string) {
+    if( newValue === oldValue ) return;
+
+    const playbackRate = parseFloat(newValue);
+    this._setPlaybackRate(playbackRate);
   }
 
   @Listen('control:showPlaybackRate')
@@ -369,15 +389,14 @@ export class Player {
       },
       settings: {
         ...this.status.settings,
-        textTrack: textTrackDefault,
+        textTrack: defaultStatus.settings.textTrack,
       }
     };
   }
 
-  @Listen('setting:changeTextTrack')
-  public _setTextTrack(e: CustomEvent) {
-    const textTrack = e.detail.textTrack;
-    if(textTrack === textTrackDefault) {
+  @bind()
+  public _setTextTrack(textTrack: string, enable: boolean = true) {
+    if(textTrack === defaultStatus.settings.textTrack) {
       this.status = {
         ...this.status,
         subtitle: {
@@ -392,7 +411,7 @@ export class Player {
         subtitle: {
           ...this.status.subtitle,
           language: textTrack,
-          enabled: true,
+          enabled: enable,
         }
       };
     }
@@ -403,6 +422,10 @@ export class Player {
         textTrack: textTrack,
       }
     };
+  }
 
+  @Listen('setting:changeTextTrack')
+  public _changeTextTrack(e: CustomEvent) {
+    this._setTextTrack(e.detail.textTrack);
   }
 }

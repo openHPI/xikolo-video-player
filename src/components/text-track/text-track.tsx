@@ -13,6 +13,7 @@ export class TextTrack {
   @Prop() language: string;
   @Prop() src: string;
   @Prop() label: string;
+  @Prop() default: boolean;
 
   private vtt:WebVTT = null;
   private promise: any;
@@ -32,7 +33,11 @@ export class TextTrack {
         // Determines the index position of the current text track component in the HTML.
         const textTrackCollection = Array.from(this.el.parentNode.children).filter(element => element.hasAttribute('language'));
         this.vtt.index = textTrackCollection.indexOf(this.el);
-        this.textTrackLoadedEvent.emit({ webVTT: this.vtt, total: textTrackCollection.length });
+        this.textTrackLoadedEvent.emit({
+          webVTT: this.vtt,
+          total: textTrackCollection.length,
+          isDefault: this.default
+        });
       } else {
         console.error(`Failed to load text track file: Check the meta data of the VTT file ${this.src} or set the <xm-text-track> attributes label and language.`);
         this.textTrackLoadedEvent.emit({ webVTT: null });

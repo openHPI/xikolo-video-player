@@ -4,7 +4,7 @@ import { Submenu, SubmenuToggleButton } from './elements';
 import { Status } from '../../utils/status';
 import { SettingsSubmenuStatus, defaultSettingsSubmenuStatus, SettingNames, settingList } from '../../utils/settings';
 import { bind } from '../../utils/bind';
-import { TextTrack } from '../../utils/webVTT';
+import { TextTrackList } from '../../utils/webVTT';
 import locales from "../../utils/locales";
 
 @Component({
@@ -16,7 +16,7 @@ export class SettingsMenu {
   @Element() el: HTMLXmSettingsMenuElement;
 
   @Prop() status: Status;
-  @Prop({mutable: true}) textTrack: TextTrack;
+  @Prop({mutable: true}) textTracks: TextTrackList;
 
   @State()
   private submenuStatus: SettingsSubmenuStatus = defaultSettingsSubmenuStatus;
@@ -63,8 +63,8 @@ export class SettingsMenu {
     setting.currentValue = this.status.settings[settingName];
     setting.label = locales[this.status.language][settingName];
     if(settingName === SettingNames.TEXTTRACK) {
-      setting.values = this.textTrack.getTextTrackValues();
-      setting.valueLabels = this.textTrack.getTextTrackLabels(this.status.language);
+      setting.values = this.textTracks.getTextTrackValues();
+      setting.valueLabels = this.textTracks.getTextTrackLabels(this.status.language);
     }
     return setting;
   }

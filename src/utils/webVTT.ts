@@ -24,7 +24,7 @@ export interface WebVTT {
   index: number;
 }
 
-export class TextTrack {
+export class TextTrackList {
 
   protected vttList: Array<WebVTT> = [];
   protected textTracks: Array<Meta> = [];
