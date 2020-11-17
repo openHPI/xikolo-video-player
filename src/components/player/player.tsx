@@ -78,6 +78,7 @@ export class Player {
 
     this._setVolume(this.volume);
     this._setPlaybackRate(this.playbackrate);
+    this._setLanguage(this.lang);
   }
 
   public componentWillUnload() {
