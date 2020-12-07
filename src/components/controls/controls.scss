@@ -145,8 +145,8 @@
   flex: 1 1 100%;
   appearance: none;
   overflow: hidden;
-  margin: 0;
   height: 0.5em;
+  height: var(--vp-control-slider-height);
   background: transparent;
   color: orange;
   color: var(--vp-slider-color);
@@ -160,7 +160,9 @@
   &::-webkit-slider-thumb {
     appearance: none;
     box-shadow: -100vw 0 0 100vw currentColor;
-    width: 0;
+    // Safari need a fixed width to display the slider thumb
+    width: 1px;
+    height: var(--vp-control-slider-height);
   }
 
   &::-moz-range-thumb {
