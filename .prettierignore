@@ -1,0 +1,7 @@
+dist/
+loader/
+node_modules/
+www/
+
+# Ignore static files
+src/static/
