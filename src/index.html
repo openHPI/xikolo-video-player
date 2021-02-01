@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US-x-opensap">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="IE=Edge"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
-  <title>Stencil Component Starter</title>
-  <script type="module" src="build/xmf.esm.js"></script>
-  <script nomodule src="build/xmf.js"></script>
-  <style>
-    body {
-      background: #eee;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=Edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
+    />
+    <title>Stencil Component Starter</title>
+    <script type="module" src="build/xmf.esm.js"></script>
+    <script nomodule src="build/xmf.js"></script>
+    <style>
+      body {
+        background: #eee;
+      }
 
-    * {
-      box-sizing: border-box;
-    }
+      * {
+        box-sizing: border-box;
+      }
 
-    h1 a, h2 a {
-      color: inherit;
-    }
+      h1 a,
+      h2 a {
+        color: inherit;
+      }
 
-    section {
-      margin: 0 auto;
-      background: #fff;
-      max-width: 900px;
-      padding: 1em;
-    }
+      section {
+        margin: 0 auto;
+        background: #fff;
+        max-width: 900px;
+        padding: 1em;
+      }
 
-    xm-player .vimeo-iframe {
-      display: none;
-    }
+      xm-player .vimeo-iframe {
+        display: none;
+      }
 
-    /* a red test :D */
-    /* xm-player {
+      /* a red test :D */
+      /* xm-player {
       --vps-slider-color:  #cc0000;
       --vps-gutter-color: #cc0000;
       --vps-bg-color: #660000;
@@ -41,80 +45,118 @@
       --vps-menu-color-rgb: 255, 50, 50;
     } */
 
-    .overlay {
-      height: 100%;
-      width: 100%;
-      background: #000A;
-    }
-  </style>
-</head>
-<body>
-  <section>
-    <h1><a href="#">Video Player Test</a></h1>
-
-    <div id="wrapper">
-      <h2>Dual Stream openSAP VTT file</h2>
-      <xm-player volume="0.3" lang="fr">
-        <xm-video slot="primary" src="340196868"></xm-video>
-        <xm-video slot="secondary" src="340196788"></xm-video>
-        <xm-text-track language="en" src="/static/en-openSAP.vtt" label="English openSAP"></xm-text-track>
-        <iframe class="vimeo-iframe" src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </xm-player>
-
-      <h2><a href="#">Dual Stream with TextTrack</a></h2>
-
-      <xm-player volume="0.5" lang="de" playbackrate="2" showsubtitle="true">
-        <xm-video slot="primary" src="264584278"></xm-video>
-        <xm-video slot="secondary" src="340196788"></xm-video>
-        <xm-text-track language="de" src="/static/de.vtt" label="Deutsch"></xm-text-track>
-        <xm-text-track language="en" src="/static/en.vtt" label="English" default></xm-text-track>
-        <iframe class="vimeo-iframe" src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </xm-player>
-
-      <h2><a href="#">Single Stream</a></h2>
-
-      <xm-player volume="0">
-        <xm-video slot="primary" src="264584278"></xm-video>
-        <xm-text-track language="de" src="/static/de.vtt" label="Deutsch"></xm-text-track>
-        <xm-text-track language="en" src="/static/en.vtt" label="English"></xm-text-track>
-        <iframe class="vimeo-iframe" src="//player.vimeo.com/video/340196868" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </xm-player>
-    </div>
-
-    <script>
-      let el = document.querySelector('xm-player');
-      const log = function(e) {
-        console.log(e.type, e.detail);
+      .overlay {
+        height: 100%;
+        width: 100%;
+        background: #000a;
       }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1><a href="#">Video Player Test</a></h1>
 
+      <div id="wrapper">
+        <h2>Dual Stream openSAP VTT file</h2>
+        <xm-player volume="0.3" lang="fr">
+          <xm-video slot="primary" src="340196868"></xm-video>
+          <xm-video slot="secondary" src="340196788"></xm-video>
+          <xm-text-track
+            language="en"
+            src="/static/en-openSAP.vtt"
+            label="English openSAP"
+          ></xm-text-track>
+          <iframe
+            class="vimeo-iframe"
+            src="//player.vimeo.com/video/340196868"
+            frameborder="0"
+            allow="autoplay; fullscreen"
+            allowfullscreen
+          ></iframe>
+        </xm-player>
 
-      el.addEventListener('play', log);
-      el.addEventListener('pause', log);
-      el.addEventListener('seeking', log);
-      el.addEventListener('seeked', log);
-      el.addEventListener('bufferstart', log);
-      el.addEventListener('bufferend', log);
-      el.addEventListener('ended', log);
+        <h2><a href="#">Dual Stream with TextTrack</a></h2>
 
-      el.addEventListener('ioc:request', log);
+        <xm-player volume="0.5" lang="de" playbackrate="2" showsubtitle="true">
+          <xm-video slot="primary" src="264584278"></xm-video>
+          <xm-video slot="secondary" src="340196788"></xm-video>
+          <xm-text-track
+            language="de"
+            src="/static/de.vtt"
+            label="Deutsch"
+          ></xm-text-track>
+          <xm-text-track
+            language="en"
+            src="/static/en.vtt"
+            label="English"
+            default
+          ></xm-text-track>
+          <iframe
+            class="vimeo-iframe"
+            src="//player.vimeo.com/video/340196868"
+            frameborder="0"
+            allow="autoplay; fullscreen"
+            allowfullscreen
+          ></iframe>
+        </xm-player>
 
-      el.addEventListener('click', function(e) {
-        console.log('click', e.target);
-      })
+        <h2><a href="#">Single Stream</a></h2>
 
-      el.addEventListener('timeupdate', log);
-      el.addEventListener('progress', log);
+        <xm-player volume="0">
+          <xm-video slot="primary" src="264584278"></xm-video>
+          <xm-text-track
+            language="de"
+            src="/static/de.vtt"
+            label="Deutsch"
+          ></xm-text-track>
+          <xm-text-track
+            language="en"
+            src="/static/en.vtt"
+            label="English"
+          ></xm-text-track>
+          <iframe
+            class="vimeo-iframe"
+            src="//player.vimeo.com/video/340196868"
+            frameborder="0"
+            allow="autoplay; fullscreen"
+            allowfullscreen
+          ></iframe>
+        </xm-player>
+      </div>
+
+      <script>
+        let el = document.querySelector('xm-player');
+        const log = function (e) {
+          console.log(e.type, e.detail);
+        };
+
+        el.addEventListener('play', log);
+        el.addEventListener('pause', log);
+        el.addEventListener('seeking', log);
+        el.addEventListener('seeked', log);
+        el.addEventListener('bufferstart', log);
+        el.addEventListener('bufferend', log);
+        el.addEventListener('ended', log);
+
+        el.addEventListener('ioc:request', log);
+
+        el.addEventListener('click', function (e) {
+          console.log('click', e.target);
+        });
+
+        el.addEventListener('timeupdate', log);
+        el.addEventListener('progress', log);
+      </script>
+
+      <br />
+      <button>Button</button>
+    </section>
+    <script>
+      document.querySelectorAll('button').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          document.querySelector('xm-player').requestFullscreen();
+        });
+      });
     </script>
-
-    <br />
-    <button>Button</button>
-  </section>
-  <script>
-    document.querySelectorAll('button').forEach(function(el) {
-      el.addEventListener('click', function(e) {
-        document.querySelector('xm-player').requestFullscreen();
-      })
-    })
-  </script>
-</body>
+  </body>
 </html>

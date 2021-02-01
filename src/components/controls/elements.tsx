@@ -11,22 +11,27 @@ interface FullscreenProps {
   onExit: (e: Event) => void;
 }
 
-export const Fullscreen: FunctionalComponent<FullscreenProps> = props => {
-  if(props.status.fullscreen) {
+export const Fullscreen: FunctionalComponent<FullscreenProps> = (props) => {
+  if (props.status.fullscreen) {
     return (
-    <button onClick={props.onExit} title={locales[props.status.language].exitFullscreen}>
-      <span class="svg" innerHTML={icon.Compress} />
-    </button>
+      <button
+        onClick={props.onExit}
+        title={locales[props.status.language].exitFullscreen}
+      >
+        <span class="svg" innerHTML={icon.Compress} />
+      </button>
     );
   } else {
     return (
-      <button onClick={props.onRequest} title={locales[props.status.language].enterFullscreen}>
+      <button
+        onClick={props.onRequest}
+        title={locales[props.status.language].enterFullscreen}
+      >
         <span class="svg" innerHTML={icon.Expand} />
       </button>
     );
   }
-}
-
+};
 
 interface ControlProps {
   status: Status;
@@ -34,34 +39,42 @@ interface ControlProps {
   onPause: (e: Event) => void;
 }
 
-export const Control: FunctionalComponent<ControlProps> = props => {
-  if(props.status.mode === Mode.PLAYING) {
+export const Control: FunctionalComponent<ControlProps> = (props) => {
+  if (props.status.mode === Mode.PLAYING) {
     return (
-      <button onClick={props.onPause} title={locales[props.status.language].pause}>
-        <span class="svg" innerHTML={icon.Pause } />
+      <button
+        onClick={props.onPause}
+        title={locales[props.status.language].pause}
+      >
+        <span class="svg" innerHTML={icon.Pause} />
       </button>
     );
-  } else if(props.status.mode === Mode.FINISHED) {
+  } else if (props.status.mode === Mode.FINISHED) {
     return (
-      <button onClick={props.onPlay} title={locales[props.status.language].restart}>
-        <span class="svg" innerHTML={icon.Restart } />
+      <button
+        onClick={props.onPlay}
+        title={locales[props.status.language].restart}
+      >
+        <span class="svg" innerHTML={icon.Restart} />
       </button>
     );
   } else {
     return (
-      <button onClick={props.onPlay} title={locales[props.status.language].play}>
-        <span class="svg" innerHTML={icon.Play } />
+      <button
+        onClick={props.onPlay}
+        title={locales[props.status.language].play}
+      >
+        <span class="svg" innerHTML={icon.Play} />
       </button>
     );
   }
-}
-
+};
 
 interface CurrentTimeProps {
-  status: Status
+  status: Status;
 }
 
-export const CurrentTime: FunctionalComponent<CurrentTimeProps> = props => {
+export const CurrentTime: FunctionalComponent<CurrentTimeProps> = (props) => {
   const { duration, progress } = props.status;
 
   return (
@@ -69,7 +82,7 @@ export const CurrentTime: FunctionalComponent<CurrentTimeProps> = props => {
       {format(progress.seconds)} / {format(duration)}
     </span>
   );
-}
+};
 
 interface VolumeProps {
   status: Status;
@@ -78,7 +91,7 @@ interface VolumeProps {
   onChangeVolume: (volume: number) => void;
 }
 
-export const Volume: FunctionalComponent<VolumeProps> = props => {
+export const Volume: FunctionalComponent<VolumeProps> = (props) => {
   const { muted, volume } = props.status;
 
   const fnSetVolume = (e: Event) => {
@@ -87,7 +100,8 @@ export const Volume: FunctionalComponent<VolumeProps> = props => {
   };
 
   const volumeSlider = (
-    <input class="controls__slider controls__slider--volume"
+    <input
+      class="controls__slider controls__slider--volume"
       type="range"
       min="0"
       max="1"
@@ -95,35 +109,44 @@ export const Volume: FunctionalComponent<VolumeProps> = props => {
       value={muted ? 0 : volume}
       onChange={fnSetVolume}
       onInput={fnSetVolume}
-/>);
+    />
+  );
 
-  if(muted) {
+  if (muted) {
     return (
       <div class="controls-volume">
-        <button class="controls__unmute" onClick={props.onUnmute} title={locales[props.status.language].unmute}>
-          <span class="svg" innerHTML={icon.VolumeOff } />
+        <button
+          class="controls__unmute"
+          onClick={props.onUnmute}
+          title={locales[props.status.language].unmute}
+        >
+          <span class="svg" innerHTML={icon.VolumeOff} />
         </button>
         {volumeSlider}
       </div>
-    )
+    );
   } else {
     return (
       <div class="controls-volume">
-        <button class="controls__mute" onClick={props.onMute} title={locales[props.status.language].mute}>
+        <button
+          class="controls__mute"
+          onClick={props.onMute}
+          title={locales[props.status.language].mute}
+        >
           <span class="svg" innerHTML={icon.VolumeOn} />
         </button>
         {volumeSlider}
       </div>
-    )
+    );
   }
-}
+};
 
 interface SliderProps {
   status: Status;
   onSeek: (seconds: number) => void;
 }
 
-export const Slider: FunctionalComponent<SliderProps> = props => {
+export const Slider: FunctionalComponent<SliderProps> = (props) => {
   const { duration, progress } = props.status;
 
   const fnSeek = (e: Event) => {
@@ -132,7 +155,8 @@ export const Slider: FunctionalComponent<SliderProps> = props => {
   };
 
   return (
-    <input class="controls__slider"
+    <input
+      class="controls__slider"
       part="slider"
       type="range"
       min="0"
@@ -147,7 +171,7 @@ export const Slider: FunctionalComponent<SliderProps> = props => {
       onInput={fnSeek}
     />
   );
-}
+};
 
 interface SettingsMenuToggleButtonProps {
   status: Status;
@@ -155,20 +179,31 @@ interface SettingsMenuToggleButtonProps {
   onCloseSettingsMenu: (e: Event) => void;
 }
 
-export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleButtonProps> = props => {
-  if(props.status.openedSettingsMenu) {
+export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleButtonProps> = (
+  props
+) => {
+  if (props.status.openedSettingsMenu) {
     return (
-      <button onClick={props.onCloseSettingsMenu} title={locales[props.status.language].settings}>
-       <span class="controls__settings-icon controls__settings-icon--open svg" innerHTML={icon.Settings} />
+      <button
+        onClick={props.onCloseSettingsMenu}
+        title={locales[props.status.language].settings}
+      >
+        <span
+          class="controls__settings-icon controls__settings-icon--open svg"
+          innerHTML={icon.Settings}
+        />
       </button>
-    )
+    );
   }
   return (
-    <button onClick={props.onOpenSettingsMenu} title={locales[props.status.language].settings}>
+    <button
+      onClick={props.onOpenSettingsMenu}
+      title={locales[props.status.language].settings}
+    >
       <span class="controls__settings-icon svg" innerHTML={icon.Settings} />
     </button>
-  )
-}
+  );
+};
 
 interface SubtitleButtonProps {
   status: Status;
@@ -177,36 +212,51 @@ interface SubtitleButtonProps {
   onDisable: (e: Event) => void;
 }
 
-export const SubtitleButton: FunctionalComponent<SubtitleButtonProps> = props => {
-  if(!props.visible) return;
-  if(props.status.subtitle.enabled) {
+export const SubtitleButton: FunctionalComponent<SubtitleButtonProps> = (
+  props
+) => {
+  if (!props.visible) return;
+  if (props.status.subtitle.enabled) {
     return (
-      <button class="controls__subtitle-button" onClick={props.onDisable} title={locales[props.status.language].disableSubtitles}>
-        <span class="controls__shortcut-icon controls__shortcut-icon--active svg" innerHTML={icon.Subtitle} />
+      <button
+        class="controls__subtitle-button"
+        onClick={props.onDisable}
+        title={locales[props.status.language].disableSubtitles}
+      >
+        <span
+          class="controls__shortcut-icon controls__shortcut-icon--active svg"
+          innerHTML={icon.Subtitle}
+        />
       </button>
-    )
+    );
   } else {
     return (
-      <button class="controls__subtitle-button" onClick={props.onEnable} title={locales[props.status.language].enableSubtitles}>
+      <button
+        class="controls__subtitle-button"
+        onClick={props.onEnable}
+        title={locales[props.status.language].enableSubtitles}
+      >
         <span class="controls__shortcut-icon svg" innerHTML={icon.Subtitle} />
       </button>
-    )
+    );
   }
-}
+};
 
 interface SubtitlesProps {
   status: Status;
 }
 
-export const Subtitles: FunctionalComponent<SubtitlesProps> = props => {
+export const Subtitles: FunctionalComponent<SubtitlesProps> = (props) => {
   const { enabled, activeCues } = props.status.subtitle;
-  if(enabled && activeCues && activeCues.length) {
+  if (enabled && activeCues && activeCues.length) {
     return (
       <div class="controls__subtitle">
-          {activeCues.map(cue => (
-            <span class="controls__subtitle-row" dir="auto">{cue.text}</span>
-          ))}
+        {activeCues.map((cue) => (
+          <span class="controls__subtitle-row" dir="auto">
+            {cue.text}
+          </span>
+        ))}
       </div>
     );
   }
-}
+};

@@ -1,5 +1,5 @@
 .controls {
-  background-color: '#353535';
+  background-color: "#353535";
   background-color: var(--vp-gutter-color);
   display: flex;
   flex: 1 0 auto;
@@ -25,7 +25,8 @@
           font-size: 1.2em;
         }
 
-        svg, .svg {
+        svg,
+        .svg {
           height: 2em;
           width: 2em;
         }
@@ -38,13 +39,13 @@
       width: 0;
       visibility: hidden;
       opacity: 0;
-      transition: visibility 0.5s linear,opacity 0.5s ease-in-out;
+      transition: visibility 0.5s linear, opacity 0.5s ease-in-out;
       border: none;
     }
   }
 
   @media only screen and (max-width: 576px) {
-    .controls__subtitle{
+    .controls__subtitle {
       bottom: 40px;
 
       &-row {
@@ -62,7 +63,8 @@
         font-size: 0.5em;
       }
 
-      .controls__playback-rate, .controls__subtitle-button {
+      .controls__playback-rate,
+      .controls__subtitle-button {
         display: none;
       }
 
@@ -70,7 +72,8 @@
         padding: 0.3em 0.4em;
       }
 
-      svg, .svg {
+      svg,
+      .svg {
         height: 1.1em;
         width: 1.1em;
       }
@@ -86,14 +89,14 @@
     z-index: 1;
     bottom: 60px;
     right: -5px;
-    background: rgba(50, 50, 50 , 0.9);
+    background: rgba(50, 50, 50, 0.9);
     background: rgba(var(--vp-menu-color-rgb), 0.9);
     font-size: 0.9em;
     line-height: 0.9em;
     padding: 0.2em;
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0.3s linear,opacity 0.3s linear;
+    transition: visibility 0.3s linear, opacity 0.3s linear;
 
     &--open {
       visibility: visible;
@@ -130,7 +133,7 @@
   margin: auto;
 
   &-row {
-    background: rgba(50,50,50,0.7);
+    background: rgba(50, 50, 50, 0.7);
     padding: 10px;
     margin: 0.2em;
     border-radius: 10px;
@@ -216,7 +219,6 @@
   margin: 1px;
   color: inherit;
 
-
   display: flex;
   flex: 1 1 100%;
   flex-flow: row nowrap;
@@ -254,8 +256,9 @@
     transition-duration: 0.4s;
     transition-property: transform;
 
-    &--open, &:hover {
-      transform: rotate(90deg) translate(1px,1px);
+    &--open,
+    &:hover {
+      transform: rotate(90deg) translate(1px, 1px);
     }
   }
 
@@ -264,8 +267,9 @@
     overflow: hidden;
     transition: box-shadow 0.3s ease-in-out;
 
-    &--active, &:hover {
-      box-shadow: 0px 2px 1px -1px rgba(231,166,26,0.72);
+    &--active,
+    &:hover {
+      box-shadow: 0px 2px 1px -1px rgba(231, 166, 26, 0.72);
     }
   }
 
@@ -279,20 +283,20 @@
 
     &:hover {
       & .controls__settings-icon {
-        transform: rotate(90deg) translate(1px,1px);
+        transform: rotate(90deg) translate(1px, 1px);
       }
       & .controls__subtitle-icon {
-        box-shadow: 0px 2px 1px -1px rgba(231,166,26,0.72);
+        box-shadow: 0px 2px 1px -1px rgba(231, 166, 26, 0.72);
       }
     }
   }
 
-  svg, .svg {
+  svg,
+  .svg {
     display: block;
     height: 1.5em;
     width: 1.5em;
     fill: currentColor;
     color: inherit;
   }
-
 }

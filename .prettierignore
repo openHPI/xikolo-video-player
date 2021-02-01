@@ -5,3 +5,7 @@ www/
 
 # Ignore static files
 src/static/
+
+# Ignore auto-generated files
+src/components.d.ts
+src/components/*/readme.md

@@ -21,7 +21,8 @@ export const settingList: Array<Setting> = [
     label: locales.en.playbackRate,
     values: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
     currentValue: 1,
-  }, {
+  },
+  {
     name: SettingNames.TEXTTRACK,
     label: locales.en.textTrack,
     values: [textTrackDefault],
@@ -38,4 +39,4 @@ export interface SettingsSubmenuStatus {
 export const defaultSettingsSubmenuStatus: SettingsSubmenuStatus = {
   isOpen: false,
   currentSetting: null,
-}
+};

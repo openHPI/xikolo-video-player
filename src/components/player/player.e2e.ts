@@ -1,11 +1,11 @@
 import { newE2EPage, E2EPage } from '@stencil/core/testing';
 
 describe('xm-player', () => {
- let page: E2EPage;
+  let page: E2EPage;
 
   beforeEach(async () => {
     page = await newE2EPage();
-    page.on('error', e => console.warn(`Error in browser context:\n  ${e}`));
+    page.on('error', (e) => console.warn(`Error in browser context:\n  ${e}`));
   });
 
   test('render', async () => {
@@ -30,6 +30,5 @@ describe('xm-player', () => {
     const controls = player.shadowRoot.querySelector('xm-controls');
     expect(controls).not.toBeNull();
     expect(controls).toHaveClass('hydrated');
-  })
-
+  });
 });

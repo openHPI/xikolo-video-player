@@ -9,35 +9,49 @@ interface SubmenuProps {
   onCloseSubmenu: (e: Event) => void;
 }
 
-export const Submenu: FunctionalComponent<SubmenuProps> = props => {
+export const Submenu: FunctionalComponent<SubmenuProps> = (props) => {
   const setting = props.status.currentSetting;
-  if(setting) {
+  if (setting) {
     return (
-      <div class={props.status.isOpen ? "settings-menu__submenu menu menu--open" : "settings-menu__submenu menu hide"}>
+      <div
+        class={
+          props.status.isOpen
+            ? 'settings-menu__submenu menu menu--open'
+            : 'settings-menu__submenu menu hide'
+        }
+      >
         <div class="settings-menu__submenu-header">
           <button class="settings-menu__button" onClick={props.onCloseSubmenu}>
             <span class="settings-menu__arrow settings-menu__arrow--left">
               <span class="svg" innerHTML={icon.ArrowLeft} />
             </span>
-            <span class="settings-menu__button-label" innerHTML={setting.label} />
+            <span
+              class="settings-menu__button-label"
+              innerHTML={setting.label}
+            />
           </button>
         </div>
         <div class="settings-menu__submenu-content">
-          {
-            setting.values.map((value, index) =>(
-              <button
-                class={value === setting.currentValue ? "settings-menu__button settings-menu__button--current" : 'settings-menu__button'}
-                onClick={()=>props.onChangeSetting(value)} innerHTML={
-                  (setting.valueLabels && setting.valueLabels[index]) ? setting.valueLabels[index] : value
-                }
-              />
-            ))
-          }
+          {setting.values.map((value, index) => (
+            <button
+              class={
+                value === setting.currentValue
+                  ? 'settings-menu__button settings-menu__button--current'
+                  : 'settings-menu__button'
+              }
+              onClick={() => props.onChangeSetting(value)}
+              innerHTML={
+                setting.valueLabels && setting.valueLabels[index]
+                  ? setting.valueLabels[index]
+                  : value
+              }
+            />
+          ))}
         </div>
       </div>
     );
   }
-}
+};
 
 interface SubmenuToggleButtonProps {
   status: SettingsSubmenuStatus;
@@ -46,19 +60,28 @@ interface SubmenuToggleButtonProps {
   onCloseSubmenu: (e: Event) => void;
 }
 
-export const SubmenuToggleButton: FunctionalComponent<SubmenuToggleButtonProps> = props => {
+export const SubmenuToggleButton: FunctionalComponent<SubmenuToggleButtonProps> = (
+  props
+) => {
   return (
-    <button class="settings-menu__button" onClick={props.status.isOpen ? props.onCloseSubmenu : props.onOpenSubmenu}>
+    <button
+      class="settings-menu__button"
+      onClick={props.status.isOpen ? props.onCloseSubmenu : props.onOpenSubmenu}
+    >
       <span class="settings-menu__button-label">{props.setting.label} </span>
-      <span class="settings-menu__button-value"> {
-        props.setting.valueLabels ?
-          props.setting.valueLabels[props.setting.values.findIndex((value) => props.setting.currentValue === value)]
-        :
-          props.setting.currentValue
-      }</span>
+      <span class="settings-menu__button-value">
+        {' '}
+        {props.setting.valueLabels
+          ? props.setting.valueLabels[
+              props.setting.values.findIndex(
+                (value) => props.setting.currentValue === value
+              )
+            ]
+          : props.setting.currentValue}
+      </span>
       <span class="settings-menu__arrow settings-menu__arrow--right">
-        <span class="svg" innerHTML={icon.ArrowRight } />
+        <span class="svg" innerHTML={icon.ArrowRight} />
       </span>
     </button>
-  )
-}
+  );
+};

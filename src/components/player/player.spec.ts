@@ -1,8 +1,8 @@
-import { newSpecPage } from "@stencil/core/testing";
+import { newSpecPage } from '@stencil/core/testing';
 import { Player } from './player';
 import { Controls } from '../controls/controls';
 import { defaultStatus } from '../../utils/status';
-import { WebVTT } from "../../utils/webVTT";
+import { WebVTT } from '../../utils/webVTT';
 
 describe('xm-player with props', () => {
   let page, controls;
@@ -22,10 +22,10 @@ describe('xm-player with props', () => {
       </xm-player>
     `,
       components: [Player, Controls],
-      supportShadowDom: true
+      supportShadowDom: true,
     });
     // We need to render all child components manually for acces to their shadow doms!
-    controls =  page.root.shadowRoot.querySelector('xm-controls');
+    controls = page.root.shadowRoot.querySelector('xm-controls');
     const controlsInstance = new Controls();
     controlsInstance.status = defaultStatus;
     controls.innerHTML = controlsInstance.render();
@@ -71,10 +71,10 @@ describe('xm-player with subtitle props', () => {
       </xm-player>
     `,
       components: [Player, Controls],
-      supportShadowDom: true
+      supportShadowDom: true,
     });
     // We need to render all child components manually for acces to their shadow doms!
-    controls =  page.root.shadowRoot.querySelector('xm-controls');
+    controls = page.root.shadowRoot.querySelector('xm-controls');
     controlsInstance = new Controls();
     controlsInstance.status = page.rootInstance.status;
     controlsInstance.textTracks = page.rootInstance.textTracks;
@@ -88,31 +88,37 @@ describe('xm-player with subtitle props', () => {
     expect(page.root.shadowRoot.querySelector('.player')).toBeTruthy();
     expect(page.root.shadowRoot.querySelector('xm-controls')).toBeTruthy();
     expect(page.root.getAttribute('showsubtitle')).toBe('true');
-    expect(controls.shadowRoot.querySelector('.controls__subtitle-button')).not.toBeTruthy();
+    expect(
+      controls.shadowRoot.querySelector('.controls__subtitle-button')
+    ).not.toBeTruthy();
     // Mock a loaded textTrack file
     const vtt: WebVTT = {
       meta: {
         language: 'de',
         label: 'Deutsch',
       },
-      cues: [{
-        end: 1,
-        identifier: '1',
-        start:1,
-        styles: '',
-        text: 'test',
-      }],
+      cues: [
+        {
+          end: 1,
+          identifier: '1',
+          start: 1,
+          styles: '',
+          text: 'test',
+        },
+      ],
       strict: true,
       valid: true,
       index: 0,
     };
     // Trigger the texttrack:loaded event
-    let ttlEvent = new CustomEvent('texttrack:loaded', { detail: {
-      webVTT: vtt,
-      total: 1,
-      isDefault: true
-    }});
-    page.root.dispatchEvent(ttlEvent)
+    let ttlEvent = new CustomEvent('texttrack:loaded', {
+      detail: {
+        webVTT: vtt,
+        total: 1,
+        isDefault: true,
+      },
+    });
+    page.root.dispatchEvent(ttlEvent);
     await page.waitForChanges();
     expect(page.rootInstance.status.subtitle.language).toBe('de');
     controlsInstance.status = page.rootInstance.status;
@@ -121,8 +127,9 @@ describe('xm-player with subtitle props', () => {
     await page.waitForChanges();
     expect(controls.shadowRoot).toBeTruthy();
     // Finally test the rendered output
-    expect(controls.shadowRoot.querySelector('.controls__subtitle-button')).toBeTruthy();
+    expect(
+      controls.shadowRoot.querySelector('.controls__subtitle-button')
+    ).toBeTruthy();
     expect(page.root).toMatchSnapshot();
   });
-
 });

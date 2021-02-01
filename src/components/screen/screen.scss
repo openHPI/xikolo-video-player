@@ -4,7 +4,8 @@
   background-color: var(--vp-bg-color);
 }
 
-.landscape, .portrait {
+.landscape,
+.portrait {
   display: flex;
   align-items: stretch;
   height: 100%;
@@ -60,7 +61,8 @@
   cursor: col-resize;
 }
 
-svg, .svg {
+svg,
+.svg {
   display: block;
   height: 1em;
   width: 1em;
@@ -93,8 +95,12 @@ svg, .svg {
 }
 
 .pip {
-  .gutter { display: none }
-  .pane { width: 100% !important; }
+  .gutter {
+    display: none;
+  }
+  .pane {
+    width: 100% !important;
+  }
 
   .pane.primary {
     position: absolute;
@@ -112,6 +118,6 @@ svg, .svg {
 .pip.flip {
   .pane.primary {
     top: auto;
-    bottom: .2em;
+    bottom: 0.2em;
   }
 }

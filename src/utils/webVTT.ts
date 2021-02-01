@@ -1,10 +1,10 @@
-import { textTrackDefault } from "./settings";
-import locales from "./locales";
+import { textTrackDefault } from './settings';
+import locales from './locales';
 
 export interface Cue {
   end: number;
   identifier: string;
-  start:number;
+  start: number;
   styles: string;
   text: string;
 }
@@ -25,7 +25,6 @@ export interface WebVTT {
 }
 
 export class TextTrackList {
-
   protected vttList: Array<WebVTT> = [];
   protected textTracks: Array<Meta> = [];
   protected currentCues: Array<Cue> = null;
@@ -38,28 +37,28 @@ export class TextTrackList {
     this.vttList.splice(webVTT.index, 0, webVTT);
     this.textTracks.splice(webVTT.index, 0, webVTT.meta);
 
-    this.loadedFiles ++;
+    this.loadedFiles++;
     this.totalFiles = total;
     this.sortAndInitLists();
   }
 
   public increaseLoadedFiles() {
-    this.loadedFiles ++;
-    if(this.totalFiles > 0) this.sortAndInitLists();
+    this.loadedFiles++;
+    if (this.totalFiles > 0) this.sortAndInitLists();
   }
 
   protected sortAndInitLists() {
     // Sort list after all files are loaded
-    if(this.loadedFiles === this.totalFiles) {
+    if (this.loadedFiles === this.totalFiles) {
       this.textTracks = [];
       this.vttList.sort(this.compareWebVTTList);
-      this.vttList.forEach(webVTT => this.textTracks.push(webVTT.meta));
+      this.vttList.forEach((webVTT) => this.textTracks.push(webVTT.meta));
     }
   }
 
   protected collectCues(language: string) {
-    const webVTT = this.vttList.find( vtt => vtt.meta.language === language);
-    if(webVTT && webVTT.cues) {
+    const webVTT = this.vttList.find((vtt) => vtt.meta.language === language);
+    if (webVTT && webVTT.cues) {
       this.currentCues = webVTT.cues;
       return;
     }
@@ -67,9 +66,11 @@ export class TextTrackList {
   }
 
   public getActiveCues(seconds: number, language: string) {
-    if(language !== this.currentLanguage) this.collectCues(language);
-    if(this.currentCues === null) return null;
-    const cues: Array<Cue> = this.currentCues.filter(cue => cue.start <= seconds && cue.end >= seconds);
+    if (language !== this.currentLanguage) this.collectCues(language);
+    if (this.currentCues === null) return null;
+    const cues: Array<Cue> = this.currentCues.filter(
+      (cue) => cue.start <= seconds && cue.end >= seconds
+    );
     return cues.length ? cues : null;
   }
 
@@ -78,23 +79,31 @@ export class TextTrackList {
   }
 
   public getTextTrackValues() {
-    return [textTrackDefault].concat(this.textTracks.map(meta => meta.language));
+    return [textTrackDefault].concat(
+      this.textTracks.map((meta) => meta.language)
+    );
   }
 
   public getTextTrackLabels(language) {
-    return [locales[language].textTrackDefault].concat(this.textTracks.map(meta => meta.label));
+    return [locales[language].textTrackDefault].concat(
+      this.textTracks.map((meta) => meta.label)
+    );
   }
 
   public compareCueLists(a: Array<Cue>, b: Array<Cue>) {
-    if(a === null && b === null) return true;
-    if(a === null || b === null || a.length !== b.length || a[0].identifier !== b[0].identifier) {
-        return false;
+    if (a === null && b === null) return true;
+    if (
+      a === null ||
+      b === null ||
+      a.length !== b.length ||
+      a[0].identifier !== b[0].identifier
+    ) {
+      return false;
     }
     return true;
   }
 
   public compareWebVTTList(a: WebVTT, b: WebVTT) {
-    return (a.index > b.index) ? 1 : -1;
+    return a.index > b.index ? 1 : -1;
   }
-
 }
