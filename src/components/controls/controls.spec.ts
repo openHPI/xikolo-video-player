@@ -1,6 +1,6 @@
-import { newSpecPage } from "@stencil/core/testing";
+import { newSpecPage } from '@stencil/core/testing';
 import { Controls } from '../controls/controls';
-import { SettingsMenu } from "../settings-menu/settings-menu";
+import { SettingsMenu } from '../settings-menu/settings-menu';
 import { defaultStatus } from '../../utils/status';
 import { TextTrackList, WebVTT } from '../../utils/webVTT';
 
@@ -16,7 +16,7 @@ describe('xm-controls', () => {
     page = await newSpecPage({
       html: `<div></div>`,
       components: [Controls, SettingsMenu],
-      supportsShadowDom: true
+      supportsShadowDom: true,
     });
 
     textTracks = new TextTrackList();
@@ -46,32 +46,45 @@ describe('xm-controls', () => {
       ...controls.status,
       openedSettingsMenu: true,
     };
-    expect(settingsMenu.shadowRoot.querySelector('.settings-menu')).toBeTruthy();
-    expect(settingsMenu.shadowRoot.querySelector('.settings-menu.menu--open')).not.toBeTruthy();
-    expect(shadowRoot.querySelector('.controls__settings-icon')).not.toHaveClass('controls__settings-icon--open');
-    let button = shadowRoot.querySelector('.controls__settings-icon').parentNode;
+    expect(
+      settingsMenu.shadowRoot.querySelector('.settings-menu')
+    ).toBeTruthy();
+    expect(
+      settingsMenu.shadowRoot.querySelector('.settings-menu.menu--open')
+    ).not.toBeTruthy();
+    expect(
+      shadowRoot.querySelector('.controls__settings-icon')
+    ).not.toHaveClass('controls__settings-icon--open');
+    let button = shadowRoot.querySelector('.controls__settings-icon')
+      .parentNode;
     expect(button).toBeTruthy();
     button.click();
     controls.status = status;
     await page.waitForChanges();
-    expect(shadowRoot.querySelector('.controls__settings-icon')).toHaveClass('controls__settings-icon--open');
-    expect(settingsMenu.shadowRoot.querySelector('.settings-menu.menu--open')).toBeTruthy();
+    expect(shadowRoot.querySelector('.controls__settings-icon')).toHaveClass(
+      'controls__settings-icon--open'
+    );
+    expect(
+      settingsMenu.shadowRoot.querySelector('.settings-menu.menu--open')
+    ).toBeTruthy();
     expect(page.root).toMatchSnapshot();
   });
 
-  it('should show a list of texttracks', async () =>{
+  it('should show a list of texttracks', async () => {
     const de: WebVTT = {
       meta: {
         language: 'de',
         label: 'Deutsch',
       },
-      cues: [{
-        end: 1,
-        identifier: '1',
-        start:1,
-        styles: '',
-        text: 'test',
-      }],
+      cues: [
+        {
+          end: 1,
+          identifier: '1',
+          start: 1,
+          styles: '',
+          text: 'test',
+        },
+      ],
       strict: true,
       valid: true,
       index: 0,
@@ -86,10 +99,14 @@ describe('xm-controls', () => {
       settings: {
         ...controls.status.settings,
         textTrack: 'de',
-      }
+      },
     };
-    expect(shadowRoot.querySelector('.controls__subtitle-icon')).not.toBeTruthy();
-    let textTrackValue = settingsMenu.shadowRoot.querySelector('.settings-menu__button-value').firstChild;
+    expect(
+      shadowRoot.querySelector('.controls__subtitle-icon')
+    ).not.toBeTruthy();
+    let textTrackValue = settingsMenu.shadowRoot.querySelector(
+      '.settings-menu__button-value'
+    ).firstChild;
     expect(textTrackValue.nodeValue.trim()).toBe('Off');
     expect(settingsMenu.status.settings.textTrack).toBe('off');
     expect(textTracks.getTextTracks()).toBe(null);
@@ -98,20 +115,33 @@ describe('xm-controls', () => {
     expect(textTracks.getTextTracks().length).toBe(1);
     controls.status = status;
     await page.waitForChanges();
-    expect(shadowRoot.querySelector('.controls__subtitle-button').querySelector('.controls__shortcut-icon')).toBeTruthy();
-    expect(shadowRoot.querySelector('.controls__subtitle-button').querySelector('.controls__shortcut-icon')).toHaveClass('controls__shortcut-icon--active');
+    expect(
+      shadowRoot
+        .querySelector('.controls__subtitle-button')
+        .querySelector('.controls__shortcut-icon')
+    ).toBeTruthy();
+    expect(
+      shadowRoot
+        .querySelector('.controls__subtitle-button')
+        .querySelector('.controls__shortcut-icon')
+    ).toHaveClass('controls__shortcut-icon--active');
     expect(settingsMenu.status.settings.textTrack).toBe('de');
     // must reselect it for testing !
-    textTrackValue = settingsMenu.shadowRoot.querySelector('.settings-menu__button-value').firstChild;
+    textTrackValue = settingsMenu.shadowRoot.querySelector(
+      '.settings-menu__button-value'
+    ).firstChild;
     expect(textTrackValue.nodeValue.trim()).toBe('Deutsch');
-    const subtitleSubmenubutton = settingsMenu.shadowRoot.querySelector('.settings-menu__button').firstChild;
+    const subtitleSubmenubutton = settingsMenu.shadowRoot.querySelector(
+      '.settings-menu__button'
+    ).firstChild;
     subtitleSubmenubutton.click();
     await page.waitForChanges();
-    const submenu = settingsMenu.shadowRoot.querySelector('.settings-menu__submenu-content');
+    const submenu = settingsMenu.shadowRoot.querySelector(
+      '.settings-menu__submenu-content'
+    );
     expect(submenu.querySelector('.settings-menu__button')).toBeTruthy();
     expect(submenu.childNodes.length).toBe(2);
     expect(textTracks.getTextTrackValues().length).toBe(2);
     expect(page.root).toMatchSnapshot();
   });
-
 });

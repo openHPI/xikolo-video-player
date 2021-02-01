@@ -9,12 +9,14 @@ More details will follow...
 ## Getting Started
 
 1. Clone the repository
+
 ```bash
 git clone https://git@dev.xikolo.de:jgraichen/video-player-stencil
 cd video-player-stencil
 ```
 
 2. Install the depencencies and run the project
+
 ```bash
 npm install
 npm start
@@ -28,7 +30,6 @@ To run the (unit) tests, run:
 ```bash
 npm test
 ```
-
 
 ## Development
 
@@ -54,7 +55,6 @@ You can easily export the icons as cleaned SVG from this page.
 The video player is designed to support simple color customization.
 Components should use `currentColor` and custom CSS variables if appropriate.
 
-
 ## Deploying
 
 For deploying the video player, please follow these steps.
@@ -75,7 +75,7 @@ npm run build
 ```
 
 3. Checkout the `build` branch and add your changes.
-Please adhere to [Semantic Versioning](https://semver.org/) for annotating your changes and add a short summary to the commit message.
+   Please adhere to [Semantic Versioning](https://semver.org/) for annotating your changes and add a short summary to the commit message.
 
 ```bash
 git checkout build

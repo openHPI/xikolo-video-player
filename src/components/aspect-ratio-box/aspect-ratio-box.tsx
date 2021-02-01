@@ -1,16 +1,9 @@
-import {
-  Component,
-  Element,
-  h,
-  Prop,
-  State,
-} from '@stencil/core';
-
+import { Component, Element, h, Prop, State } from '@stencil/core';
 
 @Component({
   tag: 'xm-aspect-ratio-box',
   styleUrl: 'aspect-ratio-box.scss',
-  shadow: true
+  shadow: true,
 })
 export class AspectRatioBox {
   @Element() el: HTMLXmControlsElement;
@@ -29,23 +22,25 @@ export class AspectRatioBox {
   render() {
     let bxStyle = {};
 
-    if(!this._fullscreened) {
-      bxStyle["paddingBottom"] = `${this.ratio * 100}%`;
-    };
+    if (!this._fullscreened) {
+      bxStyle['paddingBottom'] = `${this.ratio * 100}%`;
+    }
 
     return (
       <div class="bx" style={bxStyle}>
-        <div class="ct"><slot /></div>
+        <div class="ct">
+          <slot />
+        </div>
       </div>
     );
   }
 
   componentDidLoad() {
-    window.addEventListener('fullscreenchange', this._fullscreenChanged)
+    window.addEventListener('fullscreenchange', this._fullscreenChanged);
   }
 
   componentWillUnload() {
-    window.removeEventListener('fullscreenchange', this._fullscreenChanged)
+    window.removeEventListener('fullscreenchange', this._fullscreenChanged);
   }
 
   private _fullscreenChanged(e) {

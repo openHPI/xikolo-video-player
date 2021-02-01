@@ -1,6 +1,6 @@
 singleQuote: true
 overrides:
-- files:
-  - "**/*.scss"
-  options:
-    singleQuote: false
+  - files:
+      - '**/*.scss'
+    options:
+      singleQuote: false

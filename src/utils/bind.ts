@@ -15,11 +15,11 @@ export function bind() {
         Object.defineProperty(this, property, {
           value: bound,
           configurable: true,
-          writable: true
+          writable: true,
         });
 
         return bound;
-      }
-    }
-  }
+      },
+    };
+  };
 }

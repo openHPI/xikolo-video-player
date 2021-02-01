@@ -19,7 +19,6 @@ export interface Subtitle {
   activeCues: Array<Cue>;
 }
 
-
 export interface Settings {
   playbackRate: number;
   textTrack: string;
@@ -60,5 +59,5 @@ export const defaultStatus: Status = {
   settings: {
     playbackRate: 1,
     textTrack: textTrackDefault,
-  }
-}
+  },
+};

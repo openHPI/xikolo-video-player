@@ -8,14 +8,14 @@ import {
   Listen,
 } from '@stencil/core';
 
-import Split from 'split.js'
+import Split from 'split.js';
 import { bind } from '../../utils/bind';
 import * as icon from '../../utils/icon';
 
 @Component({
   tag: 'xm-screen',
   styleUrl: 'screen.scss',
-  shadow: true
+  shadow: true,
 })
 export class Screen {
   @Element() el: HTMLElement;
@@ -31,13 +31,13 @@ export class Screen {
   private secondaryRatio: number = null;
 
   setSplitScreen() {
-    if(window.innerWidth < 768){
+    if (window.innerWidth < 768) {
       this.orientationVertical = true;
       this.engine = Split(this.screen.childNodes, {
         sizes: [this.secondaryRatio, this.primaryRatio],
         gutterSize: 6,
         direction: 'vertical',
-        cursor: 'row-resize'
+        cursor: 'row-resize',
       });
     } else {
       this.orientationVertical = false;
@@ -45,7 +45,7 @@ export class Screen {
         sizes: [this.secondaryRatio, this.primaryRatio],
         gutterSize: 6,
         direction: 'horizontal',
-        cursor: 'col-resize'
+        cursor: 'col-resize',
       });
     }
   }
@@ -56,30 +56,30 @@ export class Screen {
       portrait: this.orientationVertical,
       fullscreen: this.fullscreen,
       pip: this.pip,
-      flip: this.pipFlip
+      flip: this.pipFlip,
     };
 
     return (
-      <div class={clWrp} ref={(e) => this.screen = e}>
+      <div class={clWrp} ref={(e) => (this.screen = e)}>
         <div class="pane primary" onMouseEnter={() => this._flipPipLeft()}>
           <span class="pane__arrow pane__arrow--left">
             <span class="svg" innerHTML={icon.ArrowLeft} />
           </span>
-          <slot name="primary"/>
+          <slot name="primary" />
         </div>
         <div class="gutter"></div>
         <div class="pane secondary">
-            <span class="pane__arrow pane__arrow--right">
-              <span class="svg" innerHTML={icon.ArrowRight} />
-            </span>
-            <slot name="secondary"/>
+          <span class="pane__arrow pane__arrow--right">
+            <span class="svg" innerHTML={icon.ArrowRight} />
+          </span>
+          <slot name="secondary" />
         </div>
       </div>
     );
   }
 
   componentDidUnload() {
-    this.engine.destroy()
+    this.engine.destroy();
   }
 
   /**
@@ -89,25 +89,26 @@ export class Screen {
    * @param e CustomEvent
    */
   @bind()
-
-  @Listen('resize',{target: 'window'})
+  @Listen('resize', { target: 'window' })
   handleScreenSize(ev: CustomEvent) {
-    if((window.innerWidth < 768 && !this.orientationVertical) || (window.innerWidth >= 768 && this.orientationVertical)) {
+    if (
+      (window.innerWidth < 768 && !this.orientationVertical) ||
+      (window.innerWidth >= 768 && this.orientationVertical)
+    ) {
       this.engine.destroy();
       this.setSplitScreen();
     }
-    
   }
 
   @Listen('ratioLoaded')
   _resizeScreen(e: CustomEvent) {
-    if(e.detail.name === 'primary') {
+    if (e.detail.name === 'primary') {
       this.primaryRatio = parseFloat(e.detail.ratio) * 100;
     } else {
       this.secondaryRatio = parseFloat(e.detail.ratio) * 100;
     }
 
-    if(this.primaryRatio && this.secondaryRatio) {
+    if (this.primaryRatio && this.secondaryRatio) {
       /**
        * IE11 hack:
        * We need to save the given stencil 'magic' class from our placeholder to
@@ -115,28 +116,28 @@ export class Screen {
        */
       const gutterPlaceholder = this.el.shadowRoot.querySelector('.gutter');
       const classesForIE11 = gutterPlaceholder.getAttribute('class');
-      if(gutterPlaceholder) {
+      if (gutterPlaceholder) {
         gutterPlaceholder.remove();
       }
       // Initialization of video orientation when first rendered
       this.setSplitScreen();
 
       const gutter = this.el.shadowRoot.querySelector('.gutter');
-      if(gutter) {
-        gutter.className += ' '+ classesForIE11;
+      if (gutter) {
+        gutter.className += ' ' + classesForIE11;
       }
     }
   }
 
   @Watch('pip')
   _setupPip(newValue: boolean, oldValue: boolean) {
-    if(newValue || !oldValue) return;
+    if (newValue || !oldValue) return;
 
     this.pipFlip = false;
   }
 
   private _flipPipLeft() {
-    if(!this.pip) return;
+    if (!this.pip) return;
 
     this.pipFlip = !this.pipFlip;
   }

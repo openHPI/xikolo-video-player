@@ -23,7 +23,6 @@ Docker E2E:
     changes:
       - Dockerfile
 
-
 .base:
   stage: test
   image: $CI_REGISTRY_IMAGE:latest
@@ -36,7 +35,6 @@ Docker E2E:
   before_script:
     - sudo chown -R user:user /builds/gitlab
     - npm install --no-audit --prefer-offline --progress=false
-
 
 test:
   extends: .base
@@ -60,5 +58,3 @@ pages:
     paths: [public]
   only:
     - master
-
-

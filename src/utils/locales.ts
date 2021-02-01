@@ -11,7 +11,7 @@ export enum de {
   unmute = 'Ton einschalten',
   settings = 'Einstellungen',
   enterFullscreen = 'Vollbildmodus öffnen',
-  exitFullscreen ='Vollbildmodus beenden',
+  exitFullscreen = 'Vollbildmodus beenden',
   enableSubtitles = 'Untertitel einblenden',
   disableSubtitles = 'Untertitel ausblenden',
 }
@@ -29,9 +29,9 @@ export enum en {
   unmute = 'Unmute',
   settings = 'Settings',
   enterFullscreen = 'Enter full screen',
-  exitFullscreen ='Exit full screen',
+  exitFullscreen = 'Exit full screen',
   enableSubtitles = 'Enable subtitles',
   disableSubtitles = 'Disable subtitles',
 }
 
-export default {de, en};
+export default { de, en };
