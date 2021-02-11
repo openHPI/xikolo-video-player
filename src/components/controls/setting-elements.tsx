@@ -21,7 +21,7 @@ export const PlaybackRateToggleButton: FunctionalComponent<PlaybackRateToggleBut
         title={locales[props.status.language].playbackRate}
       >
         <span
-          class="controls__shortcut-icon controls__shortcut-icon--active svg"
+          class="controls__button-icon controls__button-icon--active svg"
           innerHTML={icon.Speed}
         />
       </button>
@@ -32,7 +32,7 @@ export const PlaybackRateToggleButton: FunctionalComponent<PlaybackRateToggleBut
       onClick={props.onShow}
       title={locales[props.status.language].playbackRate}
     >
-      <span class="controls__shortcut-icon svg" innerHTML={icon.Speed} />
+      <span class="controls__button-icon svg" innerHTML={icon.Speed} />
     </button>
   );
 };

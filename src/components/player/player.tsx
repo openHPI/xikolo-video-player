@@ -2,6 +2,8 @@ import {
   Component,
   Element,
   h,
+  EventEmitter,
+  Event,
   Listen,
   Method,
   State,
@@ -13,6 +15,7 @@ import { Mode, Status, defaultStatus } from '../../utils/status';
 import { TextTrackList, WebVTT } from '../../utils/webVTT';
 import { bind } from '../../utils/bind';
 import locales from '../../utils/locales';
+import { ToggleControlProps, CueListChangeEventProps } from '../../utils/types';
 
 @Component({
   tag: 'xm-player',
@@ -32,6 +35,8 @@ export class Player {
 
   @State()
   private status: Status = defaultStatus;
+  @State()
+  private toggleControlButtons: Array<ToggleControlProps>;
 
   private primary: HTMLXmVideoElement | undefined;
   private secondary: HTMLXmVideoElement | undefined;
@@ -39,10 +44,19 @@ export class Player {
   private hasSecondarySlot: boolean;
   private hasDefaultTexttrack: boolean = false;
 
+  // Emits list of cues of currently selected language.
+  @Event({ eventName: 'notifyCueListChanged' })
+  cueListChangeEvent: EventEmitter<CueListChangeEventProps>;
+  // Emits list of currently active/visible cues by language and second.
+  @Event({ eventName: 'notifyActiveCuesUpdated' })
+  activeCueUpdateEvent: EventEmitter<CueListChangeEventProps>;
+  CueListChangeEventProps;
+
   public render() {
     return (
       <div class="player">
         {this.hasSecondarySlot ? (
+          // Pass through slots from consumers to subcomponents to cross the Shadow-DOM boundary
           <xm-screen fullscreen={this.status.fullscreen}>
             <slot slot="primary" name="primary"></slot>
             <slot slot="secondary" name="secondary"></slot>
@@ -50,7 +64,17 @@ export class Player {
         ) : (
           <slot slot="primary" name="primary"></slot>
         )}
-        <xm-controls status={this.status} textTracks={this.textTracks} />
+        <xm-controls
+          status={this.status}
+          textTracks={this.textTracks}
+          toggleControlButtons={this.toggleControlButtons}
+        >
+          {this.toggleControlButtons &&
+            this.toggleControlButtons.map((button) => (
+              // Pass through slots from consumers to subcomponents to cross the Shadow-DOM boundary
+              <slot slot={button.name} name={button.name}></slot>
+            ))}
+        </xm-controls>
       </div>
     );
   }
@@ -176,7 +200,34 @@ export class Player {
           activeCues: cues,
         },
       };
+      this.activeCueUpdateEvent.emit({ cues: cues });
     }
+  }
+
+  @bind()
+  @Listen('toggleControl:loaded')
+  protected _addToggleControlButton(e: CustomEvent<ToggleControlProps>) {
+    if (!e.detail) return;
+    if (!this.toggleControlButtons)
+      this.toggleControlButtons = new Array<ToggleControlProps>();
+    this.toggleControlButtons.push(e.detail);
+  }
+
+  @bind()
+  @Listen('control:changeToggleControlActiveState')
+  protected _changeToggleControlActiveState(
+    e: CustomEvent<ToggleControlProps>
+  ) {
+    const newToggleControlProps: ToggleControlProps = e.detail;
+
+    this.toggleControlButtons = this.toggleControlButtons.map(
+      (toggleControl) => {
+        // apply changed props to player state, leave rest unchanged
+        if (toggleControl.name === newToggleControlProps.name)
+          return newToggleControlProps;
+        return toggleControl;
+      }
+    );
   }
 
   @bind()
@@ -447,6 +498,7 @@ export class Player {
         textTrack: textTrack,
       },
     };
+    this.cueListChangeEvent.emit({ cues: this.textTracks.getCurrentCues() });
   }
 
   @Listen('setting:changeTextTrack')

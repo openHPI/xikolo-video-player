@@ -89,7 +89,7 @@ describe('xm-player with subtitle props', () => {
     expect(page.root.shadowRoot.querySelector('xm-controls')).toBeTruthy();
     expect(page.root.getAttribute('showsubtitle')).toBe('true');
     expect(
-      controls.shadowRoot.querySelector('.controls__subtitle-button')
+      controls.shadowRoot.querySelector('.controls__button')
     ).not.toBeTruthy();
     // Mock a loaded textTrack file
     const vtt: WebVTT = {
@@ -127,9 +127,7 @@ describe('xm-player with subtitle props', () => {
     await page.waitForChanges();
     expect(controls.shadowRoot).toBeTruthy();
     // Finally test the rendered output
-    expect(
-      controls.shadowRoot.querySelector('.controls__subtitle-button')
-    ).toBeTruthy();
+    expect(controls.shadowRoot.querySelector('.controls__button')).toBeTruthy();
     expect(page.root).toMatchSnapshot();
   });
 });

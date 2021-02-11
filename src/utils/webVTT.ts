@@ -27,6 +27,7 @@ export interface WebVTT {
 export class TextTrackList {
   protected vttList: Array<WebVTT> = [];
   protected textTracks: Array<Meta> = [];
+  // List of cues of currently selected language.
   protected currentCues: Array<Cue> = null;
   protected currentLanguage: null;
   protected loadedFiles: number = 0;
@@ -56,7 +57,7 @@ export class TextTrackList {
     }
   }
 
-  protected collectCues(language: string) {
+  protected collectCuesByLanguage(language: string) {
     const webVTT = this.vttList.find((vtt) => vtt.meta.language === language);
     if (webVTT && webVTT.cues) {
       this.currentCues = webVTT.cues;
@@ -66,12 +67,16 @@ export class TextTrackList {
   }
 
   public getActiveCues(seconds: number, language: string) {
-    if (language !== this.currentLanguage) this.collectCues(language);
+    if (language !== this.currentLanguage) this.collectCuesByLanguage(language);
     if (this.currentCues === null) return null;
     const cues: Array<Cue> = this.currentCues.filter(
       (cue) => cue.start <= seconds && cue.end >= seconds
     );
     return cues.length ? cues : null;
+  }
+
+  public getCurrentCues() {
+    return this.currentCues;
   }
 
   public getTextTracks() {

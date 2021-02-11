@@ -19,6 +19,14 @@ Now you can define default values for all used variables. :)
 | `volume`       | `volume`       |             | `number`  | `defaultStatus.volume`                |
 
 
+## Events
+
+| Event             | Description | Type                                   |
+| ----------------- | ----------- | -------------------------------------- |
+| `activeCueUpdate` |             | `CustomEvent<CueListChangeEventProps>` |
+| `cueListChange`   |             | `CustomEvent<CueListChangeEventProps>` |
+
+
 ## Methods
 
 ### `disableTextTrack() => Promise<void>`

@@ -3,6 +3,7 @@ import { Controls } from '../controls/controls';
 import { SettingsMenu } from '../settings-menu/settings-menu';
 import { defaultStatus } from '../../utils/status';
 import { TextTrackList, WebVTT } from '../../utils/webVTT';
+import { ToggleControlProps } from '../../utils/types';
 
 describe('xm-controls', () => {
   let page, textTracks: TextTrackList, shadowRoot, controls, settingsMenu;
@@ -117,14 +118,14 @@ describe('xm-controls', () => {
     await page.waitForChanges();
     expect(
       shadowRoot
-        .querySelector('.controls__subtitle-button')
-        .querySelector('.controls__shortcut-icon')
+        .querySelector('.controls__button')
+        .querySelector('.controls__button-icon')
     ).toBeTruthy();
     expect(
       shadowRoot
-        .querySelector('.controls__subtitle-button')
-        .querySelector('.controls__shortcut-icon')
-    ).toHaveClass('controls__shortcut-icon--active');
+        .querySelector('.controls__button')
+        .querySelector('.controls__button-icon')
+    ).toHaveClass('controls__button-icon--active');
     expect(settingsMenu.status.settings.textTrack).toBe('de');
     // must reselect it for testing !
     textTrackValue = settingsMenu.shadowRoot.querySelector(
@@ -142,6 +143,34 @@ describe('xm-controls', () => {
     expect(submenu.querySelector('.settings-menu__button')).toBeTruthy();
     expect(submenu.childNodes.length).toBe(2);
     expect(textTracks.getTextTrackValues().length).toBe(2);
+    expect(page.root).toMatchSnapshot();
+  });
+});
+
+describe('xm-controls with control-toggle', () => {
+  it('should match snapshot', async () => {
+    const pageConfig = {
+      html: `<div></div>`,
+      components: [Controls],
+    };
+    const page = await newSpecPage(pageConfig);
+
+    let controls = page.doc.createElement('xm-controls');
+
+    const toggleControlProps: Array<ToggleControlProps> = [
+      {
+        name: 'test',
+        title: 'test title',
+        active: true,
+      },
+    ];
+
+    controls.toggleControlButtons = toggleControlProps;
+    controls.status = defaultStatus;
+    page.root.appendChild(controls);
+
+    await page.waitForChanges();
+
     expect(page.root).toMatchSnapshot();
   });
 });
