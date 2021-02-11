@@ -45,6 +45,16 @@ Stencil components are just Web Components, so they work in any major framework 
 
 Components are named `xm-*`.
 
+### Event Naming Conventions
+
+Internal events are prefixed depending on where they come from.
+E.g. the `controls` component emits a `control:play`, the `settings-menu` a `setting:changePlaybackRate`.
+They are intended for internal use, but are also used outside, e.g. for tracking.
+
+Events from the `player` component itself do not have a name prefix.
+They are supposed to be only used externally.
+E.g. `cueListChange`.
+
 ### SVG Icons
 
 SVG icons are taken from the Xikolo font and FontAwesome imported to [icomoon.io](https://icomoon.io).
@@ -54,6 +64,66 @@ You can easily export the icons as cleaned SVG from this page.
 
 The video player is designed to support simple color customization.
 Components should use `currentColor` and custom CSS variables if appropriate.
+
+### Toggle Control
+
+The video player is capable to control components outside of itself.
+
+To add a toggle you need to add a `<xm-toggle-control></xm-toggle-control>`-tag.
+
+The `<xm-toggle-control>` must have a `name: string` as identifier.
+Important here is, that the markup also contains a `slot`-Attribute with the **same name**.
+
+A `title: string` is used for displaying a hover tooltip specified.
+
+You also need a nested `<svg>` working as a symbol displayed in the controls on the bottom of the player.
+
+On click the toggle control will emit an `control:changeToggleControlActiveState`-Event containing
+
+```javascript
+interface ToggleControlProps {
+  name: string;
+  title: string;
+  active: boolean;
+}
+```
+
+The `name` must be **unique**.
+
+#### Example markup
+
+```html
+<xm-player id="player-with-custom-control">
+  <xm-toggle-control
+    slot="toggleControl"
+    name="toggleControl"
+    title="Custom Control"
+    active
+  >
+    <svg slot="icon" viewBox="0 0 32 32" role="presentation" focusable="false">
+      <path
+        d="M0 2h32v4h-32zM0 8h20v4h-20zM0 20h20v4h-20zM0 14h32v4h-32zM0 26h32v4h-32z"
+      ></path>
+    </svg>
+  </xm-toggle-control>
+  ...
+</xm-player>
+```
+
+#### Example control hook
+
+```javascript
+videoPlayerWithCustomControl.addEventListener(
+  'control:changeToggleControlActiveState',
+  (event) => {
+    if (event.detail.name === 'toggleControl') {
+      customControlledText.innerHTML = `The feature is ${
+        event.detail.active ? ' active' : ' not active'
+      }`;
+    }
+  }
+);
+```
 
 ## Deploying
 

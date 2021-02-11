@@ -7,7 +7,6 @@ import {
   Event,
   State,
 } from '@stencil/core';
-
 import {
   Fullscreen,
   Control,
@@ -17,11 +16,13 @@ import {
   SettingsMenuToggleButton,
   Subtitles,
   SubtitleButton,
+  CustomControlButton,
 } from './elements';
 import { Status } from '../../utils/status';
 import { bind } from '../../utils/bind';
 import { TextTrackList } from '../../utils/webVTT';
 import { PlaybackRateToggleButton, PlaybackRate } from './setting-elements';
+import { ToggleControlProps } from '../../utils/types';
 
 @Component({
   tag: 'xm-controls',
@@ -33,6 +34,7 @@ export class Controls {
 
   @Prop() status: Status;
   @Prop({ mutable: true }) textTracks: TextTrackList;
+  @Prop({ mutable: true }) toggleControlButtons: Array<ToggleControlProps>;
 
   @Event({ eventName: 'control:play' }) playEvent: EventEmitter;
   @Event({ eventName: 'control:pause' }) pauseEvent: EventEmitter;
@@ -58,6 +60,11 @@ export class Controls {
   showPlaybackRateEvent: EventEmitter;
   @Event({ eventName: 'control:hidePlaybackRate' })
   hidePlaybackRateEvent: EventEmitter;
+  /**
+   * Event hook for custom control
+   */
+  @Event({ eventName: 'control:changeToggleControlActiveState' })
+  changeToggleControlActiveStateEvent: EventEmitter<ToggleControlProps>;
 
   public render() {
     return (
@@ -95,6 +102,15 @@ export class Controls {
               onHide={this._hidePlaybackRate}
             />
           </div>
+
+          {this.toggleControlButtons &&
+            this.toggleControlButtons.map((button) => (
+              <CustomControlButton
+                config={button}
+                onClick={this._changeToggleControlActiveState}
+              ></CustomControlButton>
+            ))}
+
           <SubtitleButton
             status={this.status}
             visible={!!this.status.subtitle.language}
@@ -196,5 +212,11 @@ export class Controls {
   private _hidePlaybackRate(e: MouseEvent) {
     e.stopPropagation();
     this.hidePlaybackRateEvent.emit();
+  }
+
+  @bind()
+  private _changeToggleControlActiveState(button: ToggleControlProps) {
+    button.active = !button.active;
+    this.changeToggleControlActiveStateEvent.emit(button);
   }
 }

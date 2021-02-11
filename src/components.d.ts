@@ -13,6 +13,10 @@ import {
 import {
   TextTrackList,
 } from './utils/webVTT';
+import {
+  CueListChangeEventProps,
+  ToggleControlProps,
+} from './utils/types';
 
 export namespace Components {
   interface XmAspectRatioBox {
@@ -21,6 +25,7 @@ export namespace Components {
   interface XmControls {
     'status': Status;
     'textTracks': TextTrackList;
+    'toggleControlButtons': Array<ToggleControlProps>;
   }
   interface XmPlayer {
     'disableTextTrack': () => Promise<void>;
@@ -48,6 +53,20 @@ export namespace Components {
     'label': string;
     'language': string;
     'src': string;
+  }
+  interface XmToggleControl {
+    /**
+    * Active state of toggle. Can function as on / off switch for feature
+    */
+    'active': boolean;
+    /**
+    * Reference to toggle control in EventListener and slot reference
+    */
+    'name': string;
+    /**
+    * Displays tooltip on hover
+    */
+    'title': string;
   }
   interface XmVideo {
     'currentTime': () => Promise<number>;
@@ -105,6 +124,12 @@ declare global {
     new (): HTMLXmTextTrackElement;
   };
 
+  interface HTMLXmToggleControlElement extends Components.XmToggleControl, HTMLStencilElement {}
+  var HTMLXmToggleControlElement: {
+    prototype: HTMLXmToggleControlElement;
+    new (): HTMLXmToggleControlElement;
+  };
+
   interface HTMLXmVideoElement extends Components.XmVideo, HTMLStencilElement {}
   var HTMLXmVideoElement: {
     prototype: HTMLXmVideoElement;
@@ -117,6 +142,7 @@ declare global {
     'xm-screen': HTMLXmScreenElement;
     'xm-settings-menu': HTMLXmSettingsMenuElement;
     'xm-text-track': HTMLXmTextTrackElement;
+    'xm-toggle-control': HTMLXmToggleControlElement;
     'xm-video': HTMLXmVideoElement;
   }
 }
@@ -127,6 +153,10 @@ declare namespace LocalJSX {
   }
   interface XmControls {
     'onControl:changePlaybackRate'?: (event: CustomEvent<any>) => void;
+    /**
+    * Event hook for custom control
+    */
+    'onControl:changeToggleControlActiveState'?: (event: CustomEvent<ToggleControlProps>) => void;
     'onControl:changeVolume'?: (event: CustomEvent<any>) => void;
     'onControl:closeSettingsMenu'?: (event: CustomEvent<any>) => void;
     'onControl:disableTextTrack'?: (event: CustomEvent<any>) => void;
@@ -143,9 +173,12 @@ declare namespace LocalJSX {
     'onControl:unmute'?: (event: CustomEvent<any>) => void;
     'status'?: Status;
     'textTracks'?: TextTrackList;
+    'toggleControlButtons'?: Array<ToggleControlProps>;
   }
   interface XmPlayer {
     'lang'?: string;
+    'onNotifyActiveCuesUpdated'?: (event: CustomEvent<CueListChangeEventProps>) => void;
+    'onNotifyCueListChanged'?: (event: CustomEvent<CueListChangeEventProps>) => void;
     'playbackrate'?: number;
     'showsubtitle'?: boolean;
     'volume'?: number;
@@ -166,6 +199,24 @@ declare namespace LocalJSX {
     'language'?: string;
     'onTexttrack:loaded'?: (event: CustomEvent<any>) => void;
     'src'?: string;
+  }
+  interface XmToggleControl {
+    /**
+    * Active state of toggle. Can function as on / off switch for feature
+    */
+    'active'?: boolean;
+    /**
+    * Reference to toggle control in EventListener and slot reference
+    */
+    'name'?: string;
+    /**
+    * Emitted on componentDidLoad. Used in player to init CustomControlButton
+    */
+    'onToggleControl:loaded'?: (event: CustomEvent<ToggleControlProps>) => void;
+    /**
+    * Displays tooltip on hover
+    */
+    'title'?: string;
   }
   interface XmVideo {
     'onBuffered'?: (event: CustomEvent<any>) => void;
@@ -192,6 +243,7 @@ declare namespace LocalJSX {
     'xm-screen': XmScreen;
     'xm-settings-menu': XmSettingsMenu;
     'xm-text-track': XmTextTrack;
+    'xm-toggle-control': XmToggleControl;
     'xm-video': XmVideo;
   }
 }
@@ -208,6 +260,7 @@ declare module "@stencil/core" {
       'xm-screen': LocalJSX.XmScreen & JSXBase.HTMLAttributes<HTMLXmScreenElement>;
       'xm-settings-menu': LocalJSX.XmSettingsMenu & JSXBase.HTMLAttributes<HTMLXmSettingsMenuElement>;
       'xm-text-track': LocalJSX.XmTextTrack & JSXBase.HTMLAttributes<HTMLXmTextTrackElement>;
+      'xm-toggle-control': LocalJSX.XmToggleControl & JSXBase.HTMLAttributes<HTMLXmToggleControlElement>;
       'xm-video': LocalJSX.XmVideo & JSXBase.HTMLAttributes<HTMLXmVideoElement>;
     }
   }

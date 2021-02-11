@@ -4,6 +4,7 @@ import * as icon from '../../utils/icon';
 import { Status, Mode } from '../../utils/status';
 import { format } from '../../utils/duration';
 import locales from '../../utils/locales';
+import { ToggleControlProps } from '../../utils/types';
 
 interface FullscreenProps {
   status: Status;
@@ -219,12 +220,12 @@ export const SubtitleButton: FunctionalComponent<SubtitleButtonProps> = (
   if (props.status.subtitle.enabled) {
     return (
       <button
-        class="controls__subtitle-button"
+        class="controls__button"
         onClick={props.onDisable}
         title={locales[props.status.language].disableSubtitles}
       >
         <span
-          class="controls__shortcut-icon controls__shortcut-icon--active svg"
+          class="controls__button-icon controls__button-icon--active svg"
           innerHTML={icon.Subtitle}
         />
       </button>
@@ -232,11 +233,11 @@ export const SubtitleButton: FunctionalComponent<SubtitleButtonProps> = (
   } else {
     return (
       <button
-        class="controls__subtitle-button"
+        class="controls__button"
         onClick={props.onEnable}
         title={locales[props.status.language].enableSubtitles}
       >
-        <span class="controls__shortcut-icon svg" innerHTML={icon.Subtitle} />
+        <span class="controls__button-icon svg" innerHTML={icon.Subtitle} />
       </button>
     );
   }
@@ -259,4 +260,29 @@ export const Subtitles: FunctionalComponent<SubtitlesProps> = (props) => {
       </div>
     );
   }
+};
+
+interface CustomControlButton {
+  config: ToggleControlProps;
+  onClick: (e: ToggleControlProps) => void;
+}
+
+export const CustomControlButton: FunctionalComponent<CustomControlButton> = (
+  props
+) => {
+  return (
+    <button
+      class="controls__button"
+      onClick={() => props.onClick(props.config)}
+      title={props.config.title}
+    >
+      <span
+        class={`controls__button-icon ${
+          props.config.active ? 'controls__button-icon--active' : ''
+        } svg`}
+      >
+        <slot name={props.config.name}></slot>
+      </span>
+    </button>
+  );
 };

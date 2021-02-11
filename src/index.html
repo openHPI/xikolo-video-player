@@ -35,15 +35,15 @@
         display: none;
       }
 
-      /* a red test :D */
+      /* Test video-player branding */
       /* xm-player {
-      --vps-slider-color:  #cc0000;
-      --vps-gutter-color: #cc0000;
-      --vps-bg-color: #660000;
-      --vps-bg-color-rgb: 255, 0, 0;
-      --vps-main-color: #660000;
-      --vps-menu-color-rgb: 255, 50, 50;
-    } */
+        --vps-slider-color: #cc0000;
+        --vps-gutter-color: #cc0000;
+        --vps-bg-color: #660000;
+        --vps-bg-color-rgb: 255, 0, 0;
+        --vps-main-color: #660000;
+        --vps-menu-color-rgb: 255, 50, 50;
+      } */
 
       .overlay {
         height: 100%;
@@ -122,36 +122,79 @@
             allowfullscreen
           ></iframe>
         </xm-player>
+
+        <h2><a href="#">Toggle control</a></h2>
+
+        <xm-player id="player-with-custom-control">
+          <xm-toggle-control
+            slot="toggleControl"
+            name="toggleControl"
+            title="Custom Control"
+            active
+          >
+            <svg
+              slot="icon"
+              viewBox="0 0 32 32"
+              role="presentation"
+              focusable="false"
+            >
+              <path
+                d="M0 2h32v4h-32zM0 8h20v4h-20zM0 20h20v4h-20zM0 14h32v4h-32zM0 26h32v4h-32z"
+              ></path>
+            </svg>
+          </xm-toggle-control>
+          <xm-video slot="primary" src="264584278"></xm-video>
+        </xm-player>
+        <div id="custom-controlled-element">
+          Click the custom button to toggle the feature
+        </div>
       </div>
-
-      <script>
-        let el = document.querySelector('xm-player');
-        const log = function (e) {
-          console.log(e.type, e.detail);
-        };
-
-        el.addEventListener('play', log);
-        el.addEventListener('pause', log);
-        el.addEventListener('seeking', log);
-        el.addEventListener('seeked', log);
-        el.addEventListener('bufferstart', log);
-        el.addEventListener('bufferend', log);
-        el.addEventListener('ended', log);
-
-        el.addEventListener('ioc:request', log);
-
-        el.addEventListener('click', function (e) {
-          console.log('click', e.target);
-        });
-
-        el.addEventListener('timeupdate', log);
-        el.addEventListener('progress', log);
-      </script>
 
       <br />
       <button>Button</button>
     </section>
     <script>
+      let el = document.querySelector('xm-player');
+      const log = function (e) {
+        console.log(e.type, e.detail);
+      };
+
+      el.addEventListener('play', log);
+      el.addEventListener('pause', log);
+      el.addEventListener('seeking', log);
+      el.addEventListener('seeked', log);
+      el.addEventListener('bufferstart', log);
+      el.addEventListener('bufferend', log);
+      el.addEventListener('ended', log);
+
+      el.addEventListener('ioc:request', log);
+
+      el.addEventListener('click', function (e) {
+        console.log('click', e.target);
+      });
+
+      el.addEventListener('timeupdate', log);
+      el.addEventListener('progress', log);
+
+      const videoPlayerWithCustomControl = document.querySelector(
+        '#player-with-custom-control'
+      );
+
+      const customControlledText = document.querySelector(
+        '#custom-controlled-element'
+      );
+
+      videoPlayerWithCustomControl.addEventListener(
+        'control:changeToggleControlActiveState',
+        (event) => {
+          if (event.detail.name === 'toggleControl') {
+            customControlledText.innerHTML = `The feature is ${
+              event.detail.active ? ' active' : ' not active'
+            }`;
+          }
+        }
+      );
+
       document.querySelectorAll('button').forEach(function (el) {
         el.addEventListener('click', function (e) {
           document.querySelector('xm-player').requestFullscreen();

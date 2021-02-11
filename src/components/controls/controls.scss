@@ -64,7 +64,7 @@
       }
 
       .controls__playback-rate,
-      .controls__subtitle-button {
+      .controls__button {
         display: none;
       }
 
@@ -262,7 +262,7 @@
     }
   }
 
-  .controls__shortcut-icon {
+  .controls__button-icon {
     display: block;
     overflow: hidden;
     transition: box-shadow 0.3s ease-in-out;
