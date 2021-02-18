@@ -50,7 +50,6 @@ export class Player {
   // Emits list of currently active/visible cues by language and second.
   @Event({ eventName: 'notifyActiveCuesUpdated' })
   activeCueUpdateEvent: EventEmitter<CueListChangeEventProps>;
-  CueListChangeEventProps;
 
   public render() {
     return (
@@ -188,10 +187,7 @@ export class Player {
   @bind()
   protected _cueUpdate(seconds: number, refresh?: boolean) {
     const { activeCues } = this.status.subtitle;
-    const cues = this.textTracks.getActiveCues(
-      seconds,
-      this.status.subtitle.language
-    );
+    const cues = this.textTracks.getActiveCues(seconds);
     if (refresh || !this.textTracks.compareCueLists(cues, activeCues)) {
       this.status = {
         ...this.status,
@@ -200,6 +196,7 @@ export class Player {
           activeCues: cues,
         },
       };
+      // Notifies external listeners that the active cues have changed
       this.activeCueUpdateEvent.emit({ cues: cues });
     }
   }
@@ -481,7 +478,6 @@ export class Player {
         },
       };
     } else {
-      this._cueUpdate(this.status.progress.seconds, true);
       this.status = {
         ...this.status,
         subtitle: {
@@ -490,6 +486,15 @@ export class Player {
           enabled: enable,
         },
       };
+      // Sets the current language & cues in the used player TextTrackList
+      this.textTracks.setCurrentCuesByLanguage(textTrack);
+      // Notifies external listeners that a full cue list change has occurred
+      const currentCues = this.textTracks.getCurrentCues();
+      this.cueListChangeEvent.emit({
+        cues: currentCues,
+      });
+      // Triggers an update for collecting active cues for the new language
+      this._cueUpdate(this.status.progress.seconds, true);
     }
     this.status = {
       ...this.status,
@@ -498,7 +503,6 @@ export class Player {
         textTrack: textTrack,
       },
     };
-    this.cueListChangeEvent.emit({ cues: this.textTracks.getCurrentCues() });
   }
 
   @Listen('setting:changeTextTrack')
