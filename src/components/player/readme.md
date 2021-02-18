@@ -21,10 +21,10 @@ Now you can define default values for all used variables. :)
 
 ## Events
 
-| Event             | Description | Type                                   |
-| ----------------- | ----------- | -------------------------------------- |
-| `activeCueUpdate` |             | `CustomEvent<CueListChangeEventProps>` |
-| `cueListChange`   |             | `CustomEvent<CueListChangeEventProps>` |
+| Event                     | Description | Type                                   |
+| ------------------------- | ----------- | -------------------------------------- |
+| `notifyActiveCuesUpdated` |             | `CustomEvent<CueListChangeEventProps>` |
+| `notifyCueListChanged`    |             | `CustomEvent<CueListChangeEventProps>` |
 
 
 ## Methods

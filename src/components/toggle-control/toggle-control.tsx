@@ -19,7 +19,7 @@ export class ToggleControl {
   /**
    * Active state of toggle. Can function as on / off switch for feature
    */
-  @Prop() active: boolean = true;
+  @Prop() active: boolean;
 
   /**
    * Emitted on componentDidLoad. Used in player to init CustomControlButton
