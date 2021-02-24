@@ -58,7 +58,7 @@ export class TextTrackList {
   }
 
   public setCurrentCuesByLanguage(language: string) {
-    if(this.currentLanguage !== language) {
+    if (this.currentLanguage !== language) {
       const webVTT = this.vttList.find((vtt) => vtt.meta.language === language);
       if (webVTT && webVTT.cues) {
         this.currentLanguage = language;
