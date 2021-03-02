@@ -25,15 +25,16 @@ export class Screen {
   @State() pipFlip: boolean = false;
   @State() orientationVertical: boolean;
 
-  private screen: HTMLDivElement;
-  private engine: Split;
+  private split: Split.Instance;
+  private primary: HTMLElement;
+  private secondary: HTMLElement;
   private primaryRatio: number = null;
   private secondaryRatio: number = null;
 
   setSplitScreen() {
     if (window.innerWidth < 768) {
       this.orientationVertical = true;
-      this.engine = Split(this.screen.childNodes, {
+      this.split = Split([this.primary, this.secondary], {
         sizes: [this.secondaryRatio, this.primaryRatio],
         gutterSize: 6,
         direction: 'vertical',
@@ -41,7 +42,7 @@ export class Screen {
       });
     } else {
       this.orientationVertical = false;
-      this.engine = Split(this.screen.childNodes, {
+      this.split = Split([this.primary, this.secondary], {
         sizes: [this.secondaryRatio, this.primaryRatio],
         gutterSize: 6,
         direction: 'horizontal',
@@ -60,15 +61,19 @@ export class Screen {
     };
 
     return (
-      <div class={clWrp} ref={(e) => (this.screen = e)}>
-        <div class="pane primary" onMouseEnter={() => this._flipPipLeft()}>
+      <div class={clWrp}>
+        <div
+          class="pane primary"
+          ref={(e) => (this.primary = e)}
+          onMouseEnter={() => this._flipPipLeft()}
+        >
           <span class="pane__arrow pane__arrow--left">
             <span class="svg" innerHTML={icon.ArrowLeft} />
           </span>
           <slot name="primary" />
         </div>
         <div class="gutter"></div>
-        <div class="pane secondary">
+        <div class="pane secondary" ref={(e) => (this.secondary = e)}>
           <span class="pane__arrow pane__arrow--right">
             <span class="svg" innerHTML={icon.ArrowRight} />
           </span>
@@ -79,13 +84,13 @@ export class Screen {
   }
 
   componentDidUnload() {
-    this.engine.destroy();
+    this.split.destroy();
   }
 
   /**
-   * This method is triggered by all video child web-componets within the componentDidLoad method.
+   * This method is triggered by all video child web-components within the componentDidLoad method.
    * Every time a video child component was rendered the first time and the iframe in it was loaded,
-   * we will get the currect ratio of it asynchronously.
+   * we will get the current ratio of it asynchronously.
    * @param e CustomEvent
    */
   @bind()
@@ -95,7 +100,7 @@ export class Screen {
       (window.innerWidth < 768 && !this.orientationVertical) ||
       (window.innerWidth >= 768 && this.orientationVertical)
     ) {
-      this.engine.destroy();
+      this.split.destroy();
       this.setSplitScreen();
     }
   }
