@@ -72,7 +72,7 @@ push:
     - git config --global user.name 'GitLab CI'
 
   script:
-    - git clone -b build https://gitlab-ci:$GITLAB_CI_TOKEN@dev.xikolo.de/gitlab/franz.liedke/video-player.git build
+    - git clone -b build https://gitlab-ci:$GITLAB_CI_TOKEN@dev.xikolo.de/gitlab/$CI_PROJECT_PATH.git build
     - rsync --recursive --links --delete --verbose dist/ build/dist/
     - rsync --recursive --links --delete --verbose loader/ build/loader/
     - cd build/
