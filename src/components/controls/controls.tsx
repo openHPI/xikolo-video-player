@@ -5,7 +5,7 @@ import {
   Prop,
   EventEmitter,
   Event,
-  State,
+  Listen,
 } from '@stencil/core';
 import {
   Fullscreen,
@@ -18,11 +18,22 @@ import {
   SubtitleButton,
   CustomControlButton,
 } from './elements';
-import { Status } from '../../utils/status';
+import { Mode, Status } from '../../utils/status';
 import { bind } from '../../utils/bind';
 import { TextTrackList } from '../../utils/webVTT';
 import { PlaybackRateToggleButton, PlaybackRate } from './setting-elements';
 import { ToggleControlProps } from '../../utils/types';
+
+const KeyValues = {
+  Space: ' ',
+  Enter: 'Enter',
+  ArrowUp: 'ArrowUp',
+  ArrowDown: 'ArrowDown',
+  ArrowLeft: 'ArrowLeft',
+  ArrowRight: 'ArrowRight',
+  f: 'f',
+  m: 'm',
+};
 
 @Component({
   tag: 'xm-controls',
@@ -30,6 +41,11 @@ import { ToggleControlProps } from '../../utils/types';
   shadow: true,
 })
 export class Controls {
+  /**
+   * Used on key control to skip forwards and backwards
+   */
+  skippedSeconds = 5;
+
   @Element() el: HTMLXmControlsElement;
 
   @Prop() status: Status;
@@ -77,7 +93,11 @@ export class Controls {
       >
         <Subtitles status={this.status} />
         <xm-settings-menu status={this.status} textTracks={this.textTracks} />
-        <Slider status={this.status} onSeek={this._seek} />
+        <Slider
+          status={this.status}
+          onSeek={this._seek}
+          onKeyDown={this.togglePlay}
+        />
         <div class="controls__toolbar">
           <Control
             status={this.status}
@@ -130,6 +150,53 @@ export class Controls {
         </div>
       </div>
     );
+  }
+
+  @bind()
+  @Listen('keydown', { target: 'parent' })
+  private handleKeyDown(e: KeyboardEvent) {
+    const key = e.key;
+    const target = e.target as Element;
+
+    if (this.hasDefaultScrollingBehavior(key, target)) {
+      // Prevent default scrolling when focusing the player and pressing "Space" or "ArrowUp" / "ArrowDown"
+      e.preventDefault();
+    }
+
+    switch (key) {
+      case KeyValues.Space:
+      case KeyValues.Enter:
+        // Prevent interference with controls from <xm-controls>:
+        // If focus is on a button from <xm-controls> the video should not play/pause.
+        // Instead, the button functionality will be triggered.
+        if (target.tagName === 'XM-CONTROLS') return;
+        this.togglePlay();
+        break;
+      case KeyValues.ArrowUp:
+        this.increaseVolume();
+        break;
+      case KeyValues.ArrowDown:
+        this.decreaseVolume();
+        break;
+      case KeyValues.ArrowLeft:
+        this.skipBackward();
+        break;
+      case KeyValues.ArrowRight:
+        this.skipForward();
+        break;
+      case KeyValues.f:
+        this.toggleFullscreen();
+        break;
+      case KeyValues.m:
+        this.toggleMute();
+        break;
+    }
+  }
+
+  @bind()
+  @Listen('dblclick', { target: 'parent' })
+  private handleDoubleClick(e: MouseEvent) {
+    this.toggleFullscreen();
   }
 
   @bind()
@@ -218,5 +285,76 @@ export class Controls {
   private _changeToggleControlActiveState(button: ToggleControlProps) {
     button.active = !button.active;
     this.changeToggleControlActiveStateEvent.emit(button);
+  }
+
+  @bind()
+  private toggleFullscreen() {
+    this.status.fullscreen ? this._exitFullscreen() : this._enterFullscreen();
+  }
+
+  @bind()
+  private toggleMute() {
+    this.status.muted ? this._unmute() : this._mute();
+  }
+
+  @bind()
+  private togglePlay() {
+    if (this.status.mode === Mode.PAUSED) {
+      this._play();
+    }
+    if (this.status.mode === Mode.PLAYING) {
+      this._pause();
+    }
+  }
+
+  @bind()
+  private increaseVolume() {
+    let volume = this.fixDecimalPrecision(this.status.volume);
+
+    if (volume < 1) {
+      this._setVolume((volume += 0.1));
+    }
+  }
+
+  @bind()
+  private decreaseVolume() {
+    let volume = this.fixDecimalPrecision(this.status.volume);
+
+    if (volume > 0) {
+      this._setVolume((volume -= 0.1));
+    }
+  }
+
+  @bind()
+  private skipForward() {
+    const progress = this.status.progress.seconds;
+    const endOfVideo = this.status.duration;
+    const newPosition =
+      progress < endOfVideo - this.skippedSeconds
+        ? progress + this.skippedSeconds
+        : endOfVideo;
+
+    this._seek(newPosition);
+  }
+
+  @bind()
+  private skipBackward() {
+    const progress = this.status.progress.seconds;
+    const newPosition =
+      progress < this.skippedSeconds ? 0 : progress - this.skippedSeconds;
+
+    this._seek(newPosition);
+  }
+
+  private fixDecimalPrecision(number: number): number {
+    return parseFloat(number.toFixed(1));
+  }
+
+  private hasDefaultScrollingBehavior(key: string, target: Element): boolean {
+    return (
+      (key === ' ' && target.tagName !== 'XM-CONTROLS') ||
+      key === 'ArrowUp' ||
+      key === 'ArrowDown'
+    );
   }
 }

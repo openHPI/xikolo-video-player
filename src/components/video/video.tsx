@@ -51,7 +51,7 @@ export class Video {
           <iframe class="video-iframe" />
         </div>
 
-        <div class="overlay">
+        <div class="overlay" tabindex="0">
           <slot name="overlay" />
         </div>
       </xm-aspect-ratio-box>

@@ -26,7 +26,7 @@ export class Player {
   @Element()
   private el: HTMLXmPlayerElement;
 
-  @Prop({ mutable: true }) volume: number = defaultStatus.volume;
+  @Prop() volume: number = defaultStatus.volume;
   @Prop({ mutable: true }) playbackrate: number =
     defaultStatus.settings.playbackRate;
   @Prop() showsubtitle: boolean = defaultStatus.subtitle.enabled;
@@ -53,7 +53,7 @@ export class Player {
 
   public render() {
     return (
-      <div class="player">
+      <div class="player" tabindex="0">
         {this.hasSecondarySlot ? (
           // Pass through slots from consumers to subcomponents to cross the Shadow-DOM boundary
           <xm-screen fullscreen={this.status.fullscreen}>
@@ -104,6 +104,7 @@ export class Player {
 
     document.addEventListener('click', this._hideSettingsMenuOnClickOutside);
 
+    // Based on the type, Stencil converts the user setting volume to a number
     this._setVolume(this.volume);
     this._setPlaybackRate(this.playbackrate);
     this._setLanguage(this.lang);
@@ -347,15 +348,13 @@ export class Player {
 
   @bind()
   public async _setVolume(volume: number) {
-    if (!isNaN(volume)) {
-      this.volume = volume;
-      this.primary.volume = this.volume;
-      this.status = {
-        ...this.status,
-        volume: this.volume,
-        muted: this.volume === 0,
-      };
-    }
+    this.status = {
+      ...this.status,
+      volume: volume,
+    };
+
+    const isMuted = volume === 0;
+    isMuted ? this.mute() : this.unmute();
   }
 
   @Listen('control:changeVolume')
