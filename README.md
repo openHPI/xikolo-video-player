@@ -127,43 +127,9 @@ videoPlayerWithCustomControl.addEventListener(
 
 ## Deploying
 
-For deploying the video player, please follow these steps.
+Commits to the `master` branch are automatically compiled and added to the `build` branch.
 
-Currently, the `build` branch contains the compiled build files.
-The video player can be included as git dependency from this branch (see below).
-
-1. Cleanup the project: remove the `dist` and `loader` folders
-
-```bash
-rm dist loader
-```
-
-2. When you have completed your changes and added them to `master`, build the project for production (in the `master` branch).
-
-```bash
-npm run build
-```
-
-3. Checkout the `build` branch and add your changes.
-   Please adhere to [Semantic Versioning](https://semver.org/) for annotating your changes and add a short summary to the commit message.
-
-```bash
-git checkout build
-git pull --rebase
-# Example for a commit message (not showing the summary of the changes)
-git commit -m "Add changes from master (v1.x.x)"
-```
-
-4. The video player can be included in your project as a git dependency.
-
-```bash
-# Using yarn
-yarn add git+https://gitlab+deploy-token-<TOKEN_NUMBER>:<PASSWORD>@dev.xikolo.de/gitlab/xikolo/video-player#semver:<semver>
-# Using npm
-npm install git+https://gitlab+deploy-token-<TOKEN_NUMBER>:<PASSWORD>@dev.xikolo.de/gitlab/xikolo/video-player#semver:<semver>
-```
-
-5. If it has already been added to your project, update it in your project.
+This branch can be used as a target for inclusion in other projects:
 
 ```bash
 # Example for the Xikolo project (using Yarn)

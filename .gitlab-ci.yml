@@ -46,7 +46,7 @@ build:
   script:
     - npm run build
   artifacts:
-    paths: [www]
+    paths: [dist, loader, www]
     expire_in: 1 month
 
 pages:
@@ -58,3 +58,23 @@ pages:
     paths: [public]
   only:
     - master
+
+push:
+  extends: .base
+  stage: deploy
+  only:
+    - master
+  dependencies:
+    - build
+
+  before_script:
+    - git config --global user.email 'gitlab@xikolo.de'
+    - git config --global user.name 'GitLab CI'
+
+  script:
+    - git clone -b build https://gitlab-ci:$GITLAB_CI_TOKEN@dev.xikolo.de/gitlab/franz.liedke/video-player.git build
+    - rsync --recursive --links --delete --verbose dist/ build/dist/
+    - rsync --recursive --links --delete --verbose loader/ build/loader/
+    - cd build/
+    - git add .
+    - git commit -m"Auto-build for $CI_COMMIT_SHA" && git push; true
