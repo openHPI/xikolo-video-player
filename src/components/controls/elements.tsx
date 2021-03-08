@@ -145,6 +145,7 @@ export const Volume: FunctionalComponent<VolumeProps> = (props) => {
 interface SliderProps {
   status: Status;
   onSeek: (seconds: number) => void;
+  onKeyDown: Function;
 }
 
 export const Slider: FunctionalComponent<SliderProps> = (props) => {
@@ -153,6 +154,13 @@ export const Slider: FunctionalComponent<SliderProps> = (props) => {
   const fnSeek = (e: Event) => {
     const el = e.target as HTMLInputElement;
     props.onSeek(parseFloat(el.value));
+  };
+
+  const togglePlayOnSpaceKey = (e: KeyboardEvent) => {
+    if (e.key === ' ') {
+      props.onKeyDown();
+      e.preventDefault();
+    }
   };
 
   return (
@@ -170,6 +178,9 @@ export const Slider: FunctionalComponent<SliderProps> = (props) => {
       value={progress.seconds.toString()}
       onChange={fnSeek}
       onInput={fnSeek}
+      onKeyDown={(e) => {
+        togglePlayOnSpaceKey(e);
+      }}
     />
   );
 };

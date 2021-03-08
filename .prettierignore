@@ -1,3 +1,4 @@
+.prettierignore
 dist/
 loader/
 node_modules/
@@ -9,3 +10,4 @@ src/static/
 # Ignore auto-generated files
 src/components.d.ts
 src/components/*/readme.md
+*.snap

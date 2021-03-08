@@ -3,7 +3,7 @@
 exports[`xm-player with props should render 1`] = `
 <xm-player lang="en" playbackrate="2" volume="0.3">
   <mock:shadow-root>
-    <div class="player">
+    <div class="player" tabindex="0">
       <xm-screen>
         <slot name="primary" slot="primary"></slot>
         <slot name="secondary" slot="secondary"></slot>
@@ -80,7 +80,7 @@ exports[`xm-player with props should render 1`] = `
 exports[`xm-player with props should render with volume 1`] = `
 <xm-player lang="en" playbackrate="2" volume="0.3">
   <mock:shadow-root>
-    <div class="player">
+    <div class="player" tabindex="0">
       <xm-screen>
         <slot name="primary" slot="primary"></slot>
         <slot name="secondary" slot="secondary"></slot>
@@ -157,7 +157,7 @@ exports[`xm-player with props should render with volume 1`] = `
 exports[`xm-player with subtitle props should render with default text track and an active subtitle button 1`] = `
 <xm-player lang="en" showsubtitle="true">
   <mock:shadow-root>
-    <div class="player">
+    <div class="player" tabindex="0">
       <xm-screen>
         <slot name="primary" slot="primary"></slot>
         <slot name="secondary" slot="secondary"></slot>
