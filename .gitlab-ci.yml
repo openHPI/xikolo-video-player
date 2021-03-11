@@ -61,7 +61,7 @@ pages:
 
 push:
   stage: deploy
-  image: ubuntu:20.04
+  image: ubuntu:20.04@sha256:b4f9e18267eb98998f6130342baacaeb9553f136142d40959a1b46d6401f0f2b
   only:
     - master
   dependencies:
