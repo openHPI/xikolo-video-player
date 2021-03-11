@@ -11,7 +11,7 @@ RUN apt-get update \
 
 # Own tools
 RUN apt-get update \
-    && apt-get -y install rsync sudo \
+    && apt-get -y install sudo \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd --create-home --shell /bin/bash user \

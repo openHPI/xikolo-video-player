@@ -60,14 +60,16 @@ pages:
     - master
 
 push:
-  extends: .base
   stage: deploy
+  image: ubuntu:20.04
   only:
     - master
   dependencies:
     - build
 
   before_script:
+    - apt update
+    - apt install -y git rsync
     - git config --global user.email 'gitlab@xikolo.de'
     - git config --global user.name 'GitLab CI'
 
