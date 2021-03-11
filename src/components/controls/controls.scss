@@ -258,7 +258,7 @@
 
     &--open,
     &:hover {
-      transform: rotate(90deg) translate(1px, 1px);
+      transform: rotate(90deg);
     }
   }
 
@@ -283,7 +283,7 @@
 
     &:hover {
       & .controls__settings-icon {
-        transform: rotate(90deg) translate(1px, 1px);
+        transform: rotate(90deg);
       }
       & .controls__subtitle-icon {
         box-shadow: 0px 2px 1px -1px rgba(231, 166, 26, 0.72);
