@@ -31,14 +31,35 @@ export class Screen {
   private primaryRatio: number = null;
   private secondaryRatio: number = null;
 
-  setSplitScreen() {
+  /**
+   * Override of gutter creation function for horizontal alignment
+   * See: https://github.com/nathancahill/split/tree/master/packages/splitjs#gutter
+   */
+  private gutter() {
+    const gutter = document.createElement('div');
+    gutter.className = `gutter gutter--horizontal`;
+
+    const handlerTemplate = `
+    <span class="gutter__draggable-area">
+      <span class="gutter__handle">
+        <span class="gutter__arrow gutter__arrow--left">${icon.ArrowLeft}</span>
+        <span class="gutter__arrow">${icon.ArrowRight}</span>
+      </span>
+    </span>
+    `;
+    gutter.innerHTML = handlerTemplate;
+
+    return gutter;
+  }
+
+  initSplitScreen() {
+    // Mobile view is vertical
     if (window.innerWidth < 768) {
       this.orientationVertical = true;
       this.split = Split([this.primary, this.secondary], {
         sizes: [this.secondaryRatio, this.primaryRatio],
         gutterSize: 6,
         direction: 'vertical',
-        cursor: 'row-resize',
       });
     } else {
       this.orientationVertical = false;
@@ -46,7 +67,7 @@ export class Screen {
         sizes: [this.secondaryRatio, this.primaryRatio],
         gutterSize: 6,
         direction: 'horizontal',
-        cursor: 'col-resize',
+        gutter: this.gutter,
       });
     }
   }
@@ -67,16 +88,10 @@ export class Screen {
           ref={(e) => (this.primary = e)}
           onMouseEnter={() => this._flipPipLeft()}
         >
-          <span class="pane__arrow pane__arrow--left">
-            <span class="svg" innerHTML={icon.ArrowLeft} />
-          </span>
           <slot name="primary" />
         </div>
-        <div class="gutter"></div>
+        {/* gutter: Split JS automatically inserts div here  */}
         <div class="pane secondary" ref={(e) => (this.secondary = e)}>
-          <span class="pane__arrow pane__arrow--right">
-            <span class="svg" innerHTML={icon.ArrowRight} />
-          </span>
           <slot name="secondary" />
         </div>
       </div>
@@ -101,7 +116,7 @@ export class Screen {
       (window.innerWidth >= 768 && this.orientationVertical)
     ) {
       this.split.destroy();
-      this.setSplitScreen();
+      this.initSplitScreen();
     }
   }
 
@@ -114,23 +129,8 @@ export class Screen {
     }
 
     if (this.primaryRatio && this.secondaryRatio) {
-      /**
-       * IE11 hack:
-       * We need to save the given stencil 'magic' class from our placeholder to
-       * place it to the new js generated gutter div.
-       */
-      const gutterPlaceholder = this.el.shadowRoot.querySelector('.gutter');
-      const classesForIE11 = gutterPlaceholder.getAttribute('class');
-      if (gutterPlaceholder) {
-        gutterPlaceholder.remove();
-      }
       // Initialization of video orientation when first rendered
-      this.setSplitScreen();
-
-      const gutter = this.el.shadowRoot.querySelector('.gutter');
-      if (gutter) {
-        gutter.className += ' ' + classesForIE11;
-      }
+      this.initSplitScreen();
     }
   }
 
