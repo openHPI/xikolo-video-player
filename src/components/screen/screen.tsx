@@ -43,7 +43,7 @@ export class Screen {
     <span class="gutter__draggable-area">
       <span class="gutter__handle">
         <span class="gutter__arrow gutter__arrow--left">${icon.ArrowLeft}</span>
-        <span class="gutter__arrow">${icon.ArrowRight}</span>
+        <span class="gutter__arrow gutter__arrow--right">${icon.ArrowRight}</span>
       </span>
     </span>
     `;

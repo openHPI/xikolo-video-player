@@ -19,12 +19,9 @@
         height: 55px;
       }
       .gutter__arrow {
-        &--left {
-          left: 5%;
-        }
         svg {
-          height: 1.5rem;
-          width: 1.5rem;
+          height: 30px;
+          width: 30px;
         }
       }
     }
@@ -70,6 +67,7 @@
   }
 
   &__handle {
+    position: relative;
     background-color: var(--vp-gutter-color);
     // Override height for round shape
     height: var(--vp-gutter-width);
@@ -81,17 +79,20 @@
     position: absolute;
     background-color: transparent;
     top: 50%;
-    left: 50%;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
 
     &--left {
-      left: 0%;
+      left: 25%;
+    }
+
+    &--right {
+      left: 75%;
     }
 
     svg {
       display: block;
-      height: 1.2rem;
-      width: 1.2rem;
+      height: 20px;
+      width: 20px;
       fill: currentcolor;
     }
   }
