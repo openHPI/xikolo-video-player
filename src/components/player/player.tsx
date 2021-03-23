@@ -23,6 +23,22 @@ import { ToggleControlProps, CueListChangeEventProps } from '../../utils/types';
   shadow: true,
 })
 export class Player {
+  /**
+   * Used on key control to skip forwards and backwards
+   */
+  skippedSeconds = 5;
+
+  keyValues = {
+    Space: ' ',
+    Enter: 'Enter',
+    ArrowUp: 'ArrowUp',
+    ArrowDown: 'ArrowDown',
+    ArrowLeft: 'ArrowLeft',
+    ArrowRight: 'ArrowRight',
+    f: 'f',
+    m: 'm',
+  };
+
   @Element()
   private el: HTMLXmPlayerElement;
 
@@ -249,6 +265,53 @@ export class Player {
         this._setTextTrack(vtt.meta.language, this.showsubtitle);
       }
     }
+  }
+
+  @bind()
+  @Listen('keydown')
+  private handleKeyDown(e: KeyboardEvent) {
+    const key = e.key;
+    const target = e.target as Element;
+
+    if (this.hasDefaultScrollingBehavior(key, target)) {
+      // Prevent default scrolling when focusing the player and pressing "Space" or "ArrowUp" / "ArrowDown"
+      e.preventDefault();
+    }
+
+    switch (key) {
+      case this.keyValues.Space:
+      case this.keyValues.Enter:
+        // Prevent interference with controls from <xm-controls>:
+        // If focus is on a button from <xm-controls> the video should not play/pause.
+        // Instead, the button functionality will be triggered.
+        if (this.controlsIsFocused(target)) return;
+        this.togglePlay();
+        break;
+      case this.keyValues.ArrowUp:
+        this.increaseVolume();
+        break;
+      case this.keyValues.ArrowDown:
+        this.decreaseVolume();
+        break;
+      case this.keyValues.ArrowLeft:
+        this.skipBackward();
+        break;
+      case this.keyValues.ArrowRight:
+        this.skipForward();
+        break;
+      case this.keyValues.f:
+        this.toggleFullscreen();
+        break;
+      case this.keyValues.m:
+        this.toggleMute();
+        break;
+    }
+  }
+
+  @bind()
+  @Listen('dblclick')
+  private handleDoubleClick(e: MouseEvent) {
+    this.toggleFullscreen();
   }
 
   @Method()
@@ -507,5 +570,80 @@ export class Player {
   @Listen('setting:changeTextTrack')
   public _changeTextTrack(e: CustomEvent) {
     this._setTextTrack(e.detail.textTrack);
+  }
+
+  @bind()
+  private togglePlay() {
+    if (this.status.mode === Mode.PAUSED) {
+      this.play();
+    }
+    if (this.status.mode === Mode.PLAYING) {
+      this.pause();
+    }
+  }
+
+  @bind()
+  private toggleFullscreen() {
+    this.status.fullscreen ? this._exitFullscreen() : this._enterFullscreen();
+  }
+
+  @bind()
+  private toggleMute() {
+    this.status.muted ? this.unmute() : this.mute();
+  }
+
+  @bind()
+  private increaseVolume() {
+    let volume = this.fixDecimalPrecision(this.status.volume);
+
+    if (volume < 1) {
+      this._setVolume((volume += 0.1));
+    }
+  }
+
+  @bind()
+  private decreaseVolume() {
+    let volume = this.fixDecimalPrecision(this.status.volume);
+
+    if (volume > 0) {
+      this._setVolume((volume -= 0.1));
+    }
+  }
+
+  @bind()
+  private skipForward() {
+    const progress = this.status.progress.seconds;
+    const endOfVideo = this.status.duration;
+    const newPosition =
+      progress < endOfVideo - this.skippedSeconds
+        ? progress + this.skippedSeconds
+        : endOfVideo;
+
+    this.seek(newPosition);
+  }
+
+  @bind()
+  private skipBackward() {
+    const progress = this.status.progress.seconds;
+    const newPosition =
+      progress < this.skippedSeconds ? 0 : progress - this.skippedSeconds;
+
+    this.seek(newPosition);
+  }
+
+  private fixDecimalPrecision(number: number): number {
+    return parseFloat(number.toFixed(1));
+  }
+
+  private hasDefaultScrollingBehavior(key: string, target: Element): boolean {
+    return (
+      (key === ' ' && !this.controlsIsFocused(target)) ||
+      key === 'ArrowUp' ||
+      key === 'ArrowDown'
+    );
+  }
+
+  private controlsIsFocused(target: Element): boolean {
+    return target.shadowRoot.activeElement?.tagName === 'XM-CONTROLS';
   }
 }

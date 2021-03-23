@@ -145,7 +145,8 @@ export const Volume: FunctionalComponent<VolumeProps> = (props) => {
 interface SliderProps {
   status: Status;
   onSeek: (seconds: number) => void;
-  onKeyDown: Function;
+  onPlay: (e: Event) => void;
+  onPause: (e: Event) => void;
 }
 
 export const Slider: FunctionalComponent<SliderProps> = (props) => {
@@ -158,7 +159,13 @@ export const Slider: FunctionalComponent<SliderProps> = (props) => {
 
   const togglePlayOnSpaceKey = (e: KeyboardEvent) => {
     if (e.key === ' ') {
-      props.onKeyDown();
+      if (props.status.mode === Mode.PAUSED) {
+        props.onPlay(e);
+      }
+      if (props.status.mode === Mode.PLAYING) {
+        props.onPause(e);
+      }
+
       e.preventDefault();
     }
   };
