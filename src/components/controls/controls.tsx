@@ -76,12 +76,7 @@ export class Controls {
       >
         <Subtitles status={this.status} />
         <xm-settings-menu status={this.status} textTracks={this.textTracks} />
-        <Slider
-          status={this.status}
-          onSeek={this._seek}
-          onPause={this._pause}
-          onPlay={this._play}
-        />
+        <Slider status={this.status} onSeek={this._seek} />
         <div class="controls__toolbar">
           <Control
             status={this.status}
