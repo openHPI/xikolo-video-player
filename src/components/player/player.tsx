@@ -281,10 +281,9 @@ export class Player {
     switch (key) {
       case this.keyValues.Space:
       case this.keyValues.Enter:
-        // Prevent interference with controls from <xm-controls>:
-        // If focus is on a button from <xm-controls> the video should not play/pause.
-        // Instead, the button functionality will be triggered.
-        if (this.controlsIsFocused(target)) return;
+        // Some interactive elements, e.g. links and buttons, have default behavior for Space and Enter keys.
+        // The events still bubble up in this case, but we want to ignore them, when the user was focusing on such an element
+        if (this.isInteractiveElement(target)) return;
         this.togglePlay();
         break;
       case this.keyValues.ArrowUp:
@@ -637,13 +636,20 @@ export class Player {
 
   private hasDefaultScrollingBehavior(key: string, target: Element): boolean {
     return (
-      (key === ' ' && !this.controlsIsFocused(target)) ||
+      (key === ' ' && !this.isInteractiveElement(target)) ||
       key === 'ArrowUp' ||
       key === 'ArrowDown'
     );
   }
 
-  private controlsIsFocused(target: Element): boolean {
-    return target.shadowRoot.activeElement?.tagName === 'XM-CONTROLS';
+  private isInteractiveElement(target: Element): boolean {
+    const intElems = ['A', 'BUTTON'];
+
+    if (intElems.includes(target.tagName)) {
+      return true;
+    } else if (target.shadowRoot?.activeElement) {
+      return this.isInteractiveElement(target.shadowRoot.activeElement);
+    }
+    return false;
   }
 }
