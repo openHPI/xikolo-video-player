@@ -136,7 +136,7 @@ export class Video {
     this.el.dispatchEvent(new CustomEvent('ready'));
   }
 
-  async componentDidUnload() {
+  async disconnectedCallback() {
     this.player.destroy();
   }
 

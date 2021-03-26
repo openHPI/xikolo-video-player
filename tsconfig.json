@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "typeRoots": ["./src/types"], // important for non ts node_modules
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "declaration": false,

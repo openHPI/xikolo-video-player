@@ -22,9 +22,8 @@ describe('xm-player with props', () => {
       </xm-player>
     `,
       components: [Player, Controls],
-      supportShadowDom: true,
     });
-    // We need to render all child components manually for acces to their shadow doms!
+    // We need to render all child components manually for access to their shadow doms!
     controls = page.root.shadowRoot.querySelector('xm-controls');
     const controlsInstance = new Controls();
     controlsInstance.status = defaultStatus;
@@ -71,7 +70,6 @@ describe('xm-player with subtitle props', () => {
       </xm-player>
     `,
       components: [Player, Controls],
-      supportShadowDom: true,
     });
     // We need to render all child components manually for acces to their shadow doms!
     controls = page.root.shadowRoot.querySelector('xm-controls');

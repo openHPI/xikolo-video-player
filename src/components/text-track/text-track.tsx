@@ -16,12 +16,11 @@ export class TextTrack {
   @Prop() default: boolean;
 
   private vtt: WebVTT = null;
-  private promise: any;
 
   @Event({ eventName: 'texttrack:loaded' }) textTrackLoadedEvent: EventEmitter;
 
   public componentWillLoad() {
-    this.promise = this.loadFile(this.src);
+    this.loadFile(this.src);
   }
 
   private async loadFile(url: string) {
