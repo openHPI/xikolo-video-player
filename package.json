@@ -2,10 +2,11 @@
   "name": "@xikolo/media",
   "version": "1.0.0",
   "description": "Xikolo Media Framework",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "es2015": "dist/esm/index.mjs",
-  "es2017": "dist/esm/index.mjs",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.js",
+  "es2017": "dist/esm/index.js",
+  "jsnext:main": "dist/esm/index.js",
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
@@ -22,7 +23,7 @@
     "prettier": "prettier --write ."
   },
   "devDependencies": {
-    "@stencil/core": "1.8.12",
+    "@stencil/core": "2.5.0",
     "@stencil/postcss": "2.0.0",
     "@stencil/sass": "1.4.1",
     "@types/autoprefixer": "9.7.2",
@@ -39,8 +40,7 @@
     "prettier": "2.2.1",
     "puppeteer": "5.2.1",
     "split.js": "1.6.2",
-    "stencil-inline-svg": "1.0.1",
-    "typescript": "4.2.3"
+    "stencil-inline-svg": "1.0.1"
   },
   "license": "MIT",
   "husky": {

@@ -15,9 +15,9 @@ export const config: Config = {
     {
       type: 'www',
       serviceWorker: null,
+      copy: [{ src: 'static' }],
     },
   ],
-  copy: [{ src: 'static' }],
   devServer: {
     // With HMR the `load` lifecycle event is triggered but not the `unload`
     // event. This will lead to non removing event listeners but only adding

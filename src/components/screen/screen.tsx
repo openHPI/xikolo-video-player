@@ -98,7 +98,7 @@ export class Screen {
     );
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     this.split.destroy();
   }
 
