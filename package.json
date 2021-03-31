@@ -23,7 +23,7 @@
     "prettier": "prettier --write ."
   },
   "devDependencies": {
-    "@stencil/core": "2.5.1",
+    "@stencil/core": "2.5.2",
     "@stencil/postcss": "2.0.0",
     "@stencil/sass": "1.4.1",
     "@types/autoprefixer": "9.7.2",
