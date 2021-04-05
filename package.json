@@ -39,7 +39,7 @@
     "node-webvtt": "1.9.3",
     "prettier": "2.2.1",
     "puppeteer": "5.2.1",
-    "split.js": "1.6.3",
+    "split.js": "1.6.4",
     "stencil-inline-svg": "1.0.1"
   },
   "license": "MIT",
