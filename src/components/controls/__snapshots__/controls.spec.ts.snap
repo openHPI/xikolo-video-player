@@ -1,242 +1,418 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`xm-controls should render the settings-menu 1`] = `
-<div>
-  <xm-controls>
-    <mock:shadow-root>
-      <div class="controls">
-        <xm-settings-menu>
-          <mock:shadow-root>
-            <div class="menu menu--open settings-menu">
-              <div class="settings-menu__content show">
-                <button class="settings-menu__button">
-                  <span class="settings-menu__button-label">
-                    Subtitles
+exports[`xm-controls should render opened settings-menu with openedSettingsMenu status 1`] = `
+<xm-controls>
+  <mock:shadow-root>
+    <div class="controls">
+      <xm-settings-menu>
+        <mock:shadow-root>
+          <div class="menu settings-menu" data-test-id="settingsMenu" role="menu" tabindex="0">
+            <div class="settings-menu__content show">
+              <button class="settings-menu__button">
+                <span class="settings-menu__button-label">
+                  Subtitles
+                </span>
+                <span class="settings-menu__button-value">
+                  Off
+                </span>
+                <span class="settings-menu__arrow settings-menu__arrow--right">
+                  <span class="svg">
+                    <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                      <path d="M12.4 26l-3.333-3.333 7.4-6.667-7.4-6.6 3.333-3.4 10.6 10-10.6 10z"></path>
+                    </svg>
                   </span>
-                  <span class="settings-menu__button-value">
-                    Off
+                </span>
+              </button>
+              <button class="settings-menu__button">
+                <span class="settings-menu__button-label">
+                  Playback rate
+                </span>
+                <span class="settings-menu__button-value">
+                  1
+                </span>
+                <span class="settings-menu__arrow settings-menu__arrow--right">
+                  <span class="svg">
+                    <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                      <path d="M12.4 26l-3.333-3.333 7.4-6.667-7.4-6.6 3.333-3.4 10.6 10-10.6 10z"></path>
+                    </svg>
                   </span>
-                  <span class="settings-menu__arrow settings-menu__arrow--right">
-                    <span class="svg">
-                      <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                        <path d="M12.4 26l-3.333-3.333 7.4-6.667-7.4-6.6 3.333-3.4 10.6 10-10.6 10z"></path>
-                      </svg>
-                    </span>
-                  </span>
-                </button>
-                <button class="settings-menu__button">
-                  <span class="settings-menu__button-label">
-                    Playback rate
-                  </span>
-                  <span class="settings-menu__button-value">
-                    1
-                  </span>
-                  <span class="settings-menu__arrow settings-menu__arrow--right">
-                    <span class="svg">
-                      <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                        <path d="M12.4 26l-3.333-3.333 7.4-6.667-7.4-6.6 3.333-3.4 10.6 10-10.6 10z"></path>
-                      </svg>
-                    </span>
-                  </span>
-                </button>
-              </div>
+                </span>
+              </button>
             </div>
-          </mock:shadow-root>
-        </xm-settings-menu>
-        <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
-        <div class="controls__toolbar">
-          <button title="Play">
-            <span class="svg">
-              <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                <path d="M24.267 14.867l-4.867-2.867c-1.067-0.6-2.867-1.667-3.933-2.333l-5.067-2.867c-1.067-0.667-2.133-0.133-2.133 1.133v16.067c0 1.267 1.067 1.8 2.133 1.133l4.933-2.867c1.067-0.6 2.933-1.667 4-2.333l4.867-2.867c1.133-0.533 1.133-1.6 0.067-2.2z"></path>
-              </svg>
-            </span>
-          </button>
-          <div class="controls-volume">
-            <button class="controls__mute" title="Mute">
-              <span class="svg">
-                <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                  <path d="M16.754 4.159c-0.553 0-1.061 0.231-1.522 0.692l-5.211 4.473v13.373l5.211 4.565c0.277 0.277 0.599 0.461 0.968 0.507 0.277 0.046 0.507 0.046 0.784 0.046 0.277-0.046 0.507-0.138 0.692-0.277 0.461-0.277 0.784-0.738 0.784-1.337v-20.521c0-0.876-0.83-1.522-1.706-1.522v0zM8.315 9.323v13.373h-3.735c-0.646 0-1.199-0.184-1.614-0.599s-0.553-0.968-0.553-1.614v-9.038c0-0.646 0.184-1.199 0.646-1.614 0.461-0.369 1.061-0.553 1.752-0.553l3.505 0.046zM24.040 7.294c-0.692 0-1.291 0.599-1.291 1.291 0 0.461 0.277 0.876 0.646 1.107 1.107 0.692 2.029 1.66 2.675 2.813s0.968 2.444 0.968 3.735c0 1.291-0.323 2.582-0.968 3.735-0.599 1.153-1.476 2.167-2.628 2.813 0 0 0 0 0 0-0.415 0.277-0.646 0.646-0.738 1.015-0.092 0.323 0.046 0.692 0.231 0.922 0.369 0.507 1.199 0.692 1.891 0.231 1.43-0.922 2.675-2.213 3.505-3.735s1.245-3.228 1.245-4.98c0-1.752-0.415-3.459-1.291-4.98-0.83-1.522-2.075-2.859-3.551-3.781-0.138-0.138-0.415-0.184-0.692-0.184v0zM20.766 10.568c-0.692 0.138-1.199 0.83-1.061 1.522 0.046 0.369 0.323 0.692 0.646 0.876 0.553 0.323 1.015 0.784 1.337 1.337s0.507 1.199 0.507 1.845c0 0.646-0.138 1.337-0.461 1.891-0.323 0.599-0.784 1.107-1.383 1.43 0 0 0 0 0 0-0.415 0.277-0.646 0.599-0.692 0.922-0.092 0.323 0 0.646 0.184 0.922 0.369 0.507 1.107 0.784 1.845 0.369 0 0 0 0 0 0 0.968-0.553 1.752-1.43 2.306-2.398s0.83-2.075 0.784-3.228c-0.046-1.107-0.323-2.167-0.876-3.090s-1.337-1.706-2.26-2.213c-0.277-0.138-0.553-0.231-0.876-0.184v0z"></path>
-                </svg>
-              </span>
-            </button>
-            <input class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="1">
           </div>
-          <span class="controls__time" title="Time left of 00:00s">
-            00:00 / 00:00
+        </mock:shadow-root>
+      </xm-settings-menu>
+      <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
+      <div class="controls__toolbar" data-test-id="controlsToolbar">
+        <button aria-label="Play" title="Play">
+          <span class="svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M24.267 14.867l-4.867-2.867c-1.067-0.6-2.867-1.667-3.933-2.333l-5.067-2.867c-1.067-0.667-2.133-0.133-2.133 1.133v16.067c0 1.267 1.067 1.8 2.133 1.133l4.933-2.867c1.067-0.6 2.933-1.667 4-2.333l4.867-2.867c1.133-0.533 1.133-1.6 0.067-2.2z"></path>
+            </svg>
           </span>
-          <div class="controls__playback-rate">
-            <div class="controls__playback-rate__menu">
-              <button class="controls__playback-rate__button"></button>
-              <button class="controls__playback-rate__button"></button>
-              <button class="controls__playback-rate__button controls__playback-rate__button--current"></button>
-              <button class="controls__playback-rate__button"></button>
-              <button class="controls__playback-rate__button"></button>
-              <button class="controls__playback-rate__button"></button>
-              <button class="controls__playback-rate__button"></button>
-            </div>
-            <button title="Playback rate">
-              <span class="controls__button-icon svg">
-                <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                  <path d="M6.857 20.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM10.286 12.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM17.929 21.161l1.804-6.821q0.107-0.464-0.134-0.866t-0.688-0.527-0.857 0.116-0.536 0.705l-1.804 6.821q-1.071 0.089-1.911 0.777t-1.125 1.759q-0.357 1.375 0.357 2.607t2.089 1.589 2.607-0.357 1.589-2.089q0.286-1.071-0.107-2.089t-1.286-1.625zM29.714 20.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM18.286 9.143q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM26.286 12.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM32 20.571q0 4.661-2.518 8.625-0.339 0.518-0.964 0.518h-25.036q-0.625 0-0.964-0.518-2.518-3.946-2.518-8.625 0-3.25 1.268-6.214t3.411-5.107 5.107-3.411 6.214-1.268 6.214 1.268 5.107 3.411 3.411 5.107 1.268 6.214z"></path>
-                </svg>
-              </span>
-            </button>
-          </div>
-          <button title="Settings">
-            <span class="controls__settings-icon controls__settings-icon--open svg">
+        </button>
+        <div class="controls-volume">
+          <button class="controls__mute" title="Mute">
+            <span class="svg">
               <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                <path d="M20.571 16.001q0-1.893-1.339-3.232t-3.232-1.339-3.232 1.339-1.339 3.232 1.339 3.232 3.232 1.339 3.232-1.339 1.339-3.232zM29.713 14.055v3.964q0 .214-.143.411t-.357.232l-3.304.5q-.339.964-.696 1.625.625 .893 1.911 2.464.179 .214.179 .446t-.161.411q-.482.661-1.768 1.929t-1.679 1.268q-.214 0-.464-.161l-2.464-1.929q-.786.411-1.625.679-.286 2.429-.518 3.321-.125.5-.643.5h-3.964q-.25 0-.438-.152t-.205-.384l-.5-3.286q-.875-.286-1.607-.661l-2.518 1.911q-.179.161-.446.161-.25 0-.446-.196-2.25-2.036-2.946-3-.125-.179-.125-.411 0-.214.143-.411.268-.375.911-1.188t.964-1.259q-.482-.893-.732-1.768l-3.268-.482q-.232-.036-.375-.223t-.143-.42v-3.964q0-.214.143-.411t.339-.232l3.321-.5q.25-.821.696-1.643-.714-1.018-1.911-2.464-.179-.214-.179-.429 0-.179.161-.411.464-.643 1.759-1.92t1.688-1.277q.232 0 .464.179l2.464 1.911q.786-.411 1.625-.679.286-2.429.518-3.321.125-.5.643-.5h3.964q.25 0 .438.152t.205.384l.5 3.286q.875.286 1.607.661l2.536-1.911q.161-.161.429-.161.232 0 .446.179 2.304 2.125 2.946 3.036.125 .143.125 .393 0 .214-.143.411-.268.375-.911 1.188t-.964 1.259q.464.893 .732 1.75l3.268.5q.232.036 .375.223t.143.42z"></path>
+                <path d="M16.754 4.159c-0.553 0-1.061 0.231-1.522 0.692l-5.211 4.473v13.373l5.211 4.565c0.277 0.277 0.599 0.461 0.968 0.507 0.277 0.046 0.507 0.046 0.784 0.046 0.277-0.046 0.507-0.138 0.692-0.277 0.461-0.277 0.784-0.738 0.784-1.337v-20.521c0-0.876-0.83-1.522-1.706-1.522v0zM8.315 9.323v13.373h-3.735c-0.646 0-1.199-0.184-1.614-0.599s-0.553-0.968-0.553-1.614v-9.038c0-0.646 0.184-1.199 0.646-1.614 0.461-0.369 1.061-0.553 1.752-0.553l3.505 0.046zM24.040 7.294c-0.692 0-1.291 0.599-1.291 1.291 0 0.461 0.277 0.876 0.646 1.107 1.107 0.692 2.029 1.66 2.675 2.813s0.968 2.444 0.968 3.735c0 1.291-0.323 2.582-0.968 3.735-0.599 1.153-1.476 2.167-2.628 2.813 0 0 0 0 0 0-0.415 0.277-0.646 0.646-0.738 1.015-0.092 0.323 0.046 0.692 0.231 0.922 0.369 0.507 1.199 0.692 1.891 0.231 1.43-0.922 2.675-2.213 3.505-3.735s1.245-3.228 1.245-4.98c0-1.752-0.415-3.459-1.291-4.98-0.83-1.522-2.075-2.859-3.551-3.781-0.138-0.138-0.415-0.184-0.692-0.184v0zM20.766 10.568c-0.692 0.138-1.199 0.83-1.061 1.522 0.046 0.369 0.323 0.692 0.646 0.876 0.553 0.323 1.015 0.784 1.337 1.337s0.507 1.199 0.507 1.845c0 0.646-0.138 1.337-0.461 1.891-0.323 0.599-0.784 1.107-1.383 1.43 0 0 0 0 0 0-0.415 0.277-0.646 0.599-0.692 0.922-0.092 0.323 0 0.646 0.184 0.922 0.369 0.507 1.107 0.784 1.845 0.369 0 0 0 0 0 0 0.968-0.553 1.752-1.43 2.306-2.398s0.83-2.075 0.784-3.228c-0.046-1.107-0.323-2.167-0.876-3.090s-1.337-1.706-2.26-2.213c-0.277-0.138-0.553-0.231-0.876-0.184v0z"></path>
               </svg>
             </span>
           </button>
-          <button title="Enter full screen">
-            <span class="svg">
+          <input class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="1">
+        </div>
+        <span class="controls__time" title="Time left of 00:00s">
+          00:00 / 00:00
+        </span>
+        <div class="controls__playback-rate">
+          <div class="controls__playback-rate__menu">
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button controls__playback-rate__button--current"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+          </div>
+          <button title="Playback rate">
+            <span class="controls__button-icon svg">
               <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                <path d="M10.8 18.867l-5 5-3-2.933v8.267h8.267l-2.933-3 5-5zM20.933 2.8l2.933 3-5 5 2.333 2.333 5-5 3 2.933v-8.267zM10.8 13.133l2.333-2.333-5-5 2.933-3h-8.267v8.267l3-2.933zM21.2 18.867l-2.333 2.333 5 5-2.933 3h8.267v-8.267l-3 2.933z"></path>
+                <path d="M6.857 20.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM10.286 12.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM17.929 21.161l1.804-6.821q0.107-0.464-0.134-0.866t-0.688-0.527-0.857 0.116-0.536 0.705l-1.804 6.821q-1.071 0.089-1.911 0.777t-1.125 1.759q-0.357 1.375 0.357 2.607t2.089 1.589 2.607-0.357 1.589-2.089q0.286-1.071-0.107-2.089t-1.286-1.625zM29.714 20.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM18.286 9.143q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM26.286 12.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM32 20.571q0 4.661-2.518 8.625-0.339 0.518-0.964 0.518h-25.036q-0.625 0-0.964-0.518-2.518-3.946-2.518-8.625 0-3.25 1.268-6.214t3.411-5.107 5.107-3.411 6.214-1.268 6.214 1.268 5.107 3.411 3.411 5.107 1.268 6.214z"></path>
               </svg>
             </span>
           </button>
         </div>
+        <button aria-haspopup="true" aria-label="Settings" title="Settings">
+          <span class="controls__settings-icon svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M20.571 16.001q0-1.893-1.339-3.232t-3.232-1.339-3.232 1.339-1.339 3.232 1.339 3.232 3.232 1.339 3.232-1.339 1.339-3.232zM29.713 14.055v3.964q0 .214-.143.411t-.357.232l-3.304.5q-.339.964-.696 1.625.625 .893 1.911 2.464.179 .214.179 .446t-.161.411q-.482.661-1.768 1.929t-1.679 1.268q-.214 0-.464-.161l-2.464-1.929q-.786.411-1.625.679-.286 2.429-.518 3.321-.125.5-.643.5h-3.964q-.25 0-.438-.152t-.205-.384l-.5-3.286q-.875-.286-1.607-.661l-2.518 1.911q-.179.161-.446.161-.25 0-.446-.196-2.25-2.036-2.946-3-.125-.179-.125-.411 0-.214.143-.411.268-.375.911-1.188t.964-1.259q-.482-.893-.732-1.768l-3.268-.482q-.232-.036-.375-.223t-.143-.42v-3.964q0-.214.143-.411t.339-.232l3.321-.5q.25-.821.696-1.643-.714-1.018-1.911-2.464-.179-.214-.179-.429 0-.179.161-.411.464-.643 1.759-1.92t1.688-1.277q.232 0 .464.179l2.464 1.911q.786-.411 1.625-.679.286-2.429.518-3.321.125-.5.643-.5h3.964q.25 0 .438.152t.205.384l.5 3.286q.875.286 1.607.661l2.536-1.911q.161-.161.429-.161.232 0 .446.179 2.304 2.125 2.946 3.036.125 .143.125 .393 0 .214-.143.411-.268.375-.911 1.188t-.964 1.259q.464.893 .732 1.75l3.268.5q.232.036 .375.223t.143.42z"></path>
+            </svg>
+          </span>
+        </button>
+        <button title="Enter full screen">
+          <span class="svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M10.8 18.867l-5 5-3-2.933v8.267h8.267l-2.933-3 5-5zM20.933 2.8l2.933 3-5 5 2.333 2.333 5-5 3 2.933v-8.267zM10.8 13.133l2.333-2.333-5-5 2.933-3h-8.267v8.267l3-2.933zM21.2 18.867l-2.333 2.333 5 5-2.933 3h8.267v-8.267l-3 2.933z"></path>
+            </svg>
+          </span>
+        </button>
       </div>
-    </mock:shadow-root>
-  </xm-controls>
-</div>
+    </div>
+  </mock:shadow-root>
+</xm-controls>
+`;
+
+exports[`xm-controls should render opened settings-menu with openedSettingsMenu status 2`] = `
+<xm-controls>
+  <mock:shadow-root>
+    <div class="controls">
+      <xm-settings-menu>
+        <mock:shadow-root>
+          <div class="menu menu--open settings-menu" data-test-id="settingsMenu" role="menu" tabindex="0">
+            <div class="settings-menu__content show">
+              <button class="settings-menu__button">
+                <span class="settings-menu__button-label">
+                  Subtitles
+                </span>
+                <span class="settings-menu__button-value">
+                  Off
+                </span>
+                <span class="settings-menu__arrow settings-menu__arrow--right">
+                  <span class="svg">
+                    <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                      <path d="M12.4 26l-3.333-3.333 7.4-6.667-7.4-6.6 3.333-3.4 10.6 10-10.6 10z"></path>
+                    </svg>
+                  </span>
+                </span>
+              </button>
+              <button class="settings-menu__button">
+                <span class="settings-menu__button-label">
+                  Playback rate
+                </span>
+                <span class="settings-menu__button-value">
+                  1
+                </span>
+                <span class="settings-menu__arrow settings-menu__arrow--right">
+                  <span class="svg">
+                    <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                      <path d="M12.4 26l-3.333-3.333 7.4-6.667-7.4-6.6 3.333-3.4 10.6 10-10.6 10z"></path>
+                    </svg>
+                  </span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </mock:shadow-root>
+      </xm-settings-menu>
+      <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
+      <div class="controls__toolbar" data-test-id="controlsToolbar">
+        <button aria-label="Play" title="Play">
+          <span class="svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M24.267 14.867l-4.867-2.867c-1.067-0.6-2.867-1.667-3.933-2.333l-5.067-2.867c-1.067-0.667-2.133-0.133-2.133 1.133v16.067c0 1.267 1.067 1.8 2.133 1.133l4.933-2.867c1.067-0.6 2.933-1.667 4-2.333l4.867-2.867c1.133-0.533 1.133-1.6 0.067-2.2z"></path>
+            </svg>
+          </span>
+        </button>
+        <div class="controls-volume">
+          <button class="controls__mute" title="Mute">
+            <span class="svg">
+              <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                <path d="M16.754 4.159c-0.553 0-1.061 0.231-1.522 0.692l-5.211 4.473v13.373l5.211 4.565c0.277 0.277 0.599 0.461 0.968 0.507 0.277 0.046 0.507 0.046 0.784 0.046 0.277-0.046 0.507-0.138 0.692-0.277 0.461-0.277 0.784-0.738 0.784-1.337v-20.521c0-0.876-0.83-1.522-1.706-1.522v0zM8.315 9.323v13.373h-3.735c-0.646 0-1.199-0.184-1.614-0.599s-0.553-0.968-0.553-1.614v-9.038c0-0.646 0.184-1.199 0.646-1.614 0.461-0.369 1.061-0.553 1.752-0.553l3.505 0.046zM24.040 7.294c-0.692 0-1.291 0.599-1.291 1.291 0 0.461 0.277 0.876 0.646 1.107 1.107 0.692 2.029 1.66 2.675 2.813s0.968 2.444 0.968 3.735c0 1.291-0.323 2.582-0.968 3.735-0.599 1.153-1.476 2.167-2.628 2.813 0 0 0 0 0 0-0.415 0.277-0.646 0.646-0.738 1.015-0.092 0.323 0.046 0.692 0.231 0.922 0.369 0.507 1.199 0.692 1.891 0.231 1.43-0.922 2.675-2.213 3.505-3.735s1.245-3.228 1.245-4.98c0-1.752-0.415-3.459-1.291-4.98-0.83-1.522-2.075-2.859-3.551-3.781-0.138-0.138-0.415-0.184-0.692-0.184v0zM20.766 10.568c-0.692 0.138-1.199 0.83-1.061 1.522 0.046 0.369 0.323 0.692 0.646 0.876 0.553 0.323 1.015 0.784 1.337 1.337s0.507 1.199 0.507 1.845c0 0.646-0.138 1.337-0.461 1.891-0.323 0.599-0.784 1.107-1.383 1.43 0 0 0 0 0 0-0.415 0.277-0.646 0.599-0.692 0.922-0.092 0.323 0 0.646 0.184 0.922 0.369 0.507 1.107 0.784 1.845 0.369 0 0 0 0 0 0 0.968-0.553 1.752-1.43 2.306-2.398s0.83-2.075 0.784-3.228c-0.046-1.107-0.323-2.167-0.876-3.090s-1.337-1.706-2.26-2.213c-0.277-0.138-0.553-0.231-0.876-0.184v0z"></path>
+              </svg>
+            </span>
+          </button>
+          <input class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="1">
+        </div>
+        <span class="controls__time" title="Time left of 00:00s">
+          00:00 / 00:00
+        </span>
+        <div class="controls__playback-rate">
+          <div class="controls__playback-rate__menu">
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button controls__playback-rate__button--current"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+          </div>
+          <button title="Playback rate">
+            <span class="controls__button-icon svg">
+              <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                <path d="M6.857 20.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM10.286 12.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM17.929 21.161l1.804-6.821q0.107-0.464-0.134-0.866t-0.688-0.527-0.857 0.116-0.536 0.705l-1.804 6.821q-1.071 0.089-1.911 0.777t-1.125 1.759q-0.357 1.375 0.357 2.607t2.089 1.589 2.607-0.357 1.589-2.089q0.286-1.071-0.107-2.089t-1.286-1.625zM29.714 20.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM18.286 9.143q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM26.286 12.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM32 20.571q0 4.661-2.518 8.625-0.339 0.518-0.964 0.518h-25.036q-0.625 0-0.964-0.518-2.518-3.946-2.518-8.625 0-3.25 1.268-6.214t3.411-5.107 5.107-3.411 6.214-1.268 6.214 1.268 5.107 3.411 3.411 5.107 1.268 6.214z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+        <button aria-haspopup="true" aria-label="Settings" title="Settings">
+          <span class="controls__settings-icon controls__settings-icon--open svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M20.571 16.001q0-1.893-1.339-3.232t-3.232-1.339-3.232 1.339-1.339 3.232 1.339 3.232 3.232 1.339 3.232-1.339 1.339-3.232zM29.713 14.055v3.964q0 .214-.143.411t-.357.232l-3.304.5q-.339.964-.696 1.625.625 .893 1.911 2.464.179 .214.179 .446t-.161.411q-.482.661-1.768 1.929t-1.679 1.268q-.214 0-.464-.161l-2.464-1.929q-.786.411-1.625.679-.286 2.429-.518 3.321-.125.5-.643.5h-3.964q-.25 0-.438-.152t-.205-.384l-.5-3.286q-.875-.286-1.607-.661l-2.518 1.911q-.179.161-.446.161-.25 0-.446-.196-2.25-2.036-2.946-3-.125-.179-.125-.411 0-.214.143-.411.268-.375.911-1.188t.964-1.259q-.482-.893-.732-1.768l-3.268-.482q-.232-.036-.375-.223t-.143-.42v-3.964q0-.214.143-.411t.339-.232l3.321-.5q.25-.821.696-1.643-.714-1.018-1.911-2.464-.179-.214-.179-.429 0-.179.161-.411.464-.643 1.759-1.92t1.688-1.277q.232 0 .464.179l2.464 1.911q.786-.411 1.625-.679.286-2.429.518-3.321.125-.5.643-.5h3.964q.25 0 .438.152t.205.384l.5 3.286q.875.286 1.607.661l2.536-1.911q.161-.161.429-.161.232 0 .446.179 2.304 2.125 2.946 3.036.125 .143.125 .393 0 .214-.143.411-.268.375-.911 1.188t-.964 1.259q.464.893 .732 1.75l3.268.5q.232.036 .375.223t.143.42z"></path>
+            </svg>
+          </span>
+        </button>
+        <button title="Enter full screen">
+          <span class="svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M10.8 18.867l-5 5-3-2.933v8.267h8.267l-2.933-3 5-5zM20.933 2.8l2.933 3-5 5 2.333 2.333 5-5 3 2.933v-8.267zM10.8 13.133l2.333-2.333-5-5 2.933-3h-8.267v8.267l3-2.933zM21.2 18.867l-2.333 2.333 5 5-2.933 3h8.267v-8.267l-3 2.933z"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </mock:shadow-root>
+</xm-controls>
 `;
 
 exports[`xm-controls should show a list of texttracks 1`] = `
-<div>
-  <xm-controls>
-    <mock:shadow-root>
-      <div class="controls">
-        <xm-settings-menu>
-          <mock:shadow-root>
-            <div class="menu settings-menu">
-              <div class="menu menu--open settings-menu__submenu">
-                <div class="settings-menu__submenu-header">
-                  <button class="settings-menu__button">
-                    <span class="settings-menu__arrow settings-menu__arrow--left">
-                      <span class="svg">
-                        <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                          <path d="M19.6 6l3.333 3.333-7.4 6.667 7.4 6.6-3.333 3.4-10.533-10 10.533-10z"></path>
-                        </svg>
-                      </span>
-                    </span>
-                    <span class="settings-menu__button-label">
-                      Subtitles
-                    </span>
-                  </button>
-                </div>
-                <div class="settings-menu__submenu-content">
-                  <button class="settings-menu__button">
-                    Off
-                  </button>
-                  <button class="settings-menu__button settings-menu__button--current">
-                    Deutsch
-                  </button>
-                </div>
-              </div>
-              <div class="hide settings-menu__content">
-                <button class="settings-menu__button">
-                  <span class="settings-menu__button-label">
-                    Subtitles
+<xm-controls>
+  <mock:shadow-root>
+    <div class="controls">
+      <xm-settings-menu>
+        <mock:shadow-root>
+          <div class="menu settings-menu" data-test-id="settingsMenu" role="menu" tabindex="0">
+            <div class="settings-menu__content show">
+              <button class="settings-menu__button">
+                <span class="settings-menu__button-label">
+                  Subtitles
+                </span>
+                <span class="settings-menu__button-value">
+                  Off
+                </span>
+                <span class="settings-menu__arrow settings-menu__arrow--right">
+                  <span class="svg">
+                    <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                      <path d="M12.4 26l-3.333-3.333 7.4-6.667-7.4-6.6 3.333-3.4 10.6 10-10.6 10z"></path>
+                    </svg>
                   </span>
-                  <span class="settings-menu__button-value">
-                    Deutsch
+                </span>
+              </button>
+              <button class="settings-menu__button">
+                <span class="settings-menu__button-label">
+                  Playback rate
+                </span>
+                <span class="settings-menu__button-value">
+                  1
+                </span>
+                <span class="settings-menu__arrow settings-menu__arrow--right">
+                  <span class="svg">
+                    <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                      <path d="M12.4 26l-3.333-3.333 7.4-6.667-7.4-6.6 3.333-3.4 10.6 10-10.6 10z"></path>
+                    </svg>
                   </span>
-                  <span class="settings-menu__arrow settings-menu__arrow--right">
-                    <span class="svg">
-                      <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                        <path d="M12.4 26l-3.333-3.333 7.4-6.667-7.4-6.6 3.333-3.4 10.6 10-10.6 10z"></path>
-                      </svg>
-                    </span>
-                  </span>
-                </button>
-                <button class="settings-menu__button">
-                  <span class="settings-menu__button-label">
-                    Playback rate
-                  </span>
-                  <span class="settings-menu__button-value">
-                    1
-                  </span>
-                  <span class="settings-menu__arrow settings-menu__arrow--right">
-                    <span class="svg">
-                      <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                        <path d="M12.4 26l-3.333-3.333 7.4-6.667-7.4-6.6 3.333-3.4 10.6 10-10.6 10z"></path>
-                      </svg>
-                    </span>
-                  </span>
-                </button>
-              </div>
+                </span>
+              </button>
             </div>
-          </mock:shadow-root>
-        </xm-settings-menu>
-        <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
-        <div class="controls__toolbar">
-          <button title="Play">
-            <span class="svg">
-              <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                <path d="M24.267 14.867l-4.867-2.867c-1.067-0.6-2.867-1.667-3.933-2.333l-5.067-2.867c-1.067-0.667-2.133-0.133-2.133 1.133v16.067c0 1.267 1.067 1.8 2.133 1.133l4.933-2.867c1.067-0.6 2.933-1.667 4-2.333l4.867-2.867c1.133-0.533 1.133-1.6 0.067-2.2z"></path>
-              </svg>
-            </span>
-          </button>
-          <div class="controls-volume">
-            <button class="controls__mute" title="Mute">
-              <span class="svg">
-                <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                  <path d="M16.754 4.159c-0.553 0-1.061 0.231-1.522 0.692l-5.211 4.473v13.373l5.211 4.565c0.277 0.277 0.599 0.461 0.968 0.507 0.277 0.046 0.507 0.046 0.784 0.046 0.277-0.046 0.507-0.138 0.692-0.277 0.461-0.277 0.784-0.738 0.784-1.337v-20.521c0-0.876-0.83-1.522-1.706-1.522v0zM8.315 9.323v13.373h-3.735c-0.646 0-1.199-0.184-1.614-0.599s-0.553-0.968-0.553-1.614v-9.038c0-0.646 0.184-1.199 0.646-1.614 0.461-0.369 1.061-0.553 1.752-0.553l3.505 0.046zM24.040 7.294c-0.692 0-1.291 0.599-1.291 1.291 0 0.461 0.277 0.876 0.646 1.107 1.107 0.692 2.029 1.66 2.675 2.813s0.968 2.444 0.968 3.735c0 1.291-0.323 2.582-0.968 3.735-0.599 1.153-1.476 2.167-2.628 2.813 0 0 0 0 0 0-0.415 0.277-0.646 0.646-0.738 1.015-0.092 0.323 0.046 0.692 0.231 0.922 0.369 0.507 1.199 0.692 1.891 0.231 1.43-0.922 2.675-2.213 3.505-3.735s1.245-3.228 1.245-4.98c0-1.752-0.415-3.459-1.291-4.98-0.83-1.522-2.075-2.859-3.551-3.781-0.138-0.138-0.415-0.184-0.692-0.184v0zM20.766 10.568c-0.692 0.138-1.199 0.83-1.061 1.522 0.046 0.369 0.323 0.692 0.646 0.876 0.553 0.323 1.015 0.784 1.337 1.337s0.507 1.199 0.507 1.845c0 0.646-0.138 1.337-0.461 1.891-0.323 0.599-0.784 1.107-1.383 1.43 0 0 0 0 0 0-0.415 0.277-0.646 0.599-0.692 0.922-0.092 0.323 0 0.646 0.184 0.922 0.369 0.507 1.107 0.784 1.845 0.369 0 0 0 0 0 0 0.968-0.553 1.752-1.43 2.306-2.398s0.83-2.075 0.784-3.228c-0.046-1.107-0.323-2.167-0.876-3.090s-1.337-1.706-2.26-2.213c-0.277-0.138-0.553-0.231-0.876-0.184v0z"></path>
-                </svg>
-              </span>
-            </button>
-            <input class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="1">
           </div>
-          <span class="controls__time" title="Time left of 00:00s">
-            00:00 / 00:00
+        </mock:shadow-root>
+      </xm-settings-menu>
+      <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
+      <div class="controls__toolbar" data-test-id="controlsToolbar">
+        <button aria-label="Play" title="Play">
+          <span class="svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M24.267 14.867l-4.867-2.867c-1.067-0.6-2.867-1.667-3.933-2.333l-5.067-2.867c-1.067-0.667-2.133-0.133-2.133 1.133v16.067c0 1.267 1.067 1.8 2.133 1.133l4.933-2.867c1.067-0.6 2.933-1.667 4-2.333l4.867-2.867c1.133-0.533 1.133-1.6 0.067-2.2z"></path>
+            </svg>
           </span>
-          <div class="controls__playback-rate">
-            <div class="controls__playback-rate__menu">
-              <button class="controls__playback-rate__button"></button>
-              <button class="controls__playback-rate__button"></button>
-              <button class="controls__playback-rate__button controls__playback-rate__button--current"></button>
-              <button class="controls__playback-rate__button"></button>
-              <button class="controls__playback-rate__button"></button>
-              <button class="controls__playback-rate__button"></button>
-              <button class="controls__playback-rate__button"></button>
-            </div>
-            <button title="Playback rate">
-              <span class="controls__button-icon svg">
-                <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                  <path d="M6.857 20.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM10.286 12.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM17.929 21.161l1.804-6.821q0.107-0.464-0.134-0.866t-0.688-0.527-0.857 0.116-0.536 0.705l-1.804 6.821q-1.071 0.089-1.911 0.777t-1.125 1.759q-0.357 1.375 0.357 2.607t2.089 1.589 2.607-0.357 1.589-2.089q0.286-1.071-0.107-2.089t-1.286-1.625zM29.714 20.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM18.286 9.143q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM26.286 12.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM32 20.571q0 4.661-2.518 8.625-0.339 0.518-0.964 0.518h-25.036q-0.625 0-0.964-0.518-2.518-3.946-2.518-8.625 0-3.25 1.268-6.214t3.411-5.107 5.107-3.411 6.214-1.268 6.214 1.268 5.107 3.411 3.411 5.107 1.268 6.214z"></path>
-                </svg>
-              </span>
-            </button>
-          </div>
-          <button class="controls__button" title="Disable subtitles">
-            <span class="controls__button-icon controls__button-icon--active svg">
-              <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                <path d="M29 4h-26c-1.656 0-3 1.344-3 3v18c0 1.656 1.344 3 3 3h26c1.656 0 3-1.344 3-3v-18c0-1.656-1.344-3-3-3zM13.631 17.981c0.175-0.156 0.444-0.131 0.575 0.056l1.219 1.731c0.106 0.15 0.094 0.35-0.031 0.481-3.35 3.55-10.8 2.006-10.8-4.244 0-6.081 7.606-7.469 10.781-4.381 0.131 0.125 0.156 0.2 0.063 0.356l-1.094 1.906c-0.119 0.194-0.387 0.25-0.569 0.106-2.55-2-5.912-0.931-5.912 1.95 0.006 3 3.194 4.406 5.769 2.037zM25.531 17.981c0.175-0.156 0.444-0.131 0.575 0.056l1.219 1.731c0.106 0.15 0.094 0.35-0.031 0.481-3.344 3.556-10.794 2.006-10.794-4.244 0-6.081 7.606-7.469 10.781-4.381 0.131 0.125 0.156 0.2 0.063 0.356l-1.094 1.906c-0.119 0.194-0.387 0.25-0.569 0.106-2.55-2-5.913-0.931-5.913 1.95 0 3 3.188 4.406 5.762 2.037z"></path>
-              </svg>
-            </span>
-          </button>
-          <button title="Settings">
-            <span class="controls__settings-icon svg">
-              <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                <path d="M20.571 16.001q0-1.893-1.339-3.232t-3.232-1.339-3.232 1.339-1.339 3.232 1.339 3.232 3.232 1.339 3.232-1.339 1.339-3.232zM29.713 14.055v3.964q0 .214-.143.411t-.357.232l-3.304.5q-.339.964-.696 1.625.625 .893 1.911 2.464.179 .214.179 .446t-.161.411q-.482.661-1.768 1.929t-1.679 1.268q-.214 0-.464-.161l-2.464-1.929q-.786.411-1.625.679-.286 2.429-.518 3.321-.125.5-.643.5h-3.964q-.25 0-.438-.152t-.205-.384l-.5-3.286q-.875-.286-1.607-.661l-2.518 1.911q-.179.161-.446.161-.25 0-.446-.196-2.25-2.036-2.946-3-.125-.179-.125-.411 0-.214.143-.411.268-.375.911-1.188t.964-1.259q-.482-.893-.732-1.768l-3.268-.482q-.232-.036-.375-.223t-.143-.42v-3.964q0-.214.143-.411t.339-.232l3.321-.5q.25-.821.696-1.643-.714-1.018-1.911-2.464-.179-.214-.179-.429 0-.179.161-.411.464-.643 1.759-1.92t1.688-1.277q.232 0 .464.179l2.464 1.911q.786-.411 1.625-.679.286-2.429.518-3.321.125-.5.643-.5h3.964q.25 0 .438.152t.205.384l.5 3.286q.875.286 1.607.661l2.536-1.911q.161-.161.429-.161.232 0 .446.179 2.304 2.125 2.946 3.036.125 .143.125 .393 0 .214-.143.411-.268.375-.911 1.188t-.964 1.259q.464.893 .732 1.75l3.268.5q.232.036 .375.223t.143.42z"></path>
-              </svg>
-            </span>
-          </button>
-          <button title="Enter full screen">
+        </button>
+        <div class="controls-volume">
+          <button class="controls__mute" title="Mute">
             <span class="svg">
               <svg focusable="false" role="presentation" viewBox="0 0 32 32">
-                <path d="M10.8 18.867l-5 5-3-2.933v8.267h8.267l-2.933-3 5-5zM20.933 2.8l2.933 3-5 5 2.333 2.333 5-5 3 2.933v-8.267zM10.8 13.133l2.333-2.333-5-5 2.933-3h-8.267v8.267l3-2.933zM21.2 18.867l-2.333 2.333 5 5-2.933 3h8.267v-8.267l-3 2.933z"></path>
+                <path d="M16.754 4.159c-0.553 0-1.061 0.231-1.522 0.692l-5.211 4.473v13.373l5.211 4.565c0.277 0.277 0.599 0.461 0.968 0.507 0.277 0.046 0.507 0.046 0.784 0.046 0.277-0.046 0.507-0.138 0.692-0.277 0.461-0.277 0.784-0.738 0.784-1.337v-20.521c0-0.876-0.83-1.522-1.706-1.522v0zM8.315 9.323v13.373h-3.735c-0.646 0-1.199-0.184-1.614-0.599s-0.553-0.968-0.553-1.614v-9.038c0-0.646 0.184-1.199 0.646-1.614 0.461-0.369 1.061-0.553 1.752-0.553l3.505 0.046zM24.040 7.294c-0.692 0-1.291 0.599-1.291 1.291 0 0.461 0.277 0.876 0.646 1.107 1.107 0.692 2.029 1.66 2.675 2.813s0.968 2.444 0.968 3.735c0 1.291-0.323 2.582-0.968 3.735-0.599 1.153-1.476 2.167-2.628 2.813 0 0 0 0 0 0-0.415 0.277-0.646 0.646-0.738 1.015-0.092 0.323 0.046 0.692 0.231 0.922 0.369 0.507 1.199 0.692 1.891 0.231 1.43-0.922 2.675-2.213 3.505-3.735s1.245-3.228 1.245-4.98c0-1.752-0.415-3.459-1.291-4.98-0.83-1.522-2.075-2.859-3.551-3.781-0.138-0.138-0.415-0.184-0.692-0.184v0zM20.766 10.568c-0.692 0.138-1.199 0.83-1.061 1.522 0.046 0.369 0.323 0.692 0.646 0.876 0.553 0.323 1.015 0.784 1.337 1.337s0.507 1.199 0.507 1.845c0 0.646-0.138 1.337-0.461 1.891-0.323 0.599-0.784 1.107-1.383 1.43 0 0 0 0 0 0-0.415 0.277-0.646 0.599-0.692 0.922-0.092 0.323 0 0.646 0.184 0.922 0.369 0.507 1.107 0.784 1.845 0.369 0 0 0 0 0 0 0.968-0.553 1.752-1.43 2.306-2.398s0.83-2.075 0.784-3.228c-0.046-1.107-0.323-2.167-0.876-3.090s-1.337-1.706-2.26-2.213c-0.277-0.138-0.553-0.231-0.876-0.184v0z"></path>
+              </svg>
+            </span>
+          </button>
+          <input class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="1">
+        </div>
+        <span class="controls__time" title="Time left of 00:00s">
+          00:00 / 00:00
+        </span>
+        <div class="controls__playback-rate">
+          <div class="controls__playback-rate__menu">
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button controls__playback-rate__button--current"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+          </div>
+          <button title="Playback rate">
+            <span class="controls__button-icon svg">
+              <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                <path d="M6.857 20.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM10.286 12.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM17.929 21.161l1.804-6.821q0.107-0.464-0.134-0.866t-0.688-0.527-0.857 0.116-0.536 0.705l-1.804 6.821q-1.071 0.089-1.911 0.777t-1.125 1.759q-0.357 1.375 0.357 2.607t2.089 1.589 2.607-0.357 1.589-2.089q0.286-1.071-0.107-2.089t-1.286-1.625zM29.714 20.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM18.286 9.143q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM26.286 12.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM32 20.571q0 4.661-2.518 8.625-0.339 0.518-0.964 0.518h-25.036q-0.625 0-0.964-0.518-2.518-3.946-2.518-8.625 0-3.25 1.268-6.214t3.411-5.107 5.107-3.411 6.214-1.268 6.214 1.268 5.107 3.411 3.411 5.107 1.268 6.214z"></path>
               </svg>
             </span>
           </button>
         </div>
+        <button aria-haspopup="true" aria-label="Settings" title="Settings">
+          <span class="controls__settings-icon svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M20.571 16.001q0-1.893-1.339-3.232t-3.232-1.339-3.232 1.339-1.339 3.232 1.339 3.232 3.232 1.339 3.232-1.339 1.339-3.232zM29.713 14.055v3.964q0 .214-.143.411t-.357.232l-3.304.5q-.339.964-.696 1.625.625 .893 1.911 2.464.179 .214.179 .446t-.161.411q-.482.661-1.768 1.929t-1.679 1.268q-.214 0-.464-.161l-2.464-1.929q-.786.411-1.625.679-.286 2.429-.518 3.321-.125.5-.643.5h-3.964q-.25 0-.438-.152t-.205-.384l-.5-3.286q-.875-.286-1.607-.661l-2.518 1.911q-.179.161-.446.161-.25 0-.446-.196-2.25-2.036-2.946-3-.125-.179-.125-.411 0-.214.143-.411.268-.375.911-1.188t.964-1.259q-.482-.893-.732-1.768l-3.268-.482q-.232-.036-.375-.223t-.143-.42v-3.964q0-.214.143-.411t.339-.232l3.321-.5q.25-.821.696-1.643-.714-1.018-1.911-2.464-.179-.214-.179-.429 0-.179.161-.411.464-.643 1.759-1.92t1.688-1.277q.232 0 .464.179l2.464 1.911q.786-.411 1.625-.679.286-2.429.518-3.321.125-.5.643-.5h3.964q.25 0 .438.152t.205.384l.5 3.286q.875.286 1.607.661l2.536-1.911q.161-.161.429-.161.232 0 .446.179 2.304 2.125 2.946 3.036.125 .143.125 .393 0 .214-.143.411-.268.375-.911 1.188t-.964 1.259q.464.893 .732 1.75l3.268.5q.232.036 .375.223t.143.42z"></path>
+            </svg>
+          </span>
+        </button>
+        <button title="Enter full screen">
+          <span class="svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M10.8 18.867l-5 5-3-2.933v8.267h8.267l-2.933-3 5-5zM20.933 2.8l2.933 3-5 5 2.333 2.333 5-5 3 2.933v-8.267zM10.8 13.133l2.333-2.333-5-5 2.933-3h-8.267v8.267l3-2.933zM21.2 18.867l-2.333 2.333 5 5-2.933 3h8.267v-8.267l-3 2.933z"></path>
+            </svg>
+          </span>
+        </button>
       </div>
-    </mock:shadow-root>
-  </xm-controls>
-</div>
+    </div>
+  </mock:shadow-root>
+</xm-controls>
+`;
+
+exports[`xm-controls should show a list of texttracks 2`] = `
+<xm-controls>
+  <mock:shadow-root>
+    <div class="controls">
+      <xm-settings-menu>
+        <mock:shadow-root>
+          <div class="menu settings-menu" data-test-id="settingsMenu" role="menu" tabindex="0">
+            <div class="settings-menu__content show">
+              <button class="settings-menu__button">
+                <span class="settings-menu__button-label">
+                  Subtitles
+                </span>
+                <span class="settings-menu__button-value">
+                  Deutsch
+                </span>
+                <span class="settings-menu__arrow settings-menu__arrow--right">
+                  <span class="svg">
+                    <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                      <path d="M12.4 26l-3.333-3.333 7.4-6.667-7.4-6.6 3.333-3.4 10.6 10-10.6 10z"></path>
+                    </svg>
+                  </span>
+                </span>
+              </button>
+              <button class="settings-menu__button">
+                <span class="settings-menu__button-label">
+                  Playback rate
+                </span>
+                <span class="settings-menu__button-value">
+                  1
+                </span>
+                <span class="settings-menu__arrow settings-menu__arrow--right">
+                  <span class="svg">
+                    <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                      <path d="M12.4 26l-3.333-3.333 7.4-6.667-7.4-6.6 3.333-3.4 10.6 10-10.6 10z"></path>
+                    </svg>
+                  </span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </mock:shadow-root>
+      </xm-settings-menu>
+      <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
+      <div class="controls__toolbar" data-test-id="controlsToolbar">
+        <button aria-label="Play" title="Play">
+          <span class="svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M24.267 14.867l-4.867-2.867c-1.067-0.6-2.867-1.667-3.933-2.333l-5.067-2.867c-1.067-0.667-2.133-0.133-2.133 1.133v16.067c0 1.267 1.067 1.8 2.133 1.133l4.933-2.867c1.067-0.6 2.933-1.667 4-2.333l4.867-2.867c1.133-0.533 1.133-1.6 0.067-2.2z"></path>
+            </svg>
+          </span>
+        </button>
+        <div class="controls-volume">
+          <button class="controls__mute" title="Mute">
+            <span class="svg">
+              <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                <path d="M16.754 4.159c-0.553 0-1.061 0.231-1.522 0.692l-5.211 4.473v13.373l5.211 4.565c0.277 0.277 0.599 0.461 0.968 0.507 0.277 0.046 0.507 0.046 0.784 0.046 0.277-0.046 0.507-0.138 0.692-0.277 0.461-0.277 0.784-0.738 0.784-1.337v-20.521c0-0.876-0.83-1.522-1.706-1.522v0zM8.315 9.323v13.373h-3.735c-0.646 0-1.199-0.184-1.614-0.599s-0.553-0.968-0.553-1.614v-9.038c0-0.646 0.184-1.199 0.646-1.614 0.461-0.369 1.061-0.553 1.752-0.553l3.505 0.046zM24.040 7.294c-0.692 0-1.291 0.599-1.291 1.291 0 0.461 0.277 0.876 0.646 1.107 1.107 0.692 2.029 1.66 2.675 2.813s0.968 2.444 0.968 3.735c0 1.291-0.323 2.582-0.968 3.735-0.599 1.153-1.476 2.167-2.628 2.813 0 0 0 0 0 0-0.415 0.277-0.646 0.646-0.738 1.015-0.092 0.323 0.046 0.692 0.231 0.922 0.369 0.507 1.199 0.692 1.891 0.231 1.43-0.922 2.675-2.213 3.505-3.735s1.245-3.228 1.245-4.98c0-1.752-0.415-3.459-1.291-4.98-0.83-1.522-2.075-2.859-3.551-3.781-0.138-0.138-0.415-0.184-0.692-0.184v0zM20.766 10.568c-0.692 0.138-1.199 0.83-1.061 1.522 0.046 0.369 0.323 0.692 0.646 0.876 0.553 0.323 1.015 0.784 1.337 1.337s0.507 1.199 0.507 1.845c0 0.646-0.138 1.337-0.461 1.891-0.323 0.599-0.784 1.107-1.383 1.43 0 0 0 0 0 0-0.415 0.277-0.646 0.599-0.692 0.922-0.092 0.323 0 0.646 0.184 0.922 0.369 0.507 1.107 0.784 1.845 0.369 0 0 0 0 0 0 0.968-0.553 1.752-1.43 2.306-2.398s0.83-2.075 0.784-3.228c-0.046-1.107-0.323-2.167-0.876-3.090s-1.337-1.706-2.26-2.213c-0.277-0.138-0.553-0.231-0.876-0.184v0z"></path>
+              </svg>
+            </span>
+          </button>
+          <input class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="1">
+        </div>
+        <span class="controls__time" title="Time left of 00:00s">
+          00:00 / 00:00
+        </span>
+        <div class="controls__playback-rate">
+          <div class="controls__playback-rate__menu">
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button controls__playback-rate__button--current"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+            <button class="controls__playback-rate__button"></button>
+          </div>
+          <button title="Playback rate">
+            <span class="controls__button-icon svg">
+              <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+                <path d="M6.857 20.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM10.286 12.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM17.929 21.161l1.804-6.821q0.107-0.464-0.134-0.866t-0.688-0.527-0.857 0.116-0.536 0.705l-1.804 6.821q-1.071 0.089-1.911 0.777t-1.125 1.759q-0.357 1.375 0.357 2.607t2.089 1.589 2.607-0.357 1.589-2.089q0.286-1.071-0.107-2.089t-1.286-1.625zM29.714 20.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM18.286 9.143q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM26.286 12.571q0-0.946-0.67-1.616t-1.616-0.67-1.616 0.67-0.67 1.616 0.67 1.616 1.616 0.67 1.616-0.67 0.67-1.616zM32 20.571q0 4.661-2.518 8.625-0.339 0.518-0.964 0.518h-25.036q-0.625 0-0.964-0.518-2.518-3.946-2.518-8.625 0-3.25 1.268-6.214t3.411-5.107 5.107-3.411 6.214-1.268 6.214 1.268 5.107 3.411 3.411 5.107 1.268 6.214z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+        <button class="controls__button" title="Disable subtitles">
+          <span class="controls__button-icon controls__button-icon--active svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M29 4h-26c-1.656 0-3 1.344-3 3v18c0 1.656 1.344 3 3 3h26c1.656 0 3-1.344 3-3v-18c0-1.656-1.344-3-3-3zM13.631 17.981c0.175-0.156 0.444-0.131 0.575 0.056l1.219 1.731c0.106 0.15 0.094 0.35-0.031 0.481-3.35 3.55-10.8 2.006-10.8-4.244 0-6.081 7.606-7.469 10.781-4.381 0.131 0.125 0.156 0.2 0.063 0.356l-1.094 1.906c-0.119 0.194-0.387 0.25-0.569 0.106-2.55-2-5.912-0.931-5.912 1.95 0.006 3 3.194 4.406 5.769 2.037zM25.531 17.981c0.175-0.156 0.444-0.131 0.575 0.056l1.219 1.731c0.106 0.15 0.094 0.35-0.031 0.481-3.344 3.556-10.794 2.006-10.794-4.244 0-6.081 7.606-7.469 10.781-4.381 0.131 0.125 0.156 0.2 0.063 0.356l-1.094 1.906c-0.119 0.194-0.387 0.25-0.569 0.106-2.55-2-5.913-0.931-5.913 1.95 0 3 3.188 4.406 5.762 2.037z"></path>
+            </svg>
+          </span>
+        </button>
+        <button aria-haspopup="true" aria-label="Settings" title="Settings">
+          <span class="controls__settings-icon svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M20.571 16.001q0-1.893-1.339-3.232t-3.232-1.339-3.232 1.339-1.339 3.232 1.339 3.232 3.232 1.339 3.232-1.339 1.339-3.232zM29.713 14.055v3.964q0 .214-.143.411t-.357.232l-3.304.5q-.339.964-.696 1.625.625 .893 1.911 2.464.179 .214.179 .446t-.161.411q-.482.661-1.768 1.929t-1.679 1.268q-.214 0-.464-.161l-2.464-1.929q-.786.411-1.625.679-.286 2.429-.518 3.321-.125.5-.643.5h-3.964q-.25 0-.438-.152t-.205-.384l-.5-3.286q-.875-.286-1.607-.661l-2.518 1.911q-.179.161-.446.161-.25 0-.446-.196-2.25-2.036-2.946-3-.125-.179-.125-.411 0-.214.143-.411.268-.375.911-1.188t.964-1.259q-.482-.893-.732-1.768l-3.268-.482q-.232-.036-.375-.223t-.143-.42v-3.964q0-.214.143-.411t.339-.232l3.321-.5q.25-.821.696-1.643-.714-1.018-1.911-2.464-.179-.214-.179-.429 0-.179.161-.411.464-.643 1.759-1.92t1.688-1.277q.232 0 .464.179l2.464 1.911q.786-.411 1.625-.679.286-2.429.518-3.321.125-.5.643-.5h3.964q.25 0 .438.152t.205.384l.5 3.286q.875.286 1.607.661l2.536-1.911q.161-.161.429-.161.232 0 .446.179 2.304 2.125 2.946 3.036.125 .143.125 .393 0 .214-.143.411-.268.375-.911 1.188t-.964 1.259q.464.893 .732 1.75l3.268.5q.232.036 .375.223t.143.42z"></path>
+            </svg>
+          </span>
+        </button>
+        <button title="Enter full screen">
+          <span class="svg">
+            <svg focusable="false" role="presentation" viewBox="0 0 32 32">
+              <path d="M10.8 18.867l-5 5-3-2.933v8.267h8.267l-2.933-3 5-5zM20.933 2.8l2.933 3-5 5 2.333 2.333 5-5 3 2.933v-8.267zM10.8 13.133l2.333-2.333-5-5 2.933-3h-8.267v8.267l3-2.933zM21.2 18.867l-2.333 2.333 5 5-2.933 3h8.267v-8.267l-3 2.933z"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </mock:shadow-root>
+</xm-controls>
 `;
 
 exports[`xm-controls with control-toggle should match snapshot 1`] = `
@@ -245,8 +421,8 @@ exports[`xm-controls with control-toggle should match snapshot 1`] = `
     <div class="controls">
       <xm-settings-menu></xm-settings-menu>
       <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
-      <div class="controls__toolbar">
-        <button title="Play">
+      <div class="controls__toolbar" data-test-id="controlsToolbar">
+        <button aria-label="Play" title="Play">
           <span class="svg">
             <svg focusable="false" role="presentation" viewBox="0 0 32 32">
               <path d="M24.267 14.867l-4.867-2.867c-1.067-0.6-2.867-1.667-3.933-2.333l-5.067-2.867c-1.067-0.667-2.133-0.133-2.133 1.133v16.067c0 1.267 1.067 1.8 2.133 1.133l4.933-2.867c1.067-0.6 2.933-1.667 4-2.333l4.867-2.867c1.133-0.533 1.133-1.6 0.067-2.2z"></path>
@@ -289,7 +465,7 @@ exports[`xm-controls with control-toggle should match snapshot 1`] = `
             <slot name="test"></slot>
           </span>
         </button>
-        <button title="Settings">
+        <button aria-haspopup="true" aria-label="Settings" title="Settings">
           <span class="controls__settings-icon svg">
             <svg focusable="false" role="presentation" viewBox="0 0 32 32">
               <path d="M20.571 16.001q0-1.893-1.339-3.232t-3.232-1.339-3.232 1.339-1.339 3.232 1.339 3.232 3.232 1.339 3.232-1.339 1.339-3.232zM29.713 14.055v3.964q0 .214-.143.411t-.357.232l-3.304.5q-.339.964-.696 1.625.625 .893 1.911 2.464.179 .214.179 .446t-.161.411q-.482.661-1.768 1.929t-1.679 1.268q-.214 0-.464-.161l-2.464-1.929q-.786.411-1.625.679-.286 2.429-.518 3.321-.125.5-.643.5h-3.964q-.25 0-.438-.152t-.205-.384l-.5-3.286q-.875-.286-1.607-.661l-2.518 1.911q-.179.161-.446.161-.25 0-.446-.196-2.25-2.036-2.946-3-.125-.179-.125-.411 0-.214.143-.411.268-.375.911-1.188t.964-1.259q-.482-.893-.732-1.768l-3.268-.482q-.232-.036-.375-.223t-.143-.42v-3.964q0-.214.143-.411t.339-.232l3.321-.5q.25-.821.696-1.643-.714-1.018-1.911-2.464-.179-.214-.179-.429 0-.179.161-.411.464-.643 1.759-1.92t1.688-1.277q.232 0 .464.179l2.464 1.911q.786-.411 1.625-.679.286-2.429.518-3.321.125-.5.643-.5h3.964q.25 0 .438.152t.205.384l.5 3.286q.875.286 1.607.661l2.536-1.911q.161-.161.429-.161.232 0 .446.179 2.304 2.125 2.946 3.036.125 .143.125 .393 0 .214-.143.411-.268.375-.911 1.188t-.964 1.259q.464.893 .732 1.75l3.268.5q.232.036 .375.223t.143.42z"></path>

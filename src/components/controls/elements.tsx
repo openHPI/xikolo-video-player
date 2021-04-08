@@ -46,6 +46,7 @@ export const Control: FunctionalComponent<ControlProps> = (props) => {
       <button
         onClick={props.onPause}
         title={locales[props.status.language].pause}
+        aria-label={locales[props.status.language].pause}
       >
         <span class="svg" innerHTML={icon.Pause} />
       </button>
@@ -55,6 +56,7 @@ export const Control: FunctionalComponent<ControlProps> = (props) => {
       <button
         onClick={props.onPlay}
         title={locales[props.status.language].restart}
+        aria-label={locales[props.status.language].restart}
       >
         <span class="svg" innerHTML={icon.Restart} />
       </button>
@@ -64,6 +66,7 @@ export const Control: FunctionalComponent<ControlProps> = (props) => {
       <button
         onClick={props.onPlay}
         title={locales[props.status.language].play}
+        aria-label={locales[props.status.language].play}
       >
         <span class="svg" innerHTML={icon.Play} />
       </button>
@@ -188,6 +191,8 @@ export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleBut
       <button
         onClick={props.onCloseSettingsMenu}
         title={locales[props.status.language].settings}
+        aria-label={locales[props.status.language].settings}
+        aria-haspopup="true"
       >
         <span
           class="controls__settings-icon controls__settings-icon--open svg"
@@ -200,6 +205,8 @@ export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleBut
     <button
       onClick={props.onOpenSettingsMenu}
       title={locales[props.status.language].settings}
+      aria-label={locales[props.status.language].settings}
+      aria-haspopup="true"
     >
       <span class="controls__settings-icon svg" innerHTML={icon.Settings} />
     </button>

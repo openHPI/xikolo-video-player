@@ -1,72 +1,41 @@
-import { newSpecPage } from '@stencil/core/testing';
+import { newSpecPage, SpecPage } from '@stencil/core/testing';
 import { Controls } from '../controls/controls';
 import { SettingsMenu } from '../settings-menu/settings-menu';
 import { defaultStatus } from '../../utils/status';
 import { TextTrackList, WebVTT } from '../../utils/webVTT';
 import { ToggleControlProps } from '../../utils/types';
 
-describe.skip('xm-controls', () => {
-  let page, textTracks: TextTrackList, shadowRoot, controls, settingsMenu;
-
-  it('should build', () => {
-    expect(new Controls()).toBeTruthy();
-    expect(new SettingsMenu()).toBeTruthy();
-  });
+describe('xm-controls', () => {
+  let page: SpecPage, textTracks: TextTrackList, controls, settingsMenu;
 
   beforeEach(async () => {
     page = await newSpecPage({
       html: `<div></div>`,
       components: [Controls, SettingsMenu],
-      supportsShadowDom: true,
     });
 
     textTracks = new TextTrackList();
+
+    // Render controls
     controls = page.doc.createElement('xm-controls');
     controls.status = defaultStatus;
     controls.textTracks = textTracks;
     page.root.appendChild(controls);
     await page.waitForChanges();
-    expect(page.rootInstance).toBeTruthy();
-    expect(page.root.querySelector('xm-controls')).toBeTruthy();
-    shadowRoot = page.root.querySelector('xm-controls').shadowRoot;
-    expect(shadowRoot).toBeTruthy();
 
-    // We need to render all child components manually for acces to their shadow doms!
-    settingsMenu = shadowRoot.querySelector('xm-settings-menu');
-    let settingsInstance = new SettingsMenu();
-    settingsInstance.status = defaultStatus;
-    settingsInstance.textTracks = textTracks;
-    settingsMenu.innerHTML = settingsInstance.render();
-    await page.waitForChanges();
-    expect(settingsMenu.shadowRoot).toBeTruthy();
+    settingsMenu = controls.shadowRoot.querySelector('xm-settings-menu');
   });
 
-  it('should render the settings-menu', async () => {
+  it('should render opened settings-menu with openedSettingsMenu status', async () => {
+    expect(page.root).toMatchSnapshot();
+
     const status = {
       ...controls.status,
       openedSettingsMenu: true,
     };
-    expect(
-      settingsMenu.shadowRoot.querySelector('.settings-menu')
-    ).toBeTruthy();
-    expect(
-      settingsMenu.shadowRoot.querySelector('.settings-menu.menu--open')
-    ).not.toBeTruthy();
-    expect(
-      shadowRoot.querySelector('.controls__settings-icon')
-    ).not.toHaveClass('controls__settings-icon--open');
-    let button = shadowRoot.querySelector('.controls__settings-icon')
-      .parentNode;
-    expect(button).toBeTruthy();
-    button.click();
     controls.status = status;
     await page.waitForChanges();
-    expect(shadowRoot.querySelector('.controls__settings-icon')).toHaveClass(
-      'controls__settings-icon--open'
-    );
-    expect(
-      settingsMenu.shadowRoot.querySelector('.settings-menu.menu--open')
-    ).toBeTruthy();
+
     expect(page.root).toMatchSnapshot();
   });
 
@@ -101,46 +70,23 @@ describe.skip('xm-controls', () => {
         textTrack: 'de',
       },
     };
-    expect(
-      shadowRoot.querySelector('.controls__subtitle-icon')
-    ).not.toBeTruthy();
-    let textTrackValue = settingsMenu.shadowRoot.querySelector(
-      '.settings-menu__button-value'
-    ).firstChild;
-    expect(textTrackValue.nodeValue.trim()).toBe('Off');
+
+    // Check default
     expect(settingsMenu.status.settings.textTrack).toBe('off');
     expect(textTracks.getTextTracks()).toBe(null);
+    expect(page.root).toMatchSnapshot();
+
+    // Set text tracks via function
     textTracks.addWebVTT(de, 1);
     await page.waitForChanges();
+
     expect(textTracks.getTextTracks().length).toBe(1);
+
+    // Set another language via status and enable it
     controls.status = status;
     await page.waitForChanges();
-    expect(
-      shadowRoot
-        .querySelector('.controls__button')
-        .querySelector('.controls__button-icon')
-    ).toBeTruthy();
-    expect(
-      shadowRoot
-        .querySelector('.controls__button')
-        .querySelector('.controls__button-icon')
-    ).toHaveClass('controls__button-icon--active');
+
     expect(settingsMenu.status.settings.textTrack).toBe('de');
-    // must reselect it for testing !
-    textTrackValue = settingsMenu.shadowRoot.querySelector(
-      '.settings-menu__button-value'
-    ).firstChild;
-    expect(textTrackValue.nodeValue.trim()).toBe('Deutsch');
-    const subtitleSubmenubutton = settingsMenu.shadowRoot.querySelector(
-      '.settings-menu__button'
-    ).firstChild;
-    subtitleSubmenubutton.click();
-    await page.waitForChanges();
-    const submenu = settingsMenu.shadowRoot.querySelector(
-      '.settings-menu__submenu-content'
-    );
-    expect(submenu.querySelector('.settings-menu__button')).toBeTruthy();
-    expect(submenu.childNodes.length).toBe(2);
     expect(textTracks.getTextTrackValues().length).toBe(2);
     expect(page.root).toMatchSnapshot();
   });
