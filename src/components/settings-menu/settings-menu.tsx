@@ -49,7 +49,13 @@ export class SettingsMenu {
       classes += ' menu--open';
     }
     return (
-      <div class={classes} onClick={(e) => e.stopPropagation()}>
+      <div
+        class={classes}
+        onClick={(e) => e.stopPropagation()}
+        data-test-id="settingsMenu"
+        role="menu"
+        tabindex="0"
+      >
         <Submenu
           status={this.submenuStatus}
           onChangeSetting={this._setSetting}

@@ -13,8 +13,8 @@ exports[`xm-player with props should render 1`] = `
           <div class="controls">
             <xm-settings-menu></xm-settings-menu>
             <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
-            <div class="controls__toolbar">
-              <button title="Play">
+            <div class="controls__toolbar" data-test-id="controlsToolbar">
+              <button aria-label="Play" title="Play">
                 <span class="svg">
                   <svg focusable="false" role="presentation" viewBox="0 0 32 32">
                     <path d="M24.267 14.867l-4.867-2.867c-1.067-0.6-2.867-1.667-3.933-2.333l-5.067-2.867c-1.067-0.667-2.133-0.133-2.133 1.133v16.067c0 1.267 1.067 1.8 2.133 1.133l4.933-2.867c1.067-0.6 2.933-1.667 4-2.333l4.867-2.867c1.133-0.533 1.133-1.6 0.067-2.2z"></path>
@@ -52,7 +52,7 @@ exports[`xm-player with props should render 1`] = `
                   </span>
                 </button>
               </div>
-              <button title="Settings">
+              <button aria-haspopup="true" aria-label="Settings" title="Settings">
                 <span class="controls__settings-icon svg">
                   <svg focusable="false" role="presentation" viewBox="0 0 32 32">
                     <path d="M20.571 16.001q0-1.893-1.339-3.232t-3.232-1.339-3.232 1.339-1.339 3.232 1.339 3.232 3.232 1.339 3.232-1.339 1.339-3.232zM29.713 14.055v3.964q0 .214-.143.411t-.357.232l-3.304.5q-.339.964-.696 1.625.625 .893 1.911 2.464.179 .214.179 .446t-.161.411q-.482.661-1.768 1.929t-1.679 1.268q-.214 0-.464-.161l-2.464-1.929q-.786.411-1.625.679-.286 2.429-.518 3.321-.125.5-.643.5h-3.964q-.25 0-.438-.152t-.205-.384l-.5-3.286q-.875-.286-1.607-.661l-2.518 1.911q-.179.161-.446.161-.25 0-.446-.196-2.25-2.036-2.946-3-.125-.179-.125-.411 0-.214.143-.411.268-.375.911-1.188t.964-1.259q-.482-.893-.732-1.768l-3.268-.482q-.232-.036-.375-.223t-.143-.42v-3.964q0-.214.143-.411t.339-.232l3.321-.5q.25-.821.696-1.643-.714-1.018-1.911-2.464-.179-.214-.179-.429 0-.179.161-.411.464-.643 1.759-1.92t1.688-1.277q.232 0 .464.179l2.464 1.911q.786-.411 1.625-.679.286-2.429.518-3.321.125-.5.643-.5h3.964q.25 0 .438.152t.205.384l.5 3.286q.875.286 1.607.661l2.536-1.911q.161-.161.429-.161.232 0 .446.179 2.304 2.125 2.946 3.036.125 .143.125 .393 0 .214-.143.411-.268.375-.911 1.188t-.964 1.259q.464.893 .732 1.75l3.268.5q.232.036 .375.223t.143.42z"></path>
@@ -90,8 +90,8 @@ exports[`xm-player with props should render with volume 1`] = `
           <div class="controls">
             <xm-settings-menu></xm-settings-menu>
             <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
-            <div class="controls__toolbar">
-              <button title="Play">
+            <div class="controls__toolbar" data-test-id="controlsToolbar">
+              <button aria-label="Play" title="Play">
                 <span class="svg">
                   <svg focusable="false" role="presentation" viewBox="0 0 32 32">
                     <path d="M24.267 14.867l-4.867-2.867c-1.067-0.6-2.867-1.667-3.933-2.333l-5.067-2.867c-1.067-0.667-2.133-0.133-2.133 1.133v16.067c0 1.267 1.067 1.8 2.133 1.133l4.933-2.867c1.067-0.6 2.933-1.667 4-2.333l4.867-2.867c1.133-0.533 1.133-1.6 0.067-2.2z"></path>
@@ -129,7 +129,7 @@ exports[`xm-player with props should render with volume 1`] = `
                   </span>
                 </button>
               </div>
-              <button title="Settings">
+              <button aria-haspopup="true" aria-label="Settings" title="Settings">
                 <span class="controls__settings-icon svg">
                   <svg focusable="false" role="presentation" viewBox="0 0 32 32">
                     <path d="M20.571 16.001q0-1.893-1.339-3.232t-3.232-1.339-3.232 1.339-1.339 3.232 1.339 3.232 3.232 1.339 3.232-1.339 1.339-3.232zM29.713 14.055v3.964q0 .214-.143.411t-.357.232l-3.304.5q-.339.964-.696 1.625.625 .893 1.911 2.464.179 .214.179 .446t-.161.411q-.482.661-1.768 1.929t-1.679 1.268q-.214 0-.464-.161l-2.464-1.929q-.786.411-1.625.679-.286 2.429-.518 3.321-.125.5-.643.5h-3.964q-.25 0-.438-.152t-.205-.384l-.5-3.286q-.875-.286-1.607-.661l-2.518 1.911q-.179.161-.446.161-.25 0-.446-.196-2.25-2.036-2.946-3-.125-.179-.125-.411 0-.214.143-.411.268-.375.911-1.188t.964-1.259q-.482-.893-.732-1.768l-3.268-.482q-.232-.036-.375-.223t-.143-.42v-3.964q0-.214.143-.411t.339-.232l3.321-.5q.25-.821.696-1.643-.714-1.018-1.911-2.464-.179-.214-.179-.429 0-.179.161-.411.464-.643 1.759-1.92t1.688-1.277q.232 0 .464.179l2.464 1.911q.786-.411 1.625-.679.286-2.429.518-3.321.125-.5.643-.5h3.964q.25 0 .438.152t.205.384l.5 3.286q.875.286 1.607.661l2.536-1.911q.161-.161.429-.161.232 0 .446.179 2.304 2.125 2.946 3.036.125 .143.125 .393 0 .214-.143.411-.268.375-.911 1.188t-.964 1.259q.464.893 .732 1.75l3.268.5q.232.036 .375.223t.143.42z"></path>
@@ -167,8 +167,8 @@ exports[`xm-player with subtitle props should render with default text track and
           <div class="controls">
             <xm-settings-menu></xm-settings-menu>
             <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
-            <div class="controls__toolbar">
-              <button title="Play">
+            <div class="controls__toolbar" data-test-id="controlsToolbar">
+              <button aria-label="Play" title="Play">
                 <span class="svg">
                   <svg focusable="false" role="presentation" viewBox="0 0 32 32">
                     <path d="M24.267 14.867l-4.867-2.867c-1.067-0.6-2.867-1.667-3.933-2.333l-5.067-2.867c-1.067-0.667-2.133-0.133-2.133 1.133v16.067c0 1.267 1.067 1.8 2.133 1.133l4.933-2.867c1.067-0.6 2.933-1.667 4-2.333l4.867-2.867c1.133-0.533 1.133-1.6 0.067-2.2z"></path>
@@ -213,7 +213,7 @@ exports[`xm-player with subtitle props should render with default text track and
                   </svg>
                 </span>
               </button>
-              <button title="Settings">
+              <button aria-haspopup="true" aria-label="Settings" title="Settings">
                 <span class="controls__settings-icon svg">
                   <svg focusable="false" role="presentation" viewBox="0 0 32 32">
                     <path d="M20.571 16.001q0-1.893-1.339-3.232t-3.232-1.339-3.232 1.339-1.339 3.232 1.339 3.232 3.232 1.339 3.232-1.339 1.339-3.232zM29.713 14.055v3.964q0 .214-.143.411t-.357.232l-3.304.5q-.339.964-.696 1.625.625 .893 1.911 2.464.179 .214.179 .446t-.161.411q-.482.661-1.768 1.929t-1.679 1.268q-.214 0-.464-.161l-2.464-1.929q-.786.411-1.625.679-.286 2.429-.518 3.321-.125.5-.643.5h-3.964q-.25 0-.438-.152t-.205-.384l-.5-3.286q-.875-.286-1.607-.661l-2.518 1.911q-.179.161-.446.161-.25 0-.446-.196-2.25-2.036-2.946-3-.125-.179-.125-.411 0-.214.143-.411.268-.375.911-1.188t.964-1.259q-.482-.893-.732-1.768l-3.268-.482q-.232-.036-.375-.223t-.143-.42v-3.964q0-.214.143-.411t.339-.232l3.321-.5q.25-.821.696-1.643-.714-1.018-1.911-2.464-.179-.214-.179-.429 0-.179.161-.411.464-.643 1.759-1.92t1.688-1.277q.232 0 .464.179l2.464 1.911q.786-.411 1.625-.679.286-2.429.518-3.321.125-.5.643-.5h3.964q.25 0 .438.152t.205.384l.5 3.286q.875.286 1.607.661l2.536-1.911q.161-.161.429-.161.232 0 .446.179 2.304 2.125 2.946 3.036.125 .143.125 .393 0 .214-.143.411-.268.375-.911 1.188t-.964 1.259q.464.893 .732 1.75l3.268.5q.232.036 .375.223t.143.42z"></path>

@@ -77,7 +77,7 @@ export class Controls {
         <Subtitles status={this.status} />
         <xm-settings-menu status={this.status} textTracks={this.textTracks} />
         <Slider status={this.status} onSeek={this._seek} />
-        <div class="controls__toolbar">
+        <div class="controls__toolbar" data-test-id="controlsToolbar">
           <Control
             status={this.status}
             onPause={this._pause}
@@ -120,6 +120,7 @@ export class Controls {
             status={this.status}
             onOpenSettingsMenu={this._openSettingsMenu}
             onCloseSettingsMenu={this._closeSettingsMenu}
+            data-test-id="settingsMenuToggleButton"
           />
           <Fullscreen
             status={this.status}
