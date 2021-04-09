@@ -7,6 +7,7 @@ import autoprefixer from 'autoprefixer';
 export const config: Config = {
   namespace: 'xmf',
   plugins: [sass(), postcss({ plugins: [autoprefixer()] })],
+  buildEs5: 'prod',
   outputTargets: [
     { type: 'dist', esmLoaderPath: '../loader' },
     {
