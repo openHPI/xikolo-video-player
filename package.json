@@ -20,7 +20,8 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@stencil/core": "2.5.2",
@@ -43,11 +44,6 @@
     "stencil-inline-svg": "1.0.1"
   },
   "license": "MIT",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.*": "npm run prettier"
   }
