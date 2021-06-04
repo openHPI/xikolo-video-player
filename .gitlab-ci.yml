@@ -8,7 +8,7 @@ Docker E2E:
   image: docker:stable@sha256:fd4d028713fd05a1fb896412805daed82c4a0cc84331d8dad00cb596d7ce3e3a
 
   services:
-    - docker:dind@sha256:87ed8e3a7b251eef42c2e4251f95ae3c5f8c4c0a64900f19cc532d0a42aa7107
+    - docker:dind@sha256:d62434ce9ee4dbac16a99c6eb4742722a2fffbbad81ab5e65db1792fcb566465
 
   before_script:
     - docker info
