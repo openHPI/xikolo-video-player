@@ -41,7 +41,7 @@
     "prettier": "2.3.1",
     "puppeteer": "5.2.1",
     "split.js": "1.6.4",
-    "stencil-inline-svg": "1.0.1"
+    "stencil-inline-svg": "1.1.0"
   },
   "license": "MIT",
   "lint-staged": {
