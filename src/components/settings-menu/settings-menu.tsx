@@ -29,7 +29,7 @@ import locales from '../../utils/locales';
 export class SettingsMenu {
   @Element() el: HTMLXmSettingsMenuElement;
 
-  @Prop() status: Status;
+  @Prop({ mutable: true }) status: Status;
   @Prop({ mutable: true }) textTracks: TextTrackList;
 
   @State()

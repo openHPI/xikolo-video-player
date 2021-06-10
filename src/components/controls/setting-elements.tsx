@@ -11,31 +11,30 @@ interface PlaybackRateToggleButtonProps {
   onHide: (e: Event) => void;
 }
 
-export const PlaybackRateToggleButton: FunctionalComponent<PlaybackRateToggleButtonProps> = (
-  props
-) => {
-  if (props.status.showPlaybackRate) {
+export const PlaybackRateToggleButton: FunctionalComponent<PlaybackRateToggleButtonProps> =
+  (props) => {
+    if (props.status.showPlaybackRate) {
+      return (
+        <button
+          onClick={props.onHide}
+          title={locales[props.status.language].playbackRate}
+        >
+          <span
+            class="controls__button-icon controls__button-icon--active svg"
+            innerHTML={icon.Speed}
+          />
+        </button>
+      );
+    }
     return (
       <button
-        onClick={props.onHide}
+        onClick={props.onShow}
         title={locales[props.status.language].playbackRate}
       >
-        <span
-          class="controls__button-icon controls__button-icon--active svg"
-          innerHTML={icon.Speed}
-        />
+        <span class="controls__button-icon svg" innerHTML={icon.Speed} />
       </button>
     );
-  }
-  return (
-    <button
-      onClick={props.onShow}
-      title={locales[props.status.language].playbackRate}
-    >
-      <span class="controls__button-icon svg" innerHTML={icon.Speed} />
-    </button>
-  );
-};
+  };
 
 interface PlaybackRateProps {
   status: Status;

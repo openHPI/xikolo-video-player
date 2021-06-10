@@ -42,10 +42,11 @@ export class Player {
   @Element()
   private el: HTMLXmPlayerElement;
 
-  @Prop() volume: number = defaultStatus.volume;
+  @Prop({ mutable: true }) volume: number = defaultStatus.volume;
   @Prop({ mutable: true }) playbackrate: number =
     defaultStatus.settings.playbackRate;
-  @Prop() showsubtitle: boolean = defaultStatus.subtitle.enabled;
+  @Prop({ mutable: true }) showsubtitle: boolean =
+    defaultStatus.subtitle.enabled;
 
   @Prop({ attribute: 'lang' }) lang: string;
 
