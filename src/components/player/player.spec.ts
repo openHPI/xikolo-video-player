@@ -39,20 +39,33 @@ describe('xm-player with props', () => {
     expect(page.root.getAttribute('lang')).toBe('en');
     expect(page.root.getAttribute('volume')).toBe('0.3');
     expect(page.root.getAttribute('playbackrate')).toBe('2');
-    page.rootInstance.volume = 0;
-    page.rootInstance.playbackrate = 1;
     await page.waitForChanges();
     expect(page.root).toMatchSnapshot();
   });
 
-  it('should render with volume', async () => {
+  it('should render with ui language change', async () => {
+    page.rootInstance.lang = 'de';
+    await page.waitForChanges();
+    expect(page.rootInstance.status.language).toBe('de');
+    expect(page.root).toMatchSnapshot();
+  });
+
+  it('should render with playback rate change', async () => {
+    page.rootInstance.playbackrate = 1.75;
+    await page.waitForChanges();
+    expect(page.rootInstance.status.settings.playbackRate).toBe(1.75);
+    expect(page.root).toMatchSnapshot();
+  });
+
+  it('should render with volume change', async () => {
     expect(controls.shadowRoot.querySelector('.controls-volume')).toBeTruthy();
     let button = controls.shadowRoot.querySelector('.controls__mute');
     expect(button).not.toBeNull();
     page.rootInstance.volume = 0;
     await page.waitForChanges();
+    expect(page.rootInstance.status.volume).toBe(0);
+    expect(page.rootInstance.status.muted).toBe(true);
     expect(button).toHaveClass('controls__unmute');
-    expect(page.root).toMatchSnapshot();
   });
 });
 

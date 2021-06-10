@@ -31,7 +31,7 @@ import { ToggleControlProps } from '../../utils/types';
 export class Controls {
   @Element() el: HTMLXmControlsElement;
 
-  @Prop() status: Status;
+  @Prop({ mutable: true }) status: Status;
   @Prop({ mutable: true }) textTracks: TextTrackList;
   @Prop({ mutable: true }) toggleControlButtons: Array<ToggleControlProps>;
 
