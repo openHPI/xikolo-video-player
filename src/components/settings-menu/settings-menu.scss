@@ -38,6 +38,7 @@
     flex: 1 1 100%;
     width: 100%;
     background: transparent;
+    position: relative;
     border: none;
     color: white;
     color: var(--vp-main-color);
@@ -59,6 +60,12 @@
 
     &--current {
       font-weight: 600;
+      &:before {
+        content: "\2022";
+        color: var(--vp-main-color);
+        position: absolute;
+        left: 0.7em;
+      }
     }
   }
 

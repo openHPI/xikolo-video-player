@@ -107,9 +107,11 @@
   &__button {
     font-size: 0.9em;
     line-height: 0.9em;
-    width: 28px;
+    width: 40px;
     box-sizing: content-box;
     text-align: left;
+    position: relative;
+    text-indent: 1em;
 
     &:hover {
       background: rgba(255, 255, 255, 0.2);
@@ -117,6 +119,12 @@
 
     &--current {
       font-weight: 600;
+      &:before {
+        content: "\2022";
+        color: var(--vp-main-color);
+        position: absolute;
+        left: -0.1em;
+      }
     }
   }
 }
