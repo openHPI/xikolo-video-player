@@ -18,6 +18,7 @@ export const Fullscreen: FunctionalComponent<FullscreenProps> = (props) => {
       <button
         onClick={props.onExit}
         title={locales[props.status.language].exitFullscreen}
+        aria-label={locales[props.status.language].exitFullscreen}
       >
         <span class="svg" innerHTML={icon.Compress} />
       </button>
@@ -27,6 +28,7 @@ export const Fullscreen: FunctionalComponent<FullscreenProps> = (props) => {
       <button
         onClick={props.onRequest}
         title={locales[props.status.language].enterFullscreen}
+        aria-label={locales[props.status.language].enterFullscreen}
       >
         <span class="svg" innerHTML={icon.Expand} />
       </button>
@@ -113,6 +115,7 @@ export const Volume: FunctionalComponent<VolumeProps> = (props) => {
       value={muted ? 0 : volume}
       onChange={fnSetVolume}
       onInput={fnSetVolume}
+      aria-label={locales[props.status.language].changeVolume}
     />
   );
 
@@ -123,6 +126,7 @@ export const Volume: FunctionalComponent<VolumeProps> = (props) => {
           class="controls__unmute"
           onClick={props.onUnmute}
           title={locales[props.status.language].unmute}
+          aria-label={locales[props.status.language].unmute}
         >
           <span class="svg" innerHTML={icon.VolumeOff} />
         </button>
@@ -136,6 +140,7 @@ export const Volume: FunctionalComponent<VolumeProps> = (props) => {
           class="controls__mute"
           onClick={props.onMute}
           title={locales[props.status.language].mute}
+          aria-label={locales[props.status.language].mute}
         >
           <span class="svg" innerHTML={icon.VolumeOn} />
         </button>
@@ -229,6 +234,7 @@ export const SubtitleButton: FunctionalComponent<SubtitleButtonProps> = (
         class="controls__button"
         onClick={props.onDisable}
         title={locales[props.status.language].disableSubtitles}
+        aria-label={locales[props.status.language].disableSubtitles}
       >
         <span
           class="controls__button-icon controls__button-icon--active svg"
@@ -242,6 +248,7 @@ export const SubtitleButton: FunctionalComponent<SubtitleButtonProps> = (
         class="controls__button"
         onClick={props.onEnable}
         title={locales[props.status.language].enableSubtitles}
+        aria-label={locales[props.status.language].enableSubtitles}
       >
         <span class="controls__button-icon svg" innerHTML={icon.Subtitle} />
       </button>

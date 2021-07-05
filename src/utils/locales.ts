@@ -3,7 +3,7 @@ export enum de {
   playbackRate = 'Wiedergabegeschwindigkeit',
   textTrack = 'Untertitel',
   textTrackDefault = 'Aus',
-  //control button titles
+  //control button titles and aria-labels
   play = 'Wiedergabe',
   pause = 'Pause',
   restart = 'Nochmal',
@@ -14,6 +14,7 @@ export enum de {
   exitFullscreen = 'Vollbildmodus beenden',
   enableSubtitles = 'Untertitel einblenden',
   disableSubtitles = 'Untertitel ausblenden',
+  changeVolume = 'Lautstärke ändern'
 }
 
 export enum en {
@@ -21,7 +22,7 @@ export enum en {
   playbackRate = 'Playback rate',
   textTrack = 'Subtitles',
   textTrackDefault = 'Off',
-  //control button titles
+  //control button titles and aria-labels
   play = 'Play',
   pause = 'Pause',
   restart = 'Restart',
@@ -32,6 +33,7 @@ export enum en {
   exitFullscreen = 'Exit full screen',
   enableSubtitles = 'Enable subtitles',
   disableSubtitles = 'Disable subtitles',
+  changeVolume = 'Control volume'
 }
 
 export default { de, en };
