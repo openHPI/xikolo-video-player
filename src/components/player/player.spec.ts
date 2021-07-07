@@ -1,8 +1,47 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { Player } from './player';
 import { Controls } from '../controls/controls';
-import { defaultStatus } from '../../utils/status';
+import { defaultStatus, Mode } from '../../utils/status';
 import { WebVTT } from '../../utils/webVTT';
+
+describe('xm-player default functionality', () => {
+  let player: Player;
+
+  beforeEach(async () => {
+    player = new Player();
+    // Mock primary video slot, so initialization does not crash
+    // @ts-ignore
+    player.primary = player.el.appendChild(document.createElement('div'));
+  });
+
+  /*
+   * Tests for public API
+   */
+  it('play will set the mode to playing', async () => {
+    expect(player.getStatus().mode).toEqual(Mode.PAUSED);
+    await player.play();
+    expect(player.getStatus().mode).toEqual(Mode.PLAYING);
+  });
+
+  it('pause will set the mode to pause ', async () => {
+    expect(player.getStatus().mode).toEqual(Mode.PAUSED);
+    await player.play();
+    await player.pause();
+    expect(player.getStatus().mode).toEqual(Mode.PAUSED);
+  });
+
+  it('seeking on a paused player will not trigger playing mode', async () => {
+    expect(player.getStatus().mode).toEqual(Mode.PAUSED);
+    await player.seek(10);
+    expect(player.getStatus().mode).toEqual(Mode.PAUSED);
+  });
+
+  it('seeking will trigger playing, if the player is in playing mode', async () => {
+    await player.play();
+    await player.seek(10);
+    expect(player.getStatus().mode).toEqual(Mode.PLAYING);
+  });
+});
 
 describe('xm-player with props', () => {
   let page, controls;
