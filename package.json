@@ -28,7 +28,7 @@
     "@stencil/postcss": "2.0.0",
     "@stencil/sass": "1.4.1",
     "@types/autoprefixer": "9.7.2",
-    "@types/jest": "26.0.23",
+    "@types/jest": "26.0.24",
     "@types/puppeteer": "1.19.1",
     "@types/vimeo__player": "2.10.1",
     "@vimeo/player": "2.15.3",
