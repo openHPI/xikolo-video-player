@@ -144,6 +144,10 @@ export class Player {
     document.removeEventListener('click', this._hideSettingsMenuOnClickOutside);
   }
 
+  public getStatus(): Status {
+    return this.status;
+  }
+
   /**
    * Call a method on all videos.
    *

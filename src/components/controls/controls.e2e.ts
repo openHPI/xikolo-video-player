@@ -64,19 +64,6 @@ describe('controls', () => {
   /**
    * Functional Tests
    */
-  it('should fire play event', async () => {
-    const player: E2EElement = await page.find('xm-player');
-    const playEvent = await player.spyOnEvent('control:play');
-
-    const playButton: ElementHandle = await getPlayButton();
-
-    expect(playButton).toBeTruthy();
-
-    playButton.click();
-    await page.waitForChanges();
-
-    expect(playEvent).toHaveReceivedEvent();
-  });
 
   it('should emit the settings menu open event', async () => {
     const player: E2EElement = await page.find('xm-player');
@@ -248,18 +235,6 @@ describe('controls', () => {
    * There is a workaround:
    * https://github.com/Esri/calcite-components/pull/1103
    */
-
-  const getPlayButton = async (): Promise<ElementHandle> => {
-    const playButton: ElementHandle = (
-      await page.waitForFunction(() => {
-        return document
-          .querySelector('xm-player')
-          .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector('[aria-label="Play"]');
-      })
-    ).asElement();
-    return playButton;
-  };
 
   const getSettingsMenu = async (): Promise<ElementHandle> => {
     const settingsMenu: ElementHandle = (
