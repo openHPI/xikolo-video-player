@@ -150,72 +150,40 @@ export const Volume: FunctionalComponent<VolumeProps> = (props) => {
   }
 };
 
-interface SliderProps {
-  status: Status;
-  onSeek: (seconds: number) => void;
-}
-
-export const Slider: FunctionalComponent<SliderProps> = (props) => {
-  const { duration, progress } = props.status;
-
-  const fnSeek = (e: Event) => {
-    const el = e.target as HTMLInputElement;
-    props.onSeek(parseFloat(el.value));
-  };
-
-  return (
-    <input
-      class="controls__slider"
-      part="slider"
-      type="range"
-      min="0"
-      max={duration}
-      step="any"
-      autocomplete="off"
-      // Convert to string as zero (0) is otherwise ignored and
-      // not rendered at all. This would show a default progress
-      // bar of around 50%.
-      value={progress.seconds.toString()}
-      onChange={fnSeek}
-      onInput={fnSeek}
-    />
-  );
-};
-
 interface SettingsMenuToggleButtonProps {
   status: Status;
   onOpenSettingsMenu: (e: Event) => void;
   onCloseSettingsMenu: (e: Event) => void;
 }
 
-export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleButtonProps> =
-  (props) => {
-    if (props.status.openedSettingsMenu) {
-      return (
-        <button
-          onClick={props.onCloseSettingsMenu}
-          title={locales[props.status.language].settings}
-          aria-label={locales[props.status.language].settings}
-          aria-haspopup="true"
-        >
-          <span
-            class="controls__settings-icon controls__settings-icon--open svg"
-            innerHTML={icon.Settings}
-          />
-        </button>
-      );
-    }
+export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleButtonProps> = 
+(props) => {
+  if (props.status.openedSettingsMenu) {
     return (
       <button
-        onClick={props.onOpenSettingsMenu}
+        onClick={props.onCloseSettingsMenu}
         title={locales[props.status.language].settings}
         aria-label={locales[props.status.language].settings}
         aria-haspopup="true"
       >
-        <span class="controls__settings-icon svg" innerHTML={icon.Settings} />
+        <span
+          class="controls__settings-icon controls__settings-icon--open svg"
+          innerHTML={icon.Settings}
+        />
       </button>
     );
-  };
+  }
+  return (
+    <button
+      onClick={props.onOpenSettingsMenu}
+      title={locales[props.status.language].settings}
+      aria-label={locales[props.status.language].settings}
+      aria-haspopup="true"
+    >
+      <span class="controls__settings-icon svg" innerHTML={icon.Settings} />
+    </button>
+  );
+};
 
 interface SubtitleButtonProps {
   status: Status;

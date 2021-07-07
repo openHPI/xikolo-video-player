@@ -1,0 +1,47 @@
+:host {
+  width: 100%;
+  display: flex;
+}
+
+.slider {
+  flex: 1 1 100%;
+  appearance: none;
+  overflow: hidden;
+  height: var(--vp-control-slider-height);
+  background: transparent;
+  color: var(--vp-slider-color);
+  margin: 0;
+  border-top: 1px solid var(--vp-bg-color);
+  border-bottom: 1px solid var(--vp-bg-color);
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    box-shadow: -100vw 0 0 100vw currentColor;
+    // Safari need a fixed width to display the slider thumb
+    width: 1px;
+    height: var(--vp-control-slider-height);
+  }
+
+  &::-moz-range-thumb {
+    appearance: none;
+    box-shadow: -100vw 0 0 100vw currentColor;
+    width: 0;
+    border: 0;
+  }
+
+  &::-ms-thumb {
+    appearance: none;
+    box-shadow: -100vw 0 0 100vw var(--vp-slider-color);
+    width: 0;
+    border: 0;
+  }
+
+  &::-ms-fill-upper {
+    background: var(--vp-gutter-color);
+  }
+
+  &::-ms-track {
+    color: var(--vp-gutter-color);
+  }
+}

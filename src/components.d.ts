@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Status } from "./utils/status";
+import { Progress, Status } from "./utils/status";
 import { TextTrackList } from "./utils/webVTT";
 import { CueListChangeEventProps, ToggleControlProps } from "./utils/types";
 export namespace Components {
@@ -37,6 +37,10 @@ export namespace Components {
     interface XmSettingsMenu {
         "status": Status;
         "textTracks": TextTrackList;
+    }
+    interface XmSlider {
+        "duration": number;
+        "progress": Progress;
     }
     interface XmTextTrack {
         "default": boolean;
@@ -105,6 +109,12 @@ declare global {
         prototype: HTMLXmSettingsMenuElement;
         new (): HTMLXmSettingsMenuElement;
     };
+    interface HTMLXmSliderElement extends Components.XmSlider, HTMLStencilElement {
+    }
+    var HTMLXmSliderElement: {
+        prototype: HTMLXmSliderElement;
+        new (): HTMLXmSliderElement;
+    };
     interface HTMLXmTextTrackElement extends Components.XmTextTrack, HTMLStencilElement {
     }
     var HTMLXmTextTrackElement: {
@@ -129,6 +139,7 @@ declare global {
         "xm-player": HTMLXmPlayerElement;
         "xm-screen": HTMLXmScreenElement;
         "xm-settings-menu": HTMLXmSettingsMenuElement;
+        "xm-slider": HTMLXmSliderElement;
         "xm-text-track": HTMLXmTextTrackElement;
         "xm-toggle-control": HTMLXmToggleControlElement;
         "xm-video": HTMLXmVideoElement;
@@ -155,7 +166,6 @@ declare namespace LocalJSX {
         "onControl:openSettingsMenu"?: (event: CustomEvent<any>) => void;
         "onControl:pause"?: (event: CustomEvent<any>) => void;
         "onControl:play"?: (event: CustomEvent<any>) => void;
-        "onControl:seek"?: (event: CustomEvent<any>) => void;
         "onControl:showPlaybackRate"?: (event: CustomEvent<any>) => void;
         "onControl:unmute"?: (event: CustomEvent<any>) => void;
         "status"?: Status;
@@ -179,6 +189,11 @@ declare namespace LocalJSX {
         "onSetting:changeTextTrack"?: (event: CustomEvent<any>) => void;
         "status"?: Status;
         "textTracks"?: TextTrackList;
+    }
+    interface XmSlider {
+        "duration"?: number;
+        "onSlider:seek"?: (event: CustomEvent<any>) => void;
+        "progress"?: Progress;
     }
     interface XmTextTrack {
         "default"?: boolean;
@@ -228,6 +243,7 @@ declare namespace LocalJSX {
         "xm-player": XmPlayer;
         "xm-screen": XmScreen;
         "xm-settings-menu": XmSettingsMenu;
+        "xm-slider": XmSlider;
         "xm-text-track": XmTextTrack;
         "xm-toggle-control": XmToggleControl;
         "xm-video": XmVideo;
@@ -242,6 +258,7 @@ declare module "@stencil/core" {
             "xm-player": LocalJSX.XmPlayer & JSXBase.HTMLAttributes<HTMLXmPlayerElement>;
             "xm-screen": LocalJSX.XmScreen & JSXBase.HTMLAttributes<HTMLXmScreenElement>;
             "xm-settings-menu": LocalJSX.XmSettingsMenu & JSXBase.HTMLAttributes<HTMLXmSettingsMenuElement>;
+            "xm-slider": LocalJSX.XmSlider & JSXBase.HTMLAttributes<HTMLXmSliderElement>;
             "xm-text-track": LocalJSX.XmTextTrack & JSXBase.HTMLAttributes<HTMLXmTextTrackElement>;
             "xm-toggle-control": LocalJSX.XmToggleControl & JSXBase.HTMLAttributes<HTMLXmToggleControlElement>;
             "xm-video": LocalJSX.XmVideo & JSXBase.HTMLAttributes<HTMLXmVideoElement>;
