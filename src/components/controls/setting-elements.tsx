@@ -18,6 +18,7 @@ export const PlaybackRateToggleButton: FunctionalComponent<PlaybackRateToggleBut
         <button
           onClick={props.onHide}
           title={locales[props.status.language].playbackRate}
+          aria-label={locales[props.status.language].playbackRate}
         >
           <span
             class="controls__button-icon controls__button-icon--active svg"
@@ -63,11 +64,7 @@ export const PlaybackRate: FunctionalComponent<PlaybackRateProps> = (props) => {
               : 'controls__playback-rate__button'
           }
           onClick={() => props.onChange(value)}
-          innerHTML={
-            setting.valueLabels && setting.valueLabels[index]
-              ? setting.valueLabels[index]
-              : value
-          }
+          innerHTML={value}
         />
       ))}
     </div>

@@ -7,7 +7,7 @@ describe('xm-player', () => {
   beforeEach(async () => {
     page = await newE2EPage();
     await page.setContent(`
-      <xm-player>
+      <xm-player lang="en">
         <xm-video slot="primary" src="340196868"></xm-video>
       </xm-player>
     `);

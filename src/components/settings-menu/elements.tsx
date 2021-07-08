@@ -1,6 +1,10 @@
 import { FunctionalComponent, h } from '@stencil/core';
 
-import { SettingsSubmenuStatus, Setting } from '../../utils/settings';
+import {
+  SettingsSubmenuStatus,
+  Setting,
+  settingList,
+} from '../../utils/settings';
 import * as icon from '../../utils/icon';
 
 interface SubmenuProps {
@@ -21,7 +25,11 @@ export const Submenu: FunctionalComponent<SubmenuProps> = (props) => {
         }
       >
         <div class="settings-menu__submenu-header">
-          <button class="settings-menu__button" onClick={props.onCloseSubmenu}>
+          <button
+            class="settings-menu__button"
+            onClick={props.onCloseSubmenu}
+            aria-label={setting.label}
+          >
             <span class="settings-menu__arrow settings-menu__arrow--left">
               <span class="svg" innerHTML={icon.ArrowLeft} />
             </span>
@@ -40,8 +48,13 @@ export const Submenu: FunctionalComponent<SubmenuProps> = (props) => {
                   : 'settings-menu__button'
               }
               onClick={() => props.onChangeSetting(value)}
+              aria-label={
+                setting.valueLabels?.[index]
+                  ? setting.valueLabels[index]
+                  : value
+              }
               innerHTML={
-                setting.valueLabels && setting.valueLabels[index]
+                setting.valueLabels?.[index]
                   ? setting.valueLabels[index]
                   : value
               }
@@ -65,6 +78,7 @@ export const SubmenuToggleButton: FunctionalComponent<SubmenuToggleButtonProps> 
     return (
       <button
         class="settings-menu__button"
+        aria-label={props.setting.label}
         onClick={
           props.status.isOpen ? props.onCloseSubmenu : props.onOpenSubmenu
         }

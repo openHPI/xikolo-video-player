@@ -14,7 +14,7 @@ export enum de {
   exitFullscreen = 'Vollbildmodus beenden',
   enableSubtitles = 'Untertitel einblenden',
   disableSubtitles = 'Untertitel ausblenden',
-  changeVolume = 'Lautstärke ändern'
+  changeVolume = 'Lautstärke ändern',
 }
 
 export enum en {
@@ -33,7 +33,7 @@ export enum en {
   exitFullscreen = 'Exit full screen',
   enableSubtitles = 'Enable subtitles',
   disableSubtitles = 'Disable subtitles',
-  changeVolume = 'Control volume'
+  changeVolume = 'Control volume',
 }
 
 export default { de, en };

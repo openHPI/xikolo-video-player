@@ -8,7 +8,7 @@ exports[`xm-controls should render opened settings-menu with openedSettingsMenu 
         <mock:shadow-root>
           <div class="menu settings-menu" data-test-id="settingsMenu" role="menu" tabindex="0">
             <div class="settings-menu__content show">
-              <button class="settings-menu__button">
+              <button aria-label="Subtitles" class="settings-menu__button">
                 <span class="settings-menu__button-label">
                   Subtitles
                 </span>
@@ -23,7 +23,7 @@ exports[`xm-controls should render opened settings-menu with openedSettingsMenu 
                   </span>
                 </span>
               </button>
-              <button class="settings-menu__button">
+              <button aria-label="Playback rate" class="settings-menu__button">
                 <span class="settings-menu__button-label">
                   Playback rate
                 </span>
@@ -110,7 +110,7 @@ exports[`xm-controls should render opened settings-menu with openedSettingsMenu 
         <mock:shadow-root>
           <div class="menu menu--open settings-menu" data-test-id="settingsMenu" role="menu" tabindex="0">
             <div class="settings-menu__content show">
-              <button class="settings-menu__button">
+              <button aria-label="Subtitles" class="settings-menu__button">
                 <span class="settings-menu__button-label">
                   Subtitles
                 </span>
@@ -125,7 +125,7 @@ exports[`xm-controls should render opened settings-menu with openedSettingsMenu 
                   </span>
                 </span>
               </button>
-              <button class="settings-menu__button">
+              <button aria-label="Playback rate" class="settings-menu__button">
                 <span class="settings-menu__button-label">
                   Playback rate
                 </span>
@@ -212,7 +212,7 @@ exports[`xm-controls should show a list of texttracks 1`] = `
         <mock:shadow-root>
           <div class="menu settings-menu" data-test-id="settingsMenu" role="menu" tabindex="0">
             <div class="settings-menu__content show">
-              <button class="settings-menu__button">
+              <button aria-label="Subtitles" class="settings-menu__button">
                 <span class="settings-menu__button-label">
                   Subtitles
                 </span>
@@ -227,7 +227,7 @@ exports[`xm-controls should show a list of texttracks 1`] = `
                   </span>
                 </span>
               </button>
-              <button class="settings-menu__button">
+              <button aria-label="Playback rate" class="settings-menu__button">
                 <span class="settings-menu__button-label">
                   Playback rate
                 </span>
@@ -314,7 +314,7 @@ exports[`xm-controls should show a list of texttracks 2`] = `
         <mock:shadow-root>
           <div class="menu settings-menu" data-test-id="settingsMenu" role="menu" tabindex="0">
             <div class="settings-menu__content show">
-              <button class="settings-menu__button">
+              <button aria-label="Subtitles" class="settings-menu__button">
                 <span class="settings-menu__button-label">
                   Subtitles
                 </span>
@@ -329,7 +329,7 @@ exports[`xm-controls should show a list of texttracks 2`] = `
                   </span>
                 </span>
               </button>
-              <button class="settings-menu__button">
+              <button aria-label="Playback rate" class="settings-menu__button">
                 <span class="settings-menu__button-label">
                   Playback rate
                 </span>
