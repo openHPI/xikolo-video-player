@@ -1,9 +1,13 @@
 :host {
   width: 100%;
-  display: flex;
+  position: relative;
 }
 
 .slider {
+  display: flex;
+}
+
+.slider__progress {
   flex: 1 1 100%;
   appearance: none;
   overflow: hidden;

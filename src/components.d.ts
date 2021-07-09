@@ -40,6 +40,7 @@ export namespace Components {
     }
     interface XmSlider {
         "duration": number;
+        "fullscreen": boolean;
         "progress": Progress;
     }
     interface XmTextTrack {
@@ -61,6 +62,11 @@ export namespace Components {
           * Displays tooltip on hover
          */
         "title": string;
+    }
+    interface XmTooltip {
+        "content": string;
+        "positionX"?: number;
+        "show": boolean;
     }
     interface XmVideo {
         "currentTime": () => Promise<number>;
@@ -127,6 +133,12 @@ declare global {
         prototype: HTMLXmToggleControlElement;
         new (): HTMLXmToggleControlElement;
     };
+    interface HTMLXmTooltipElement extends Components.XmTooltip, HTMLStencilElement {
+    }
+    var HTMLXmTooltipElement: {
+        prototype: HTMLXmTooltipElement;
+        new (): HTMLXmTooltipElement;
+    };
     interface HTMLXmVideoElement extends Components.XmVideo, HTMLStencilElement {
     }
     var HTMLXmVideoElement: {
@@ -142,6 +154,7 @@ declare global {
         "xm-slider": HTMLXmSliderElement;
         "xm-text-track": HTMLXmTextTrackElement;
         "xm-toggle-control": HTMLXmToggleControlElement;
+        "xm-tooltip": HTMLXmTooltipElement;
         "xm-video": HTMLXmVideoElement;
     }
 }
@@ -192,6 +205,7 @@ declare namespace LocalJSX {
     }
     interface XmSlider {
         "duration"?: number;
+        "fullscreen"?: boolean;
         "onSlider:seek"?: (event: CustomEvent<any>) => void;
         "progress"?: Progress;
     }
@@ -220,6 +234,11 @@ declare namespace LocalJSX {
          */
         "title"?: string;
     }
+    interface XmTooltip {
+        "content"?: string;
+        "positionX"?: number;
+        "show"?: boolean;
+    }
     interface XmVideo {
         "onBuffered"?: (event: CustomEvent<any>) => void;
         "onBuffering"?: (event: CustomEvent<any>) => void;
@@ -246,6 +265,7 @@ declare namespace LocalJSX {
         "xm-slider": XmSlider;
         "xm-text-track": XmTextTrack;
         "xm-toggle-control": XmToggleControl;
+        "xm-tooltip": XmTooltip;
         "xm-video": XmVideo;
     }
 }
@@ -261,6 +281,7 @@ declare module "@stencil/core" {
             "xm-slider": LocalJSX.XmSlider & JSXBase.HTMLAttributes<HTMLXmSliderElement>;
             "xm-text-track": LocalJSX.XmTextTrack & JSXBase.HTMLAttributes<HTMLXmTextTrackElement>;
             "xm-toggle-control": LocalJSX.XmToggleControl & JSXBase.HTMLAttributes<HTMLXmToggleControlElement>;
+            "xm-tooltip": LocalJSX.XmTooltip & JSXBase.HTMLAttributes<HTMLXmTooltipElement>;
             "xm-video": LocalJSX.XmVideo & JSXBase.HTMLAttributes<HTMLXmVideoElement>;
         }
     }

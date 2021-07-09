@@ -74,7 +74,10 @@ export class Controls {
       >
         <Subtitles status={this.status} />
         <xm-settings-menu status={this.status} textTracks={this.textTracks} />
-        <xm-slider duration={this.status.duration} progress={this.status.progress} />
+        <xm-slider
+          duration={this.status.duration}
+          progress={this.status.progress}
+        />
         <div class="controls__toolbar" data-test-id="controlsToolbar">
           <Control
             status={this.status}
