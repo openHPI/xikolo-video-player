@@ -32,7 +32,7 @@
     "@types/puppeteer": "1.19.1",
     "@types/vimeo__player": "2.10.1",
     "@vimeo/player": "2.15.3",
-    "autoprefixer": "10.2.6",
+    "autoprefixer": "10.3.0",
     "husky": "7.0.1",
     "jest": "26.4.0",
     "jest-cli": "24.9.0",
