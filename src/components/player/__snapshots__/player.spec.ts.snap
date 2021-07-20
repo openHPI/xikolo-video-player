@@ -12,7 +12,7 @@ exports[`xm-player with props should render 1`] = `
         <mock:shadow-root>
           <div class="controls">
             <xm-settings-menu></xm-settings-menu>
-            <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
+            <xm-slider></xm-slider>
             <div class="controls__toolbar" data-test-id="controlsToolbar">
               <button aria-label="Play" title="Play">
                 <span class="svg">
@@ -89,7 +89,7 @@ exports[`xm-player with props should render with playback rate change 1`] = `
         <mock:shadow-root>
           <div class="controls">
             <xm-settings-menu></xm-settings-menu>
-            <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
+            <xm-slider></xm-slider>
             <div class="controls__toolbar" data-test-id="controlsToolbar">
               <button aria-label="Play" title="Play">
                 <span class="svg">
@@ -166,7 +166,7 @@ exports[`xm-player with props should render with ui language change 1`] = `
         <mock:shadow-root>
           <div class="controls">
             <xm-settings-menu></xm-settings-menu>
-            <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
+            <xm-slider></xm-slider>
             <div class="controls__toolbar" data-test-id="controlsToolbar">
               <button aria-label="Wiedergabe" title="Wiedergabe">
                 <span class="svg">
@@ -243,7 +243,7 @@ exports[`xm-player with subtitle props should render with default text track and
         <mock:shadow-root>
           <div class="controls">
             <xm-settings-menu></xm-settings-menu>
-            <input autocomplete="off" class="controls__slider" max="0" min="0" part="slider" step="any" type="range" value="0">
+            <xm-slider></xm-slider>
             <div class="controls__toolbar" data-test-id="controlsToolbar">
               <button aria-label="Play" title="Play">
                 <span class="svg">
