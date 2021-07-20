@@ -40,7 +40,7 @@ export interface Status {
 
 export const defaultStatus: Status = {
   language: 'en',
-  duration: 0,
+  duration: null,
   volume: 1.0,
   muted: false,
   fullscreen: false,

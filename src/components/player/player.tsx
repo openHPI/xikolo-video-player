@@ -353,7 +353,7 @@ export class Player {
     this.status = { ...this.status, fullscreen: fullscreen };
   }
 
-  @Listen('control:seek')
+  @Listen('slider:seek')
   protected async _seek(e: CustomEvent) {
     await this.seek(e.detail.seconds);
   }

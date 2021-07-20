@@ -1,0 +1,32 @@
+:host {
+  position: absolute;
+  // Needed to position the slider tooltip on top of subtitles
+  z-index: 1;
+  // Default tooltip position (Top-center + 10 px margin)
+  left: 50%;
+  bottom: calc(100% + 10px);
+}
+
+.tooltip {
+  background-color: rgba(var(--vp-menu-color-rgb), 0.9);
+  padding: 0.4em;
+  font-size: 0.9em;
+  border-radius: 5px;
+
+  :after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 0.4em solid transparent;
+    border-right: 0.4em solid transparent;
+    border-top: 0.4em solid rgba(var(--vp-menu-color-rgb), 0.9);
+  }
+
+  p {
+    margin: 0;
+  }
+}

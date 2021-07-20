@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Status } from "./utils/status";
+import { Progress, Status } from "./utils/status";
 import { TextTrackList } from "./utils/webVTT";
 import { CueListChangeEventProps, ToggleControlProps } from "./utils/types";
 export namespace Components {
@@ -38,6 +38,11 @@ export namespace Components {
         "status": Status;
         "textTracks": TextTrackList;
     }
+    interface XmSlider {
+        "duration": number;
+        "fullscreen": boolean;
+        "progress": Progress;
+    }
     interface XmTextTrack {
         "default": boolean;
         "label": string;
@@ -57,6 +62,11 @@ export namespace Components {
           * Displays tooltip on hover
          */
         "title": string;
+    }
+    interface XmTooltip {
+        "content": string;
+        "positionX"?: number;
+        "show": boolean;
     }
     interface XmVideo {
         "currentTime": () => Promise<number>;
@@ -105,6 +115,12 @@ declare global {
         prototype: HTMLXmSettingsMenuElement;
         new (): HTMLXmSettingsMenuElement;
     };
+    interface HTMLXmSliderElement extends Components.XmSlider, HTMLStencilElement {
+    }
+    var HTMLXmSliderElement: {
+        prototype: HTMLXmSliderElement;
+        new (): HTMLXmSliderElement;
+    };
     interface HTMLXmTextTrackElement extends Components.XmTextTrack, HTMLStencilElement {
     }
     var HTMLXmTextTrackElement: {
@@ -116,6 +132,12 @@ declare global {
     var HTMLXmToggleControlElement: {
         prototype: HTMLXmToggleControlElement;
         new (): HTMLXmToggleControlElement;
+    };
+    interface HTMLXmTooltipElement extends Components.XmTooltip, HTMLStencilElement {
+    }
+    var HTMLXmTooltipElement: {
+        prototype: HTMLXmTooltipElement;
+        new (): HTMLXmTooltipElement;
     };
     interface HTMLXmVideoElement extends Components.XmVideo, HTMLStencilElement {
     }
@@ -129,8 +151,10 @@ declare global {
         "xm-player": HTMLXmPlayerElement;
         "xm-screen": HTMLXmScreenElement;
         "xm-settings-menu": HTMLXmSettingsMenuElement;
+        "xm-slider": HTMLXmSliderElement;
         "xm-text-track": HTMLXmTextTrackElement;
         "xm-toggle-control": HTMLXmToggleControlElement;
+        "xm-tooltip": HTMLXmTooltipElement;
         "xm-video": HTMLXmVideoElement;
     }
 }
@@ -155,7 +179,6 @@ declare namespace LocalJSX {
         "onControl:openSettingsMenu"?: (event: CustomEvent<any>) => void;
         "onControl:pause"?: (event: CustomEvent<any>) => void;
         "onControl:play"?: (event: CustomEvent<any>) => void;
-        "onControl:seek"?: (event: CustomEvent<any>) => void;
         "onControl:showPlaybackRate"?: (event: CustomEvent<any>) => void;
         "onControl:unmute"?: (event: CustomEvent<any>) => void;
         "status"?: Status;
@@ -179,6 +202,12 @@ declare namespace LocalJSX {
         "onSetting:changeTextTrack"?: (event: CustomEvent<any>) => void;
         "status"?: Status;
         "textTracks"?: TextTrackList;
+    }
+    interface XmSlider {
+        "duration"?: number;
+        "fullscreen"?: boolean;
+        "onSlider:seek"?: (event: CustomEvent<any>) => void;
+        "progress"?: Progress;
     }
     interface XmTextTrack {
         "default"?: boolean;
@@ -205,6 +234,11 @@ declare namespace LocalJSX {
          */
         "title"?: string;
     }
+    interface XmTooltip {
+        "content"?: string;
+        "positionX"?: number;
+        "show"?: boolean;
+    }
     interface XmVideo {
         "onBuffered"?: (event: CustomEvent<any>) => void;
         "onBuffering"?: (event: CustomEvent<any>) => void;
@@ -228,8 +262,10 @@ declare namespace LocalJSX {
         "xm-player": XmPlayer;
         "xm-screen": XmScreen;
         "xm-settings-menu": XmSettingsMenu;
+        "xm-slider": XmSlider;
         "xm-text-track": XmTextTrack;
         "xm-toggle-control": XmToggleControl;
+        "xm-tooltip": XmTooltip;
         "xm-video": XmVideo;
     }
 }
@@ -242,8 +278,10 @@ declare module "@stencil/core" {
             "xm-player": LocalJSX.XmPlayer & JSXBase.HTMLAttributes<HTMLXmPlayerElement>;
             "xm-screen": LocalJSX.XmScreen & JSXBase.HTMLAttributes<HTMLXmScreenElement>;
             "xm-settings-menu": LocalJSX.XmSettingsMenu & JSXBase.HTMLAttributes<HTMLXmSettingsMenuElement>;
+            "xm-slider": LocalJSX.XmSlider & JSXBase.HTMLAttributes<HTMLXmSliderElement>;
             "xm-text-track": LocalJSX.XmTextTrack & JSXBase.HTMLAttributes<HTMLXmTextTrackElement>;
             "xm-toggle-control": LocalJSX.XmToggleControl & JSXBase.HTMLAttributes<HTMLXmToggleControlElement>;
+            "xm-tooltip": LocalJSX.XmTooltip & JSXBase.HTMLAttributes<HTMLXmTooltipElement>;
             "xm-video": LocalJSX.XmVideo & JSXBase.HTMLAttributes<HTMLXmVideoElement>;
         }
     }

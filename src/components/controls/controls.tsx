@@ -11,7 +11,6 @@ import {
   Control,
   CurrentTime,
   Volume,
-  Slider,
   SettingsMenuToggleButton,
   Subtitles,
   SubtitleButton,
@@ -37,7 +36,6 @@ export class Controls {
 
   @Event({ eventName: 'control:play' }) playEvent: EventEmitter;
   @Event({ eventName: 'control:pause' }) pauseEvent: EventEmitter;
-  @Event({ eventName: 'control:seek' }) seekEvent: EventEmitter;
   @Event({ eventName: 'control:enterFullscreen' })
   enterFullscreenEvent: EventEmitter;
   @Event({ eventName: 'control:exitFullscreen' })
@@ -76,7 +74,10 @@ export class Controls {
       >
         <Subtitles status={this.status} />
         <xm-settings-menu status={this.status} textTracks={this.textTracks} />
-        <Slider status={this.status} onSeek={this._seek} />
+        <xm-slider
+          duration={this.status.duration}
+          progress={this.status.progress}
+        />
         <div class="controls__toolbar" data-test-id="controlsToolbar">
           <Control
             status={this.status}
@@ -150,11 +151,6 @@ export class Controls {
   @bind()
   private _exitFullscreen() {
     this.exitFullscreenEvent.emit();
-  }
-
-  @bind()
-  private _seek(seconds: number) {
-    this.seekEvent.emit({ seconds: seconds });
   }
 
   @bind()
