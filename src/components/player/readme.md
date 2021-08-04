@@ -49,6 +49,16 @@ Type: `Promise<void>`
 
 
 
+### `getShortcutKeys() => Promise<Array<string>>`
+
+Values of the keyboard keys the player listens to on the 'keydown` event
+
+#### Returns
+
+Type: `Promise<string[]>`
+
+
+
 ### `mute() => Promise<void>`
 
 
@@ -113,6 +123,8 @@ graph TD;
   xm-player --> xm-screen
   xm-player --> xm-controls
   xm-controls --> xm-settings-menu
+  xm-controls --> xm-slider
+  xm-slider --> xm-tooltip
   style xm-player fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

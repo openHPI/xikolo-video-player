@@ -20,6 +20,10 @@ export namespace Components {
     interface XmPlayer {
         "disableTextTrack": () => Promise<void>;
         "enableTextTrack": () => Promise<void>;
+        /**
+          * Values of the keyboard keys the player listens to on the 'keydown` event
+         */
+        "getShortcutKeys": () => Promise<Array<string>>;
         "lang": string;
         "mute": () => Promise<void>;
         "pause": () => Promise<void>;

@@ -4,8 +4,6 @@
 
 This video player will replace the currently used Vimeo video player for the Xikolo project.
 
-More details will follow...
-
 ## Getting Started
 
 1. Clone the repository
@@ -15,7 +13,7 @@ git clone https://git@dev.xikolo.de:jgraichen/video-player-stencil
 cd video-player-stencil
 ```
 
-2. Install the depencencies and run the project
+2. Install the dependencies and run the project
 
 ```bash
 npm install
@@ -54,6 +52,10 @@ They are intended for internal use, but are also used outside, e.g. for tracking
 Events from the `player` component itself do not have a name prefix.
 They are supposed to be only used externally.
 E.g. `cueListChange`.
+
+### Code Style
+
+To organize the code structure, we follow the [proposed guideline by Stencil](https://stenciljs.com/docs/style-guide#code-organization).
 
 ### SVG Icons
 
