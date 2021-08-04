@@ -24,11 +24,14 @@ import { ToggleControlProps, CueListChangeEventProps } from '../../utils/types';
 })
 export class Player {
   /**
-   * Used on key control to skip forwards and backwards
+   * Used on key control to skip the video forwards and backwards
    */
   skippedSeconds = 5;
 
-  keyValues = {
+  /**
+   * List of keyboard keys the player listens to on the 'keydown` event
+   */
+  shortcutKeys = {
     Space: ' ',
     Enter: 'Enter',
     ArrowUp: 'ArrowUp',
@@ -284,29 +287,29 @@ export class Player {
     }
 
     switch (key) {
-      case this.keyValues.Space:
-      case this.keyValues.Enter:
+      case this.shortcutKeys.Space:
+      case this.shortcutKeys.Enter:
         // Some interactive elements, e.g. links and buttons, have default behavior for Space and Enter keys.
         // The events still bubble up in this case, but we want to ignore them, when the user was focusing on such an element
         if (this.isInteractiveElement(target)) return;
         this.togglePlay();
         break;
-      case this.keyValues.ArrowUp:
+      case this.shortcutKeys.ArrowUp:
         this.increaseVolume();
         break;
-      case this.keyValues.ArrowDown:
+      case this.shortcutKeys.ArrowDown:
         this.decreaseVolume();
         break;
-      case this.keyValues.ArrowLeft:
+      case this.shortcutKeys.ArrowLeft:
         this.skipBackward();
         break;
-      case this.keyValues.ArrowRight:
+      case this.shortcutKeys.ArrowRight:
         this.skipForward();
         break;
-      case this.keyValues.f:
+      case this.shortcutKeys.f:
         this.toggleFullscreen();
         break;
-      case this.keyValues.m:
+      case this.shortcutKeys.m:
         this.toggleMute();
         break;
     }
@@ -427,6 +430,14 @@ export class Player {
   @Listen('control:changeVolume')
   public async _changeVolume(e: CustomEvent) {
     this._setVolume(e.detail.volume);
+  }
+
+  /**
+   * Values of the keyboard keys the player listens to on the 'keydown` event
+   */
+  @Method()
+  async getShortcutKeys(): Promise<Array<string>> {
+    return Promise.resolve(Object.values(this.shortcutKeys));
   }
 
   @Watch('volume')
