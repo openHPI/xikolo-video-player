@@ -10,7 +10,7 @@ export class Tooltip {
 
   @Prop() show: boolean;
   @Prop() content: string;
-  // Optional props. Default left position is 50%. 
+  // Optional props. Default left position is 50%.
   @Prop() positionX?: number;
 
   componentDidUpdate() {
