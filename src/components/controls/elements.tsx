@@ -156,34 +156,34 @@ interface SettingsMenuToggleButtonProps {
   onCloseSettingsMenu: (e: Event) => void;
 }
 
-export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleButtonProps> = 
-(props) => {
-  if (props.status.openedSettingsMenu) {
+export const SettingsMenuToggleButton: FunctionalComponent<SettingsMenuToggleButtonProps> =
+  (props) => {
+    if (props.status.openedSettingsMenu) {
+      return (
+        <button
+          onClick={props.onCloseSettingsMenu}
+          title={locales[props.status.language].settings}
+          aria-label={locales[props.status.language].settings}
+          aria-haspopup="true"
+        >
+          <span
+            class="controls__settings-icon controls__settings-icon--open svg"
+            innerHTML={icon.Settings}
+          />
+        </button>
+      );
+    }
     return (
       <button
-        onClick={props.onCloseSettingsMenu}
+        onClick={props.onOpenSettingsMenu}
         title={locales[props.status.language].settings}
         aria-label={locales[props.status.language].settings}
         aria-haspopup="true"
       >
-        <span
-          class="controls__settings-icon controls__settings-icon--open svg"
-          innerHTML={icon.Settings}
-        />
+        <span class="controls__settings-icon svg" innerHTML={icon.Settings} />
       </button>
     );
-  }
-  return (
-    <button
-      onClick={props.onOpenSettingsMenu}
-      title={locales[props.status.language].settings}
-      aria-label={locales[props.status.language].settings}
-      aria-haspopup="true"
-    >
-      <span class="controls__settings-icon svg" innerHTML={icon.Settings} />
-    </button>
-  );
-};
+  };
 
 interface SubtitleButtonProps {
   status: Status;

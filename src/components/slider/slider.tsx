@@ -22,7 +22,6 @@ interface HoverStatus {
   styleUrl: 'slider.scss',
   shadow: true,
 })
-
 export class Slider {
   @Element() el: HTMLXmSliderElement;
 
