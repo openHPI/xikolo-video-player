@@ -49,6 +49,11 @@ build:
     paths: [dist, loader, www]
     expire_in: 1 month
 
+prettier:
+  extends: .base
+  script:
+    - npx prettier --check .
+
 pages:
   extends: .base
   stage: deploy
