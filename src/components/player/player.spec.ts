@@ -44,7 +44,8 @@ describe('xm-player default functionality', () => {
 });
 
 describe('xm-player with props', () => {
-  let page, controls;
+  let page;
+  let controls;
 
   it('should build', () => {
     // Vimeo API is not working here, so we can not create/test the video component.
@@ -98,7 +99,7 @@ describe('xm-player with props', () => {
 
   it('should render with volume change', async () => {
     expect(controls.shadowRoot.querySelector('.controls-volume')).toBeTruthy();
-    let button = controls.shadowRoot.querySelector('.controls__mute');
+    const button = controls.shadowRoot.querySelector('.controls__mute');
     expect(button).not.toBeNull();
     page.rootInstance.volume = 0;
     await page.waitForChanges();
@@ -109,7 +110,9 @@ describe('xm-player with props', () => {
 });
 
 describe('xm-player with subtitle props', () => {
-  let page, controls, controlsInstance;
+  let page;
+  let controls;
+  let controlsInstance;
 
   beforeEach(async () => {
     page = await newSpecPage({
@@ -161,7 +164,7 @@ describe('xm-player with subtitle props', () => {
       index: 0,
     };
     // Trigger the texttrack:loaded event
-    let ttlEvent = new CustomEvent('texttrack:loaded', {
+    const ttlEvent = new CustomEvent('texttrack:loaded', {
       detail: {
         webVTT: vtt,
         total: 1,

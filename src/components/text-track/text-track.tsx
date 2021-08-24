@@ -1,7 +1,7 @@
 import { Component, Element, Prop, EventEmitter, Event } from '@stencil/core';
 
-import { bind } from '../../utils/bind';
 import * as webvtt from 'node-webvtt';
+import { bind } from '../../utils/bind';
 import { WebVTT } from '../../utils/webVTT';
 
 @Component({
@@ -11,8 +11,11 @@ export class TextTrack {
   @Element() el: HTMLXmTextTrackElement;
 
   @Prop() language: string;
+
   @Prop() src: string;
+
   @Prop() label: string;
+
   @Prop() default: boolean;
 
   private vtt: WebVTT = null;
@@ -24,7 +27,7 @@ export class TextTrack {
   }
 
   private async loadFile(url: string) {
-    return await fetch(url)
+    return fetch(url)
       .then((response) => response.text())
       .then((data) => {
         this.vtt = webvtt.parse(data, { meta: true });

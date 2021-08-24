@@ -2,7 +2,8 @@ import { E2EElement, E2EPage, newE2EPage } from '@stencil/core/testing';
 import { ElementHandle } from 'puppeteer';
 
 describe('xm-player', () => {
-  let page: E2EPage, player: E2EElement;
+  let page: E2EPage;
+  let player: E2EElement;
 
   beforeEach(async () => {
     page = await newE2EPage();
@@ -53,14 +54,13 @@ describe('xm-player', () => {
    * There is a workaround:
    * https://github.com/Esri/calcite-components/pull/1103
    */
-  const getPlayButton = async (): Promise<ElementHandle> => {
-    return (
-      await page.waitForFunction((label: string) => {
-        return document
+  const getPlayButton = async (): Promise<ElementHandle> =>
+    (
+      await page.waitForFunction((label: string) =>
+        document
           .querySelector('xm-player')
           .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector('[aria-label="Play"]');
-      })
+          .shadowRoot.querySelector('[aria-label="Play"]')
+      )
     ).asElement();
-  };
 });

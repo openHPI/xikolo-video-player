@@ -6,7 +6,10 @@ import { TextTrackList, WebVTT } from '../../utils/webVTT';
 import { ToggleControlProps } from '../../utils/types';
 
 describe('xm-controls', () => {
-  let page: SpecPage, textTracks: TextTrackList, controls, settingsMenu;
+  let page: SpecPage;
+  let textTracks: TextTrackList;
+  let controls;
+  let settingsMenu;
 
   beforeEach(async () => {
     page = await newSpecPage({
@@ -100,7 +103,7 @@ describe('xm-controls with control-toggle', () => {
     };
     const page = await newSpecPage(pageConfig);
 
-    let controls = page.doc.createElement('xm-controls');
+    const controls = page.doc.createElement('xm-controls');
 
     const toggleControlProps: Array<ToggleControlProps> = [
       {

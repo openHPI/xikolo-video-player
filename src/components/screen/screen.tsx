@@ -18,17 +18,24 @@ import * as icon from '../../utils/icon';
   shadow: true,
 })
 export class Screen {
-  @Element() el: HTMLElement;
+  @Element() el: HTMLXmScreenElement;
 
   @Prop() fullscreen: boolean;
+
   @Prop() pip: boolean;
+
   @State() pipFlip: boolean = false;
+
   @State() orientationVertical: boolean;
 
   private split: Split.Instance;
+
   private primary: HTMLElement;
+
   private secondary: HTMLElement;
+
   private primaryRatio: number = null;
+
   private secondaryRatio: number = null;
 
   /**

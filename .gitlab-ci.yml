@@ -49,6 +49,12 @@ build:
     paths: [dist, loader, www]
     expire_in: 1 month
 
+lint:
+  extends: .base
+  script:
+    - npm run lint
+  allow_failure: true
+
 prettier:
   extends: .base
   script:

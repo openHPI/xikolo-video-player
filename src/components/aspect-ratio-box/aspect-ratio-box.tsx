@@ -6,7 +6,7 @@ import { Component, Element, h, Prop, State } from '@stencil/core';
   shadow: true,
 })
 export class AspectRatioBox {
-  @Element() el: HTMLXmControlsElement;
+  @Element() el: HTMLXmAspectRatioBoxElement;
 
   @Prop()
   public ratio: number = 1;
@@ -20,9 +20,10 @@ export class AspectRatioBox {
   }
 
   render() {
-    let bxStyle = {};
+    const bxStyle = {};
 
     if (!this._fullscreened) {
+      /* eslint-disable @typescript-eslint/dot-notation */
       bxStyle['paddingBottom'] = `${this.ratio * 100}%`;
     }
 

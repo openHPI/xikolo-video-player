@@ -23,17 +23,16 @@ export const Fullscreen: FunctionalComponent<FullscreenProps> = (props) => {
         <span class="svg" innerHTML={icon.Compress} />
       </button>
     );
-  } else {
-    return (
-      <button
-        onClick={props.onRequest}
-        title={locales[props.status.language].enterFullscreen}
-        aria-label={locales[props.status.language].enterFullscreen}
-      >
-        <span class="svg" innerHTML={icon.Expand} />
-      </button>
-    );
   }
+  return (
+    <button
+      onClick={props.onRequest}
+      title={locales[props.status.language].enterFullscreen}
+      aria-label={locales[props.status.language].enterFullscreen}
+    >
+      <span class="svg" innerHTML={icon.Expand} />
+    </button>
+  );
 };
 
 interface ControlProps {
@@ -53,7 +52,8 @@ export const Control: FunctionalComponent<ControlProps> = (props) => {
         <span class="svg" innerHTML={icon.Pause} />
       </button>
     );
-  } else if (props.status.mode === Mode.FINISHED) {
+  }
+  if (props.status.mode === Mode.FINISHED) {
     return (
       <button
         onClick={props.onPlay}
@@ -63,17 +63,16 @@ export const Control: FunctionalComponent<ControlProps> = (props) => {
         <span class="svg" innerHTML={icon.Restart} />
       </button>
     );
-  } else {
-    return (
-      <button
-        onClick={props.onPlay}
-        title={locales[props.status.language].play}
-        aria-label={locales[props.status.language].play}
-      >
-        <span class="svg" innerHTML={icon.Play} />
-      </button>
-    );
   }
+  return (
+    <button
+      onClick={props.onPlay}
+      title={locales[props.status.language].play}
+      aria-label={locales[props.status.language].play}
+    >
+      <span class="svg" innerHTML={icon.Play} />
+    </button>
+  );
 };
 
 interface CurrentTimeProps {
@@ -133,21 +132,20 @@ export const Volume: FunctionalComponent<VolumeProps> = (props) => {
         {volumeSlider}
       </div>
     );
-  } else {
-    return (
-      <div class="controls-volume">
-        <button
-          class="controls__mute"
-          onClick={props.onMute}
-          title={locales[props.status.language].mute}
-          aria-label={locales[props.status.language].mute}
-        >
-          <span class="svg" innerHTML={icon.VolumeOn} />
-        </button>
-        {volumeSlider}
-      </div>
-    );
   }
+  return (
+    <div class="controls-volume">
+      <button
+        class="controls__mute"
+        onClick={props.onMute}
+        title={locales[props.status.language].mute}
+        aria-label={locales[props.status.language].mute}
+      >
+        <span class="svg" innerHTML={icon.VolumeOn} />
+      </button>
+      {volumeSlider}
+    </div>
+  );
 };
 
 interface SettingsMenuToggleButtonProps {
@@ -210,18 +208,17 @@ export const SubtitleButton: FunctionalComponent<SubtitleButtonProps> = (
         />
       </button>
     );
-  } else {
-    return (
-      <button
-        class="controls__button"
-        onClick={props.onEnable}
-        title={locales[props.status.language].enableSubtitles}
-        aria-label={locales[props.status.language].enableSubtitles}
-      >
-        <span class="controls__button-icon svg" innerHTML={icon.Subtitle} />
-      </button>
-    );
   }
+  return (
+    <button
+      class="controls__button"
+      onClick={props.onEnable}
+      title={locales[props.status.language].enableSubtitles}
+      aria-label={locales[props.status.language].enableSubtitles}
+    >
+      <span class="controls__button-icon svg" innerHTML={icon.Subtitle} />
+    </button>
+  );
 };
 
 interface SubtitlesProps {
@@ -250,20 +247,18 @@ interface CustomControlButton {
 
 export const CustomControlButton: FunctionalComponent<CustomControlButton> = (
   props
-) => {
-  return (
-    <button
-      class="controls__button"
-      onClick={() => props.onClick(props.config)}
-      title={props.config.title}
+) => (
+  <button
+    class="controls__button"
+    onClick={() => props.onClick(props.config)}
+    title={props.config.title}
+  >
+    <span
+      class={`controls__button-icon ${
+        props.config.active ? 'controls__button-icon--active' : ''
+      } svg`}
     >
-      <span
-        class={`controls__button-icon ${
-          props.config.active ? 'controls__button-icon--active' : ''
-        } svg`}
-      >
-        <slot name={props.config.name}></slot>
-      </span>
-    </button>
-  );
-};
+      <slot name={props.config.name}></slot>
+    </span>
+  </button>
+);

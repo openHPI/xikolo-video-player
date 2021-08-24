@@ -26,7 +26,9 @@ export class Slider {
   @Element() el: HTMLXmSliderElement;
 
   @Prop() duration: number;
+
   @Prop() progress: Progress;
+
   @Prop() fullscreen: boolean;
 
   @State()
@@ -72,7 +74,7 @@ export class Slider {
   protected onSeek(e: Event) {
     const el = e.target as HTMLInputElement;
     const seconds = parseFloat(el.value);
-    this.seekEvent.emit({ seconds: seconds });
+    this.seekEvent.emit({ seconds });
   }
 
   @bind()

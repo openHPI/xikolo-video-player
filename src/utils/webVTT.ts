@@ -26,11 +26,16 @@ export interface WebVTT {
 
 export class TextTrackList {
   protected vttList: Array<WebVTT> = [];
+
   protected textTracks: Array<Meta> = [];
+
   // List of cues of currently selected language.
   protected currentCues: Array<Cue> = null;
+
   protected currentLanguage: string;
+
   protected loadedFiles: number = 0;
+
   protected totalFiles: number = 0;
 
   public addWebVTT(webVTT: WebVTT, total: number) {

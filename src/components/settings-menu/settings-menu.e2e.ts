@@ -7,7 +7,7 @@ import {
 
 /**
  * Hint: The seetings menu will be removed and changed to a new language menu for controls.
- **/
+ * */
 describe('settings-menu', () => {
   let page: E2EPage;
 
