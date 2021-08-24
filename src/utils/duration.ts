@@ -13,7 +13,7 @@ export function format(seconds: number): string {
   const m = Math.floor(secs / 60) % 60;
   const h = Math.floor(secs / 3600);
 
-  return `${negative ? '-' : ''}${h > 0 ? lzpad(h) + ':' : ''}${lzpad(
+  return `${negative ? '-' : ''}${h > 0 ? `${lzpad(h)}:` : ''}${lzpad(
     m
   )}:${lzpad(s)}`;
 }

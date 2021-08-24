@@ -46,8 +46,10 @@ export class Player {
   private el: HTMLXmPlayerElement;
 
   @Prop({ mutable: true }) volume: number = defaultStatus.volume;
+
   @Prop({ mutable: true }) playbackrate: number =
     defaultStatus.settings.playbackRate;
+
   @Prop({ mutable: true }) showsubtitle: boolean =
     defaultStatus.subtitle.enabled;
 
@@ -55,18 +57,24 @@ export class Player {
 
   @State()
   private status: Status = defaultStatus;
+
   @State()
   private toggleControlButtons: Array<ToggleControlProps>;
 
   private primary: HTMLXmVideoElement | undefined;
+
   private secondary: HTMLXmVideoElement | undefined;
+
   private textTracks: TextTrackList = new TextTrackList();
+
   private hasSecondarySlot: boolean;
+
   private hasDefaultTexttrack: boolean = false;
 
   // Emits list of cues of currently selected language.
   @Event({ eventName: 'notifyCueListChanged' })
   cueListChangeEvent: EventEmitter<CueListChangeEventProps>;
+
   // Emits list of currently active/visible cues by language and second.
   @Event({ eventName: 'notifyActiveCuesUpdated' })
   activeCueUpdateEvent: EventEmitter<CueListChangeEventProps>;
@@ -196,8 +204,8 @@ export class Player {
     this._cueUpdate(seconds);
     this.status = {
       ...this.status,
-      duration: duration,
-      progress: { seconds: seconds, percent: percent },
+      duration,
+      progress: { seconds, percent },
     };
     if (this.secondary) {
       this.secondary.currentTime().then((currentTime) => {
@@ -222,7 +230,7 @@ export class Player {
         },
       };
       // Notifies external listeners that the active cues have changed
-      this.activeCueUpdateEvent.emit({ cues: cues });
+      this.activeCueUpdateEvent.emit({ cues });
     }
   }
 
@@ -278,7 +286,7 @@ export class Player {
   @bind()
   @Listen('keydown')
   private handleKeyDown(e: KeyboardEvent) {
-    const key = e.key;
+    const { key } = e;
     const target = e.target as Element;
 
     if (this.hasDefaultScrollingBehavior(key, target)) {
@@ -353,7 +361,7 @@ export class Player {
     const doc = document as any;
     const fullscreen =
       doc.fullScreen || doc.mozFullScreen || doc.webkitIsFullScreen;
-    this.status = { ...this.status, fullscreen: fullscreen };
+    this.status = { ...this.status, fullscreen };
   }
 
   @Listen('slider:seek')
@@ -420,7 +428,7 @@ export class Player {
   public async _setVolume(volume: number) {
     this.status = {
       ...this.status,
-      volume: volume,
+      volume,
     };
 
     const isMuted = volume === 0;
@@ -463,7 +471,7 @@ export class Player {
     }
     this.status = {
       ...this.status,
-      language: language,
+      language,
     };
   }
 
@@ -482,7 +490,7 @@ export class Player {
         ...this.status,
         settings: {
           ...this.status.settings,
-          playbackRate: playbackRate,
+          playbackRate,
         },
       };
     }
@@ -577,7 +585,7 @@ export class Player {
       ...this.status,
       settings: {
         ...this.status.settings,
-        textTrack: textTrack,
+        textTrack,
       },
     };
   }
@@ -663,7 +671,8 @@ export class Player {
 
     if (intElems.includes(target.tagName)) {
       return true;
-    } else if (target.shadowRoot?.activeElement) {
+    }
+    if (target.shadowRoot?.activeElement) {
       return this.isInteractiveElement(target.shadowRoot.activeElement);
     }
     return false;

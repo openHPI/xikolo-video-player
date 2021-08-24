@@ -74,29 +74,25 @@ interface SubmenuToggleButtonProps {
 }
 
 export const SubmenuToggleButton: FunctionalComponent<SubmenuToggleButtonProps> =
-  (props) => {
-    return (
-      <button
-        class="settings-menu__button"
-        aria-label={props.setting.label}
-        onClick={
-          props.status.isOpen ? props.onCloseSubmenu : props.onOpenSubmenu
-        }
-      >
-        <span class="settings-menu__button-label">{props.setting.label} </span>
-        <span class="settings-menu__button-value">
-          {' '}
-          {props.setting.valueLabels
-            ? props.setting.valueLabels[
-                props.setting.values.findIndex(
-                  (value) => props.setting.currentValue === value
-                )
-              ]
-            : props.setting.currentValue}
-        </span>
-        <span class="settings-menu__arrow settings-menu__arrow--right">
-          <span class="svg" innerHTML={icon.ArrowRight} />
-        </span>
-      </button>
-    );
-  };
+  (props) => (
+    <button
+      class="settings-menu__button"
+      aria-label={props.setting.label}
+      onClick={props.status.isOpen ? props.onCloseSubmenu : props.onOpenSubmenu}
+    >
+      <span class="settings-menu__button-label">{props.setting.label} </span>
+      <span class="settings-menu__button-value">
+        {' '}
+        {props.setting.valueLabels
+          ? props.setting.valueLabels[
+              props.setting.values.findIndex(
+                (value) => props.setting.currentValue === value
+              )
+            ]
+          : props.setting.currentValue}
+      </span>
+      <span class="settings-menu__arrow settings-menu__arrow--right">
+        <span class="svg" innerHTML={icon.ArrowRight} />
+      </span>
+    </button>
+  );

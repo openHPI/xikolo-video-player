@@ -31,32 +31,48 @@ export class Controls {
   @Element() el: HTMLXmControlsElement;
 
   @Prop({ mutable: true }) status: Status;
+
   @Prop({ mutable: true }) textTracks: TextTrackList;
+
   @Prop({ mutable: true }) toggleControlButtons: Array<ToggleControlProps>;
 
   @Event({ eventName: 'control:play' }) playEvent: EventEmitter;
+
   @Event({ eventName: 'control:pause' }) pauseEvent: EventEmitter;
+
   @Event({ eventName: 'control:enterFullscreen' })
   enterFullscreenEvent: EventEmitter;
+
   @Event({ eventName: 'control:exitFullscreen' })
   exitFullscreenEvent: EventEmitter;
+
   @Event({ eventName: 'control:mute' }) muteEvent: EventEmitter;
+
   @Event({ eventName: 'control:unmute' }) unmuteEvent: EventEmitter;
+
   @Event({ eventName: 'control:changeVolume' }) changeVolumeEvent: EventEmitter;
+
   @Event({ eventName: 'control:enableTextTrack' })
   enableTextTrackEvent: EventEmitter;
+
   @Event({ eventName: 'control:disableTextTrack' })
   disableTextTrackEvent: EventEmitter;
+
   @Event({ eventName: 'control:openSettingsMenu' })
   openSettingsMenuEvent: EventEmitter;
+
   @Event({ eventName: 'control:closeSettingsMenu' })
   closeSettingsMenuEvent: EventEmitter;
+
   @Event({ eventName: 'control:changePlaybackRate' })
   changePlaybackRateEvent: EventEmitter;
+
   @Event({ eventName: 'control:showPlaybackRate' })
   showPlaybackRateEvent: EventEmitter;
+
   @Event({ eventName: 'control:hidePlaybackRate' })
   hidePlaybackRateEvent: EventEmitter;
+
   /**
    * Event hook for custom control
    */
@@ -165,7 +181,7 @@ export class Controls {
 
   @bind()
   private _setVolume(volume: number) {
-    this.changeVolumeEvent.emit({ volume: volume });
+    this.changeVolumeEvent.emit({ volume });
   }
 
   @bind()
@@ -193,7 +209,7 @@ export class Controls {
 
   @bind()
   private _setPlaybackRate(playbackRate: number) {
-    this.changePlaybackRateEvent.emit({ playbackRate: playbackRate });
+    this.changePlaybackRateEvent.emit({ playbackRate });
     this.hidePlaybackRateEvent.emit();
   }
 

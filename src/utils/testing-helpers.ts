@@ -22,13 +22,12 @@ export async function getSettingsMenuElement(
 ): Promise<ElementHandle> {
   return (
     await page.waitForFunction(
-      (selector: string) => {
-        return document
+      (selector: string) =>
+        document
           .querySelector('xm-player')
           .shadowRoot.querySelector('xm-controls')
           .shadowRoot.querySelector('xm-settings-menu')
-          .shadowRoot.querySelector(selector);
-      },
+          .shadowRoot.querySelector(selector),
       {},
       [selector]
     )
@@ -41,12 +40,11 @@ export async function getControlsElement(
 ): Promise<ElementHandle> {
   return (
     await page.waitForFunction(
-      (selector: string) => {
-        return document
+      (selector: string) =>
+        document
           .querySelector('xm-player')
           .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector(selector);
-      },
+          .shadowRoot.querySelector(selector),
       {},
       [selector]
     )

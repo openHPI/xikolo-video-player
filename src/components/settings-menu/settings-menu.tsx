@@ -30,6 +30,7 @@ export class SettingsMenu {
   @Element() el: HTMLXmSettingsMenuElement;
 
   @Prop({ mutable: true }) status: Status;
+
   @Prop({ mutable: true }) textTracks: TextTrackList;
 
   @State()
@@ -37,6 +38,7 @@ export class SettingsMenu {
 
   @Event({ eventName: 'setting:changePlaybackRate' })
   changePlaybackRateEvent: EventEmitter;
+
   @Event({ eventName: 'setting:changeTextTrack' })
   changeTextTrackEvent: EventEmitter;
 
@@ -87,7 +89,7 @@ export class SettingsMenu {
 
   @bind()
   private _getSetting(settingName: string) {
-    let setting = settingList.find((setting) => setting.name === settingName);
+    const setting = settingList.find((setting) => setting.name === settingName);
     setting.currentValue = this.status.settings[settingName];
     setting.label = locales[this.status.language][settingName];
     if (settingName === SettingNames.TEXTTRACK) {
@@ -137,11 +139,11 @@ export class SettingsMenu {
 
   @bind()
   private _setPlaybackRate(playbackRate: number) {
-    this.changePlaybackRateEvent.emit({ playbackRate: playbackRate });
+    this.changePlaybackRateEvent.emit({ playbackRate });
   }
 
   @bind()
   private _setTextTrack(textTrack: string) {
-    this.changeTextTrackEvent.emit({ textTrack: textTrack });
+    this.changeTextTrackEvent.emit({ textTrack });
   }
 }

@@ -18,28 +18,37 @@ import Player from '@vimeo/player';
   shadow: true,
 })
 export class Video {
-  @Element() el: HTMLElement;
+  @Element() el: HTMLXmVideoElement;
 
   /**
    * Vimeo Video ID
    */
   @Prop() src: number;
+
   @Prop() volume: number;
 
   @State() private ratio: number; // = 0.5625;
 
   private container: HTMLElement;
+
   @State() private player: Player;
 
   @Event({ eventName: 'play' }) playEvent: EventEmitter;
+
   @Event({ eventName: 'pause' }) pauseEvent: EventEmitter;
+
   @Event({ eventName: 'timeupdate' }) timeUpdateEvent: EventEmitter;
+
   @Event({ eventName: 'progress' }) progressEvent: EventEmitter;
+
   @Event({ eventName: 'seeking' }) seekingEvent: EventEmitter;
+
   @Event({ eventName: 'seeked' }) seekedEvent: EventEmitter;
+
   @Event({ eventName: 'ended' }) endedEvent: EventEmitter;
 
   @Event({ eventName: 'buffering' }) bufferingEvent: EventEmitter;
+
   @Event({ eventName: 'buffered' }) bufferedEvent: EventEmitter;
 
   @Event({ eventName: 'ratioLoaded' }) ratioLoadedEvent: EventEmitter;
@@ -109,7 +118,7 @@ export class Video {
     // add classes for IE11
     const iframe = this.container.querySelector('iframe');
     if (iframe) {
-      iframe.className += ' ' + classesForIE11;
+      iframe.className += ` ${classesForIE11}`;
     }
 
     // Sometimes vimeo videos has texttrack enabled per default
@@ -118,7 +127,7 @@ export class Video {
     // Emit one default timeupdate event to update player with duration
     this.player.getDuration().then((duration) => {
       const e = new CustomEvent('timeupdate', {
-        detail: { duration: duration, seconds: 0, percent: 0 },
+        detail: { duration, seconds: 0, percent: 0 },
       });
 
       this.el.dispatchEvent(e);
@@ -170,16 +179,12 @@ export class Video {
     return Promise.all([
       this.player.getVideoWidth(),
       this.player.getVideoHeight(),
-    ]).then((dimensions) => {
-      return { width: dimensions[0], height: dimensions[1] };
-    });
+    ]).then((dimensions) => ({ width: dimensions[0], height: dimensions[1] }));
   }
 
   @Method()
   async getAspectRatio() {
-    return this.getDimensions().then(({ width, height }) => {
-      return height / width;
-    });
+    return this.getDimensions().then(({ width, height }) => height / width);
   }
 
   @Method()

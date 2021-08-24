@@ -31,7 +31,6 @@
 | `control:openSettingsMenu`               |                               | `CustomEvent<any>`                |
 | `control:pause`                          |                               | `CustomEvent<any>`                |
 | `control:play`                           |                               | `CustomEvent<any>`                |
-| `control:seek`                           |                               | `CustomEvent<any>`                |
 | `control:showPlaybackRate`               |                               | `CustomEvent<any>`                |
 | `control:unmute`                         |                               | `CustomEvent<any>`                |
 
@@ -45,11 +44,14 @@
 ### Depends on
 
 - [xm-settings-menu](../settings-menu)
+- [xm-slider](../slider)
 
 ### Graph
 ```mermaid
 graph TD;
   xm-controls --> xm-settings-menu
+  xm-controls --> xm-slider
+  xm-slider --> xm-tooltip
   xm-player --> xm-controls
   style xm-controls fill:#f9f,stroke:#333,stroke-width:4px
 ```
