@@ -43,7 +43,7 @@
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.24.2",
     "husky": "7.0.2",
-    "jest": "27.1.0",
+    "jest": "27.1.1",
     "jest-cli": "24.9.0",
     "lint-staged": "11.1.2",
     "node-webvtt": "1.9.3",
