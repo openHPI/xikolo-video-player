@@ -34,6 +34,14 @@
     }
   }
 
+  @media only screen and (min-width: 376px) {
+    .controls__toolbar {
+      button {
+        padding: 0.6em 0.7em;
+      }
+    }
+  }
+
   @media only screen and (min-width: 992px) {
     .controls__toolbar .controls__slider--volume {
       width: 0;
@@ -44,7 +52,7 @@
     }
   }
 
-  @media only screen and (max-width: 576px) {
+  @media only screen and (max-width: 580px) {
     .controls__subtitle {
       bottom: 40px;
 
@@ -56,26 +64,20 @@
     }
     .controls__toolbar {
       .controls__slider--volume {
-        max-width: 80px;
-      }
-
-      .controls__time {
-        font-size: 0.5em;
-      }
-
-      .controls__playback-rate,
-      .controls__button {
         display: none;
       }
 
-      button {
-        padding: 0.3em 0.4em;
+      .controls__time {
+        padding: inherit;
       }
+    }
+  }
 
-      svg,
-      .svg {
-        height: 1.1em;
-        width: 1.1em;
+  // Reduces the font size for the current time display, so it does not wrap into two lines
+  @media only screen and (max-width: 590px) {
+    .controls__toolbar {
+      .controls__time {
+        font-size: 0.75em;
       }
     }
   }
@@ -283,7 +285,7 @@
 
   button {
     border: 0;
-    padding: 0.6em 0.7em;
+    padding: 0.6em 0.5em;
     margin: 0;
     background: transparent;
     color: inherit;

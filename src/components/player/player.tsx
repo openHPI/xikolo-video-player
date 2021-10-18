@@ -16,6 +16,7 @@ import { TextTrackList, WebVTT } from '../../utils/webVTT';
 import { bind } from '../../utils/bind';
 import locales from '../../utils/locales';
 import { ToggleControlProps, CueListChangeEventProps } from '../../utils/types';
+import { isSmall } from '../../utils/helpers';
 
 @Component({
   tag: 'xm-player',
@@ -132,8 +133,12 @@ export class Player {
 
     document.addEventListener('click', this._hideSettingsMenuOnClickOutside);
 
-    // Based on the type, Stencil converts the user setting volume to a number
-    this._setVolume(this.volume);
+    // On small devices the volume slider is hidden
+    // So the user can only change it via the device buttons
+    // That's why the player's initial state for 'volume' will remain the default 100%
+    if (!isSmall) {
+      this._setVolume(this.volume);
+    }
     this._setPlaybackRate(this.playbackrate);
     this._setLanguage(this.lang);
   }
