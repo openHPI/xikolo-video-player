@@ -67,7 +67,7 @@ Type: `Promise<string[]>`
 
 ### `mute() => Promise<void>`
 
-
+Sets the mute state true and the primary slot volume to 0.
 
 #### Returns
 
@@ -107,7 +107,7 @@ Type: `Promise<void>`
 
 ### `unmute() => Promise<void>`
 
-
+Sets the mute state false and resets the primary slot video volume.
 
 #### Returns
 

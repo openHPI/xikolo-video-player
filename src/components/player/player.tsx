@@ -415,6 +415,9 @@ export class Player {
     this.status = { ...this.status, openedSettingsMenu: false };
   }
 
+  /**
+   * Sets the mute state true and the primary slot volume to 0.
+   */
   @Method()
   @Listen('control:mute')
   public async mute() {
@@ -422,6 +425,9 @@ export class Player {
     this.status = { ...this.status, muted: true };
   }
 
+  /**
+   * Sets the mute state false and resets the primary slot video volume.
+   */
   @Method()
   @Listen('control:unmute')
   public async unmute() {
@@ -436,8 +442,11 @@ export class Player {
       volume,
     };
 
-    const isMuted = volume === 0;
-    isMuted ? this.mute() : this.unmute();
+    if (volume === 0) {
+      this.mute();
+    } else {
+      this.unmute();
+    }
   }
 
   @Listen('control:changeVolume')

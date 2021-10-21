@@ -26,7 +26,7 @@ export namespace Components {
         "getShortcutKeys": () => Promise<Array<string>>;
         "lang": string;
         /**
-          * Sets the video player mute state true Also sets the primary slot volume to 0
+          * Sets the mute state true and the primary slot volume to 0.
          */
         "mute": () => Promise<void>;
         "pause": () => Promise<void>;
@@ -35,7 +35,7 @@ export namespace Components {
         "seek": (seconds: number) => Promise<void>;
         "showsubtitle": boolean;
         /**
-          * Sets the video player mute state false Resets the primary slot video volume
+          * Sets the mute state false and resets the primary slot video volume.
          */
         "unmute": () => Promise<void>;
         "volume": number;
