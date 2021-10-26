@@ -16,6 +16,7 @@ import { TextTrackList, WebVTT } from '../../utils/webVTT';
 import { bind } from '../../utils/bind';
 import locales from '../../utils/locales';
 import { ToggleControlProps, CueListChangeEventProps } from '../../utils/types';
+import { isSmall } from '../../utils/helpers';
 
 @Component({
   tag: 'xm-player',
@@ -132,8 +133,12 @@ export class Player {
 
     document.addEventListener('click', this._hideSettingsMenuOnClickOutside);
 
-    // Based on the type, Stencil converts the user setting volume to a number
-    this._setVolume(this.volume);
+    // On small devices the volume slider is hidden
+    // So the user can only change it via the device buttons
+    // That's why the player's initial state for 'volume' will remain the default 100%
+    if (!isSmall) {
+      this._setVolume(this.volume);
+    }
     this._setPlaybackRate(this.playbackrate);
     this._setLanguage(this.lang);
   }
@@ -406,6 +411,9 @@ export class Player {
     this.status = { ...this.status, openedSettingsMenu: false };
   }
 
+  /**
+   * Sets the mute state true and the primary slot volume to 0.
+   */
   @Method()
   @Listen('control:mute')
   public async mute() {
@@ -413,6 +421,9 @@ export class Player {
     this.status = { ...this.status, muted: true };
   }
 
+  /**
+   * Sets the mute state false and resets the primary slot video volume.
+   */
   @Method()
   @Listen('control:unmute')
   public async unmute() {
@@ -427,8 +438,11 @@ export class Player {
       volume,
     };
 
-    const isMuted = volume === 0;
-    isMuted ? this.mute() : this.unmute();
+    if (volume === 0) {
+      this.mute();
+    } else {
+      this.unmute();
+    }
   }
 
   @Listen('control:changeVolume')
