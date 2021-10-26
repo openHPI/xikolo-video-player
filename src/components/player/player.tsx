@@ -56,7 +56,7 @@ export class Player {
   @Prop({ attribute: 'lang' }) lang: string;
 
   @State()
-  private status: Status = defaultStatus;
+  status: Status = defaultStatus;
 
   @State()
   private toggleControlButtons: Array<ToggleControlProps>;
@@ -153,10 +153,6 @@ export class Player {
     );
 
     document.removeEventListener('click', this._hideSettingsMenuOnClickOutside);
-  }
-
-  public getStatus(): Status {
-    return this.status;
   }
 
   /**

@@ -18,28 +18,28 @@ describe('xm-player default functionality', () => {
    * Tests for public API
    */
   it('play will set the mode to playing', async () => {
-    expect(player.getStatus().mode).toEqual(Mode.PAUSED);
+    expect(player.status.mode).toEqual(Mode.PAUSED);
     await player.play();
-    expect(player.getStatus().mode).toEqual(Mode.PLAYING);
+    expect(player.status.mode).toEqual(Mode.PLAYING);
   });
 
   it('pause will set the mode to pause ', async () => {
-    expect(player.getStatus().mode).toEqual(Mode.PAUSED);
+    expect(player.status.mode).toEqual(Mode.PAUSED);
     await player.play();
     await player.pause();
-    expect(player.getStatus().mode).toEqual(Mode.PAUSED);
+    expect(player.status.mode).toEqual(Mode.PAUSED);
   });
 
   it('seeking on a paused player will not trigger playing mode', async () => {
-    expect(player.getStatus().mode).toEqual(Mode.PAUSED);
+    expect(player.status.mode).toEqual(Mode.PAUSED);
     await player.seek(10);
-    expect(player.getStatus().mode).toEqual(Mode.PAUSED);
+    expect(player.status.mode).toEqual(Mode.PAUSED);
   });
 
   it('seeking will trigger playing, if the player is in playing mode', async () => {
     await player.play();
     await player.seek(10);
-    expect(player.getStatus().mode).toEqual(Mode.PLAYING);
+    expect(player.status.mode).toEqual(Mode.PLAYING);
   });
 });
 
