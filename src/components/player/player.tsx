@@ -179,7 +179,7 @@ export class Player {
   }
 
   @bind()
-  protected async _click(e: MouseEvent) {
+  protected async _click() {
     if (!this.status.openedSettingsMenu && !this.status.showPlaybackRate) {
       switch (this.status.mode) {
         case Mode.PAUSED:
@@ -192,7 +192,7 @@ export class Player {
   }
 
   @bind()
-  protected async _hideSettingsMenuOnClickOutside(e: MouseEvent) {
+  protected async _hideSettingsMenuOnClickOutside() {
     if (this.status.openedSettingsMenu || this.status.showPlaybackRate) {
       this._closeSettingsMenu();
       this._hidePlaybackRate();
@@ -326,7 +326,7 @@ export class Player {
 
   @bind()
   @Listen('dblclick')
-  private handleDoubleClick(e: MouseEvent) {
+  private handleDoubleClick() {
     this.toggleFullscreen();
   }
 
@@ -353,7 +353,7 @@ export class Player {
   }
 
   @bind()
-  protected async _ended(e: CustomEvent) {
+  protected async _ended() {
     this.status = { ...this.status, mode: Mode.FINISHED };
   }
 
