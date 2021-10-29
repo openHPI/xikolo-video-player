@@ -23,6 +23,9 @@
     // There is an open issue regarding this rule: https://github.com/ionic-team/stencil-eslint/issues/10
     // In essence, nobody understands why this rule is in place and the Stencil team did not answer yet
     "@stencil/prefer-vdom-listener": 1,
+    // Our decorators are in the right place.
+    // There is an open issues with that rule: https://github.com/ionic-team/stencil-eslint/issues/60
+    "@stencil/decorators-context": 1,
     // conflicts with prettier: sometimes the line gets too long and it puts it on the next
     "@stencil/decorators-style": 0,
     "import/no-extraneous-dependencies": 0,
