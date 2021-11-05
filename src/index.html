@@ -58,7 +58,7 @@
 
       <div id="wrapper">
         <h2>Dual Stream openSAP VTT file</h2>
-        <xm-player volume="0.3" lang="fr">
+        <xm-player>
           <xm-video slot="primary" src="340196868"></xm-video>
           <xm-video slot="secondary" src="340196788"></xm-video>
           <xm-text-track
@@ -170,27 +170,26 @@
         <div id="custom-controlled-element">
           Click the custom button to toggle the feature
         </div>
+
+        <h2><a href="#">Interactive Transcript</a></h2>
+
+        <xm-player id="video-player-with-transcript">
+          <xm-video slot="primary" src="264584278"></xm-video>
+          <xm-text-track
+            language="de"
+            src="/static/de.vtt"
+            label="Deutsch"
+            default
+          ></xm-text-track>
+          <xm-text-track
+            language="en"
+            src="/static/en.vtt"
+            label="English"
+          ></xm-text-track>
+        </xm-player>
+
+        <div id="transcript-text">Feed me</div>
       </div>
-
-      <h2><a href="#">Interactive Transcript</a></h2>
-
-      <xm-player id="video-player-with-transcript">
-        <xm-video slot="primary" src="264584278"></xm-video>
-        <xm-text-track
-          language="de"
-          src="/static/de.vtt"
-          label="Deutsch"
-          default
-        ></xm-text-track>
-        <xm-text-track
-          language="en"
-          src="/static/en.vtt"
-          label="English"
-        ></xm-text-track>
-      </xm-player>
-
-      <div id="transcript-text">Feed me</div>
-
       <br />
       <button>Button</button>
     </section>

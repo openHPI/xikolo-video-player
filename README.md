@@ -2,15 +2,23 @@
 
 # Xikolo Video Player
 
-This video player will replace the currently used Vimeo video player for the Xikolo project.
+This video player is used to provide a better user experience when viewing videos in the Xikolo project.
+It provides features to control all basic video playback functions to control videos hosted on Vimeo.
+
+The feature set includes more than the usual
+
+- Dual Stream mode (teacher view and slides) and the ability to resize streams
+- Event API for analytics
+- Branding
+- Control any other function with a custom button, see [Toggle Control](#toggle-control)
 
 ## Getting Started
 
 1. Clone the repository
 
 ```bash
-git clone https://git@dev.xikolo.de:jgraichen/video-player-stencil
-cd video-player-stencil
+git clone https://dev.xikolo.de/gitlab/xikolo/video-player
+cd video-player
 ```
 
 2. Install the dependencies and run the project
@@ -23,13 +31,102 @@ npm start
 The demo page will then be available on http://localhost:3333.
 This page is reloaded automatically when saving a file with changes.
 
-To run the (unit) tests, run:
+To run the tests, run:
 
 ```bash
 npm test
 ```
 
-## Development
+## Example usage
+
+### Embedding the video player
+
+A very basic markup to get started may look like this:
+
+```html
+<xm-player>
+  <xm-video slot="primary" src="340196868"></xm-video>
+</xm-player>
+```
+
+### Branding
+
+The video player is designed to support color customization for key components.
+You can override the following variables with your favorite colors or numbers:
+
+```css
+  --vp-slider-color
+  --vp-gutter-color
+  --vp-gutter-width
+  --vp-main-color
+  --vp-bg-color
+  --vp-bg-color-rgb
+  --vp-menu-color-rgb
+  --vp-control-slider-height
+```
+
+Components should use `currentColor` and custom CSS variables if appropriate.
+
+### Toggle Control
+
+The video player is capable to control components outside of itself.
+
+To add a toggle you need to add a `<xm-toggle-control></xm-toggle-control>`-tag.
+
+The `<xm-toggle-control>` must have a `name: string` as identifier.
+The `name` must be **unique**.
+
+Important here is, that the markup also contains a `slot`-Attribute with the **same name**.
+A `title: string` is used for displaying a hover tooltip specified.
+You also need a nested `<svg>` working as a symbol displayed in the controls on the bottom of the player.
+
+On click the toggle control will emit an `control:changeToggleControlActiveState`-Event containing
+
+```javascript
+interface ToggleControlProps {
+  name: string;
+  title: string;
+  active: boolean;
+}
+```
+
+#### Example markup
+
+```html
+<xm-player id="player-with-custom-control">
+  <xm-toggle-control
+    slot="toggleControl"
+    name="toggleControl"
+    title="Custom Control"
+    active
+  >
+    <svg slot="icon" viewBox="0 0 32 32" role="presentation" focusable="false">
+      <path
+        d="M0 2h32v4h-32zM0 8h20v4h-20zM0 20h20v4h-20zM0 14h32v4h-32zM0 26h32v4h-32z"
+      ></path>
+    </svg>
+  </xm-toggle-control>
+</xm-player>
+```
+
+#### Example control hook
+
+```javascript
+videoPlayerWithCustomControl.addEventListener(
+  'control:changeToggleControlActiveState',
+  (event) => {
+    if (event.detail.name === 'toggleControl') {
+      customControlledText.innerHTML = `The feature is ${
+        event.detail.active ? ' active' : ' not active'
+      }`;
+    }
+  }
+);
+```
+
+## Contributing to the project
+
+### Development
 
 The Xikolo Video Player is built with [Stencil JS](https://stenciljs.com).
 
@@ -56,78 +153,14 @@ E.g. `cueListChange`.
 ### Code Style
 
 To organize the code structure, we follow the [proposed guideline by Stencil](https://stenciljs.com/docs/style-guide#code-organization).
+The repo has a pre-push git hook with eslint so that new linter offenses do not end up in the code base.
 
 ### SVG Icons
 
 SVG icons are taken from the Xikolo font and FontAwesome imported to [icomoon.io](https://icomoon.io).
 You can easily export the icons as cleaned SVG from this page.
 
-### Branding
-
-The video player is designed to support simple color customization.
-Components should use `currentColor` and custom CSS variables if appropriate.
-
-### Toggle Control
-
-The video player is capable to control components outside of itself.
-
-To add a toggle you need to add a `<xm-toggle-control></xm-toggle-control>`-tag.
-
-The `<xm-toggle-control>` must have a `name: string` as identifier.
-Important here is, that the markup also contains a `slot`-Attribute with the **same name**.
-
-A `title: string` is used for displaying a hover tooltip specified.
-
-You also need a nested `<svg>` working as a symbol displayed in the controls on the bottom of the player.
-
-On click the toggle control will emit an `control:changeToggleControlActiveState`-Event containing
-
-```javascript
-interface ToggleControlProps {
-  name: string;
-  title: string;
-  active: boolean;
-}
-```
-
-The `name` must be **unique**.
-
-#### Example markup
-
-```html
-<xm-player id="player-with-custom-control">
-  <xm-toggle-control
-    slot="toggleControl"
-    name="toggleControl"
-    title="Custom Control"
-    active
-  >
-    <svg slot="icon" viewBox="0 0 32 32" role="presentation" focusable="false">
-      <path
-        d="M0 2h32v4h-32zM0 8h20v4h-20zM0 20h20v4h-20zM0 14h32v4h-32zM0 26h32v4h-32z"
-      ></path>
-    </svg>
-  </xm-toggle-control>
-  ...
-</xm-player>
-```
-
-#### Example control hook
-
-```javascript
-videoPlayerWithCustomControl.addEventListener(
-  'control:changeToggleControlActiveState',
-  (event) => {
-    if (event.detail.name === 'toggleControl') {
-      customControlledText.innerHTML = `The feature is ${
-        event.detail.active ? ' active' : ' not active'
-      }`;
-    }
-  }
-);
-```
-
-## Deploying
+### Deploying
 
 Commits to the `master` branch are automatically compiled and added to the `build` branch.
 
