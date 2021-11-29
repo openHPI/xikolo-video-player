@@ -47,7 +47,7 @@
     "jest-cli": "24.9.0",
     "lint-staged": "11.2.6",
     "node-webvtt": "1.9.3",
-    "prettier": "2.4.1",
+    "prettier": "2.5.0",
     "puppeteer": "10.4.0",
     "split.js": "1.6.4",
     "stencil-inline-svg": "1.1.0",
