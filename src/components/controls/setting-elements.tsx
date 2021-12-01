@@ -11,32 +11,33 @@ interface PlaybackRateToggleButtonProps {
   onHide: (e: Event) => void;
 }
 
-export const PlaybackRateToggleButton: FunctionalComponent<PlaybackRateToggleButtonProps> =
-  (props) => {
-    if (props.status.showPlaybackRate) {
-      return (
-        <button
-          onClick={props.onHide}
-          title={locales[props.status.language].playbackRate}
-          aria-label={locales[props.status.language].playbackRate}
-        >
-          <span
-            class="controls__button-icon controls__button-icon--active svg"
-            innerHTML={icon.Speed}
-          />
-        </button>
-      );
-    }
+export const PlaybackRateToggleButton: FunctionalComponent<
+  PlaybackRateToggleButtonProps
+> = (props) => {
+  if (props.status.showPlaybackRate) {
     return (
       <button
-        onClick={props.onShow}
+        onClick={props.onHide}
         title={locales[props.status.language].playbackRate}
         aria-label={locales[props.status.language].playbackRate}
       >
-        <span class="controls__button-icon svg" innerHTML={icon.Speed} />
+        <span
+          class="controls__button-icon controls__button-icon--active svg"
+          innerHTML={icon.Speed}
+        />
       </button>
     );
-  };
+  }
+  return (
+    <button
+      onClick={props.onShow}
+      title={locales[props.status.language].playbackRate}
+      aria-label={locales[props.status.language].playbackRate}
+    >
+      <span class="controls__button-icon svg" innerHTML={icon.Speed} />
+    </button>
+  );
+};
 
 interface PlaybackRateProps {
   status: Status;
@@ -44,10 +45,11 @@ interface PlaybackRateProps {
 }
 
 export const PlaybackRate: FunctionalComponent<PlaybackRateProps> = (props) => {
-  const setting = settingList.find(
+  const playbackRateSetting = settingList.find(
     (setting) => setting.name === SettingNames.PLAYBACKRATE
   );
-  setting.currentValue = props.status.settings[SettingNames.PLAYBACKRATE];
+  playbackRateSetting.currentValue =
+    props.status.settings[SettingNames.PLAYBACKRATE];
   return (
     <div
       class={
@@ -56,10 +58,10 @@ export const PlaybackRate: FunctionalComponent<PlaybackRateProps> = (props) => {
           : 'controls__playback-rate__menu'
       }
     >
-      {setting.values.map((value, index) => (
+      {playbackRateSetting.values.map((value) => (
         <button
           class={
-            value === setting.currentValue
+            value === playbackRateSetting.currentValue
               ? 'controls__playback-rate__button controls__playback-rate__button--current'
               : 'controls__playback-rate__button'
           }
