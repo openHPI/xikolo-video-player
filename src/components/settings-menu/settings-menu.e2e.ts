@@ -35,7 +35,7 @@ describe('settings-menu', () => {
       '[aria-label="Settings"]'
     );
     const openMenuEvent = await player.spyOnEvent('control:openSettingsMenu');
-    settingsButton.click();
+    await settingsButton.click();
     await page.waitForChanges();
     expect(openMenuEvent).toHaveReceivedEvent();
     // Second step: open the subtitles submenu
@@ -44,7 +44,7 @@ describe('settings-menu', () => {
       '[aria-label="Subtitles"]'
     );
     expect(subtitleButton).toBeTruthy();
-    subtitleButton.click();
+    await subtitleButton.click();
     await page.waitForChanges();
     // Third step: click on an other language as the default 'German' one
     const changeTextTrackEvent = await player.spyOnEvent(
@@ -55,7 +55,7 @@ describe('settings-menu', () => {
       '[aria-label="English"]'
     );
     expect(englishButton).toBeTruthy();
-    englishButton.click();
+    await englishButton.click();
     await page.waitForChanges();
     expect(changeTextTrackEvent).toHaveReceivedEventDetail({
       textTrack: 'en',
