@@ -27,7 +27,7 @@ describe('settings-menu', () => {
     expect(settingsMenu).toBeTruthy();
   });
 
-  it('should fire the text track change event', async () => {
+  it.skip('should fire the text track change event', async () => {
     const player: E2EElement = await page.find('xm-player');
     // First step: open the settings menu
     const settingsButton: ElementHandle = await getControlsElement(
