@@ -51,7 +51,7 @@
     "puppeteer": "10.4.0",
     "split.js": "1.6.4",
     "stencil-inline-svg": "1.1.0",
-    "typescript": "4.5.2"
+    "typescript": "4.5.3"
   },
   "license": "MIT",
   "lint-staged": {
