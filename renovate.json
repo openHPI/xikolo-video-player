@@ -1,5 +1,7 @@
 {
   "extends": ["config:base"],
+  "labels": ["Internal 🔨"],
+  "rangeStrategy": "bump",
   "automerge": true,
   "major": {
     "automerge": false
