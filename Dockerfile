@@ -1,4 +1,4 @@
-FROM node:16@sha256:4b0b5c3db44f567d5d25c80a6fe33a981d911cdae20b39d2395be268aea2cb97
+FROM node:16@sha256:e1368ace0254da6845b6ab81c8c3a4f0058db41ca319b582396971648afae21d
 
 # https://github.com/GoogleChrome/puppeteer/blob/master/.ci/node12/Dockerfile.linux
 RUN apt-get update \
