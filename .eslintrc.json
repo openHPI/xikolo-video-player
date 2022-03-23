@@ -25,9 +25,11 @@
     "@stencil/prefer-vdom-listener": 1,
     // Our decorators are in the right place.
     // There is an open issues with that rule: https://github.com/ionic-team/stencil-eslint/issues/60
-    "@stencil/decorators-context": 1,
+    "@stencil/decorators-context": 0,
     // conflicts with prettier: sometimes the line gets too long and it puts it on the next
     "@stencil/decorators-style": 0,
+    // we use that a lot and it works fine
+    "@stencil/strict-boolean-conditions": 0,
     "import/no-extraneous-dependencies": 0,
     "import/prefer-default-export": 0
   }
