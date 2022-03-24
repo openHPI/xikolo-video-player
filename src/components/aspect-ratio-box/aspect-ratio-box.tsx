@@ -1,4 +1,4 @@
-import { Component, Element, h, Prop, State } from '@stencil/core';
+import { Component, Element, h, Listen, Prop, State } from '@stencil/core';
 
 @Component({
   tag: 'xm-aspect-ratio-box',
@@ -8,27 +8,24 @@ import { Component, Element, h, Prop, State } from '@stencil/core';
 export class AspectRatioBox {
   @Element() el: HTMLXmAspectRatioBoxElement;
 
-  @Prop()
-  public ratio: number = 1;
+  @Prop() ratio: number = 1;
 
-  @State()
-  private _fullscreened: boolean = false;
+  @State() fullscreen: boolean = this.isVideoInFullscreen();
 
-  constructor() {
-    this._fullscreened = document.fullscreenElement !== null;
-    this._fullscreenChanged = this._fullscreenChanged.bind(this);
+  @Listen('fullscreenchange', { target: 'window' })
+  @Listen('webkitfullscreenchange', { target: 'window' })
+  handleFullscreenChange() {
+    this.fullscreen = this.isVideoInFullscreen();
   }
 
   render() {
-    const bxStyle = {};
-
-    if (!this._fullscreened) {
-      /* eslint-disable @typescript-eslint/dot-notation */
-      bxStyle['paddingBottom'] = `${this.ratio * 100}%`;
-    }
-
     return (
-      <div class="bx" style={bxStyle}>
+      <div
+        class="bx"
+        style={
+          !this.fullscreen ? { 'padding-bottom': `${this.ratio * 100}%` } : {}
+        }
+      >
         <div class="ct">
           <slot />
         </div>
@@ -36,15 +33,13 @@ export class AspectRatioBox {
     );
   }
 
-  componentDidLoad() {
-    window.addEventListener('fullscreenchange', this._fullscreenChanged);
-  }
+  private isVideoInFullscreen() {
+    const fullScreenElement =
+      document.fullscreenElement || (document as any).webkitFullscreenElement;
 
-  componentWillUnload() {
-    window.removeEventListener('fullscreenchange', this._fullscreenChanged);
-  }
-
-  private _fullscreenChanged(e) {
-    this._fullscreened = document.fullscreenElement !== null;
+    if (fullScreenElement) {
+      return true;
+    }
+    return false;
   }
 }
