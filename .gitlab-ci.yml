@@ -33,7 +33,7 @@ Docker E2E:
       - node_modules
 
   before_script:
-    - sudo chown -R user:user /builds/gitlab
+    - sudo chown -R user:user $(pwd)
     - npm install --no-audit --prefer-offline --progress=false
 
 test:
