@@ -17,11 +17,13 @@
 ### Used by
 
  - [xm-video](../video)
+ - [xm-video-kaltura](../kaltura)
 
 ### Graph
 ```mermaid
 graph TD;
   xm-video --> xm-aspect-ratio-box
+  xm-video-kaltura --> xm-aspect-ratio-box
   style xm-aspect-ratio-box fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

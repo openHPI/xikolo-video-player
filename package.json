@@ -46,6 +46,7 @@
     "jest": "27.5.1",
     "jest-cli": "27.5.1",
     "lint-staged": "12.3.7",
+    "kaltura-player-js": "https://github.com/kaltura/kaltura-player-js.git#master",
     "node-webvtt": "1.9.3",
     "prettier": "2.6.1",
     "puppeteer": "^10.4.0",
