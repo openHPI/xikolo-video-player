@@ -147,7 +147,7 @@ export class Player {
     this._setLanguage(this.lang);
   }
 
-  public componentWillUnload() {
+  public disconnectedCallback() {
     this.primary.removeEventListener('click', this._click);
     this.primary.removeEventListener('timeupdate', this._timeUpdate);
     this.primary.removeEventListener('ended', this._ended);
