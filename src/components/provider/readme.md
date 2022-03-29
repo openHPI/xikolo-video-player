@@ -1,4 +1,4 @@
-# xm-video-kaltura
+# xm-kaltura
 
 
 
@@ -84,8 +84,8 @@ Type: `Promise<number>`
 ### Graph
 ```mermaid
 graph TD;
-  xm-video-kaltura --> xm-aspect-ratio-box
-  style xm-video-kaltura fill:#f9f,stroke:#333,stroke-width:4px
+  xm-kaltura --> xm-aspect-ratio-box
+  style xm-kaltura fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

@@ -18,6 +18,22 @@ export namespace Components {
         "textTracks": TextTrackList;
         "toggleControlButtons": Array<ToggleControlProps>;
     }
+    interface XmKaltura {
+        "currentTime": () => Promise<any>;
+        "entryId": string;
+        "partnerId": number;
+        "pause": () => Promise<void>;
+        "play": () => Promise<void>;
+        /**
+          * @param seconds
+         */
+        "seek": (seconds: number) => Promise<number>;
+        /**
+          * @param playbackRate
+         */
+        "setPlaybackRate": (playbackRate: number) => Promise<number>;
+        "volume": number;
+    }
     interface XmPlayer {
         "disableTextTrack": () => Promise<void>;
         "enableTextTrack": () => Promise<void>;
@@ -94,22 +110,6 @@ export namespace Components {
         "src": number;
         "volume": number;
     }
-    interface XmVideoKaltura {
-        "currentTime": () => Promise<any>;
-        "entryId": string;
-        "partnerId": number;
-        "pause": () => Promise<void>;
-        "play": () => Promise<void>;
-        /**
-          * @param seconds
-         */
-        "seek": (seconds: number) => Promise<number>;
-        /**
-          * @param playbackRate
-         */
-        "setPlaybackRate": (playbackRate: number) => Promise<number>;
-        "volume": number;
-    }
 }
 declare global {
     interface HTMLXmAspectRatioBoxElement extends Components.XmAspectRatioBox, HTMLStencilElement {
@@ -123,6 +123,12 @@ declare global {
     var HTMLXmControlsElement: {
         prototype: HTMLXmControlsElement;
         new (): HTMLXmControlsElement;
+    };
+    interface HTMLXmKalturaElement extends Components.XmKaltura, HTMLStencilElement {
+    }
+    var HTMLXmKalturaElement: {
+        prototype: HTMLXmKalturaElement;
+        new (): HTMLXmKalturaElement;
     };
     interface HTMLXmPlayerElement extends Components.XmPlayer, HTMLStencilElement {
     }
@@ -172,15 +178,10 @@ declare global {
         prototype: HTMLXmVideoElement;
         new (): HTMLXmVideoElement;
     };
-    interface HTMLXmVideoKalturaElement extends Components.XmVideoKaltura, HTMLStencilElement {
-    }
-    var HTMLXmVideoKalturaElement: {
-        prototype: HTMLXmVideoKalturaElement;
-        new (): HTMLXmVideoKalturaElement;
-    };
     interface HTMLElementTagNameMap {
         "xm-aspect-ratio-box": HTMLXmAspectRatioBoxElement;
         "xm-controls": HTMLXmControlsElement;
+        "xm-kaltura": HTMLXmKalturaElement;
         "xm-player": HTMLXmPlayerElement;
         "xm-screen": HTMLXmScreenElement;
         "xm-settings-menu": HTMLXmSettingsMenuElement;
@@ -189,7 +190,6 @@ declare global {
         "xm-toggle-control": HTMLXmToggleControlElement;
         "xm-tooltip": HTMLXmTooltipElement;
         "xm-video": HTMLXmVideoElement;
-        "xm-video-kaltura": HTMLXmVideoKalturaElement;
     }
 }
 declare namespace LocalJSX {
@@ -218,6 +218,13 @@ declare namespace LocalJSX {
         "status"?: Status;
         "textTracks"?: TextTrackList;
         "toggleControlButtons"?: Array<ToggleControlProps>;
+    }
+    interface XmKaltura {
+        "entryId"?: string;
+        "onRatioLoaded"?: (event: CustomEvent<RatioLoadedDetail>) => void;
+        "onTimeupdate"?: (event: CustomEvent<TimeUpdateDetail>) => void;
+        "partnerId"?: number;
+        "volume"?: number;
     }
     interface XmPlayer {
         "lang"?: string;
@@ -290,16 +297,10 @@ declare namespace LocalJSX {
         "src"?: number;
         "volume"?: number;
     }
-    interface XmVideoKaltura {
-        "entryId"?: string;
-        "onRatioLoaded"?: (event: CustomEvent<RatioLoadedDetail>) => void;
-        "onTimeupdate"?: (event: CustomEvent<TimeUpdateDetail>) => void;
-        "partnerId"?: number;
-        "volume"?: number;
-    }
     interface IntrinsicElements {
         "xm-aspect-ratio-box": XmAspectRatioBox;
         "xm-controls": XmControls;
+        "xm-kaltura": XmKaltura;
         "xm-player": XmPlayer;
         "xm-screen": XmScreen;
         "xm-settings-menu": XmSettingsMenu;
@@ -308,7 +309,6 @@ declare namespace LocalJSX {
         "xm-toggle-control": XmToggleControl;
         "xm-tooltip": XmTooltip;
         "xm-video": XmVideo;
-        "xm-video-kaltura": XmVideoKaltura;
     }
 }
 export { LocalJSX as JSX };
@@ -317,6 +317,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "xm-aspect-ratio-box": LocalJSX.XmAspectRatioBox & JSXBase.HTMLAttributes<HTMLXmAspectRatioBoxElement>;
             "xm-controls": LocalJSX.XmControls & JSXBase.HTMLAttributes<HTMLXmControlsElement>;
+            "xm-kaltura": LocalJSX.XmKaltura & JSXBase.HTMLAttributes<HTMLXmKalturaElement>;
             "xm-player": LocalJSX.XmPlayer & JSXBase.HTMLAttributes<HTMLXmPlayerElement>;
             "xm-screen": LocalJSX.XmScreen & JSXBase.HTMLAttributes<HTMLXmScreenElement>;
             "xm-settings-menu": LocalJSX.XmSettingsMenu & JSXBase.HTMLAttributes<HTMLXmSettingsMenuElement>;
@@ -325,7 +326,6 @@ declare module "@stencil/core" {
             "xm-toggle-control": LocalJSX.XmToggleControl & JSXBase.HTMLAttributes<HTMLXmToggleControlElement>;
             "xm-tooltip": LocalJSX.XmTooltip & JSXBase.HTMLAttributes<HTMLXmTooltipElement>;
             "xm-video": LocalJSX.XmVideo & JSXBase.HTMLAttributes<HTMLXmVideoElement>;
-            "xm-video-kaltura": LocalJSX.XmVideoKaltura & JSXBase.HTMLAttributes<HTMLXmVideoKalturaElement>;
         }
     }
 }

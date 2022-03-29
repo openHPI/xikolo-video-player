@@ -18,7 +18,7 @@ import {
 import { generateId } from '../../utils/helpers';
 
 @Component({
-  tag: 'xm-video-kaltura',
+  tag: 'xm-kaltura',
 })
 export class Kaltura implements XmVideo {
   player;
