@@ -19,15 +19,25 @@ import { generateId } from '../../utils/helpers';
 
 @Component({
   tag: 'xm-kaltura',
+  styleUrl: 'kaltura.scss',
 })
 export class Kaltura implements XmVideo {
   player;
 
-  ratio = 0.5625; // 16:9
-
   id = generateId('xm-aspect-ratio-box-');
 
   @Element() el: HTMLXmVideoElement;
+
+  /**
+   * Number resulting from dividing the height by the width of the
+   * video. Common ratios are 0.75 (4:3) and 0.5625 (16:9)
+   */
+  @Prop() ratio: number;
+
+  /**
+   * Duration of the video in seconds
+   */
+  @Prop() duration: number;
 
   @Prop() entryId: string;
 
@@ -40,6 +50,8 @@ export class Kaltura implements XmVideo {
 
   @Event({ eventName: 'ratioLoaded' })
   ratioLoadedEvent: EventEmitter<RatioLoadedDetail>;
+
+  @Event({ eventName: 'ended' }) endedEvent: EventEmitter;
 
   // eslint-disable-next-line @stencil/no-unused-watch
   @Watch('volume')
@@ -64,16 +76,26 @@ export class Kaltura implements XmVideo {
 
     await this.player.loadMedia({ entryId: this.entryId });
 
-    this.player.addEventListener('timeupdate', () => {
-      this.timeUpdateEvent.emit({
-        duration: this.player.duration,
-        seconds: this.player.currentTime,
-      });
+    this.timeUpdateEvent.emit({
+      duration: this.duration,
+      seconds: 0,
+      percent: 0,
     });
 
     this.ratioLoadedEvent.emit({
       name: this.el.getAttribute('slot'),
       ratio: this.ratio,
+    });
+
+    this.player.addEventListener('timeupdate', () => {
+      this.timeUpdateEvent.emit({
+        duration: this.duration,
+        seconds: this.player.currentTime,
+      });
+    });
+
+    this.player.addEventListener('ended', (e) => {
+      this.endedEvent.emit(e);
     });
   }
 

@@ -20,10 +20,18 @@ export namespace Components {
     }
     interface XmKaltura {
         "currentTime": () => Promise<any>;
+        /**
+          * Duration of the video in seconds
+         */
+        "duration": number;
         "entryId": string;
         "partnerId": number;
         "pause": () => Promise<void>;
         "play": () => Promise<void>;
+        /**
+          * Number resulting from dividing the height by the width of the video. Common ratios are 0.75 (4:3) and 0.5625 (16:9)
+         */
+        "ratio": number;
         /**
           * @param seconds
          */
@@ -220,10 +228,28 @@ declare namespace LocalJSX {
         "toggleControlButtons"?: Array<ToggleControlProps>;
     }
     interface XmKaltura {
+        /**
+          * Duration of the video in seconds
+         */
+        "duration"?: number;
         "entryId"?: string;
+        /**
+          * Emit when video has ended
+         */
+        "onEnded"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emit ratio as soon as it is available
+         */
         "onRatioLoaded"?: (event: CustomEvent<RatioLoadedDetail>) => void;
+        /**
+          * Emit timeupdate event to update player controls with duration This needs to happen once initially and on every video timeupdate
+         */
         "onTimeupdate"?: (event: CustomEvent<TimeUpdateDetail>) => void;
         "partnerId"?: number;
+        /**
+          * Number resulting from dividing the height by the width of the video. Common ratios are 0.75 (4:3) and 0.5625 (16:9)
+         */
+        "ratio"?: number;
         "volume"?: number;
     }
     interface XmPlayer {
@@ -283,13 +309,22 @@ declare namespace LocalJSX {
     interface XmVideo {
         "onBuffered"?: (event: CustomEvent<any>) => void;
         "onBuffering"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emit when video has ended
+         */
         "onEnded"?: (event: CustomEvent<any>) => void;
         "onPause"?: (event: CustomEvent<any>) => void;
         "onPlay"?: (event: CustomEvent<any>) => void;
         "onProgress"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emit ratio as soon as it is available
+         */
         "onRatioLoaded"?: (event: CustomEvent<any>) => void;
         "onSeeked"?: (event: CustomEvent<any>) => void;
         "onSeeking"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emit timeupdate event to update player controls with duration This needs to happen once initially and on every video timeupdate
+         */
         "onTimeupdate"?: (event: CustomEvent<any>) => void;
         /**
           * Vimeo Video ID
