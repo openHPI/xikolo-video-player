@@ -16,6 +16,7 @@ import {
 } from '../../types/common';
 
 import { generateId } from '../../utils/helpers';
+import { defaultStatus } from '../../utils/status';
 
 @Component({
   tag: 'xm-kaltura',
@@ -25,6 +26,11 @@ export class Kaltura implements XmVideo {
   player;
 
   id = generateId('xm-aspect-ratio-box-');
+
+  userSettings = {
+    playbackrate: defaultStatus.settings.playbackRate,
+    volume: defaultStatus.volume,
+  };
 
   @Element() el: HTMLXmVideoElement;
 
@@ -56,7 +62,14 @@ export class Kaltura implements XmVideo {
   // eslint-disable-next-line @stencil/no-unused-watch
   @Watch('volume')
   async volumeChanged(volume: number) {
-    return (this.player.volume = volume);
+    if (this.player) {
+      return (this.player.volume = volume);
+    } else {
+      // Save the volume value in the userSettings property
+      // if the player is not initialized. This function will be
+      // called again once the player is ready.
+      this.userSettings.volume = volume;
+    }
   }
 
   async componentDidLoad() {
@@ -75,6 +88,12 @@ export class Kaltura implements XmVideo {
     });
 
     await this.player.loadMedia({ entryId: this.entryId });
+
+    /**
+     * Set pre-defined user settings. Use default settings as fallback.
+     */
+    this.setPlaybackRate(this.userSettings.playbackrate);
+    this.volumeChanged(this.userSettings.volume);
 
     this.timeUpdateEvent.emit({
       duration: this.duration,
@@ -142,7 +161,14 @@ export class Kaltura implements XmVideo {
    */
   @Method()
   async setPlaybackRate(playbackRate: number) {
-    return (this.player.playbackRate = playbackRate);
+    if (this.player) {
+      return (this.player.playbackRate = playbackRate);
+    } else {
+      // Save the playbackRate value in the userSettings property
+      // if the player is not initialized. This function will be
+      // called again once the player is ready.
+      this.userSettings.playbackrate = playbackRate;
+    }
   }
 
   render() {
