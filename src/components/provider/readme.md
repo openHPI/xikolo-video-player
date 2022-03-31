@@ -9,7 +9,7 @@
 
 | Property    | Attribute    | Description                                                                                                         | Type     | Default     |
 | ----------- | ------------ | ------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
-| `duration`  | `duration`   | Duration of the video in ms                                                                                         | `number` | `undefined` |
+| `duration`  | `duration`   | Duration of the video in seconds                                                                                    | `number` | `undefined` |
 | `entryId`   | `entry-id`   |                                                                                                                     | `string` | `undefined` |
 | `partnerId` | `partner-id` |                                                                                                                     | `number` | `undefined` |
 | `ratio`     | `ratio`      | Number resulting from dividing the height by the width of the video. Common ratios are 0.75 (4:3) and 0.5625 (16:9) | `number` | `undefined` |
