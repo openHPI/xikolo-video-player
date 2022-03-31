@@ -7,19 +7,22 @@
 
 ## Properties
 
-| Property    | Attribute    | Description | Type     | Default     |
-| ----------- | ------------ | ----------- | -------- | ----------- |
-| `entryId`   | `entry-id`   |             | `string` | `undefined` |
-| `partnerId` | `partner-id` |             | `number` | `undefined` |
-| `volume`    | `volume`     |             | `number` | `undefined` |
+| Property    | Attribute    | Description                                                                                                         | Type     | Default     |
+| ----------- | ------------ | ------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
+| `duration`  | `duration`   | Duration of the video in ms                                                                                         | `number` | `undefined` |
+| `entryId`   | `entry-id`   |                                                                                                                     | `string` | `undefined` |
+| `partnerId` | `partner-id` |                                                                                                                     | `number` | `undefined` |
+| `ratio`     | `ratio`      | Number resulting from dividing the height by the width of the video. Common ratios are 0.75 (4:3) and 0.5625 (16:9) | `number` | `undefined` |
+| `volume`    | `volume`     |                                                                                                                     | `number` | `undefined` |
 
 
 ## Events
 
-| Event         | Description | Type                             |
-| ------------- | ----------- | -------------------------------- |
-| `ratioLoaded` |             | `CustomEvent<RatioLoadedDetail>` |
-| `timeupdate`  |             | `CustomEvent<TimeUpdateDetail>`  |
+| Event         | Description                                                                                                                     | Type                             |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| `ended`       | Emit when video has ended                                                                                                       | `CustomEvent<any>`               |
+| `ratioLoaded` | Emit ratio as soon as it is available                                                                                           | `CustomEvent<RatioLoadedDetail>` |
+| `timeupdate`  | Emit timeupdate event to update player controls with duration This needs to happen once initially and on every video timeupdate | `CustomEvent<TimeUpdateDetail>`  |
 
 
 ## Methods
