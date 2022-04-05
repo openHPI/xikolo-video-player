@@ -58,6 +58,12 @@ export class Kaltura implements XmVideo {
 
   @Event({ eventName: 'ended' }) endedEvent: EventEmitter;
 
+  @Event({ eventName: 'play' }) playEvent: EventEmitter;
+
+  @Event({ eventName: 'pause' }) pauseEvent: EventEmitter;
+
+  @Event({ eventName: 'seeked' }) seekedEvent: EventEmitter;
+
   // eslint-disable-next-line @stencil/no-unused-watch
   @Watch('volume')
   async volumeChanged(volume: number) {
@@ -113,6 +119,13 @@ export class Kaltura implements XmVideo {
     this.player.addEventListener('ended', (e) => {
       this.endedEvent.emit(e);
     });
+
+    /**
+     * Emit events to tack via lanalytics
+     */
+    this.player.addEventListener('play', (e) => this.playEvent.emit(e));
+    this.player.addEventListener('pause', (e) => this.pauseEvent.emit(e));
+    this.player.addEventListener('seeked', (e) => this.seekedEvent.emit(e));
   }
 
   disconnectedCallback() {
