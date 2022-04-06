@@ -14,6 +14,7 @@ import {
   TimeUpdateDetail,
   XmVideo,
   VideoAnalytics,
+  HTMLXmVideoElement,
 } from '../../types/common';
 
 import { defaultStatus } from '../../utils/status';
