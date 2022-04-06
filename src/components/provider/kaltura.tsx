@@ -15,7 +15,6 @@ import {
   XmVideo,
 } from '../../types/common';
 
-import { generateId } from '../../utils/helpers';
 import { defaultStatus } from '../../utils/status';
 
 @Component({
@@ -25,7 +24,7 @@ import { defaultStatus } from '../../utils/status';
 export class Kaltura implements XmVideo {
   player;
 
-  id = generateId('xm-aspect-ratio-box-');
+  playerContainer: HTMLXmAspectRatioBoxElement;
 
   userSettings = {
     playbackrate: defaultStatus.settings.playbackRate,
@@ -73,21 +72,19 @@ export class Kaltura implements XmVideo {
   }
 
   async componentDidLoad() {
-    const module = await import('kaltura-player-js');
-    this.player = module.setup({
-      targetId: this.id,
-      provider: {
-        partnerId: this.partnerId,
-      },
-      playback: {
-        autoplay: false,
-      },
-      ui: {
-        disable: true,
-      },
-    });
+    const { Core, Provider } = await import('./kaltura-module');
 
-    await this.player.loadMedia({ entryId: this.entryId });
+    // See https://github.com/kaltura/playkit-js-providers
+    const provider = await new Provider.Provider({
+      partnerId: this.partnerId,
+    });
+    const mediaInfo = await provider.getMediaConfig({ entryId: this.entryId });
+
+    // See https://github.com/kaltura/playkit-js
+    this.player = await Core.loadPlayer();
+
+    this.player.setSources(mediaInfo.sources);
+    this.playerContainer.appendChild(this.player.getView());
 
     /**
      * Set pre-defined user settings. Use default settings as fallback.
@@ -174,8 +171,8 @@ export class Kaltura implements XmVideo {
   render() {
     return (
       <xm-aspect-ratio-box
+        ref={(e) => (this.playerContainer = e)}
         ratio={this.ratio}
-        id={this.id}
       ></xm-aspect-ratio-box>
     );
   }
