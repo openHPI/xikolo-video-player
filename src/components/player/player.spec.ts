@@ -57,8 +57,8 @@ describe('xm-player with props', () => {
     page = await newSpecPage({
       html: `
       <xm-player lang="en" volume="0.3" playbackrate="2">
-        <xm-video slot="primary" src="340196868"></xm-video>
-        <xm-video slot="secondary" src="340196788"></xm-video>
+        <div slot="primary"></div>
+        <div slot="secondary"></div>
       </xm-player>
     `,
       components: [Player, Controls],
@@ -118,8 +118,8 @@ describe('xm-player with subtitle props', () => {
     page = await newSpecPage({
       html: `
       <xm-player lang="en" showsubtitle="true">
-        <xm-video slot="primary" src="340196868"></xm-video>
-        <xm-video slot="secondary" src="340196788"></xm-video>
+        <div slot="primary"></div>
+        <div slot="secondary"></div>
         <xm-text-track language="de" src="../../static/de.vtt" label="Deutsch" default></xm-text-track>
         <xm-text-track language="en" src="../../static/en.vtt" label="English"></xm-text-track>
       </xm-player>
