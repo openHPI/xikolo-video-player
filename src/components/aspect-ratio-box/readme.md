@@ -16,8 +16,8 @@
 
 ### Used by
 
- - [xm-kaltura](../provider)
- - [xm-vimeo](../video)
+ - [xm-kaltura](../providers/kaltura)
+ - [xm-vimeo](../providers/vimeo)
 
 ### Graph
 ```mermaid

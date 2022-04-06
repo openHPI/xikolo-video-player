@@ -15,10 +15,9 @@ import {
   XmVideo,
   VideoAnalytics,
   HTMLXmVideoElement,
-} from '../../types/common';
+} from '../../../types/common';
 
-import { defaultStatus } from '../../utils/status';
-
+import { defaultStatus } from '../../../utils/status';
 @Component({
   tag: 'xm-kaltura',
   styleUrl: 'kaltura.scss',
