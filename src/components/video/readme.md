@@ -1,7 +1,5 @@
 # xmf-source
 
-
-
 <!-- Auto Generated Below -->
 
 
@@ -121,8 +119,8 @@ Type: `Promise<number>`
 ### Graph
 ```mermaid
 graph TD;
-  xm-video --> xm-aspect-ratio-box
-  style xm-video fill:#f9f,stroke:#333,stroke-width:4px
+  xm-vimeo --> xm-aspect-ratio-box
+  style xm-vimeo fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
