@@ -103,7 +103,7 @@ export namespace Components {
         "positionX"?: number;
         "show": boolean;
     }
-    interface XmVideo {
+    interface XmVimeo {
         "currentTime": () => Promise<number>;
         "getAspectRatio": () => Promise<number>;
         "getDimensions": () => Promise<{ width: number; height: number; }>;
@@ -180,11 +180,11 @@ declare global {
         prototype: HTMLXmTooltipElement;
         new (): HTMLXmTooltipElement;
     };
-    interface HTMLXmVideoElement extends Components.XmVideo, HTMLStencilElement {
+    interface HTMLXmVimeoElement extends Components.XmVimeo, HTMLStencilElement {
     }
-    var HTMLXmVideoElement: {
-        prototype: HTMLXmVideoElement;
-        new (): HTMLXmVideoElement;
+    var HTMLXmVimeoElement: {
+        prototype: HTMLXmVimeoElement;
+        new (): HTMLXmVimeoElement;
     };
     interface HTMLElementTagNameMap {
         "xm-aspect-ratio-box": HTMLXmAspectRatioBoxElement;
@@ -197,7 +197,7 @@ declare global {
         "xm-text-track": HTMLXmTextTrackElement;
         "xm-toggle-control": HTMLXmToggleControlElement;
         "xm-tooltip": HTMLXmTooltipElement;
-        "xm-video": HTMLXmVideoElement;
+        "xm-vimeo": HTMLXmVimeoElement;
     }
 }
 declare namespace LocalJSX {
@@ -309,7 +309,7 @@ declare namespace LocalJSX {
         "positionX"?: number;
         "show"?: boolean;
     }
-    interface XmVideo {
+    interface XmVimeo {
         "onBuffered"?: (event: CustomEvent<any>) => void;
         "onBuffering"?: (event: CustomEvent<any>) => void;
         /**
@@ -346,7 +346,7 @@ declare namespace LocalJSX {
         "xm-text-track": XmTextTrack;
         "xm-toggle-control": XmToggleControl;
         "xm-tooltip": XmTooltip;
-        "xm-video": XmVideo;
+        "xm-vimeo": XmVimeo;
     }
 }
 export { LocalJSX as JSX };
@@ -363,7 +363,7 @@ declare module "@stencil/core" {
             "xm-text-track": LocalJSX.XmTextTrack & JSXBase.HTMLAttributes<HTMLXmTextTrackElement>;
             "xm-toggle-control": LocalJSX.XmToggleControl & JSXBase.HTMLAttributes<HTMLXmToggleControlElement>;
             "xm-tooltip": LocalJSX.XmTooltip & JSXBase.HTMLAttributes<HTMLXmTooltipElement>;
-            "xm-video": LocalJSX.XmVideo & JSXBase.HTMLAttributes<HTMLXmVideoElement>;
+            "xm-vimeo": LocalJSX.XmVimeo & JSXBase.HTMLAttributes<HTMLXmVimeoElement>;
         }
     }
 }
