@@ -31,3 +31,11 @@ interface TimeUpdateDetail {
   seconds: number;
   percent?: number;
 }
+
+interface VideoAnalytics {
+  playEvent: EventEmitter;
+  pauseEvent: EventEmitter;
+  seekedEvent: EventEmitter;
+  endedEvent: EventEmitter;
+  timeUpdateEvent: EventEmitter<TimeUpdateDetail>;
+}

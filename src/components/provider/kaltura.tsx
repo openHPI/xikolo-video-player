@@ -13,6 +13,7 @@ import {
   RatioLoadedDetail,
   TimeUpdateDetail,
   XmVideo,
+  VideoAnalytics,
 } from '../../types/common';
 
 import { defaultStatus } from '../../utils/status';
@@ -21,7 +22,7 @@ import { defaultStatus } from '../../utils/status';
   tag: 'xm-kaltura',
   styleUrl: 'kaltura.scss',
 })
-export class Kaltura implements XmVideo {
+export class Kaltura implements XmVideo, VideoAnalytics {
   player;
 
   playerContainer: HTMLXmAspectRatioBoxElement;
