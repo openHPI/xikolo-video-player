@@ -13,6 +13,7 @@ import {
   RatioLoadedDetail,
   TimeUpdateDetail,
   XmVideo,
+  VideoAnalytics,
 } from '../../types/common';
 
 import { defaultStatus } from '../../utils/status';
@@ -21,7 +22,7 @@ import { defaultStatus } from '../../utils/status';
   tag: 'xm-kaltura',
   styleUrl: 'kaltura.scss',
 })
-export class Kaltura implements XmVideo {
+export class Kaltura implements XmVideo, VideoAnalytics {
   player;
 
   playerContainer: HTMLXmAspectRatioBoxElement;
@@ -57,6 +58,12 @@ export class Kaltura implements XmVideo {
   ratioLoadedEvent: EventEmitter<RatioLoadedDetail>;
 
   @Event({ eventName: 'ended' }) endedEvent: EventEmitter;
+
+  @Event({ eventName: 'play' }) playEvent: EventEmitter;
+
+  @Event({ eventName: 'pause' }) pauseEvent: EventEmitter;
+
+  @Event({ eventName: 'seeked' }) seekedEvent: EventEmitter;
 
   // eslint-disable-next-line @stencil/no-unused-watch
   @Watch('volume')
@@ -113,6 +120,13 @@ export class Kaltura implements XmVideo {
     this.player.addEventListener('ended', (e) => {
       this.endedEvent.emit(e);
     });
+
+    /**
+     * Emit events to tack via lanalytics
+     */
+    this.player.addEventListener('play', (e) => this.playEvent.emit(e));
+    this.player.addEventListener('pause', (e) => this.pauseEvent.emit(e));
+    this.player.addEventListener('seeked', (e) => this.seekedEvent.emit(e));
   }
 
   disconnectedCallback() {

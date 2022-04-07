@@ -237,10 +237,13 @@ declare namespace LocalJSX {
           * Emit when video has ended
          */
         "onEnded"?: (event: CustomEvent<any>) => void;
+        "onPause"?: (event: CustomEvent<any>) => void;
+        "onPlay"?: (event: CustomEvent<any>) => void;
         /**
           * Emit ratio as soon as it is available
          */
         "onRatioLoaded"?: (event: CustomEvent<RatioLoadedDetail>) => void;
+        "onSeeked"?: (event: CustomEvent<any>) => void;
         /**
           * Emit timeupdate event to update player controls with duration This needs to happen once initially and on every video timeupdate
          */

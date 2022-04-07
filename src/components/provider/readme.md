@@ -21,7 +21,10 @@
 | Event         | Description                                                                                                                     | Type                             |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
 | `ended`       | Emit when video has ended                                                                                                       | `CustomEvent<any>`               |
+| `pause`       |                                                                                                                                 | `CustomEvent<any>`               |
+| `play`        |                                                                                                                                 | `CustomEvent<any>`               |
 | `ratioLoaded` | Emit ratio as soon as it is available                                                                                           | `CustomEvent<RatioLoadedDetail>` |
+| `seeked`      |                                                                                                                                 | `CustomEvent<any>`               |
 | `timeupdate`  | Emit timeupdate event to update player controls with duration This needs to happen once initially and on every video timeupdate | `CustomEvent<TimeUpdateDetail>`  |
 
 
