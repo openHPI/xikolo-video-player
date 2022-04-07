@@ -29,6 +29,10 @@ export namespace Components {
         "pause": () => Promise<void>;
         "play": () => Promise<void>;
         /**
+          * URL for a poster to be displayed initially
+         */
+        "poster": string;
+        /**
           * Number resulting from dividing the height by the width of the video. Common ratios are 0.75 (4:3) and 0.5625 (16:9)
          */
         "ratio": number;
@@ -246,6 +250,10 @@ declare namespace LocalJSX {
          */
         "onTimeupdate"?: (event: CustomEvent<TimeUpdateDetail>) => void;
         "partnerId"?: number;
+        /**
+          * URL for a poster to be displayed initially
+         */
+        "poster"?: string;
         /**
           * Number resulting from dividing the height by the width of the video. Common ratios are 0.75 (4:3) and 0.5625 (16:9)
          */
