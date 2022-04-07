@@ -15,7 +15,7 @@ describe('settings-menu', () => {
     page = await newE2EPage();
     await page.setContent(`
     <xm-player lang="en">
-      <xm-video slot="primary" src="340196868"></xm-video>
+      <div slot="primary"></div>
       <xm-text-track language="de" src="../../static/de.vtt" label="Deutsch" default></xm-text-track>
       <xm-text-track language="en" src="../../static/en.vtt" label="English"></xm-text-track>
     </xm-player>
@@ -74,7 +74,7 @@ describe.skip('text track', () => {
       // const loadedEvent = await page.spyOnEvent('texttrack:loaded');
       await page.setContent(`
       <xm-player lang="en">
-        <xm-video slot="primary" src="340196868"></xm-video>
+        <div slot="primary"></div>
         <xm-text-track
             language="de"
             src="../../static/de.vtt"

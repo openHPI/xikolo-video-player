@@ -1,5 +1,9 @@
 import { E2EElement, E2EPage, newE2EPage } from '@stencil/core/testing';
 import { ElementHandle } from 'puppeteer';
+import {
+  getSettingsMenu,
+  getSettingsButton,
+} from '../../utils/testing-helpers';
 
 describe('controls', () => {
   let page: E2EPage;
@@ -8,7 +12,7 @@ describe('controls', () => {
     page = await newE2EPage();
     await page.setContent(`
     <xm-player lang="en">
-      <xm-video slot="primary" src="340196868"></xm-video>
+      <div slot="primary"></div>
     </xm-player>
     `);
   });
@@ -49,7 +53,7 @@ describe('controls', () => {
   });
 
   it('should render the settings menu', async () => {
-    const settingsMenu = await getSettingsMenu();
+    const settingsMenu = await getSettingsMenu(page);
     expect(settingsMenu).toBeTruthy();
   });
 
@@ -67,7 +71,7 @@ describe('controls', () => {
 
   it('should emit the settings menu open event', async () => {
     const player: E2EElement = await page.find('xm-player');
-    const settingsButton: ElementHandle = await getSettingsButton();
+    const settingsButton: ElementHandle = await getSettingsButton(page);
 
     const openMenuEvent = await player.spyOnEvent('control:openSettingsMenu');
 
@@ -187,7 +191,7 @@ describe('controls', () => {
     ).asElement();
 
     const playbackRateValue = await page.evaluate(
-      (playbackRateValueButton) => playbackRateValueButton.textContent,
+      (btn) => btn.textContent,
       playbackRateValueButton
     );
 
@@ -196,7 +200,7 @@ describe('controls', () => {
     );
 
     // Change playback rate value
-    playbackRateValueButton.click();
+    await page.evaluate((btn) => btn.click(), playbackRateValueButton);
     await page.waitForChanges();
     expect(changePlaybackRateEvent).toHaveReceivedEvent();
 
@@ -223,42 +227,6 @@ describe('controls', () => {
     await page.waitForChanges();
     expect(changeVolumeEvent).toHaveReceivedEvent();
   });
-
-  /**
-   * Helper Functions
-   *
-   * There is a bug in the puppeteer page.find() function with multiple piercing selectors.
-   * If it is used to find elements under more than one layer of shadowRoots, it returns the first shadowRoot.
-   *
-   * E.g. await page.find('xm-player >>> xm-controls >>> xm-settings-menu') returns the xm-control
-   *
-   * There is a workaround:
-   * https://github.com/Esri/calcite-components/pull/1103
-   */
-
-  const getSettingsMenu = async (): Promise<ElementHandle> => {
-    const settingsMenu: ElementHandle = (
-      await page.waitForFunction(() =>
-        document
-          .querySelector('xm-player')
-          .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector('xm-settings-menu')
-      )
-    ).asElement();
-    return settingsMenu;
-  };
-
-  const getSettingsButton = async (): Promise<ElementHandle> => {
-    const settingsButton: ElementHandle = (
-      await page.waitForFunction(() =>
-        document
-          .querySelector('body > xm-player')
-          .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector('[aria-label="Settings"]')
-      )
-    ).asElement();
-    return settingsButton;
-  };
 });
 
 describe('controls with text track', () => {
@@ -268,7 +236,7 @@ describe('controls with text track', () => {
     page = await newE2EPage();
     await page.setContent(`
     <xm-player lang="en">
-      <xm-video slot="primary" src="340196868"></xm-video>
+      <div slot="primary"></div>
       <xm-text-track
           language="de"
           src="/static/de.vtt"
