@@ -1,4 +1,5 @@
 import { EventEmitter } from '@stencil/core';
+import { HTMLStencilElement } from '@stencil/core/internal';
 
 interface XmVideo {
   currentTime(): Promise<number>;
@@ -21,6 +22,11 @@ interface XmVideo {
    */
   endedEvent: EventEmitter;
 }
+
+interface HTMLXmVideoElement extends XmVideo, HTMLStencilElement {
+  volume: number;
+}
+
 interface RatioLoadedDetail {
   name: string;
   ratio: number;

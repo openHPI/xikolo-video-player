@@ -14,10 +14,10 @@ import {
   TimeUpdateDetail,
   XmVideo,
   VideoAnalytics,
-} from '../../types/common';
+  HTMLXmVideoElement,
+} from '../../../types/common';
 
-import { defaultStatus } from '../../utils/status';
-
+import { defaultStatus } from '../../../utils/status';
 @Component({
   tag: 'xm-kaltura',
   styleUrl: 'kaltura.scss',

@@ -21,6 +21,7 @@ import {
   VimeoSeekedDetail,
 } from '../../utils/types';
 import { isSmall } from '../../utils/helpers';
+import { HTMLXmVideoElement } from '../../types/common';
 
 @Component({
   tag: 'xm-player',

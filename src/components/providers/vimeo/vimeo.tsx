@@ -11,14 +11,18 @@ import {
 } from '@stencil/core';
 
 import Player from '@vimeo/player';
-import { XmVideo, VideoAnalytics } from '../../types/common';
+import {
+  XmVideo,
+  VideoAnalytics,
+  HTMLXmVideoElement,
+} from '../../../types/common';
 
 @Component({
-  tag: 'xm-video',
-  styleUrl: 'video.scss',
+  tag: 'xm-vimeo',
+  styleUrl: 'vimeo.scss',
   shadow: true,
 })
-export class Video implements XmVideo, VideoAnalytics {
+export class Vimeo implements XmVideo, VideoAnalytics {
   @Element() el: HTMLXmVideoElement;
 
   /**

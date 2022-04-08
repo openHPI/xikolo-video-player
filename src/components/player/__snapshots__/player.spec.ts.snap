@@ -72,8 +72,8 @@ exports[`xm-player with props should render 1`] = `
       </xm-controls>
     </div>
   </mock:shadow-root>
-  <xm-video slot="primary" src="340196868"></xm-video>
-  <xm-video slot="secondary" src="340196788"></xm-video>
+  <div slot="primary"></div>
+  <div slot="secondary"></div>
 </xm-player>
 `;
 
@@ -149,8 +149,8 @@ exports[`xm-player with props should render with playback rate change 1`] = `
       </xm-controls>
     </div>
   </mock:shadow-root>
-  <xm-video slot="primary" src="340196868"></xm-video>
-  <xm-video slot="secondary" src="340196788"></xm-video>
+  <div slot="primary"></div>
+  <div slot="secondary"></div>
 </xm-player>
 `;
 
@@ -226,8 +226,8 @@ exports[`xm-player with props should render with ui language change 1`] = `
       </xm-controls>
     </div>
   </mock:shadow-root>
-  <xm-video slot="primary" src="340196868"></xm-video>
-  <xm-video slot="secondary" src="340196788"></xm-video>
+  <div slot="primary"></div>
+  <div slot="secondary"></div>
 </xm-player>
 `;
 
@@ -310,8 +310,8 @@ exports[`xm-player with subtitle props should render with default text track and
       </xm-controls>
     </div>
   </mock:shadow-root>
-  <xm-video slot="primary" src="340196868"></xm-video>
-  <xm-video slot="secondary" src="340196788"></xm-video>
+  <div slot="primary"></div>
+  <div slot="secondary"></div>
   <xm-text-track default="" label="Deutsch" language="de" src="../../static/de.vtt"></xm-text-track>
   <xm-text-track label="English" language="en" src="../../static/en.vtt"></xm-text-track>
 </xm-player>

@@ -45,7 +45,7 @@ A very basic markup to get started may look like this:
 
 ```html
 <xm-player>
-  <xm-video slot="primary" src="340196868"></xm-video>
+  <xm-vimeo slot="primary" src="340196868"></xm-vimeo>
 </xm-player>
 ```
 

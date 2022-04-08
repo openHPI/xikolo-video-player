@@ -1,7 +1,5 @@
 # xm-kaltura
 
-
-
 <!-- Auto Generated Below -->
 
 
@@ -85,7 +83,7 @@ Type: `Promise<number>`
 
 ### Depends on
 
-- [xm-aspect-ratio-box](../aspect-ratio-box)
+- [xm-aspect-ratio-box](../../aspect-ratio-box)
 
 ### Graph
 ```mermaid
