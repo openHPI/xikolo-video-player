@@ -49,6 +49,11 @@ export class Kaltura implements XmVideo, VideoAnalytics {
 
   @Prop() partnerId: number;
 
+  /**
+   * URL for a poster to be displayed initially
+   */
+  @Prop() poster: string;
+
   @Prop() volume: number;
 
   @Event({ eventName: 'timeupdate' })
@@ -86,6 +91,9 @@ export class Kaltura implements XmVideo, VideoAnalytics {
       partnerId: this.partnerId,
     });
     const mediaInfo = await provider.getMediaConfig({ entryId: this.entryId });
+
+    // Add poster to sources
+    mediaInfo.sources.poster = this.poster;
 
     // See https://github.com/kaltura/playkit-js
     this.player = await Core.loadPlayer();
