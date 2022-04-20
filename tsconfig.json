@@ -12,7 +12,7 @@
     "jsxFactory": "h",
 
     // When all of these are true, we can enable full strict mode
-    "alwaysStrict": false,
+    "alwaysStrict": true,
     "strictNullChecks": false,
     "strictBindCallApply": true,
     "strictFunctionTypes": false,
