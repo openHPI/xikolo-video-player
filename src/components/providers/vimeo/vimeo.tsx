@@ -1,3 +1,4 @@
+/* eslint-disable @stencil/no-unused-watch */
 import {
   Component,
   Element,
@@ -10,7 +11,8 @@ import {
   EventEmitter,
 } from '@stencil/core';
 
-import Player from '@vimeo/player';
+import type Player from '@vimeo/player';
+
 import {
   XmVideo,
   VideoAnalytics,
@@ -23,6 +25,8 @@ import {
   shadow: true,
 })
 export class Vimeo implements XmVideo, VideoAnalytics {
+  callbacks: Function[] = [];
+
   @Element() el: HTMLXmVideoElement;
 
   /**
@@ -84,7 +88,7 @@ export class Vimeo implements XmVideo, VideoAnalytics {
       iframePlaceholder.remove();
     }
 
-    // Initialize Vimeo Player
+    const { default: Player } = await import('@vimeo/player');
     this.player = new Player(this.container, {
       id: this.src,
       controls: false,
@@ -146,6 +150,9 @@ export class Vimeo implements XmVideo, VideoAnalytics {
     // Read aspect ratio from video to configure view box
     this.ratio = await this.getAspectRatio();
 
+    // Call all functions collected before the player was ready
+    this.applyCallbacks();
+
     // This event indicates the video component is loaded and ready
     this.el.dispatchEvent(new CustomEvent('ready'));
   }
@@ -161,49 +168,115 @@ export class Vimeo implements XmVideo, VideoAnalytics {
 
   @Watch('volume')
   async volumeChanged(volume: number) {
-    return this.player.setVolume(volume);
+    if (this.playerAvailable()) {
+      return this.player.setVolume(volume);
+    } else {
+      this.addToCallBacks(() => this.player.setVolume(volume));
+    }
   }
 
+  /**
+   * Call play on the Vimeo player
+   *
+   * If the player is not initialized, it will save the function
+   * so it can be applied once the player is ready.
+   */
   @Method()
   async play() {
-    return this.player.play();
+    if (this.playerAvailable()) {
+      return this.player.play();
+    } else {
+      this.addToCallBacks(() => this.player.play());
+    }
   }
 
+  /**
+   * Call pause on the Vimeo player
+   *
+   * If the player is not initialized, it will save the function
+   * so it can be applied once the player is ready.
+   */
   @Method()
   async pause() {
-    return this.player.pause();
+    if (this.playerAvailable()) {
+      return this.player.pause();
+    } else {
+      this.addToCallBacks(() => this.player.pause());
+    }
   }
 
+  /**
+   * Call seek on the Vimeo player
+   *
+   * If the player is not initialized, it will save the function
+   * so it can be applied once the player is ready.
+   */
   @Method()
-  async getDuration() {
-    return this.player.getDuration();
+  async seek(seconds: number) {
+    if (this.playerAvailable()) {
+      return this.player.setCurrentTime(seconds);
+    } else {
+      this.addToCallBacks(() => this.player.setCurrentTime(seconds));
+    }
   }
 
+  /**
+   * Call getCurrentTime on the Vimeo player
+   *
+   * If the player is not initialized, it will save the function
+   * so it can be applied once the player is ready.
+   */
   @Method()
-  async getDimensions() {
+  async currentTime() {
+    if (this.playerAvailable()) {
+      return this.player.getCurrentTime();
+    } else {
+      this.addToCallBacks(() => this.player.getCurrentTime());
+    }
+  }
+
+  /**
+   * Call setPlaybackRate on the Vimeo player
+   *
+   * If the player is not initialized, it will save the function
+   * so it can be applied once the player is ready.
+   */
+  @Method()
+  async setPlaybackRate(playbackRate: number) {
+    if (this.playerAvailable()) {
+      return this.player.setPlaybackRate(playbackRate);
+    } else {
+      this.addToCallBacks(() => this.player.setPlaybackRate(playbackRate));
+    }
+  }
+
+  private playerAvailable() {
+    return this.player != null;
+  }
+
+  private addToCallBacks(fn: Function) {
+    this.callbacks.push(fn);
+  }
+
+  /**
+   * Calls all functions in the callback array
+   * Empties the queue after that
+   */
+  private applyCallbacks() {
+    this.callbacks.forEach((fn) => {
+      fn();
+    });
+    this.callbacks = [];
+  }
+
+  private async getDimensions() {
     return Promise.all([
       this.player.getVideoWidth(),
       this.player.getVideoHeight(),
     ]).then((dimensions) => ({ width: dimensions[0], height: dimensions[1] }));
   }
 
-  @Method()
-  async getAspectRatio() {
+  private getAspectRatio() {
     return this.getDimensions().then(({ width, height }) => height / width);
-  }
-
-  @Method()
-  async seek(seconds: number) {
-    return this.player.setCurrentTime(seconds);
-  }
-
-  @Method()
-  async currentTime() {
-    return this.player.getCurrentTime();
-  }
-
-  @Method()
-  async setPlaybackRate(playbackRate: number) {
-    return this.player.setPlaybackRate(playbackRate);
   }
 }

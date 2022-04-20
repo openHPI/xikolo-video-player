@@ -31,37 +31,10 @@
 
 ### `currentTime() => Promise<number>`
 
+Call getCurrentTime on the Vimeo player
 
-
-#### Returns
-
-Type: `Promise<number>`
-
-
-
-### `getAspectRatio() => Promise<number>`
-
-
-
-#### Returns
-
-Type: `Promise<number>`
-
-
-
-### `getDimensions() => Promise<{ width: number; height: number; }>`
-
-
-
-#### Returns
-
-Type: `Promise<{ width: number; height: number; }>`
-
-
-
-### `getDuration() => Promise<number>`
-
-
+If the player is not initialized, it will save the function
+so it can be applied once the player is ready.
 
 #### Returns
 
@@ -71,7 +44,10 @@ Type: `Promise<number>`
 
 ### `pause() => Promise<void>`
 
+Call pause on the Vimeo player
 
+If the player is not initialized, it will save the function
+so it can be applied once the player is ready.
 
 #### Returns
 
@@ -81,7 +57,10 @@ Type: `Promise<void>`
 
 ### `play() => Promise<void>`
 
+Call play on the Vimeo player
 
+If the player is not initialized, it will save the function
+so it can be applied once the player is ready.
 
 #### Returns
 
@@ -91,7 +70,10 @@ Type: `Promise<void>`
 
 ### `seek(seconds: number) => Promise<number>`
 
+Call seek on the Vimeo player
 
+If the player is not initialized, it will save the function
+so it can be applied once the player is ready.
 
 #### Returns
 
@@ -101,7 +83,10 @@ Type: `Promise<number>`
 
 ### `setPlaybackRate(playbackRate: number) => Promise<number>`
 
+Call setPlaybackRate on the Vimeo player
 
+If the player is not initialized, it will save the function
+so it can be applied once the player is ready.
 
 #### Returns
 
