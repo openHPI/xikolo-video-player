@@ -108,13 +108,25 @@ export namespace Components {
         "show": boolean;
     }
     interface XmVimeo {
+        /**
+          * Call getCurrentTime on the Vimeo player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
+         */
         "currentTime": () => Promise<number>;
-        "getAspectRatio": () => Promise<number>;
-        "getDimensions": () => Promise<{ width: number; height: number; }>;
-        "getDuration": () => Promise<number>;
+        /**
+          * Call pause on the Vimeo player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
+         */
         "pause": () => Promise<void>;
+        /**
+          * Call play on the Vimeo player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
+         */
         "play": () => Promise<void>;
+        /**
+          * Call seek on the Vimeo player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
+         */
         "seek": (seconds: number) => Promise<number>;
+        /**
+          * Call setPlaybackRate on the Vimeo player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
+         */
         "setPlaybackRate": (playbackRate: number) => Promise<number>;
         /**
           * Vimeo Video ID
