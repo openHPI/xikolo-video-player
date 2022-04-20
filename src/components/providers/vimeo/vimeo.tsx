@@ -1,4 +1,3 @@
-/* eslint-disable @stencil/no-unused-watch */
 import {
   Component,
   Element,
