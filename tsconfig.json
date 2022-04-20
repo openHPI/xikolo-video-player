@@ -8,10 +8,18 @@
     "moduleResolution": "node",
     "module": "esnext",
     "target": "es2017",
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
     "jsx": "react",
-    "jsxFactory": "h"
+    "jsxFactory": "h",
+
+    // When all of these are true, we can enable full strict mode
+    "alwaysStrict": false,
+    "strictNullChecks": false,
+    "strictBindCallApply": false,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "useUnknownInCatchVariables": false
   },
   "include": ["src", "types/jsx.d.ts"],
   "exclude": ["node_modules"]
