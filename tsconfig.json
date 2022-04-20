@@ -19,7 +19,7 @@
     "strictPropertyInitialization": false,
     "noImplicitAny": false,
     "noImplicitThis": false,
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": true
   },
   "include": ["src", "types/jsx.d.ts"],
   "exclude": ["node_modules"]
