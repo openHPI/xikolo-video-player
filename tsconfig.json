@@ -14,7 +14,7 @@
     // When all of these are true, we can enable full strict mode
     "alwaysStrict": false,
     "strictNullChecks": false,
-    "strictBindCallApply": false,
+    "strictBindCallApply": true,
     "strictFunctionTypes": false,
     "strictPropertyInitialization": false,
     "noImplicitAny": false,
