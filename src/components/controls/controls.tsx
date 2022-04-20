@@ -185,14 +185,14 @@ export class Controls {
   }
 
   @bind()
-  private _openSettingsMenu(e: MouseEvent) {
+  private _openSettingsMenu(e: Event) {
     e.stopPropagation();
     this.hidePlaybackRateEvent.emit();
     this.openSettingsMenuEvent.emit();
   }
 
   @bind()
-  private _closeSettingsMenu(e: MouseEvent) {
+  private _closeSettingsMenu(e: Event) {
     e.stopPropagation();
     this.closeSettingsMenuEvent.emit();
   }
@@ -214,14 +214,14 @@ export class Controls {
   }
 
   @bind()
-  private _showPlaybackRate(e: MouseEvent) {
+  private _showPlaybackRate(e: Event) {
     e.stopPropagation();
     this.closeSettingsMenuEvent.emit();
     this.showPlaybackRateEvent.emit();
   }
 
   @bind()
-  private _hidePlaybackRate(e: MouseEvent) {
+  private _hidePlaybackRate(e: Event) {
     e.stopPropagation();
     this.hidePlaybackRateEvent.emit();
   }
