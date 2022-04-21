@@ -1,5 +1,5 @@
 import { textTrackDefault } from './settings';
-import locales from './locales';
+import locales, { KnownLocale } from './locales';
 
 export interface Cue {
   end: number;
@@ -96,8 +96,8 @@ export class TextTrackList {
     );
   }
 
-  public getTextTrackLabels(language) {
-    return [locales[language].textTrackDefault].concat(
+  public getTextTrackLabels(language: KnownLocale): string[] {
+    return [locales[language].textTrackDefault as string].concat(
       this.textTracks.map((meta) => meta.label)
     );
   }

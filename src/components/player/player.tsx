@@ -14,7 +14,7 @@ import {
 import { Mode, Status, defaultStatus } from '../../utils/status';
 import { TextTrackList, WebVTT } from '../../utils/webVTT';
 import { bind } from '../../utils/bind';
-import locales from '../../utils/locales';
+import { isKnownLocale } from '../../utils/locales';
 import {
   ToggleControlProps,
   CueListChangeEventProps,
@@ -501,20 +501,17 @@ export class Player {
 
   @bind()
   public _setLanguage(language: string) {
-    if (!language || !locales[language]) {
-      if (navigator && navigator.language && locales[navigator.language]) {
-        language = navigator.language;
-      } else {
-        const element = this.el.closest('[lang]');
-        if (element) {
-          const lang = element.getAttribute('lang').substr(0, 2);
-          language = locales[lang] ? lang : defaultStatus.language;
-        }
-      }
-    }
+    const candidates: Array<string> = [
+      language,
+      navigator && navigator.language,
+      this.el.closest('[lang]')?.getAttribute('lang')?.substr(0, 2),
+    ];
+
+    const chosen = candidates.find(isKnownLocale);
+
     this.status = {
       ...this.status,
-      language,
+      language: chosen || defaultStatus.language,
     };
   }
 

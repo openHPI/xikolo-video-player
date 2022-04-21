@@ -36,4 +36,12 @@ export enum en {
   changeVolume = 'Control volume',
 }
 
-export default { de, en };
+const locales = { de, en };
+
+export type KnownLocale = keyof typeof locales;
+
+export function isKnownLocale(locale: string): locale is KnownLocale {
+  return Object.keys(locales).includes(locale);
+}
+
+export default locales;
