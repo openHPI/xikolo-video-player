@@ -89,7 +89,9 @@ export class SettingsMenu {
 
   @bind()
   private _getSetting(settingName: string) {
-    const setting = settingList.find((setting) => setting.name === settingName);
+    const setting = settingList.find(
+      (settingItem) => settingItem.name === settingName
+    );
     setting.currentValue = this.status.settings[settingName];
     setting.label = locales[this.status.language][settingName];
     if (settingName === SettingNames.TEXTTRACK) {
@@ -118,7 +120,7 @@ export class SettingsMenu {
   }
 
   @Watch('status')
-  protected _checkSettingsMenuOpenningState(newState, oldState) {
+  protected _checkSettingsMenuOpenningState(newState) {
     if (!newState.openedSettingsMenu) {
       this._onCloseSubmenu();
     }
