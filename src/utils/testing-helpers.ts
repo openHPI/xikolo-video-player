@@ -81,7 +81,9 @@ export async function getPlayButton(page: E2EPage): Promise<ElementHandle> {
  * https://github.com/Esri/calcite-components/pull/1103
  */
 
-export const getSettingsMenu = async (page): Promise<ElementHandle> => {
+export const getSettingsMenu = async (
+  page: E2EPage
+): Promise<ElementHandle> => {
   const settingsMenu: ElementHandle = (
     await page.waitForFunction(() =>
       document
@@ -93,7 +95,9 @@ export const getSettingsMenu = async (page): Promise<ElementHandle> => {
   return settingsMenu;
 };
 
-export const getSettingsButton = async (page): Promise<ElementHandle> => {
+export const getSettingsButton = async (
+  page: E2EPage
+): Promise<ElementHandle> => {
   const settingsButton: ElementHandle = (
     await page.waitForFunction(() =>
       document

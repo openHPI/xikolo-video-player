@@ -121,7 +121,7 @@ export class SettingsMenu {
   }
 
   @Watch('status')
-  protected _checkSettingsMenuOpenningState(newState) {
+  protected _checkSettingsMenuOpeningState(newState: Status) {
     if (!newState.openedSettingsMenu) {
       this._onCloseSubmenu();
     }
