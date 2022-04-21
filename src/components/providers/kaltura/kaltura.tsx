@@ -17,7 +17,6 @@ import {
   HTMLXmVideoElement,
 } from '../../../types/common';
 
-import { defaultStatus } from '../../../utils/status';
 @Component({
   tag: 'xm-kaltura',
   styleUrl: 'kaltura.scss',
@@ -27,10 +26,7 @@ export class Kaltura implements XmVideo, VideoAnalytics {
 
   playerContainer: HTMLXmAspectRatioBoxElement;
 
-  userSettings = {
-    playbackrate: defaultStatus.settings.playbackRate,
-    volume: defaultStatus.volume,
-  };
+  callbacks: Function[] = [];
 
   @Element() el: HTMLXmVideoElement;
 
@@ -70,16 +66,12 @@ export class Kaltura implements XmVideo, VideoAnalytics {
 
   @Event({ eventName: 'seeked' }) seekedEvent: EventEmitter;
 
-  // eslint-disable-next-line @stencil/no-unused-watch
   @Watch('volume')
   async volumeChanged(volume: number) {
-    if (this.player) {
+    if (this.playerAvailable()) {
       return (this.player.volume = volume);
     } else {
-      // Save the volume value in the userSettings property
-      // if the player is not initialized. This function will be
-      // called again once the player is ready.
-      this.userSettings.volume = volume;
+      this.addToCallBacks(() => (this.player.volume = volume));
     }
   }
 
@@ -100,12 +92,6 @@ export class Kaltura implements XmVideo, VideoAnalytics {
 
     this.player.setSources(mediaInfo.sources);
     this.playerContainer.appendChild(this.player.getView());
-
-    /**
-     * Set pre-defined user settings. Use default settings as fallback.
-     */
-    this.setPlaybackRate(this.userSettings.playbackrate);
-    this.volumeChanged(this.userSettings.volume);
 
     this.timeUpdateEvent.emit({
       duration: this.duration,
@@ -135,6 +121,9 @@ export class Kaltura implements XmVideo, VideoAnalytics {
     this.player.addEventListener('play', (e) => this.playEvent.emit(e));
     this.player.addEventListener('pause', (e) => this.pauseEvent.emit(e));
     this.player.addEventListener('seeked', (e) => this.seekedEvent.emit(e));
+
+    // Call all functions collected before the player was ready
+    this.applyCallbacks();
   }
 
   disconnectedCallback() {
@@ -142,52 +131,97 @@ export class Kaltura implements XmVideo, VideoAnalytics {
   }
 
   /**
+   * Call getCurrentTime on the Kaltura player
    *
+   * If the player is not initialized, it will save the function
+   * so it can be applied once the player is ready.
    */
   @Method()
   async currentTime() {
-    return this.player.currentTime;
+    if (this.playerAvailable()) {
+      return this.player.currentTime;
+    } else {
+      this.addToCallBacks(() => this.player.currentTime);
+    }
   }
 
   /**
+   * Call pause on the Kaltura player
    *
+   * If the player is not initialized, it will save the function
+   * so it can be applied once the player is ready.
    */
   @Method()
   async pause() {
-    this.player.pause();
+    if (this.playerAvailable()) {
+      this.player.pause();
+    } else {
+      this.addToCallBacks(() => this.player.pause());
+    }
   }
 
   /**
+   * Call play on the Kaltura player
    *
+   * If the player is not initialized, it will save the function
+   * so it can be applied once the player is ready.
    */
   @Method()
   async play() {
-    this.player.play();
+    if (this.playerAvailable()) {
+      this.player.play();
+    } else {
+      this.addToCallBacks(() => this.player.play());
+    }
   }
 
   /**
+   * Call seek on the Kaltura player
    *
-   * @param seconds
+   * If the player is not initialized, it will save the function
+   * so it can be applied once the player is ready.
    */
   @Method()
   async seek(seconds: number) {
-    return (this.player.currentTime = seconds);
+    if (this.playerAvailable()) {
+      return (this.player.currentTime = seconds);
+    } else {
+      this.addToCallBacks(() => (this.player.currentTime = seconds));
+    }
   }
 
   /**
+   * Call setPlaybackRate on the Kaltura player
    *
-   * @param playbackRate
+   * If the player is not initialized, it will save the function
+   * so it can be applied once the player is ready.
    */
   @Method()
   async setPlaybackRate(playbackRate: number) {
-    if (this.player) {
+    if (this.playerAvailable()) {
       return (this.player.playbackRate = playbackRate);
     } else {
-      // Save the playbackRate value in the userSettings property
-      // if the player is not initialized. This function will be
-      // called again once the player is ready.
-      this.userSettings.playbackrate = playbackRate;
+      this.addToCallBacks(() => (this.player.playbackRate = playbackRate));
     }
+  }
+
+  private playerAvailable() {
+    return this.player != null;
+  }
+
+  private addToCallBacks(fn: Function) {
+    this.callbacks.push(fn);
+  }
+
+  /**
+   * Calls all functions in the callback array
+   * Empties the queue after that
+   */
+  private applyCallbacks() {
+    this.callbacks.forEach((fn) => {
+      fn();
+    });
+    this.callbacks = [];
   }
 
   render() {
