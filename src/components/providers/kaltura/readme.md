@@ -31,7 +31,10 @@
 
 ### `currentTime() => Promise<any>`
 
+Call getCurrentTime on the Kaltura player
 
+If the player is not initialized, it will save the function
+so it can be applied once the player is ready.
 
 #### Returns
 
@@ -41,7 +44,10 @@ Type: `Promise<any>`
 
 ### `pause() => Promise<void>`
 
+Call pause on the Kaltura player
 
+If the player is not initialized, it will save the function
+so it can be applied once the player is ready.
 
 #### Returns
 
@@ -51,7 +57,10 @@ Type: `Promise<void>`
 
 ### `play() => Promise<void>`
 
+Call play on the Kaltura player
 
+If the player is not initialized, it will save the function
+so it can be applied once the player is ready.
 
 #### Returns
 
@@ -61,7 +70,10 @@ Type: `Promise<void>`
 
 ### `seek(seconds: number) => Promise<number>`
 
+Call seek on the Kaltura player
 
+If the player is not initialized, it will save the function
+so it can be applied once the player is ready.
 
 #### Returns
 
@@ -71,7 +83,10 @@ Type: `Promise<number>`
 
 ### `setPlaybackRate(playbackRate: number) => Promise<number>`
 
+Call setPlaybackRate on the Kaltura player
 
+If the player is not initialized, it will save the function
+so it can be applied once the player is ready.
 
 #### Returns
 
