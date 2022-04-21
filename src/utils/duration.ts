@@ -1,3 +1,16 @@
+// left pad a number with zeros
+function lzpad(num: number, digits = 2) {
+  const negative = num < 0;
+
+  let buffer = Math.abs(num).toString();
+
+  if (buffer.length < digits) {
+    buffer = new Array(digits - buffer.length + 1).join('0').concat(buffer);
+  }
+
+  return (negative ? '-' : '') + buffer;
+}
+
 /**
  * Format a duration has HH:MM:SS.
  *
@@ -16,17 +29,4 @@ export function format(seconds: number): string {
   return `${negative ? '-' : ''}${h > 0 ? `${lzpad(h)}:` : ''}${lzpad(
     m
   )}:${lzpad(s)}`;
-}
-
-// left pad a number with zeros
-function lzpad(num: number, digits = 2) {
-  const negative = num < 0;
-
-  let buffer = Math.abs(num).toString();
-
-  if (buffer.length < digits) {
-    buffer = new Array(digits - buffer.length + 1).join('0').concat(buffer);
-  }
-
-  return (negative ? '-' : '') + buffer;
 }
