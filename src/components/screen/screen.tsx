@@ -117,7 +117,7 @@ export class Screen {
    */
   @bind()
   @Listen('resize', { target: 'window' })
-  handleScreenSize(ev: CustomEvent) {
+  handleScreenSize() {
     if (
       (window.innerWidth < 768 && !this.orientationVertical) ||
       (window.innerWidth >= 768 && this.orientationVertical)
