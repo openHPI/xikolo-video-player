@@ -205,8 +205,8 @@ export class Player {
   }
 
   @bind()
-  protected async _timeUpdate(e: CustomEvent) {
-    const { seconds, percent, duration } = e.detail;
+  protected async _timeUpdate(e: Event) {
+    const { seconds, percent, duration } = (e as CustomEvent).detail;
     this._cueUpdate(seconds);
     this.status = {
       ...this.status,
