@@ -20,7 +20,7 @@ Finally, feel free to @tag other developers to ask them to review your work. Alw
 ## Release Notes
 
 ```
-- Add a bullet point for customer-facing release notes as described in https://dev.xikolo.de/gitlab/xikolo/release-notes or "N/A"
+- Add a bullet point for customer-facing release notes as described in https://lab.xikolo.de/xikolo/release-notes or "N/A"
 ```
 
 ## Checklist

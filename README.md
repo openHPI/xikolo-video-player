@@ -17,7 +17,7 @@ The feature set includes more than the usual
 1. Clone the repository
 
 ```bash
-git clone https://dev.xikolo.de/gitlab/xikolo/video-player
+git clone https://lab.xikolo.de/xikolo/video-player
 cd video-player
 ```
 
