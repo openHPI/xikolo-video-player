@@ -19,6 +19,9 @@ export namespace Components {
         "toggleControlButtons": Array<ToggleControlProps>;
     }
     interface XmKaltura {
+        /**
+          * Call getCurrentTime on the Kaltura player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
+         */
         "currentTime": () => Promise<any>;
         /**
           * Duration of the video in seconds
@@ -26,7 +29,13 @@ export namespace Components {
         "duration": number;
         "entryId": string;
         "partnerId": number;
+        /**
+          * Call pause on the Kaltura player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
+         */
         "pause": () => Promise<void>;
+        /**
+          * Call play on the Kaltura player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
+         */
         "play": () => Promise<void>;
         /**
           * URL for a poster to be displayed initially
@@ -37,11 +46,11 @@ export namespace Components {
          */
         "ratio": number;
         /**
-          * @param seconds
+          * Call seek on the Kaltura player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
          */
         "seek": (seconds: number) => Promise<number>;
         /**
-          * @param playbackRate
+          * Call setPlaybackRate on the Kaltura player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
          */
         "setPlaybackRate": (playbackRate: number) => Promise<number>;
         "volume": number;
