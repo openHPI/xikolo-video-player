@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base"],
+  "extends": ["config:base", "schedule:weekly"],
   "labels": ["Internal 🔨"],
   "rangeStrategy": "bump",
   "automerge": true,
@@ -8,5 +8,11 @@
   },
   "lockFileMaintenance": {
     "enabled": true
-  }
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["digest"],
+      "schedule": ["before 3am on the first day of the month"]
+    }
+  ]
 }
