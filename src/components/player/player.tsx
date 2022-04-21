@@ -21,7 +21,7 @@ import {
   VimeoSeekedDetail,
 } from '../../utils/types';
 import { isSmall } from '../../utils/helpers';
-import { HTMLXmVideoElement } from '../../types/common';
+import { HTMLXmVideoElement, XmVideoFunctions } from '../../types/common';
 
 @Component({
   tag: 'xm-player',
@@ -173,12 +173,22 @@ export class Player {
    * @param params
    */
   @bind()
-  private async _invokePlayerFunction(functionName: string, params?: any) {
+  private async _invokePlayerFunction(
+    functionName: keyof XmVideoFunctions,
+    params?: any
+  ) {
     if (!this.primary[functionName]) return;
     return Promise.all([
-      this.primary[functionName].apply(this.primary, params),
+      this.primary[functionName].apply<HTMLXmVideoElement, any, Promise<any>>(
+        this.primary,
+        params
+      ),
       this.secondary
-        ? this.secondary[functionName].apply(this.secondary, params)
+        ? this.secondary[functionName].apply<
+            HTMLXmVideoElement,
+            any,
+            Promise<any>
+          >(this.secondary, params)
         : null,
     ]);
   }
