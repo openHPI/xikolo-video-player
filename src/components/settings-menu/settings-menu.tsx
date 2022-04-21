@@ -14,6 +14,7 @@ import { Status } from '../../utils/status';
 import {
   SettingsSubmenuStatus,
   defaultSettingsSubmenuStatus,
+  Setting,
   SettingNames,
   settingList,
 } from '../../utils/settings';
@@ -88,7 +89,7 @@ export class SettingsMenu {
   }
 
   @bind()
-  private _getSetting(settingName: string) {
+  private _getSetting(settingName: SettingNames): Setting<any> {
     const setting = settingList.find(
       (settingItem) => settingItem.name === settingName
     );
@@ -104,7 +105,7 @@ export class SettingsMenu {
   }
 
   @bind()
-  private _onOpenSubmenu(settingName: string) {
+  private _onOpenSubmenu(settingName: SettingNames) {
     this.submenuStatus = {
       isOpen: true,
       currentSetting: this._getSetting(settingName),

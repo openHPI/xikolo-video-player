@@ -64,7 +64,7 @@ export const Submenu: FunctionalComponent<SubmenuProps> = (props) => {
 
 interface SubmenuToggleButtonProps {
   status: SettingsSubmenuStatus;
-  setting: Setting;
+  setting: Setting<any>;
   onOpenSubmenu: (e: Event) => void;
   onCloseSubmenu: (e: Event) => void;
 }

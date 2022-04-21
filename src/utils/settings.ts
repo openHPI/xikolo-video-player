@@ -7,15 +7,15 @@ export enum SettingNames {
 
 export const textTrackDefault = 'off';
 
-export interface Setting {
+export interface Setting<T> {
   name: string;
   label: string;
-  values: any;
+  values: Array<T>;
   valueLabels?: Array<String>;
-  currentValue: any;
+  currentValue: T;
 }
 
-export const settingList: Array<Setting> = [
+export const settingList: Array<Setting<any>> = [
   {
     name: SettingNames.PLAYBACKRATE,
     label: locales.en.playbackRate,
@@ -33,7 +33,7 @@ export const settingList: Array<Setting> = [
 
 export interface SettingsSubmenuStatus {
   isOpen: boolean;
-  currentSetting: Setting;
+  currentSetting: Setting<any>;
 }
 
 export const defaultSettingsSubmenuStatus: SettingsSubmenuStatus = {
