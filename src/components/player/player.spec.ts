@@ -90,6 +90,13 @@ describe('xm-player with props', () => {
     expect(page.root).toMatchSnapshot();
   });
 
+  it('should fall back to English when the page has an unknown language', async () => {
+    page.rootInstance.lang = 'fr';
+    await page.waitForChanges();
+    expect(page.rootInstance.status.language).toBe('en');
+    expect(page.root).toMatchSnapshot();
+  });
+
   it('should render with playback rate change', async () => {
     page.rootInstance.playbackrate = 1.75;
     await page.waitForChanges();
