@@ -382,7 +382,11 @@ export class Player {
     await this._invokePlayerFunction('seek', [seconds]);
     // Sometimes seeking starts playing the video too.
     // Reset state to current stored player state.
-    this.status.mode === Mode.PLAYING ? this.play() : this.pause();
+    if (this.status.mode === Mode.PLAYING) {
+      this.play();
+    } else {
+      this.pause();
+    }
   }
 
   @bind()
@@ -647,12 +651,20 @@ export class Player {
 
   @bind()
   private toggleFullscreen() {
-    this.status.fullscreen ? this._exitFullscreen() : this._enterFullscreen();
+    if (this.status.fullscreen) {
+      this._exitFullscreen();
+    } else {
+      this._enterFullscreen();
+    }
   }
 
   @bind()
   private toggleMute() {
-    this.status.muted ? this.unmute() : this.mute();
+    if (this.status.muted) {
+      this.unmute();
+    } else {
+      this.mute();
+    }
   }
 
   @bind()
