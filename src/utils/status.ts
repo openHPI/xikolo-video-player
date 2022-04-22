@@ -1,5 +1,6 @@
 import { Cue } from './webVTT';
 import { textTrackDefault } from './settings';
+import { KnownLocale } from './locales';
 
 export enum Mode {
   PLAYING,
@@ -25,7 +26,7 @@ export interface Settings {
 }
 
 export interface Status {
-  language: string;
+  language: KnownLocale;
   duration: number;
   volume: number;
   muted: boolean;

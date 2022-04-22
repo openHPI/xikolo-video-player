@@ -14,14 +14,14 @@ import {
 import { Mode, Status, defaultStatus } from '../../utils/status';
 import { TextTrackList, WebVTT } from '../../utils/webVTT';
 import { bind } from '../../utils/bind';
-import locales from '../../utils/locales';
+import { isKnownLocale } from '../../utils/locales';
 import {
   ToggleControlProps,
   CueListChangeEventProps,
   VimeoSeekedDetail,
 } from '../../utils/types';
 import { isSmall } from '../../utils/helpers';
-import { HTMLXmVideoElement } from '../../types/common';
+import { HTMLXmVideoElement, XmVideoFunctions } from '../../types/common';
 
 @Component({
   tag: 'xm-player',
@@ -173,12 +173,22 @@ export class Player {
    * @param params
    */
   @bind()
-  private async _invokePlayerFunction(functionName: string, params?: any) {
+  private async _invokePlayerFunction(
+    functionName: keyof XmVideoFunctions,
+    params?: any
+  ) {
     if (!this.primary[functionName]) return;
     return Promise.all([
-      this.primary[functionName].apply(this.primary, params),
+      this.primary[functionName].apply<HTMLXmVideoElement, any, Promise<any>>(
+        this.primary,
+        params
+      ),
       this.secondary
-        ? this.secondary[functionName].apply(this.secondary, params)
+        ? this.secondary[functionName].apply<
+            HTMLXmVideoElement,
+            any,
+            Promise<any>
+          >(this.secondary, params)
         : null,
     ]);
   }
@@ -491,20 +501,17 @@ export class Player {
 
   @bind()
   public _setLanguage(language: string) {
-    if (!language || !locales[language]) {
-      if (navigator && navigator.language && locales[navigator.language]) {
-        language = navigator.language;
-      } else {
-        const element = this.el.closest('[lang]');
-        if (element) {
-          const lang = element.getAttribute('lang').substr(0, 2);
-          language = locales[lang] ? lang : defaultStatus.language;
-        }
-      }
-    }
+    const candidates: Array<string> = [
+      language,
+      navigator && navigator.language,
+      this.el.closest('[lang]')?.getAttribute('lang')?.substr(0, 2),
+    ];
+
+    const chosen = candidates.find(isKnownLocale);
+
     this.status = {
       ...this.status,
-      language,
+      language: chosen || defaultStatus.language,
     };
   }
 

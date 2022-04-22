@@ -1,13 +1,16 @@
 import { EventEmitter } from '@stencil/core';
 import { HTMLStencilElement } from '@stencil/core/internal';
 
-interface XmVideo {
+interface XmVideoFunctions {
   currentTime(): Promise<number>;
   pause(): Promise<void>;
   play(): Promise<void>;
   seek(seconds: number): Promise<number>;
   setPlaybackRate(playbackRate: number): Promise<number>;
   volumeChanged(volume: number): Promise<number>;
+}
+
+interface XmVideoEvents {
   /**
    * Emit ratio as soon as it is available
    */
@@ -22,6 +25,8 @@ interface XmVideo {
    */
   endedEvent: EventEmitter;
 }
+
+interface XmVideo extends XmVideoFunctions, XmVideoEvents {}
 
 interface HTMLXmVideoElement extends XmVideo, HTMLStencilElement {
   volume: number;
