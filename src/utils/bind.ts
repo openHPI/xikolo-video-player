@@ -2,7 +2,7 @@
  * https://github.com/NoHomey/bind-decorator/blob/master/src/index.ts
  */
 export function bind() {
-  return function bind<T extends Function>(
+  return function <T extends Function>(
     target: Object,
     property: string,
     descriptor: TypedPropertyDescriptor<T>
