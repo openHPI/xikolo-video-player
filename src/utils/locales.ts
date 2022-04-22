@@ -1,4 +1,4 @@
-export enum de {
+export enum DE {
   // labels
   playbackRate = 'Wiedergabegeschwindigkeit',
   textTrack = 'Untertitel',
@@ -17,7 +17,7 @@ export enum de {
   changeVolume = 'Lautstärke ändern',
 }
 
-export enum en {
+export enum EN {
   // labels
   playbackRate = 'Playback rate',
   textTrack = 'Subtitles',
@@ -36,7 +36,7 @@ export enum en {
   changeVolume = 'Control volume',
 }
 
-const locales = { de, en };
+const locales = { de: DE, en: EN };
 
 export type KnownLocale = keyof typeof locales;
 
