@@ -163,10 +163,22 @@ You can easily export the icons as cleaned SVG from this page.
 ### Deploying
 
 Commits to the `master` branch are automatically compiled and added to the `build` branch.
+Commits on this branch can be used as a target for inclusion in other projects:
 
-This branch can be used as a target for inclusion in other projects:
+```json
+// In package.json:
+{
+  "dependencies": {
+    "@xikolo/video-player2019": "git+https://gitlab+deploy-token-1:secrettoken@lab.xikolo.de/xikolo/video-player#sha"
+  }
+}
+```
+
+Because the video-player project currently has no versioning policy, every commit may break the public interface, so we recommend locking the desired commit already in the `package.json`.
+
+To upgrade to a new version, pick the desired commit SHA from the `build` branch and replace the old one (everything after the `#` symbol) in `package.json`.
+Then, install the new dependency version:
 
 ```bash
-# Example for the Xikolo project (using Yarn)
-yarn upgrade @xikolo/video-player2019
+yarn install
 ```
