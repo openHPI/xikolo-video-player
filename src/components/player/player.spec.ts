@@ -1,4 +1,4 @@
-import { newSpecPage } from '@stencil/core/testing';
+import { SpecPage, newSpecPage } from '@stencil/core/testing';
 import { Player } from './player';
 import { Controls } from '../controls/controls';
 import { defaultStatus, Mode } from '../../utils/status';
@@ -44,8 +44,8 @@ describe('xm-player default functionality', () => {
 });
 
 describe('xm-player with props', () => {
-  let page;
-  let controls;
+  let page: SpecPage;
+  let controls: HTMLXmControlsElement;
 
   it('should build', () => {
     // Vimeo API is not working here, so we can not create/test the video component.
@@ -117,9 +117,9 @@ describe('xm-player with props', () => {
 });
 
 describe('xm-player with subtitle props', () => {
-  let page;
-  let controls;
-  let controlsInstance;
+  let page: SpecPage;
+  let controls: HTMLXmControlsElement;
+  let controlsInstance: Controls;
 
   beforeEach(async () => {
     page = await newSpecPage({
