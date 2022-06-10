@@ -1,15 +1,15 @@
 import { newSpecPage, SpecPage } from '@stencil/core/testing';
 import { Controls } from '../controls/controls';
 import { SettingsMenu } from '../settings-menu/settings-menu';
-import { defaultStatus } from '../../utils/status';
+import { defaultStatus, Status } from '../../utils/status';
 import { TextTrackList, WebVTT } from '../../utils/webVTT';
 import { ToggleControlProps } from '../../utils/types';
 
 describe('xm-controls', () => {
   let page: SpecPage;
   let textTracks: TextTrackList;
-  let controls;
-  let settingsMenu;
+  let controls: HTMLXmControlsElement;
+  let settingsMenu: HTMLXmSettingsMenuElement;
 
   beforeEach(async () => {
     page = await newSpecPage({
@@ -61,12 +61,12 @@ describe('xm-controls', () => {
       valid: true,
       index: 0,
     };
-    const status = {
+    const status: Status = {
       ...controls.status,
       subtitle: {
-        ...controls.status.textTrack,
         enabled: true,
         language: 'de',
+        activeCues: [],
       },
       settings: {
         ...controls.status.settings,
