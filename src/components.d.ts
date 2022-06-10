@@ -144,6 +144,38 @@ export namespace Components {
         "volume": number;
     }
 }
+export interface XmControlsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLXmControlsElement;
+}
+export interface XmKalturaCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLXmKalturaElement;
+}
+export interface XmPlayerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLXmPlayerElement;
+}
+export interface XmSettingsMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLXmSettingsMenuElement;
+}
+export interface XmSliderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLXmSliderElement;
+}
+export interface XmTextTrackCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLXmTextTrackElement;
+}
+export interface XmToggleControlCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLXmToggleControlElement;
+}
+export interface XmVimeoCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLXmVimeoElement;
+}
 declare global {
     interface HTMLXmAspectRatioBoxElement extends Components.XmAspectRatioBox, HTMLStencilElement {
     }
@@ -230,24 +262,24 @@ declare namespace LocalJSX {
         "ratio"?: number;
     }
     interface XmControls {
-        "onControl:changePlaybackRate"?: (event: CustomEvent<any>) => void;
+        "onControl:changePlaybackRate"?: (event: XmControlsCustomEvent<any>) => void;
         /**
           * Event hook for custom control
          */
-        "onControl:changeToggleControlActiveState"?: (event: CustomEvent<ToggleControlProps>) => void;
-        "onControl:changeVolume"?: (event: CustomEvent<any>) => void;
-        "onControl:closeSettingsMenu"?: (event: CustomEvent<any>) => void;
-        "onControl:disableTextTrack"?: (event: CustomEvent<any>) => void;
-        "onControl:enableTextTrack"?: (event: CustomEvent<any>) => void;
-        "onControl:enterFullscreen"?: (event: CustomEvent<any>) => void;
-        "onControl:exitFullscreen"?: (event: CustomEvent<any>) => void;
-        "onControl:hidePlaybackRate"?: (event: CustomEvent<any>) => void;
-        "onControl:mute"?: (event: CustomEvent<any>) => void;
-        "onControl:openSettingsMenu"?: (event: CustomEvent<any>) => void;
-        "onControl:pause"?: (event: CustomEvent<any>) => void;
-        "onControl:play"?: (event: CustomEvent<any>) => void;
-        "onControl:showPlaybackRate"?: (event: CustomEvent<any>) => void;
-        "onControl:unmute"?: (event: CustomEvent<any>) => void;
+        "onControl:changeToggleControlActiveState"?: (event: XmControlsCustomEvent<ToggleControlProps>) => void;
+        "onControl:changeVolume"?: (event: XmControlsCustomEvent<any>) => void;
+        "onControl:closeSettingsMenu"?: (event: XmControlsCustomEvent<any>) => void;
+        "onControl:disableTextTrack"?: (event: XmControlsCustomEvent<any>) => void;
+        "onControl:enableTextTrack"?: (event: XmControlsCustomEvent<any>) => void;
+        "onControl:enterFullscreen"?: (event: XmControlsCustomEvent<any>) => void;
+        "onControl:exitFullscreen"?: (event: XmControlsCustomEvent<any>) => void;
+        "onControl:hidePlaybackRate"?: (event: XmControlsCustomEvent<any>) => void;
+        "onControl:mute"?: (event: XmControlsCustomEvent<any>) => void;
+        "onControl:openSettingsMenu"?: (event: XmControlsCustomEvent<any>) => void;
+        "onControl:pause"?: (event: XmControlsCustomEvent<any>) => void;
+        "onControl:play"?: (event: XmControlsCustomEvent<any>) => void;
+        "onControl:showPlaybackRate"?: (event: XmControlsCustomEvent<any>) => void;
+        "onControl:unmute"?: (event: XmControlsCustomEvent<any>) => void;
         "status"?: Status;
         "textTracks"?: TextTrackList;
         "toggleControlButtons"?: Array<ToggleControlProps>;
@@ -261,18 +293,18 @@ declare namespace LocalJSX {
         /**
           * Emit when video has ended
          */
-        "onEnded"?: (event: CustomEvent<any>) => void;
-        "onPause"?: (event: CustomEvent<any>) => void;
-        "onPlay"?: (event: CustomEvent<any>) => void;
+        "onEnded"?: (event: XmKalturaCustomEvent<any>) => void;
+        "onPause"?: (event: XmKalturaCustomEvent<any>) => void;
+        "onPlay"?: (event: XmKalturaCustomEvent<any>) => void;
         /**
           * Emit ratio as soon as it is available
          */
-        "onRatioLoaded"?: (event: CustomEvent<RatioLoadedDetail>) => void;
-        "onSeeked"?: (event: CustomEvent<any>) => void;
+        "onRatioLoaded"?: (event: XmKalturaCustomEvent<RatioLoadedDetail>) => void;
+        "onSeeked"?: (event: XmKalturaCustomEvent<any>) => void;
         /**
           * Emit timeupdate event to update player controls with duration This needs to happen once initially and on every video timeupdate
          */
-        "onTimeupdate"?: (event: CustomEvent<TimeUpdateDetail>) => void;
+        "onTimeupdate"?: (event: XmKalturaCustomEvent<TimeUpdateDetail>) => void;
         "partnerId"?: number;
         /**
           * URL for a poster to be displayed initially
@@ -286,8 +318,8 @@ declare namespace LocalJSX {
     }
     interface XmPlayer {
         "lang"?: string;
-        "onNotifyActiveCuesUpdated"?: (event: CustomEvent<CueListChangeEventProps>) => void;
-        "onNotifyCueListChanged"?: (event: CustomEvent<CueListChangeEventProps>) => void;
+        "onNotifyActiveCuesUpdated"?: (event: XmPlayerCustomEvent<CueListChangeEventProps>) => void;
+        "onNotifyCueListChanged"?: (event: XmPlayerCustomEvent<CueListChangeEventProps>) => void;
         "playbackrate"?: number;
         "showsubtitle"?: boolean;
         "volume"?: number;
@@ -297,22 +329,22 @@ declare namespace LocalJSX {
         "pip"?: boolean;
     }
     interface XmSettingsMenu {
-        "onSetting:changePlaybackRate"?: (event: CustomEvent<any>) => void;
-        "onSetting:changeTextTrack"?: (event: CustomEvent<any>) => void;
+        "onSetting:changePlaybackRate"?: (event: XmSettingsMenuCustomEvent<any>) => void;
+        "onSetting:changeTextTrack"?: (event: XmSettingsMenuCustomEvent<any>) => void;
         "status"?: Status;
         "textTracks"?: TextTrackList;
     }
     interface XmSlider {
         "duration"?: number;
         "fullscreen"?: boolean;
-        "onSlider:seek"?: (event: CustomEvent<any>) => void;
+        "onSlider:seek"?: (event: XmSliderCustomEvent<any>) => void;
         "progress"?: Progress;
     }
     interface XmTextTrack {
         "default"?: boolean;
         "label"?: string;
         "language"?: string;
-        "onTexttrack:loaded"?: (event: CustomEvent<any>) => void;
+        "onTexttrack:loaded"?: (event: XmTextTrackCustomEvent<any>) => void;
         "src"?: string;
     }
     interface XmToggleControl {
@@ -327,7 +359,7 @@ declare namespace LocalJSX {
         /**
           * Emitted on componentDidLoad. Used in player to init CustomControlButton
          */
-        "onToggleControl:loaded"?: (event: CustomEvent<ToggleControlProps>) => void;
+        "onToggleControl:loaded"?: (event: XmToggleControlCustomEvent<ToggleControlProps>) => void;
         /**
           * Displays tooltip on hover
          */
@@ -339,25 +371,25 @@ declare namespace LocalJSX {
         "show"?: boolean;
     }
     interface XmVimeo {
-        "onBuffered"?: (event: CustomEvent<any>) => void;
-        "onBuffering"?: (event: CustomEvent<any>) => void;
+        "onBuffered"?: (event: XmVimeoCustomEvent<any>) => void;
+        "onBuffering"?: (event: XmVimeoCustomEvent<any>) => void;
         /**
           * Emit when video has ended
          */
-        "onEnded"?: (event: CustomEvent<any>) => void;
-        "onPause"?: (event: CustomEvent<any>) => void;
-        "onPlay"?: (event: CustomEvent<any>) => void;
-        "onProgress"?: (event: CustomEvent<any>) => void;
+        "onEnded"?: (event: XmVimeoCustomEvent<any>) => void;
+        "onPause"?: (event: XmVimeoCustomEvent<any>) => void;
+        "onPlay"?: (event: XmVimeoCustomEvent<any>) => void;
+        "onProgress"?: (event: XmVimeoCustomEvent<any>) => void;
         /**
           * Emit ratio as soon as it is available
          */
-        "onRatioLoaded"?: (event: CustomEvent<any>) => void;
-        "onSeeked"?: (event: CustomEvent<any>) => void;
-        "onSeeking"?: (event: CustomEvent<any>) => void;
+        "onRatioLoaded"?: (event: XmVimeoCustomEvent<any>) => void;
+        "onSeeked"?: (event: XmVimeoCustomEvent<any>) => void;
+        "onSeeking"?: (event: XmVimeoCustomEvent<any>) => void;
         /**
           * Emit timeupdate event to update player controls with duration This needs to happen once initially and on every video timeupdate
          */
-        "onTimeupdate"?: (event: CustomEvent<any>) => void;
+        "onTimeupdate"?: (event: XmVimeoCustomEvent<any>) => void;
         /**
           * Vimeo Video ID
          */
