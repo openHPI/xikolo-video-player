@@ -20,7 +20,12 @@ import {
   CueListChangeEventProps,
   VimeoSeekedDetail,
 } from '../../utils/types';
-import { isSmall } from '../../utils/helpers';
+import {
+  fixDecimalPrecision,
+  hasDefaultScrollingBehavior,
+  isInteractiveElement,
+  isSmall,
+} from '../../utils/helpers';
 import { HTMLXmVideoElement, XmVideoFunctions } from '../../types/common';
 
 @Component({
@@ -323,7 +328,7 @@ export class Player {
     const { key } = e;
     const target = e.target as Element;
 
-    if (this.hasDefaultScrollingBehavior(key, target)) {
+    if (hasDefaultScrollingBehavior(key, target)) {
       // Prevent default scrolling when focusing the player and pressing "Space" or "ArrowUp" / "ArrowDown"
       e.preventDefault();
     }
@@ -333,7 +338,7 @@ export class Player {
       case this.shortcutKeys.Enter:
         // Some interactive elements, e.g. links and buttons, have default behavior for Space and Enter keys.
         // The events still bubble up in this case, but we want to ignore them, when the user was focusing on such an element
-        if (this.isInteractiveElement(target)) return;
+        if (isInteractiveElement(target)) return;
         this.togglePlay();
         break;
       case this.shortcutKeys.ArrowUp:
@@ -669,7 +674,7 @@ export class Player {
 
   @bind()
   private increaseVolume() {
-    let volume = this.fixDecimalPrecision(this.status.volume);
+    let volume = fixDecimalPrecision(this.status.volume);
 
     if (volume < 1) {
       this._setVolume((volume += 0.1));
@@ -678,7 +683,7 @@ export class Player {
 
   @bind()
   private decreaseVolume() {
-    let volume = this.fixDecimalPrecision(this.status.volume);
+    let volume = fixDecimalPrecision(this.status.volume);
 
     if (volume > 0) {
       this._setVolume((volume -= 0.1));
@@ -704,29 +709,5 @@ export class Player {
       progress < this.skippedSeconds ? 0 : progress - this.skippedSeconds;
 
     this.seek(newPosition);
-  }
-
-  private fixDecimalPrecision(number: number): number {
-    return parseFloat(number.toFixed(1));
-  }
-
-  private hasDefaultScrollingBehavior(key: string, target: Element): boolean {
-    return (
-      (key === ' ' && !this.isInteractiveElement(target)) ||
-      key === 'ArrowUp' ||
-      key === 'ArrowDown'
-    );
-  }
-
-  private isInteractiveElement(target: Element): boolean {
-    const intElems = ['A', 'BUTTON'];
-
-    if (intElems.includes(target.tagName)) {
-      return true;
-    }
-    if (target.shadowRoot?.activeElement) {
-      return this.isInteractiveElement(target.shadowRoot.activeElement);
-    }
-    return false;
   }
 }
