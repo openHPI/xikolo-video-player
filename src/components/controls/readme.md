@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property               | Attribute | Description | Type                   | Default     |
-| ---------------------- | --------- | ----------- | ---------------------- | ----------- |
-| `status`               | --        |             | `Status`               | `undefined` |
-| `textTracks`           | --        |             | `TextTrackList`        | `undefined` |
-| `toggleControlButtons` | --        |             | `ToggleControlProps[]` | `undefined` |
+| Property               | Attribute    | Description | Type                   | Default     |
+| ---------------------- | ------------ | ----------- | ---------------------- | ----------- |
+| `slidesSrc`            | `slides-src` |             | `string`               | `undefined` |
+| `status`               | --           |             | `Status`               | `undefined` |
+| `textTracks`           | --           |             | `TextTrackList`        | `undefined` |
+| `toggleControlButtons` | --           |             | `ToggleControlProps[]` | `undefined` |
 
 
 ## Events
@@ -51,7 +52,9 @@
 graph TD;
   xm-controls --> xm-settings-menu
   xm-controls --> xm-slider
+  xm-slider --> xm-slide-preview-bar
   xm-slider --> xm-tooltip
+  xm-slide-preview-bar --> xm-tooltip
   xm-player --> xm-controls
   style xm-controls fill:#f9f,stroke:#333,stroke-width:4px
 ```

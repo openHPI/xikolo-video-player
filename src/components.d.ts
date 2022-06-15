@@ -14,6 +14,7 @@ export namespace Components {
         "ratio": number;
     }
     interface XmControls {
+        "slidesSrc"?: string;
         "status": Status;
         "textTracks": TextTrackList;
         "toggleControlButtons": Array<ToggleControlProps>;
@@ -72,6 +73,7 @@ export namespace Components {
         "playbackrate": number;
         "seek": (seconds: number) => Promise<void>;
         "showsubtitle": boolean;
+        "slidesSrc"?: string;
         /**
           * Sets the mute state false and resets the primary slot video volume.
          */
@@ -86,10 +88,16 @@ export namespace Components {
         "status": Status;
         "textTracks": TextTrackList;
     }
+    interface XmSlidePreviewBar {
+        "duration": number;
+        "onSeek": (seconds: number) => void;
+        "slidesSrc"?: string;
+    }
     interface XmSlider {
         "duration": number;
         "fullscreen": boolean;
         "progress": Progress;
+        "slidesSrc"?: string;
     }
     interface XmTextTrack {
         "default": boolean;
@@ -113,6 +121,7 @@ export namespace Components {
     }
     interface XmTooltip {
         "content": string;
+        "image"?: string;
         "positionX"?: number;
         "show": boolean;
     }
@@ -213,6 +222,12 @@ declare global {
         prototype: HTMLXmSettingsMenuElement;
         new (): HTMLXmSettingsMenuElement;
     };
+    interface HTMLXmSlidePreviewBarElement extends Components.XmSlidePreviewBar, HTMLStencilElement {
+    }
+    var HTMLXmSlidePreviewBarElement: {
+        prototype: HTMLXmSlidePreviewBarElement;
+        new (): HTMLXmSlidePreviewBarElement;
+    };
     interface HTMLXmSliderElement extends Components.XmSlider, HTMLStencilElement {
     }
     var HTMLXmSliderElement: {
@@ -250,6 +265,7 @@ declare global {
         "xm-player": HTMLXmPlayerElement;
         "xm-screen": HTMLXmScreenElement;
         "xm-settings-menu": HTMLXmSettingsMenuElement;
+        "xm-slide-preview-bar": HTMLXmSlidePreviewBarElement;
         "xm-slider": HTMLXmSliderElement;
         "xm-text-track": HTMLXmTextTrackElement;
         "xm-toggle-control": HTMLXmToggleControlElement;
@@ -280,6 +296,7 @@ declare namespace LocalJSX {
         "onControl:play"?: (event: XmControlsCustomEvent<any>) => void;
         "onControl:showPlaybackRate"?: (event: XmControlsCustomEvent<any>) => void;
         "onControl:unmute"?: (event: XmControlsCustomEvent<any>) => void;
+        "slidesSrc"?: string;
         "status"?: Status;
         "textTracks"?: TextTrackList;
         "toggleControlButtons"?: Array<ToggleControlProps>;
@@ -322,6 +339,7 @@ declare namespace LocalJSX {
         "onNotifyCueListChanged"?: (event: XmPlayerCustomEvent<CueListChangeEventProps>) => void;
         "playbackrate"?: number;
         "showsubtitle"?: boolean;
+        "slidesSrc"?: string;
         "volume"?: number;
     }
     interface XmScreen {
@@ -334,11 +352,17 @@ declare namespace LocalJSX {
         "status"?: Status;
         "textTracks"?: TextTrackList;
     }
+    interface XmSlidePreviewBar {
+        "duration"?: number;
+        "onSeek"?: (seconds: number) => void;
+        "slidesSrc"?: string;
+    }
     interface XmSlider {
         "duration"?: number;
         "fullscreen"?: boolean;
         "onSlider:seek"?: (event: XmSliderCustomEvent<any>) => void;
         "progress"?: Progress;
+        "slidesSrc"?: string;
     }
     interface XmTextTrack {
         "default"?: boolean;
@@ -367,6 +391,7 @@ declare namespace LocalJSX {
     }
     interface XmTooltip {
         "content"?: string;
+        "image"?: string;
         "positionX"?: number;
         "show"?: boolean;
     }
@@ -403,6 +428,7 @@ declare namespace LocalJSX {
         "xm-player": XmPlayer;
         "xm-screen": XmScreen;
         "xm-settings-menu": XmSettingsMenu;
+        "xm-slide-preview-bar": XmSlidePreviewBar;
         "xm-slider": XmSlider;
         "xm-text-track": XmTextTrack;
         "xm-toggle-control": XmToggleControl;
@@ -420,6 +446,7 @@ declare module "@stencil/core" {
             "xm-player": LocalJSX.XmPlayer & JSXBase.HTMLAttributes<HTMLXmPlayerElement>;
             "xm-screen": LocalJSX.XmScreen & JSXBase.HTMLAttributes<HTMLXmScreenElement>;
             "xm-settings-menu": LocalJSX.XmSettingsMenu & JSXBase.HTMLAttributes<HTMLXmSettingsMenuElement>;
+            "xm-slide-preview-bar": LocalJSX.XmSlidePreviewBar & JSXBase.HTMLAttributes<HTMLXmSlidePreviewBarElement>;
             "xm-slider": LocalJSX.XmSlider & JSXBase.HTMLAttributes<HTMLXmSliderElement>;
             "xm-text-track": LocalJSX.XmTextTrack & JSXBase.HTMLAttributes<HTMLXmTextTrackElement>;
             "xm-toggle-control": LocalJSX.XmToggleControl & JSXBase.HTMLAttributes<HTMLXmToggleControlElement>;

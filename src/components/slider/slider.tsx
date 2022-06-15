@@ -31,6 +31,8 @@ export class Slider {
 
   @Prop() fullscreen: boolean;
 
+  @Prop() slidesSrc?: string;
+
   @State()
   private hoverStatus: HoverStatus = {
     hover: false,
@@ -61,11 +63,19 @@ export class Slider {
           onMouseEnter={this.toggleTooltip}
           onMouseLeave={this.toggleTooltip}
         />
-        <xm-tooltip
-          show={this.hoverStatus.hover}
-          content={this.hoverStatus.hoverTime}
-          positionX={this.hoverStatus.hoverPositionX}
-        />
+        {this.slidesSrc && this.duration ? (
+          <xm-slide-preview-bar
+            duration={this.duration}
+            slidesSrc={this.slidesSrc}
+            onSeek={this.handleClickOnSlidePreview}
+          />
+        ) : (
+          <xm-tooltip
+            show={this.hoverStatus.hover}
+            content={this.hoverStatus.hoverTime}
+            positionX={this.hoverStatus.hoverPositionX}
+          />
+        )}
       </div>
     );
   }
@@ -104,4 +114,8 @@ export class Slider {
       hover: !this.hoverStatus.hover,
     };
   }
+
+  private handleClickOnSlidePreview = (seconds: number) => {
+    this.seekEvent.emit({ seconds });
+  };
 }

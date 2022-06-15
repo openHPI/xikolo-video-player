@@ -34,6 +34,8 @@ export class Controls {
 
   @Prop({ mutable: true }) textTracks: TextTrackList;
 
+  @Prop() slidesSrc?: string;
+
   @Prop({ mutable: true }) toggleControlButtons: Array<ToggleControlProps>;
 
   @Event({ eventName: 'control:play' }) playEvent: EventEmitter;
@@ -93,6 +95,7 @@ export class Controls {
         <xm-slider
           duration={this.status.duration}
           progress={this.status.progress}
+          slidesSrc={this.slidesSrc}
         />
         <div class="controls__toolbar" data-test-id="controlsToolbar">
           <Control

@@ -66,6 +66,8 @@ export class Player {
 
   @Prop({ attribute: 'lang' }) lang: string;
 
+  @Prop() slidesSrc?: string;
+
   @State()
   status: Status = defaultStatus;
 
@@ -106,6 +108,7 @@ export class Player {
           status={this.status}
           textTracks={this.textTracks}
           toggleControlButtons={this.toggleControlButtons}
+          slidesSrc={this.slidesSrc}
         >
           {this.toggleControlButtons &&
             this.toggleControlButtons.map((button) => (

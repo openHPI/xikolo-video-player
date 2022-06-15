@@ -12,6 +12,7 @@
 | `duration`   | `duration`   |             | `number`   | `undefined` |
 | `fullscreen` | `fullscreen` |             | `boolean`  | `undefined` |
 | `progress`   | --           |             | `Progress` | `undefined` |
+| `slidesSrc`  | `slides-src` |             | `string`   | `undefined` |
 
 
 ## Events
@@ -36,12 +37,15 @@
 
 ### Depends on
 
+- [xm-slide-preview-bar](../slide-preview-bar)
 - [xm-tooltip](../tooltip)
 
 ### Graph
 ```mermaid
 graph TD;
+  xm-slider --> xm-slide-preview-bar
   xm-slider --> xm-tooltip
+  xm-slide-preview-bar --> xm-tooltip
   xm-controls --> xm-slider
   style xm-slider fill:#f9f,stroke:#333,stroke-width:4px
 ```

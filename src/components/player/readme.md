@@ -22,6 +22,7 @@ so that the user can change the volume with the device keys.
 | `lang`         | `lang`         |             | `string`  | `undefined`                           |
 | `playbackrate` | `playbackrate` |             | `number`  | `defaultStatus.settings.playbackRate` |
 | `showsubtitle` | `showsubtitle` |             | `boolean` | `defaultStatus.subtitle.enabled`      |
+| `slidesSrc`    | `slides-src`   |             | `string`  | `undefined`                           |
 | `volume`       | `volume`       |             | `number`  | `defaultStatus.volume`                |
 
 
@@ -130,7 +131,9 @@ graph TD;
   xm-player --> xm-controls
   xm-controls --> xm-settings-menu
   xm-controls --> xm-slider
+  xm-slider --> xm-slide-preview-bar
   xm-slider --> xm-tooltip
+  xm-slide-preview-bar --> xm-tooltip
   style xm-player fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
