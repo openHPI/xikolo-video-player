@@ -181,6 +181,17 @@
         <div id="transcript-text">Feed me</div>
         <br />
         <button>Button</button>
+
+        <h2>Slide Preview</h2>
+        <xm-player
+          slides-src='[{"thumbnail": "https://picsum.photos/360/200/?random=1", "startPosition":10},
+        { "thumbnail":"https://picsum.photos/360/200/?random=2", "startPosition":50},
+        { "thumbnail":"https://picsum.photos/360/200/?random=3", "startPosition":100},
+        { "thumbnail":"https://picsum.photos/360/200/?random=4", "startPosition":200}]'
+        >
+          <xm-vimeo slot="primary" src="647310940"></xm-vimeo>
+          <xm-vimeo slot="secondary" src="647310886"></xm-vimeo>
+        </xm-player>
       </div>
     </section>
     <script>
