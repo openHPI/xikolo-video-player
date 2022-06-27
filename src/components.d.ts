@@ -82,7 +82,6 @@ export namespace Components {
     }
     interface XmScreen {
         "fullscreen": boolean;
-        "pip": boolean;
         "primaryRatio": number;
         "secondaryRatio": number;
     }
@@ -346,7 +345,6 @@ declare namespace LocalJSX {
     }
     interface XmScreen {
         "fullscreen"?: boolean;
-        "pip"?: boolean;
         "primaryRatio"?: number;
         "secondaryRatio"?: number;
     }

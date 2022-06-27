@@ -1,12 +1,4 @@
-import {
-  Component,
-  Element,
-  Prop,
-  h,
-  State,
-  Watch,
-  Listen,
-} from '@stencil/core';
+import { Component, Element, Prop, h, State, Listen } from '@stencil/core';
 
 import Split from 'split.js';
 import { bind } from '../../utils/bind';
@@ -20,13 +12,9 @@ import * as icon from '../../utils/icon';
 export class Screen {
   @Element() el: HTMLXmScreenElement;
 
+  @State() orientationPortrait: boolean;
+
   @Prop() fullscreen: boolean;
-
-  @Prop() pip: boolean;
-
-  @State() pipFlip: boolean = false;
-
-  @State() orientationVertical: boolean;
 
   @Prop() primaryRatio: number;
 
@@ -42,6 +30,10 @@ export class Screen {
     this.split.destroy();
   }
 
+  componentWillLoad() {
+    this.setOrientation();
+  }
+
   componentDidRender() {
     if (this.primaryRatio && this.secondaryRatio) {
       // Initialization of video orientation when rendered
@@ -51,20 +43,14 @@ export class Screen {
 
   render() {
     const clWrp = {
-      landscape: !this.orientationVertical,
-      portrait: this.orientationVertical,
+      landscape: !this.orientationPortrait,
+      portrait: this.orientationPortrait,
       fullscreen: this.fullscreen,
-      pip: this.pip,
-      flip: this.pipFlip,
     };
 
     return (
       <div class={clWrp}>
-        <div
-          class="pane primary"
-          ref={(e) => (this.primary = e)}
-          onMouseEnter={() => this._flipPipLeft()}
-        >
+        <div class="pane primary" ref={(e) => (this.primary = e)}>
           <slot name="primary" />
         </div>
         {/* gutter: Split JS automatically inserts div here  */}
@@ -83,14 +69,12 @@ export class Screen {
 
     // Mobile view is vertical
     if (window.innerWidth < 768) {
-      this.orientationVertical = true;
       this.split = Split([this.primary, this.secondary], {
         sizes: [this.secondaryRatio, this.primaryRatio],
         gutterSize: 6,
         direction: 'vertical',
       });
     } else {
-      this.orientationVertical = false;
       this.split = Split([this.primary, this.secondary], {
         sizes: [this.secondaryRatio, this.primaryRatio],
         gutterSize: 6,
@@ -122,32 +106,39 @@ export class Screen {
   }
 
   /**
-   * This method is triggered by all video child web-components within the componentDidLoad method.
-   * Every time a video child component was rendered the first time and the iframe in it was loaded,
-   * we will get the current ratio of it asynchronously.
-   * @param e CustomEvent
+   * On every window resize event,
+   * the Screen needs to evaluate video arrangements (landscape / portrait).
+   *
+   * If there is a mismatch of these properties,
+   * the Screen will re-render with the correct orientation
    */
   @bind()
   @Listen('resize', { target: 'window' })
   handleScreenSize() {
     if (
-      (window.innerWidth < 768 && !this.orientationVertical) ||
-      (window.innerWidth >= 768 && this.orientationVertical)
+      (this.hasSmallScreenWidth() && !this.orientationPortrait) ||
+      (!this.hasSmallScreenWidth() && this.orientationPortrait)
     ) {
-      this.initSplitScreen();
+      this.setOrientation();
     }
   }
 
-  @Watch('pip')
-  _setupPip(newValue: boolean, oldValue: boolean) {
-    if (newValue || !oldValue) return;
-
-    this.pipFlip = false;
+  /**
+   * Initially and after every window re-size,
+   * the Screen need to evaluate orientation of the video streams
+   *
+   * On smaller screens, they are stacked on top of each other (portrait).
+   * On bigger screens, there they are side by side (landscape).
+   */
+  private setOrientation() {
+    if (this.hasSmallScreenWidth()) {
+      this.orientationPortrait = true;
+    } else {
+      this.orientationPortrait = false;
+    }
   }
 
-  private _flipPipLeft() {
-    if (!this.pip) return;
-
-    this.pipFlip = !this.pipFlip;
+  private hasSmallScreenWidth() {
+    return window.innerWidth < 768;
   }
 }
