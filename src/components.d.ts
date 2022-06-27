@@ -82,7 +82,8 @@ export namespace Components {
     }
     interface XmScreen {
         "fullscreen": boolean;
-        "pip": boolean;
+        "primaryRatio": number;
+        "secondaryRatio": number;
     }
     interface XmSettingsMenu {
         "status": Status;
@@ -344,7 +345,8 @@ declare namespace LocalJSX {
     }
     interface XmScreen {
         "fullscreen"?: boolean;
-        "pip"?: boolean;
+        "primaryRatio"?: number;
+        "secondaryRatio"?: number;
     }
     interface XmSettingsMenu {
         "onSetting:changePlaybackRate"?: (event: XmSettingsMenuCustomEvent<any>) => void;

@@ -1,12 +1,4 @@
-import {
-  Component,
-  Element,
-  Prop,
-  h,
-  State,
-  Watch,
-  Listen,
-} from '@stencil/core';
+import { Component, Element, Prop, h, State, Listen } from '@stencil/core';
 
 import Split from 'split.js';
 import { bind } from '../../utils/bind';
@@ -20,13 +12,13 @@ import * as icon from '../../utils/icon';
 export class Screen {
   @Element() el: HTMLXmScreenElement;
 
+  @State() orientationPortrait: boolean;
+
   @Prop() fullscreen: boolean;
 
-  @Prop() pip: boolean;
+  @Prop() primaryRatio: number;
 
-  @State() pipFlip: boolean = false;
-
-  @State() orientationVertical: boolean;
+  @Prop() secondaryRatio: number;
 
   private split: Split.Instance;
 
@@ -34,67 +26,31 @@ export class Screen {
 
   private secondary: HTMLElement;
 
-  private primaryRatio: number = null;
-
-  private secondaryRatio: number = null;
-
-  /**
-   * Override of gutter creation function for horizontal alignment
-   * See: https://github.com/nathancahill/split/tree/master/packages/splitjs#gutter
-   */
-  private gutter() {
-    const gutter = document.createElement('div');
-    gutter.className = `gutter gutter--horizontal`;
-
-    const handlerTemplate = `
-    <span class="gutter__draggable-area">
-      <span class="gutter__handle">
-        <span class="gutter__arrow gutter__arrow--left">${icon.ArrowLeft}</span>
-        <span class="gutter__arrow gutter__arrow--right">${icon.ArrowRight}</span>
-      </span>
-    </span>
-    `;
-    gutter.innerHTML = handlerTemplate;
-
-    return gutter;
+  disconnectedCallback() {
+    this.split.destroy();
   }
 
-  initSplitScreen() {
-    // Mobile view is vertical
-    if (window.innerWidth < 768) {
-      this.orientationVertical = true;
-      this.split = Split([this.primary, this.secondary], {
-        sizes: [this.secondaryRatio, this.primaryRatio],
-        gutterSize: 6,
-        direction: 'vertical',
-      });
-    } else {
-      this.orientationVertical = false;
-      this.split = Split([this.primary, this.secondary], {
-        sizes: [this.secondaryRatio, this.primaryRatio],
-        gutterSize: 6,
-        direction: 'horizontal',
-        gutter: this.gutter,
-      });
+  componentWillLoad() {
+    this.setOrientation();
+  }
+
+  componentDidRender() {
+    if (this.primaryRatio && this.secondaryRatio) {
+      // Initialization of video orientation when rendered
+      this.initSplitScreen();
     }
   }
 
   render() {
     const clWrp = {
-      landscape: !this.orientationVertical,
-      portrait: this.orientationVertical,
+      landscape: !this.orientationPortrait,
+      portrait: this.orientationPortrait,
       fullscreen: this.fullscreen,
-      pip: this.pip,
-      flip: this.pipFlip,
     };
 
     return (
       <div class={clWrp}>
-        <div
-          class="pane primary"
-          ref={(e) => (this.primary = e)}
-          onMouseEnter={() => this._flipPipLeft()}
-        >
+        <div class="pane primary" ref={(e) => (this.primary = e)}>
           <slot name="primary" />
         </div>
         {/* gutter: Split JS automatically inserts div here  */}
@@ -105,52 +61,84 @@ export class Screen {
     );
   }
 
-  disconnectedCallback() {
-    this.split.destroy();
+  private initSplitScreen() {
+    // reinitialize in case component did rerender
+    if (this.split) {
+      this.split.destroy();
+    }
+
+    // Mobile view is vertical
+    if (window.innerWidth < 768) {
+      this.split = Split([this.primary, this.secondary], {
+        sizes: [this.secondaryRatio, this.primaryRatio],
+        gutterSize: 6,
+        direction: 'vertical',
+      });
+    } else {
+      this.split = Split([this.primary, this.secondary], {
+        sizes: [this.secondaryRatio, this.primaryRatio],
+        gutterSize: 6,
+        direction: 'horizontal',
+        gutter: this.gutter,
+      });
+    }
   }
 
   /**
-   * This method is triggered by all video child web-components within the componentDidLoad method.
-   * Every time a video child component was rendered the first time and the iframe in it was loaded,
-   * we will get the current ratio of it asynchronously.
-   * @param e CustomEvent
+   * Override of gutter creation function for horizontal alignment
+   * See: https://github.com/nathancahill/split/tree/master/packages/splitjs#gutter
+   */
+  private gutter() {
+    const gutter = document.createElement('div');
+    gutter.className = `gutter gutter--horizontal`;
+
+    const handlerTemplate = `
+      <span class="gutter__draggable-area">
+        <span class="gutter__handle">
+          <span class="gutter__arrow gutter__arrow--left">${icon.ArrowLeft}</span>
+          <span class="gutter__arrow gutter__arrow--right">${icon.ArrowRight}</span>
+        </span>
+      </span>
+      `;
+    gutter.innerHTML = handlerTemplate;
+
+    return gutter;
+  }
+
+  /**
+   * On every window resize event,
+   * the Screen needs to evaluate video arrangements (landscape / portrait).
+   *
+   * If there is a mismatch of these properties,
+   * the Screen will re-render with the correct orientation
    */
   @bind()
   @Listen('resize', { target: 'window' })
   handleScreenSize() {
     if (
-      (window.innerWidth < 768 && !this.orientationVertical) ||
-      (window.innerWidth >= 768 && this.orientationVertical)
+      (this.hasSmallScreenWidth() && !this.orientationPortrait) ||
+      (!this.hasSmallScreenWidth() && this.orientationPortrait)
     ) {
-      this.split.destroy();
-      this.initSplitScreen();
+      this.setOrientation();
     }
   }
 
-  @Listen('ratioLoaded')
-  _resizeScreen(e: CustomEvent) {
-    if (e.detail.name === 'primary') {
-      this.primaryRatio = parseFloat(e.detail.ratio) * 100;
+  /**
+   * Initially and after every window re-size,
+   * the Screen need to evaluate orientation of the video streams
+   *
+   * On smaller screens, they are stacked on top of each other (portrait).
+   * On bigger screens, there they are side by side (landscape).
+   */
+  private setOrientation() {
+    if (this.hasSmallScreenWidth()) {
+      this.orientationPortrait = true;
     } else {
-      this.secondaryRatio = parseFloat(e.detail.ratio) * 100;
-    }
-
-    if (this.primaryRatio && this.secondaryRatio) {
-      // Initialization of video orientation when first rendered
-      this.initSplitScreen();
+      this.orientationPortrait = false;
     }
   }
 
-  @Watch('pip')
-  _setupPip(newValue: boolean, oldValue: boolean) {
-    if (newValue || !oldValue) return;
-
-    this.pipFlip = false;
-  }
-
-  private _flipPipLeft() {
-    if (!this.pip) return;
-
-    this.pipFlip = !this.pipFlip;
+  private hasSmallScreenWidth() {
+    return window.innerWidth < 768;
   }
 }

@@ -102,31 +102,3 @@
   position: relative;
   overflow: hidden;
 }
-
-.pip {
-  .gutter {
-    display: none;
-  }
-  .pane {
-    width: 100% !important;
-  }
-
-  .pane.primary {
-    position: absolute;
-    z-index: 2;
-
-    top: 0.2em;
-    right: 0.2em;
-    width: 35% !important;
-
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.75);
-    box-shadow: 0 0 8px rgba(var(--vp-bg-color-rgb), 0.75);
-  }
-}
-
-.pip.flip {
-  .pane.primary {
-    top: auto;
-    bottom: 0.2em;
-  }
-}
