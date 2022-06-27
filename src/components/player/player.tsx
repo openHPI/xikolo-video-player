@@ -96,43 +96,11 @@ export class Player {
   @Event({ eventName: 'notifyActiveCuesUpdated' })
   activeCueUpdateEvent: EventEmitter<CueListChangeEventProps>;
 
-  public render() {
-    return (
-      <div class="player" tabindex="0">
-        {this.hasSecondarySlot ? (
-          // Pass through slots from consumers to subcomponents to cross the Shadow-DOM boundary
-          <xm-screen
-            fullscreen={this.status.fullscreen}
-            primaryRatio={this.primaryRatio}
-            secondaryRatio={this.secondaryRatio}
-          >
-            <slot slot="primary" name="primary"></slot>
-            <slot slot="secondary" name="secondary"></slot>
-          </xm-screen>
-        ) : (
-          <slot slot="primary" name="primary"></slot>
-        )}
-        <xm-controls
-          status={this.status}
-          textTracks={this.textTracks}
-          toggleControlButtons={this.toggleControlButtons}
-          slidesSrc={this.slidesSrc}
-        >
-          {this.toggleControlButtons &&
-            this.toggleControlButtons.map((button) => (
-              // Pass through slots from consumers to subcomponents to cross the Shadow-DOM boundary
-              <slot slot={button.name} name={button.name}></slot>
-            ))}
-        </xm-controls>
-      </div>
-    );
-  }
-
   componentWillLoad() {
     this.hasSecondarySlot = !!this.el.querySelector('[slot="secondary"]');
   }
 
-  public componentDidLoad() {
+  componentDidLoad() {
     this.primary = this.el.querySelector(
       '[slot=primary]'
     ) as HTMLXmVideoElement;
@@ -164,7 +132,7 @@ export class Player {
     this._setLanguage(this.lang);
   }
 
-  public disconnectedCallback() {
+  disconnectedCallback() {
     this.primary.removeEventListener('click', this._click);
     this.primary.removeEventListener('timeupdate', this._timeUpdate);
     this.primary.removeEventListener('ended', this._ended);
@@ -179,6 +147,15 @@ export class Player {
     );
 
     document.removeEventListener('click', this._hideSettingsMenuOnClickOutside);
+  }
+
+  render() {
+    return (
+      <div class="player" tabindex="0">
+        {this.renderPlayer()}
+        {this.renderControls()}
+      </div>
+    );
   }
 
   /**
@@ -730,4 +707,37 @@ export class Player {
 
     this.seek(newPosition);
   }
+
+  private renderPlayer = () => {
+    return this.hasSecondarySlot ? (
+      // Pass through slots from consumers to subcomponents to cross the Shadow-DOM boundary
+      <xm-screen
+        fullscreen={this.status.fullscreen}
+        primaryRatio={this.primaryRatio}
+        secondaryRatio={this.secondaryRatio}
+      >
+        <slot slot="primary" name="primary"></slot>
+        <slot slot="secondary" name="secondary"></slot>
+      </xm-screen>
+    ) : (
+      <slot slot="primary" name="primary"></slot>
+    );
+  };
+
+  private renderControls = () => {
+    return (
+      <xm-controls
+        status={this.status}
+        textTracks={this.textTracks}
+        toggleControlButtons={this.toggleControlButtons}
+        slidesSrc={this.slidesSrc}
+      >
+        {this.toggleControlButtons &&
+          this.toggleControlButtons.map((button) => (
+            // Pass through slots from consumers to subcomponents to cross the Shadow-DOM boundary
+            <slot slot={button.name} name={button.name}></slot>
+          ))}
+      </xm-controls>
+    );
+  };
 }
