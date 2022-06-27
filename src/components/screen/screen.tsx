@@ -28,54 +28,24 @@ export class Screen {
 
   @State() orientationVertical: boolean;
 
+  @Prop() primaryRatio: number;
+
+  @Prop() secondaryRatio: number;
+
   private split: Split.Instance;
 
   private primary: HTMLElement;
 
   private secondary: HTMLElement;
 
-  private primaryRatio: number = null;
-
-  private secondaryRatio: number = null;
-
-  /**
-   * Override of gutter creation function for horizontal alignment
-   * See: https://github.com/nathancahill/split/tree/master/packages/splitjs#gutter
-   */
-  private gutter() {
-    const gutter = document.createElement('div');
-    gutter.className = `gutter gutter--horizontal`;
-
-    const handlerTemplate = `
-    <span class="gutter__draggable-area">
-      <span class="gutter__handle">
-        <span class="gutter__arrow gutter__arrow--left">${icon.ArrowLeft}</span>
-        <span class="gutter__arrow gutter__arrow--right">${icon.ArrowRight}</span>
-      </span>
-    </span>
-    `;
-    gutter.innerHTML = handlerTemplate;
-
-    return gutter;
+  disconnectedCallback() {
+    this.split.destroy();
   }
 
-  initSplitScreen() {
-    // Mobile view is vertical
-    if (window.innerWidth < 768) {
-      this.orientationVertical = true;
-      this.split = Split([this.primary, this.secondary], {
-        sizes: [this.secondaryRatio, this.primaryRatio],
-        gutterSize: 6,
-        direction: 'vertical',
-      });
-    } else {
-      this.orientationVertical = false;
-      this.split = Split([this.primary, this.secondary], {
-        sizes: [this.secondaryRatio, this.primaryRatio],
-        gutterSize: 6,
-        direction: 'horizontal',
-        gutter: this.gutter,
-      });
+  componentDidRender() {
+    if (this.primaryRatio && this.secondaryRatio) {
+      // Initialization of video orientation when rendered
+      this.initSplitScreen();
     }
   }
 
@@ -105,8 +75,50 @@ export class Screen {
     );
   }
 
-  disconnectedCallback() {
-    this.split.destroy();
+  private initSplitScreen() {
+    // reinitialize in case component did rerender
+    if (this.split) {
+      this.split.destroy();
+    }
+
+    // Mobile view is vertical
+    if (window.innerWidth < 768) {
+      this.orientationVertical = true;
+      this.split = Split([this.primary, this.secondary], {
+        sizes: [this.secondaryRatio, this.primaryRatio],
+        gutterSize: 6,
+        direction: 'vertical',
+      });
+    } else {
+      this.orientationVertical = false;
+      this.split = Split([this.primary, this.secondary], {
+        sizes: [this.secondaryRatio, this.primaryRatio],
+        gutterSize: 6,
+        direction: 'horizontal',
+        gutter: this.gutter,
+      });
+    }
+  }
+
+  /**
+   * Override of gutter creation function for horizontal alignment
+   * See: https://github.com/nathancahill/split/tree/master/packages/splitjs#gutter
+   */
+  private gutter() {
+    const gutter = document.createElement('div');
+    gutter.className = `gutter gutter--horizontal`;
+
+    const handlerTemplate = `
+      <span class="gutter__draggable-area">
+        <span class="gutter__handle">
+          <span class="gutter__arrow gutter__arrow--left">${icon.ArrowLeft}</span>
+          <span class="gutter__arrow gutter__arrow--right">${icon.ArrowRight}</span>
+        </span>
+      </span>
+      `;
+    gutter.innerHTML = handlerTemplate;
+
+    return gutter;
   }
 
   /**
@@ -122,21 +134,6 @@ export class Screen {
       (window.innerWidth < 768 && !this.orientationVertical) ||
       (window.innerWidth >= 768 && this.orientationVertical)
     ) {
-      this.split.destroy();
-      this.initSplitScreen();
-    }
-  }
-
-  @Listen('ratioLoaded')
-  _resizeScreen(e: CustomEvent) {
-    if (e.detail.name === 'primary') {
-      this.primaryRatio = parseFloat(e.detail.ratio) * 100;
-    } else {
-      this.secondaryRatio = parseFloat(e.detail.ratio) * 100;
-    }
-
-    if (this.primaryRatio && this.secondaryRatio) {
-      // Initialization of video orientation when first rendered
       this.initSplitScreen();
     }
   }

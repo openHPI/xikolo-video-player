@@ -84,6 +84,10 @@ export class Player {
 
   private hasDefaultTexttrack: boolean = false;
 
+  private primaryRatio: number;
+
+  private secondaryRatio: number;
+
   // Emits list of cues of currently selected language.
   @Event({ eventName: 'notifyCueListChanged' })
   cueListChangeEvent: EventEmitter<CueListChangeEventProps>;
@@ -97,7 +101,11 @@ export class Player {
       <div class="player" tabindex="0">
         {this.hasSecondarySlot ? (
           // Pass through slots from consumers to subcomponents to cross the Shadow-DOM boundary
-          <xm-screen fullscreen={this.status.fullscreen}>
+          <xm-screen
+            fullscreen={this.status.fullscreen}
+            primaryRatio={this.primaryRatio}
+            secondaryRatio={this.secondaryRatio}
+          >
             <slot slot="primary" name="primary"></slot>
             <slot slot="secondary" name="secondary"></slot>
           </xm-screen>
@@ -255,6 +263,15 @@ export class Player {
       };
       // Notifies external listeners that the active cues have changed
       this.activeCueUpdateEvent.emit({ cues });
+    }
+  }
+
+  @Listen('ratioLoaded')
+  _resizeScreen(e: CustomEvent) {
+    if (e.detail.name === 'primary') {
+      this.primaryRatio = parseFloat(e.detail.ratio) * 100;
+    } else {
+      this.secondaryRatio = parseFloat(e.detail.ratio) * 100;
     }
   }
 
