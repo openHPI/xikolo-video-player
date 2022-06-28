@@ -39,15 +39,29 @@ npm test
 
 ## Example usage
 
-### Embedding the video player
-
-A very basic markup to get started may look like this:
+A basic markup to get started may look like this:
 
 ```html
 <xm-player>
-  <xm-vimeo slot="primary" src="340196868"></xm-vimeo>
+  <xm-vimeo src="xxx" name="foo-stream"></xm-vimeo>
+  <xm-presentation reference="foo-stream" name="single" label="Lecturer and slides (picture-in-picture)"><xm-presentation>
 </xm-player>
 ```
+
+## Video Providers
+
+There is support for videos hosted on Vimeo and Kaltura.
+The `name` property must match a `reference` property of a `xm-presentation`.
+
+For more configuration, consult the documention of the `xm-vimeo` or `xm-kaltura` component.
+
+## Presentation modes
+
+At least one `xm-presentation` component is required.
+The `reference` property must match the `name` property of a provider.
+As of now, only one `xm-presentation` is supported so make sure to add the default mode first in the DOM.
+
+For more configuration, consult the documention of the `xm-presentation` component.
 
 ### Branding
 

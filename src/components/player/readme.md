@@ -1,15 +1,14 @@
 # video-player
 
-All css variables are defined in the _vars.scss partial file.
-The namespace for :root or xm-player definitions from the outside is: "--vps-variable-name" eg --vps-slider-color.
-And intern we used: "--vp-variable-name" eg --vp-slider-color.
-Now you can define default values for all used variables. :)
+All css variables are defined in the `_vars.scss` file.
+The namespace for `:root` or `xm-player` definitions from the outside is: `--vps-variable-name` e.g. `--vps-slider-color`.
+And intern we use `--vp-variable-name` e.g. `--vp-slider-color`.
 
-## Special behavior of the video-player
+## Special behavior
 
-Below are listed all the properties of the player. On small screens, the volume slider is hidden to allow more room
-for the short-cut keys. If you set the volume property lower than 1.0, this setting is ignored on small devices,
-so that the user can change the volume with the device keys.
+On small screens, the volume slider is hidden to allow more space for the short-cut keys.
+If the `volume` property is set lower than 1.0, this setting is ignored on small devices.
+The user can still change the volume with the device keys.
 
 
 <!-- Auto Generated Below -->

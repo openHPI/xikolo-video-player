@@ -28,6 +28,8 @@ export class Vimeo implements XmVideo, VideoAnalytics {
 
   @Element() el: HTMLXmVideoElement;
 
+  @Prop() active = false;
+
   /**
    * Vimeo Video ID
    */
@@ -62,6 +64,8 @@ export class Vimeo implements XmVideo, VideoAnalytics {
   @Event({ eventName: 'ratioLoaded' }) ratioLoadedEvent: EventEmitter;
 
   render() {
+    if (!this.active) return;
+
     return (
       <xm-aspect-ratio-box ratio={this.ratio}>
         <div ref={(el) => (this.container = el)}>
@@ -76,6 +80,7 @@ export class Vimeo implements XmVideo, VideoAnalytics {
   }
 
   async componentDidLoad() {
+    if (!this.active) return;
     /**
      * IE11 hack:
      * We need to save the given stencil 'magic' class from our placeholder to

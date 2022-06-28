@@ -49,20 +49,18 @@
       <div id="wrapper">
         <h2>Dual Stream openSAP VTT file</h2>
         <xm-player>
-          <xm-vimeo slot="primary" src="647310940"></xm-vimeo>
-          <xm-vimeo slot="secondary" src="647310886"></xm-vimeo>
+          <xm-vimeo name="lecturer" src="647310940"></xm-vimeo>
+          <xm-vimeo name="slides" src="647310886"></xm-vimeo>
           <xm-text-track
             language="en"
             src="/static/en-openSAP.vtt"
             label="English openSAP"
           ></xm-text-track>
-          <iframe
-            class="vimeo-iframe"
-            src="//player.vimeo.com/video/647311794"
-            frameborder="0"
-            allow="autoplay; fullscreen"
-            allowfullscreen
-          ></iframe>
+          <xm-presentation
+            reference="lecturer,slides"
+            name="dual"
+            label="Lecturer and slides (side-by-side)"
+          ></xm-presentation>
         </xm-player>
 
         <h2><a href="#">Dual Stream with TextTrack</a></h2>
@@ -74,8 +72,8 @@
           showsubtitle="true"
           class="check-cue-events"
         >
-          <xm-vimeo slot="primary" src="264584278"></xm-vimeo>
-          <xm-vimeo slot="secondary" src="340196788"></xm-vimeo>
+          <xm-vimeo name="lecturer" src="264584278"></xm-vimeo>
+          <xm-vimeo name="slides" src="340196788"></xm-vimeo>
           <xm-text-track
             language="de"
             src="/static/de.vtt"
@@ -87,35 +85,17 @@
             label="English"
             default
           ></xm-text-track>
-          <xm-toggle-control
-            slot="toggleControl"
-            name="toggleControl"
-            title="Custom Control"
-          >
-            <svg
-              slot="icon"
-              viewBox="0 0 32 32"
-              role="presentation"
-              focusable="false"
-            >
-              <path
-                d="M0 2h32v4h-32zM0 8h20v4h-20zM0 20h20v4h-20zM0 14h32v4h-32zM0 26h32v4h-32z"
-              ></path>
-            </svg>
-          </xm-toggle-control>
-          <iframe
-            class="vimeo-iframe"
-            src="//player.vimeo.com/video/340196868"
-            frameborder="0"
-            allow="autoplay; fullscreen"
-            allowfullscreen
-          ></iframe>
+          <xm-presentation
+            reference="lecturer,slides"
+            name="dual"
+            label="Lecturer and slides (side-by-side)"
+          ></xm-presentation>
         </xm-player>
 
         <h2><a href="#">Single Stream</a></h2>
 
         <xm-player volume="0">
-          <xm-vimeo slot="primary" src="264584278"></xm-vimeo>
+          <xm-vimeo name="primary" src="264584278"></xm-vimeo>
           <xm-text-track
             language="de"
             src="/static/de.vtt"
@@ -126,13 +106,34 @@
             src="/static/en.vtt"
             label="English"
           ></xm-text-track>
-          <iframe
-            class="vimeo-iframe"
-            src="//player.vimeo.com/video/340196868"
-            frameborder="0"
-            allow="autoplay; fullscreen"
-            allowfullscreen
-          ></iframe>
+          <xm-presentation
+            reference="primary"
+            name="single"
+            label="Single stream"
+          ></xm-presentation>
+        </xm-player>
+
+        <h2>Various presentation modes</h2>
+
+        <xm-player>
+          <xm-vimeo name="lecturer" src="199649621"></xm-vimeo>
+          <xm-vimeo name="slides" src="199649484"></xm-vimeo>
+          <xm-vimeo name="pip" src="199649621"></xm-vimeo>
+          <xm-presentation
+            reference="lecturer,slides"
+            name="dual"
+            label="Lecturer and slides (side-by-side)"
+          ></xm-presentation>
+          <xm-presentation
+            reference="slides"
+            name="single"
+            label="Slides only"
+          ></xm-presentation>
+          <xm-presentation
+            reference="pip"
+            name="pip"
+            label="Lecturer and slides (picture-in-picture)"
+          ></xm-presentation>
         </xm-player>
 
         <h2><a href="#">Toggle control</a></h2>
@@ -155,7 +156,12 @@
               ></path>
             </svg>
           </xm-toggle-control>
-          <xm-vimeo slot="primary" src="264584278"></xm-vimeo>
+          <xm-vimeo name="pip" src="264584278"></xm-vimeo>
+          <xm-presentation
+            reference="pip"
+            name="single"
+            label="Single stream"
+          ></xm-presentation>
         </xm-player>
         <div id="custom-controlled-element">
           Click the custom button to toggle the feature
@@ -164,7 +170,7 @@
         <h2><a href="#">Interactive Transcript</a></h2>
 
         <xm-player id="video-player-with-transcript">
-          <xm-vimeo slot="primary" src="264584278"></xm-vimeo>
+          <xm-vimeo name="pip" src="264584278"></xm-vimeo>
           <xm-text-track
             language="de"
             src="/static/de.vtt"
@@ -176,6 +182,11 @@
             src="/static/en.vtt"
             label="English"
           ></xm-text-track>
+          <xm-presentation
+            reference="pip"
+            name="single"
+            label="Single stream"
+          ></xm-presentation>
         </xm-player>
 
         <div id="transcript-text">Feed me</div>
@@ -189,8 +200,13 @@
         { "thumbnail":"https://picsum.photos/360/200/?random=3", "startPosition":100},
         { "thumbnail":"https://picsum.photos/360/200/?random=4", "startPosition":200}]'
         >
-          <xm-vimeo slot="primary" src="647310940"></xm-vimeo>
-          <xm-vimeo slot="secondary" src="647310886"></xm-vimeo>
+          <xm-vimeo name="lecturer" src="647310940"></xm-vimeo>
+          <xm-vimeo name="slides" src="647310886"></xm-vimeo>
+          <xm-presentation
+            reference="lecturer,slides"
+            name="dual"
+            label="Lecturer and slides (side-by-side)"
+          ></xm-presentation>
         </xm-player>
       </div>
     </section>

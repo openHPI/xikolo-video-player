@@ -20,6 +20,7 @@ export namespace Components {
         "toggleControlButtons": Array<ToggleControlProps>;
     }
     interface XmKaltura {
+        "active": boolean;
         /**
           * Call getCurrentTime on the Kaltura player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
          */
@@ -80,6 +81,20 @@ export namespace Components {
         "unmute": () => Promise<void>;
         "volume": number;
     }
+    interface XmPresentation {
+        /**
+          * Label for button shown in the settings
+         */
+        "label": string;
+        /**
+          * Internal name property Must be unique
+         */
+        "name": string;
+        /**
+          * Comma separated-string to define video sources to load. These are displayed in the specified order in the player.  For example: `reference='source-a,source-b'` will result in a primary video rendering source-a and a secondary screen will render source-b.
+         */
+        "reference": string;
+    }
     interface XmScreen {
         "fullscreen": boolean;
         "primaryRatio": number;
@@ -127,6 +142,7 @@ export namespace Components {
         "show": boolean;
     }
     interface XmVimeo {
+        "active": boolean;
         /**
           * Call getCurrentTime on the Vimeo player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
          */
@@ -211,6 +227,12 @@ declare global {
         prototype: HTMLXmPlayerElement;
         new (): HTMLXmPlayerElement;
     };
+    interface HTMLXmPresentationElement extends Components.XmPresentation, HTMLStencilElement {
+    }
+    var HTMLXmPresentationElement: {
+        prototype: HTMLXmPresentationElement;
+        new (): HTMLXmPresentationElement;
+    };
     interface HTMLXmScreenElement extends Components.XmScreen, HTMLStencilElement {
     }
     var HTMLXmScreenElement: {
@@ -264,6 +286,7 @@ declare global {
         "xm-controls": HTMLXmControlsElement;
         "xm-kaltura": HTMLXmKalturaElement;
         "xm-player": HTMLXmPlayerElement;
+        "xm-presentation": HTMLXmPresentationElement;
         "xm-screen": HTMLXmScreenElement;
         "xm-settings-menu": HTMLXmSettingsMenuElement;
         "xm-slide-preview-bar": HTMLXmSlidePreviewBarElement;
@@ -303,6 +326,7 @@ declare namespace LocalJSX {
         "toggleControlButtons"?: Array<ToggleControlProps>;
     }
     interface XmKaltura {
+        "active"?: boolean;
         /**
           * Duration of the video in seconds
          */
@@ -342,6 +366,20 @@ declare namespace LocalJSX {
         "showsubtitle"?: boolean;
         "slidesSrc"?: string;
         "volume"?: number;
+    }
+    interface XmPresentation {
+        /**
+          * Label for button shown in the settings
+         */
+        "label"?: string;
+        /**
+          * Internal name property Must be unique
+         */
+        "name"?: string;
+        /**
+          * Comma separated-string to define video sources to load. These are displayed in the specified order in the player.  For example: `reference='source-a,source-b'` will result in a primary video rendering source-a and a secondary screen will render source-b.
+         */
+        "reference"?: string;
     }
     interface XmScreen {
         "fullscreen"?: boolean;
@@ -398,6 +436,7 @@ declare namespace LocalJSX {
         "show"?: boolean;
     }
     interface XmVimeo {
+        "active"?: boolean;
         "onBuffered"?: (event: XmVimeoCustomEvent<any>) => void;
         "onBuffering"?: (event: XmVimeoCustomEvent<any>) => void;
         /**
@@ -428,6 +467,7 @@ declare namespace LocalJSX {
         "xm-controls": XmControls;
         "xm-kaltura": XmKaltura;
         "xm-player": XmPlayer;
+        "xm-presentation": XmPresentation;
         "xm-screen": XmScreen;
         "xm-settings-menu": XmSettingsMenu;
         "xm-slide-preview-bar": XmSlidePreviewBar;
@@ -446,6 +486,7 @@ declare module "@stencil/core" {
             "xm-controls": LocalJSX.XmControls & JSXBase.HTMLAttributes<HTMLXmControlsElement>;
             "xm-kaltura": LocalJSX.XmKaltura & JSXBase.HTMLAttributes<HTMLXmKalturaElement>;
             "xm-player": LocalJSX.XmPlayer & JSXBase.HTMLAttributes<HTMLXmPlayerElement>;
+            "xm-presentation": LocalJSX.XmPresentation & JSXBase.HTMLAttributes<HTMLXmPresentationElement>;
             "xm-screen": LocalJSX.XmScreen & JSXBase.HTMLAttributes<HTMLXmScreenElement>;
             "xm-settings-menu": LocalJSX.XmSettingsMenu & JSXBase.HTMLAttributes<HTMLXmSettingsMenuElement>;
             "xm-slide-preview-bar": LocalJSX.XmSlidePreviewBar & JSXBase.HTMLAttributes<HTMLXmSlidePreviewBarElement>;
