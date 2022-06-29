@@ -1,3 +1,5 @@
+jest.mock('../../utils/helpers');
+
 import { SpecPage, newSpecPage } from '@stencil/core/testing';
 import { Player } from './player';
 import { Controls } from '../controls/controls';
@@ -57,12 +59,14 @@ describe('xm-player with props', () => {
     page = await newSpecPage({
       html: `
       <xm-player lang="en" volume="0.3" playbackrate="2">
-        <div slot="primary"></div>
-        <div slot="secondary"></div>
+        <div name="first-source"></div>
+        <div name="second-source"></div>
+        <xm-presentation reference="first-source,second-source" name="dual" label="Dual stream mode></xm-presentation>
       </xm-player>
     `,
       components: [Player, Controls],
     });
+
     // We need to render all child components manually for access to their shadow doms!
     controls = page.root.shadowRoot.querySelector('xm-controls');
     const controlsInstance = new Controls();
@@ -125,14 +129,16 @@ describe('xm-player with subtitle props', () => {
     page = await newSpecPage({
       html: `
       <xm-player lang="en" showsubtitle="true">
-        <div slot="primary"></div>
-        <div slot="secondary"></div>
+        <div name="first-source"></div>
+        <div name="second-source"></div>
         <xm-text-track language="de" src="../../static/de.vtt" label="Deutsch" default></xm-text-track>
         <xm-text-track language="en" src="../../static/en.vtt" label="English"></xm-text-track>
+        <xm-presentation reference="first-source,second-source" name="dual" label="Dual stream mode></xm-presentation>
       </xm-player>
     `,
       components: [Player, Controls],
     });
+
     // We need to render all child components manually for acces to their shadow doms!
     controls = page.root.shadowRoot.querySelector('xm-controls');
     controlsInstance = new Controls();

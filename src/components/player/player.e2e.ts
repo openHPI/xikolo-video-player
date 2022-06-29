@@ -10,7 +10,8 @@ describe('xm-player', () => {
     page = await newE2EPage();
     await page.setContent(`
       <xm-player lang="en">
-        <div slot="primary"></div>
+        <div name="ref"></div>
+        <xm-presentation reference="ref" name="single" label="Generic stream"></xm-presentation>
       </xm-player>
     `);
     player = await page.find('xm-player');
@@ -43,4 +44,64 @@ describe('xm-player', () => {
   // There is an error instead of a proper "playing" state and we are unable to trigger a seek event
   it.todo('should fire pause event if player is playing');
   it.todo('should fire seek event');
+});
+
+describe('xm-player with xm-presentation', () => {
+  describe('configured as single stream', () => {
+    let page: E2EPage;
+    let player: E2EElement;
+
+    beforeEach(async () => {
+      page = await newE2EPage({
+        html: `
+      <xm-player>
+        <div name="ref1"></div>
+        <div name="ref2"></div>
+        <div name="ref3"></div>
+        <xm-presentation reference="ref1" name="single" label="Generic stream"></xm-presentation>
+      </xm-player>
+    `,
+      });
+      player = await page.find('xm-player');
+    });
+
+    it('should only flag one reference as active as single stream', async () => {
+      const activeItems = await player.findAll('[name="ref1"][active="true"]');
+      expect(activeItems.length).toBe(1);
+    });
+
+    test('should not render a resizable screen', async () => {
+      const screen = player.shadowRoot.querySelector('xm-screen');
+      expect(screen).toBeNull();
+    });
+  });
+
+  describe('configured as dual stream', () => {
+    let page: E2EPage;
+    let player: E2EElement;
+
+    beforeEach(async () => {
+      page = await newE2EPage({
+        html: `
+      <xm-player>
+        <div name="ref1"></div>
+        <div name="ref2"></div>
+        <div name="ref3"></div>
+        <xm-presentation reference="ref1,ref2" name="dual" label="Generic stream"></xm-presentation>
+      </xm-player>
+    `,
+      });
+      player = await page.find('xm-player');
+    });
+
+    it('should flag two references as active in dual stream mode', async () => {
+      const activeItems = await player.findAll('[active="true"]');
+      expect(activeItems.length).toBe(2);
+    });
+
+    test('should render a resizable screen', async () => {
+      const resizableScreen = player.shadowRoot.querySelector('xm-screen');
+      expect(resizableScreen).toBeTruthy();
+    });
+  });
 });

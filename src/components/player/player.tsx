@@ -22,6 +22,8 @@ import {
 } from '../../utils/types';
 import {
   fixDecimalPrecision,
+  getPresentationNodes,
+  getVideoElement,
   hasDefaultScrollingBehavior,
   isInteractiveElement,
   isSmall,
@@ -103,7 +105,7 @@ export class Player {
   activeCueUpdateEvent: EventEmitter<CueListChangeEventProps>;
 
   componentWillLoad() {
-    const presentationNodes = this.el.querySelectorAll('xm-presentation');
+    const presentationNodes = getPresentationNodes(this.el);
 
     presentationNodes.forEach((presentation) => {
       const references = presentation.reference.split(',');
@@ -119,12 +121,8 @@ export class Player {
   }
 
   componentDidLoad() {
-    this.primary = this.el.querySelector(
-      '[slot=primary]'
-    ) as HTMLXmVideoElement;
-    this.secondary = this.el.querySelector(
-      '[slot=secondary]'
-    ) as HTMLXmVideoElement;
+    this.primary = getVideoElement(this.el, '[slot=primary]');
+    this.secondary = getVideoElement(this.el, '[slot=secondary]');
 
     this.primary.addEventListener('click', this._click);
     this.primary.addEventListener('timeupdate', this._timeUpdate);
@@ -764,7 +762,7 @@ export class Player {
     const video = this.el.querySelector(
       `[name='${ref}']`
     ) as HTMLXmVideoElement;
-    video.slot = slot;
+    video.setAttribute('slot', slot);
     video.setAttribute('active', 'true');
   };
 
