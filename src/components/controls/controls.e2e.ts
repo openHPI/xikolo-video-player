@@ -2,7 +2,6 @@ import { E2EElement, E2EPage, newE2EPage } from '@stencil/core/testing';
 import { ElementHandle } from 'puppeteer';
 import {
   getSettingsMenu,
-  getSettingsButton,
   getControlsElement,
 } from '../../utils/testing-helpers';
 
@@ -72,7 +71,10 @@ describe('controls', () => {
 
   it('should emit the settings menu open event', async () => {
     const player: E2EElement = await page.find('xm-player');
-    const settingsButton: ElementHandle = await getSettingsButton(page);
+    const settingsButton: ElementHandle = await getControlsElement(
+      page,
+      '[aria-label="Settings"]'
+    );
 
     const openMenuEvent = await player.spyOnEvent('control:openSettingsMenu');
 

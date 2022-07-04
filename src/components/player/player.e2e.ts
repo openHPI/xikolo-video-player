@@ -1,6 +1,6 @@
 import { E2EElement, E2EPage, newE2EPage } from '@stencil/core/testing';
 import { ElementHandle } from 'puppeteer';
-import { getPlayButton } from '../../utils/testing-helpers';
+import { getControlsElement } from '../../utils/testing-helpers';
 
 describe('xm-player', () => {
   let page: E2EPage;
@@ -29,7 +29,10 @@ describe('xm-player', () => {
   it('should fire play event', async () => {
     const playEvent = await player.spyOnEvent('control:play');
 
-    const playButton: ElementHandle = await getPlayButton(page);
+    const playButton: ElementHandle = await getControlsElement(
+      page,
+      '[aria-label="Play"]'
+    );
 
     expect(playButton).toBeTruthy();
 
