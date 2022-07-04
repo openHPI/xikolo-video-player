@@ -3,6 +3,7 @@ import { ElementHandle } from 'puppeteer';
 import {
   getSettingsMenu,
   getSettingsButton,
+  getControlsElement,
 } from '../../utils/testing-helpers';
 
 describe('controls', () => {
@@ -29,7 +30,7 @@ describe('controls', () => {
     const controls: E2EElement = await page.find('xm-player >>> xm-controls');
     const controlsToolbar: HTMLElement = controls.shadowRoot.querySelector(
       '[data-test-id="controlsToolbar"]'
-    );
+    )!;
     expect(controlsToolbar).toBeTruthy();
   });
 
@@ -40,7 +41,7 @@ describe('controls', () => {
     const controls: E2EElement = await page.find('xm-player >>> xm-controls');
     const playButton: HTMLElement = controls.shadowRoot.querySelector(
       '[aria-label="Play"]'
-    );
+    )!;
     expect(playButton).toBeTruthy();
   });
 
@@ -48,7 +49,7 @@ describe('controls', () => {
     const controls: E2EElement = await page.find('xm-player >>> xm-controls');
     const settingsButton: HTMLElement = controls.shadowRoot.querySelector(
       '[aria-label="Settings"]'
-    );
+    )!;
     expect(settingsButton).toBeTruthy();
   });
 
@@ -61,7 +62,7 @@ describe('controls', () => {
     const controls: E2EElement = await page.find('xm-player >>> xm-controls');
     const texTrackButton: HTMLElement = controls.shadowRoot.querySelector(
       '[aria-label="Enable subtitles"]'
-    );
+    )!;
     expect(texTrackButton).toBeFalsy();
   });
 
@@ -83,14 +84,7 @@ describe('controls', () => {
 
   it('should emit the mute and unmute events', async () => {
     const player: E2EElement = await page.find('xm-player');
-    const muteButton: ElementHandle = (
-      await page.waitForFunction(() =>
-        document
-          .querySelector('xm-player')
-          .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector('[aria-label="Mute"]')
-      )
-    ).asElement();
+    const muteButton = await getControlsElement(page, '[aria-label="Mute"]');
 
     const muteEvent = await player.spyOnEvent('control:mute');
 
@@ -109,14 +103,10 @@ describe('controls', () => {
 
   it('should emit the enter fullscreen event', async () => {
     const player: E2EElement = await page.find('xm-player');
-    const fullscreenButton: ElementHandle = (
-      await page.waitForFunction(() =>
-        document
-          .querySelector('body > xm-player')
-          .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector('[aria-label="Enter full screen"]')
-      )
-    ).asElement();
+    const fullscreenButton = await getControlsElement(
+      page,
+      '[aria-label="Enter full screen"]'
+    );
 
     const enterFullscreenEvent = await player.spyOnEvent(
       'control:enterFullscreen'
@@ -136,14 +126,10 @@ describe('controls', () => {
 
   it('should emit the show and hide playback rate events', async () => {
     const player: E2EElement = await page.find('xm-player');
-    const playbackRateButton: ElementHandle = (
-      await page.waitForFunction(() =>
-        document
-          .querySelector('xm-player')
-          .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector('[aria-label="Playback rate"]')
-      )
-    ).asElement();
+    const playbackRateButton = await getControlsElement(
+      page,
+      '[aria-label="Playback rate"]'
+    );
 
     const showPlaybackRateEvent = await player.spyOnEvent(
       'control:showPlaybackRate'
@@ -167,28 +153,20 @@ describe('controls', () => {
   it('should emit the change playback rate event', async () => {
     const player: E2EElement = await page.find('xm-player');
 
-    const playbackRateButton: ElementHandle = (
-      await page.waitForFunction(() =>
-        document
-          .querySelector('xm-player')
-          .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector('[aria-label="Playback rate"]')
-      )
-    ).asElement();
+    const playbackRateButton = await getControlsElement(
+      page,
+      '[aria-label="Playback rate"]'
+    );
 
     // Open playback rate menu
     playbackRateButton.click();
     await page.waitForChanges();
 
     // Select first playback rate value on the list and save value
-    const playbackRateValueButton: ElementHandle = (
-      await page.waitForFunction(() =>
-        document
-          .querySelector('xm-player')
-          .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector('.controls__playback-rate__button')
-      )
-    ).asElement();
+    const playbackRateValueButton = await getControlsElement(
+      page,
+      '.controls__playback-rate__button'
+    );
 
     const playbackRateValue = await page.evaluate(
       (btn) => btn.textContent,
@@ -212,14 +190,10 @@ describe('controls', () => {
   it('should emit the change volume event', async () => {
     const player: E2EElement = await page.find('xm-player');
 
-    const volumeSlider: ElementHandle = (
-      await page.waitForFunction(() =>
-        document
-          .querySelector('xm-player')
-          .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector('[aria-label="Control volume"]')
-      )
-    ).asElement();
+    const volumeSlider = await getControlsElement(
+      page,
+      '[aria-label="Control volume"]'
+    );
     const changeVolumeEvent = await player.spyOnEvent('control:changeVolume');
 
     // Click volume slider to change volume
@@ -255,7 +229,7 @@ describe('controls with text track', () => {
     const controls: E2EElement = await page.find('xm-player >>> xm-controls');
     const texTrackButton: HTMLElement = controls.shadowRoot.querySelector(
       '[aria-label="Enable subtitles"]'
-    );
+    )!;
     expect(texTrackButton).toBeTruthy();
   });
 
@@ -264,14 +238,10 @@ describe('controls with text track', () => {
    */
   it('should emit the enable and disable text track events', async () => {
     const player: E2EElement = await page.find('xm-player');
-    const textTrackButton: ElementHandle = (
-      await page.waitForFunction(() =>
-        document
-          .querySelector('xm-player')
-          .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector('[aria-label="Enable subtitles"]')
-      )
-    ).asElement();
+    const textTrackButton = await getControlsElement(
+      page,
+      '[aria-label="Enable subtitles"]'
+    );
 
     const enableTextTrackEvent = await player.spyOnEvent(
       'control:enableTextTrack'
