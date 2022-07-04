@@ -24,14 +24,14 @@ export async function getSettingsMenuElement(
     await page.waitForFunction(
       (shadowDomSelector: string) =>
         document
-          .querySelector('xm-player')
-          .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector('xm-settings-menu')
-          .shadowRoot.querySelector(shadowDomSelector),
+          .querySelector('xm-player')!
+          .shadowRoot?.querySelector('xm-controls')!
+          .shadowRoot!.querySelector('xm-settings-menu')!
+          .shadowRoot!.querySelector(shadowDomSelector)!,
       {},
       [selector]
     )
-  ).asElement();
+  ).asElement()!;
 }
 
 export async function getControlsElement(
@@ -42,13 +42,13 @@ export async function getControlsElement(
     await page.waitForFunction(
       (shadowDomSelector: string) =>
         document
-          .querySelector('xm-player')
-          .shadowRoot.querySelector('xm-controls')
-          .shadowRoot.querySelector(shadowDomSelector),
+          .querySelector('xm-player')!
+          .shadowRoot!.querySelector('xm-controls')!
+          .shadowRoot!.querySelector(shadowDomSelector)!,
       {},
       [selector]
     )
-  ).asElement();
+  ).asElement()!;
 }
 
 /**
@@ -64,11 +64,11 @@ export async function getPlayButton(page: E2EPage): Promise<ElementHandle> {
   return (
     await page.waitForFunction(() =>
       document
-        .querySelector('xm-player')
-        .shadowRoot.querySelector('xm-controls')
-        .shadowRoot.querySelector('[aria-label="Play"]')
+        .querySelector('xm-player')!
+        .shadowRoot!.querySelector('xm-controls')!
+        .shadowRoot!.querySelector('[aria-label="Play"]')
     )
-  ).asElement();
+  ).asElement()!;
 }
 
 /**
@@ -87,11 +87,11 @@ export const getSettingsMenu = async (
   const settingsMenu: ElementHandle = (
     await page.waitForFunction(() =>
       document
-        .querySelector('xm-player')
-        .shadowRoot.querySelector('xm-controls')
-        .shadowRoot.querySelector('xm-settings-menu')
+        .querySelector('xm-player')!
+        .shadowRoot!.querySelector('xm-controls')!
+        .shadowRoot!.querySelector('xm-settings-menu')
     )
-  ).asElement();
+  ).asElement()!;
   return settingsMenu;
 };
 
@@ -101,10 +101,10 @@ export const getSettingsButton = async (
   const settingsButton: ElementHandle = (
     await page.waitForFunction(() =>
       document
-        .querySelector('body > xm-player')
-        .shadowRoot.querySelector('xm-controls')
-        .shadowRoot.querySelector('[aria-label="Settings"]')
+        .querySelector('body > xm-player')!
+        .shadowRoot!.querySelector('xm-controls')!
+        .shadowRoot!.querySelector('[aria-label="Settings"]')
     )
-  ).asElement();
+  ).asElement()!;
   return settingsButton;
 };
