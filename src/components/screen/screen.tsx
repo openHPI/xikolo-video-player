@@ -50,11 +50,11 @@ export class Screen {
 
     return (
       <div class={clWrp}>
-        <div class="pane primary" ref={(e) => (this.primary = e)}>
+        <div class="pane primary" ref={(e) => (this.primary = e!)}>
           <slot name="primary" />
         </div>
         {/* gutter: Split JS automatically inserts div here  */}
-        <div class="pane secondary" ref={(e) => (this.secondary = e)}>
+        <div class="pane secondary" ref={(e) => (this.secondary = e!)}>
           <slot name="secondary" />
         </div>
       </div>
