@@ -30,6 +30,8 @@ export class Kaltura implements XmVideo, VideoAnalytics {
 
   @Element() el: HTMLXmVideoElement;
 
+  @Prop() active = false;
+
   /**
    * Number resulting from dividing the height by the width of the
    * video. Common ratios are 0.75 (4:3) and 0.5625 (16:9)
@@ -76,6 +78,8 @@ export class Kaltura implements XmVideo, VideoAnalytics {
   }
 
   async componentDidLoad() {
+    if (!this.active) return;
+
     const { Core, Provider } = await import('./kaltura-module');
 
     // See https://github.com/kaltura/playkit-js-providers
@@ -229,6 +233,8 @@ export class Kaltura implements XmVideo, VideoAnalytics {
   }
 
   render() {
+    if (!this.active) return;
+
     return (
       <xm-aspect-ratio-box
         ref={(e) => (this.playerContainer = e)}

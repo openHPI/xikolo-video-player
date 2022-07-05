@@ -12,7 +12,8 @@ describe('controls', () => {
     page = await newE2EPage();
     await page.setContent(`
     <xm-player lang="en">
-      <div slot="primary"></div>
+      <div name="pip"></div>
+      <xm-presentation reference="pip" name="single" label="Stream label"></xm-presentation>
     </xm-player>
     `);
   });
@@ -212,14 +213,15 @@ describe('controls with text track', () => {
     page = await newE2EPage();
     await page.setContent(`
     <xm-player lang="en">
-      <div slot="primary"></div>
-      <xm-text-track
-          language="de"
-          src="/static/de.vtt"
-          label="Deutsch"
-          default
-        >
-      </xm-text-track>
+    <div name="ref"></div>
+    <xm-presentation reference="ref" name="single" label="Generic stream"></xm-presentation>
+    <xm-text-track
+    language="de"
+    src="/static/de.vtt"
+    label="Deutsch"
+    default
+    >
+    </xm-text-track>
     </xm-player>
     `);
   });

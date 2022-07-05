@@ -5,10 +5,11 @@
 
 ## Properties
 
-| Property | Attribute | Description    | Type     | Default     |
-| -------- | --------- | -------------- | -------- | ----------- |
-| `src`    | `src`     | Vimeo Video ID | `number` | `undefined` |
-| `volume` | `volume`  |                | `number` | `undefined` |
+| Property | Attribute | Description    | Type      | Default     |
+| -------- | --------- | -------------- | --------- | ----------- |
+| `active` | `active`  |                | `boolean` | `false`     |
+| `src`    | `src`     | Vimeo Video ID | `number`  | `undefined` |
+| `volume` | `volume`  |                | `number`  | `undefined` |
 
 
 ## Events

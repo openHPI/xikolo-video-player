@@ -26,7 +26,9 @@ interface XmVideoEvents {
   endedEvent: EventEmitter;
 }
 
-interface XmVideo extends XmVideoFunctions, XmVideoEvents {}
+interface XmVideo extends XmVideoFunctions, XmVideoEvents {
+  active: boolean;
+}
 
 interface HTMLXmVideoElement extends XmVideo, HTMLStencilElement {
   volume: number;
@@ -49,4 +51,8 @@ interface VideoAnalytics {
   seekedEvent: EventEmitter;
   endedEvent: EventEmitter;
   timeUpdateEvent: EventEmitter<TimeUpdateDetail>;
+}
+
+interface Presentations {
+  [key: string]: { refs: string[]; label: string };
 }

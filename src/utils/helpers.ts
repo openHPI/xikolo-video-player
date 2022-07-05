@@ -1,3 +1,5 @@
+import { HTMLXmVideoElement } from '../types/common';
+
 /*
   Breakpoint test to check if device is small
  */
@@ -31,3 +33,11 @@ export const hasDefaultScrollingBehavior = (
     key === 'ArrowDown'
   );
 };
+
+export const getPresentationNodes = (el: Element) =>
+  el.querySelectorAll('xm-presentation');
+
+export const getVideoElement = (
+  el: Element,
+  selector: string
+): HTMLXmVideoElement => el.querySelector(selector);

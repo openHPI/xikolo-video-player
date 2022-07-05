@@ -22,11 +22,17 @@ import {
 } from '../../utils/types';
 import {
   fixDecimalPrecision,
+  getPresentationNodes,
+  getVideoElement,
   hasDefaultScrollingBehavior,
   isInteractiveElement,
   isSmall,
 } from '../../utils/helpers';
-import { HTMLXmVideoElement, XmVideoFunctions } from '../../types/common';
+import {
+  HTMLXmVideoElement,
+  Presentations,
+  XmVideoFunctions,
+} from '../../types/common';
 
 @Component({
   tag: 'xm-player',
@@ -74,19 +80,21 @@ export class Player {
   @State()
   private toggleControlButtons: Array<ToggleControlProps>;
 
+  @State() activePresentationMode: string;
+
   private primary: HTMLXmVideoElement | undefined;
 
   private secondary: HTMLXmVideoElement | undefined;
 
   private textTracks: TextTrackList = new TextTrackList();
 
-  private hasSecondarySlot: boolean;
-
   private hasDefaultTexttrack: boolean = false;
 
   private primaryRatio: number;
 
   private secondaryRatio: number;
+
+  private presentations: Presentations = {};
 
   // Emits list of cues of currently selected language.
   @Event({ eventName: 'notifyCueListChanged' })
@@ -97,20 +105,29 @@ export class Player {
   activeCueUpdateEvent: EventEmitter<CueListChangeEventProps>;
 
   componentWillLoad() {
-    this.hasSecondarySlot = !!this.el.querySelector('[slot="secondary"]');
+    const presentationNodes = getPresentationNodes(this.el);
+
+    presentationNodes.forEach((presentation) => {
+      const references = presentation.reference.split(',');
+      const content = { refs: references, label: presentation.label };
+      Object.defineProperty(this.presentations, presentation.name, {
+        value: content,
+      });
+    });
+
+    this.activePresentationMode = Object.getOwnPropertyNames(
+      this.presentations
+    )[0];
   }
 
   componentDidLoad() {
-    this.primary = this.el.querySelector(
-      '[slot=primary]'
-    ) as HTMLXmVideoElement;
-    this.secondary = this.el.querySelector(
-      '[slot=secondary]'
-    ) as HTMLXmVideoElement;
+    this.primary = getVideoElement(this.el, '[slot=primary]');
+    this.secondary = getVideoElement(this.el, '[slot=secondary]');
 
     this.primary.addEventListener('click', this._click);
     this.primary.addEventListener('timeupdate', this._timeUpdate);
     this.primary.addEventListener('ended', this._ended);
+
     if (this.secondary) {
       this.secondary.addEventListener('click', this._click);
       this.secondary.volume = 0;
@@ -152,7 +169,7 @@ export class Player {
   render() {
     return (
       <div class="player" tabindex="0">
-        {this.renderPlayer()}
+        {this.renderVideoContent()}
         {this.renderControls()}
       </div>
     );
@@ -708,20 +725,45 @@ export class Player {
     this.seek(newPosition);
   }
 
-  private renderPlayer = () => {
-    return this.hasSecondarySlot ? (
-      // Pass through slots from consumers to subcomponents to cross the Shadow-DOM boundary
-      <xm-screen
-        fullscreen={this.status.fullscreen}
-        primaryRatio={this.primaryRatio}
-        secondaryRatio={this.secondaryRatio}
-      >
-        <slot slot="primary" name="primary"></slot>
-        <slot slot="secondary" name="secondary"></slot>
-      </xm-screen>
-    ) : (
-      <slot slot="primary" name="primary"></slot>
-    );
+  /**
+   *  Depending on the currently active presentation,
+   *  this will determine which video sources to render
+   *
+   *  Both slot and name attributes are needed to
+   *  pass through slots from consumers to subcomponents to cross the Shadow-DOM boundary
+   *
+   */
+  private renderVideoContent = () => {
+    const activePresentation = this.presentations[this.activePresentationMode];
+    const refs = activePresentation.refs;
+
+    if (refs.length === 2) {
+      this.renderVideoByRef(refs[0], 'primary');
+      this.renderVideoByRef(refs[1], 'secondary');
+
+      return (
+        <xm-screen
+          fullscreen={this.status.fullscreen}
+          primaryRatio={this.primaryRatio}
+          secondaryRatio={this.secondaryRatio}
+        >
+          <slot slot="primary" name="primary"></slot>
+          <slot slot="secondary" name="secondary"></slot>
+        </xm-screen>
+      );
+    } else {
+      this.renderVideoByRef(refs[0], 'primary');
+
+      return <slot slot="primary" name="primary"></slot>;
+    }
+  };
+
+  private renderVideoByRef = (ref: string, slot: string) => {
+    const video = this.el.querySelector(
+      `[name='${ref}']`
+    ) as HTMLXmVideoElement;
+    video.setAttribute('slot', slot);
+    video.setAttribute('active', 'true');
   };
 
   private renderControls = () => {

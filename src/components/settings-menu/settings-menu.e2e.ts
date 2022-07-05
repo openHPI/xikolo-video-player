@@ -5,9 +5,6 @@ import {
   getSettingsMenuElement,
 } from '../../utils/testing-helpers';
 
-/**
- * Hint: The seetings menu will be removed and changed to a new language menu for controls.
- * */
 describe('settings-menu', () => {
   let page: E2EPage;
 
@@ -15,9 +12,10 @@ describe('settings-menu', () => {
     page = await newE2EPage();
     await page.setContent(`
     <xm-player lang="en">
-      <div slot="primary"></div>
+      <div name="ref"></div>
       <xm-text-track language="de" src="../../static/de.vtt" label="Deutsch" default></xm-text-track>
       <xm-text-track language="en" src="../../static/en.vtt" label="English"></xm-text-track>
+      <xm-presentation reference="ref" name="single" label="Generic stream"></xm-presentation>
     </xm-player>
     `);
   });

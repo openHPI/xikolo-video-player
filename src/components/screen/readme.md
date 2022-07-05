@@ -7,10 +7,11 @@
 
 ## Properties
 
-| Property     | Attribute    | Description | Type      | Default     |
-| ------------ | ------------ | ----------- | --------- | ----------- |
-| `fullscreen` | `fullscreen` |             | `boolean` | `undefined` |
-| `pip`        | `pip`        |             | `boolean` | `undefined` |
+| Property         | Attribute         | Description | Type      | Default     |
+| ---------------- | ----------------- | ----------- | --------- | ----------- |
+| `fullscreen`     | `fullscreen`      |             | `boolean` | `undefined` |
+| `primaryRatio`   | `primary-ratio`   |             | `number`  | `undefined` |
+| `secondaryRatio` | `secondary-ratio` |             | `number`  | `undefined` |
 
 
 ## Dependencies
