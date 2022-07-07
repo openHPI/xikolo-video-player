@@ -27,10 +27,10 @@ The user can still change the volume with the device keys.
 
 ## Events
 
-| Event                     | Description | Type                                   |
-| ------------------------- | ----------- | -------------------------------------- |
-| `notifyActiveCuesUpdated` |             | `CustomEvent<CueListChangeEventProps>` |
-| `notifyCueListChanged`    |             | `CustomEvent<CueListChangeEventProps>` |
+| Event                     | Description                                                                                                                         | Type                                   |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `notifyActiveCuesUpdated` | Emits list of currently active/visible cues by language and second to notifies external listeners that the active cues have changed | `CustomEvent<CueListChangeEventProps>` |
+| `notifyCueListChanged`    | Emits list of cues of currently selected language.                                                                                  | `CustomEvent<CueListChangeEventProps>` |
 
 
 ## Methods

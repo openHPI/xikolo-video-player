@@ -360,7 +360,13 @@ declare namespace LocalJSX {
     }
     interface XmPlayer {
         "lang"?: string;
+        /**
+          * Emits list of currently active/visible cues by language and second to notifies external listeners that the active cues have changed
+         */
         "onNotifyActiveCuesUpdated"?: (event: XmPlayerCustomEvent<CueListChangeEventProps>) => void;
+        /**
+          * Emits list of cues of currently selected language.
+         */
         "onNotifyCueListChanged"?: (event: XmPlayerCustomEvent<CueListChangeEventProps>) => void;
         "playbackrate"?: number;
         "showsubtitle"?: boolean;
