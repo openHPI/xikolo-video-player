@@ -27,7 +27,7 @@ describe('xm-player', () => {
     expect(controls).toHaveClass('hydrated');
   });
 
-  it('should fire play event', async () => {
+  test('should fire play event', async () => {
     const playEvent = await player.spyOnEvent('control:play');
 
     const playButton: ElementHandle = await getControlsElement(
@@ -43,9 +43,30 @@ describe('xm-player', () => {
     expect(playEvent).toHaveReceivedEvent();
   });
 
-  // In our current setup, the video does not actually play.
-  // There is an error instead of a proper "playing" state and we are unable to trigger a seek event
-  it.todo('should fire pause event if player is playing');
+  test('should fire pause event if it was playing before', async () => {
+    const pauseEvent = await player.spyOnEvent('control:pause');
+
+    const playButton: ElementHandle = await getControlsElement(
+      page,
+      '[aria-label="Play"]'
+    );
+
+    expect(playButton).toBeTruthy();
+
+    await playButton.click();
+    await page.waitForChanges();
+
+    const pauseButton: ElementHandle = await getControlsElement(
+      page,
+      '[aria-label="Pause"]'
+    );
+
+    await pauseButton.click();
+    await page.waitForChanges();
+
+    expect(pauseEvent).toHaveReceivedEvent();
+  });
+
   it.todo('should fire seek event');
 });
 
