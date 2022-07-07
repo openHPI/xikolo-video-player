@@ -82,7 +82,7 @@ export class Player {
 
   @State() activePresentationMode: string;
 
-  private primary: HTMLXmVideoElement | undefined;
+  private primary: HTMLXmVideoElement;
 
   private secondary: HTMLXmVideoElement | undefined;
 
@@ -96,11 +96,16 @@ export class Player {
 
   private presentations: Presentations = {};
 
-  // Emits list of cues of currently selected language.
+  /**
+   *  Emits list of cues of currently selected language.
+   */
   @Event({ eventName: 'notifyCueListChanged' })
   cueListChangeEvent: EventEmitter<CueListChangeEventProps>;
 
-  // Emits list of currently active/visible cues by language and second.
+  /**
+   * Emits list of currently active/visible cues by language and second
+   * to notifies external listeners that the active cues have changed
+   */
   @Event({ eventName: 'notifyActiveCuesUpdated' })
   activeCueUpdateEvent: EventEmitter<CueListChangeEventProps>;
 
@@ -125,7 +130,7 @@ export class Player {
     this.secondary = getVideoElement(this.el, '[slot=secondary]');
 
     this.primary.addEventListener('click', this._click);
-    this.primary.addEventListener('timeupdate', this._timeUpdate);
+    this.primary.addEventListener('timeupdate', this.timeUpdate);
     this.primary.addEventListener('ended', this._ended);
 
     if (this.secondary) {
@@ -151,7 +156,7 @@ export class Player {
 
   disconnectedCallback() {
     this.primary.removeEventListener('click', this._click);
-    this.primary.removeEventListener('timeupdate', this._timeUpdate);
+    this.primary.removeEventListener('timeupdate', this.timeUpdate);
     this.primary.removeEventListener('ended', this._ended);
     if (this.secondary)
       this.secondary.removeEventListener('click', this._click);
@@ -224,30 +229,30 @@ export class Player {
     }
   }
 
-  @bind()
-  protected async _timeUpdate(e: Event) {
+  private timeUpdate = async (e: Event) => {
     const { seconds, percent, duration } = (e as CustomEvent).detail;
-    this._cueUpdate(seconds);
+    this.cueUpdate(seconds);
     this.status = {
       ...this.status,
       duration,
       progress: { seconds, percent },
     };
     if (this.secondary) {
-      this.secondary.currentTime().then((currentTime) => {
-        const skew = Math.abs(currentTime - seconds);
-        if (skew > 1.0) {
-          this.secondary.seek(seconds);
-        }
-      });
+      const currentTime = await this.secondary.currentTime();
+      const skew = Math.abs(currentTime - seconds);
+      if (skew > 1.0) {
+        this.secondary.seek(seconds);
+      }
     }
-  }
+  };
 
-  @bind()
-  protected _cueUpdate(seconds: number, refresh?: boolean) {
+  private cueUpdate = (seconds: number, refresh?: boolean) => {
     const { activeCues } = this.status.subtitle;
     const cues = this.textTracks.getActiveCues(seconds);
-    if (refresh || !this.textTracks.compareCueLists(cues, activeCues)) {
+    if (
+      cues &&
+      (refresh || !this.textTracks.compareCueLists(cues, activeCues))
+    ) {
       this.status = {
         ...this.status,
         subtitle: {
@@ -255,10 +260,9 @@ export class Player {
           activeCues: cues,
         },
       };
-      // Notifies external listeners that the active cues have changed
       this.activeCueUpdateEvent.emit({ cues });
     }
-  }
+  };
 
   @Listen('ratioLoaded')
   _resizeScreen(e: CustomEvent) {
@@ -284,7 +288,7 @@ export class Player {
         percent,
       },
     };
-    this._cueUpdate(seconds);
+    this.cueUpdate(seconds);
   }
 
   @bind()
@@ -642,7 +646,7 @@ export class Player {
         cues: currentCues,
       });
       // Triggers an update for collecting active cues for the new language
-      this._cueUpdate(this.status.progress.seconds, true);
+      this.cueUpdate(this.status.progress.seconds, true);
     }
     this.status = {
       ...this.status,
