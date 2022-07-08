@@ -40,4 +40,4 @@ export const getPresentationNodes = (el: Element) =>
 export const getVideoElement = (
   el: Element,
   selector: string
-): HTMLXmVideoElement => el.querySelector(selector);
+): HTMLXmVideoElement | null => el.querySelector(selector);

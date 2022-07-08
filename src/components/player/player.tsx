@@ -84,7 +84,7 @@ export class Player {
 
   private primary: HTMLXmVideoElement;
 
-  private secondary: HTMLXmVideoElement | undefined;
+  private secondary: HTMLXmVideoElement | null;
 
   private textTracks: TextTrackList = new TextTrackList();
 
@@ -126,7 +126,7 @@ export class Player {
   }
 
   componentDidLoad() {
-    this.primary = getVideoElement(this.el, '[slot=primary]');
+    this.primary = getVideoElement(this.el, '[slot=primary]')!;
     this.secondary = getVideoElement(this.el, '[slot=secondary]');
 
     this.primary.addEventListener('click', this._click);
@@ -151,7 +151,7 @@ export class Player {
       this._setVolume(this.volume);
     }
     this._setPlaybackRate(this.playbackrate);
-    this._setLanguage(this.lang);
+    this.setLanguage(this.lang);
   }
 
   disconnectedCallback() {
@@ -328,7 +328,7 @@ export class Player {
     }
     this.textTracks.addWebVTT(vtt, total);
     if (!this.hasDefaultTexttrack) {
-      this._setLanguage(this.lang);
+      this.setLanguage(this.lang);
       // Use the default text track
       if (isDefault) {
         this.hasDefaultTexttrack = true;
@@ -526,13 +526,20 @@ export class Player {
     }
   }
 
-  @bind()
-  public _setLanguage(language: string) {
+  private setLanguage = (language: string) => {
     const candidates: Array<string> = [
       language,
       navigator && navigator.language,
-      this.el.closest('[lang]')?.getAttribute('lang')?.substr(0, 2),
     ];
+
+    const closestLang = this.el
+      .closest('[lang]')
+      ?.getAttribute('lang')
+      ?.slice(0, 2);
+
+    if (closestLang) {
+      candidates.push(closestLang);
+    }
 
     const chosen = candidates.find(isKnownLocale);
 
@@ -540,12 +547,12 @@ export class Player {
       ...this.status,
       language: chosen || defaultStatus.language,
     };
-  }
+  };
 
   @Watch('lang')
   _setupLanguage(newValue: string, oldValue: string) {
     if (newValue != oldValue) {
-      this._setLanguage(newValue);
+      this.setLanguage(newValue);
     }
   }
 

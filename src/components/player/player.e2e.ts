@@ -1,5 +1,4 @@
 import { E2EElement, E2EPage, newE2EPage } from '@stencil/core/testing';
-import { ElementHandle } from 'puppeteer';
 import { getControlsElement } from '../../utils/testing-helpers';
 
 describe('xm-player', () => {
@@ -30,10 +29,7 @@ describe('xm-player', () => {
   test('should fire play event', async () => {
     const playEvent = await player.spyOnEvent('control:play');
 
-    const playButton: ElementHandle = await getControlsElement(
-      page,
-      '[aria-label="Play"]'
-    );
+    const playButton = await getControlsElement(page, '[aria-label="Play"]');
 
     expect(playButton).toBeTruthy();
 
@@ -46,20 +42,14 @@ describe('xm-player', () => {
   test('should fire pause event if it was playing before', async () => {
     const pauseEvent = await player.spyOnEvent('control:pause');
 
-    const playButton: ElementHandle = await getControlsElement(
-      page,
-      '[aria-label="Play"]'
-    );
+    const playButton = await getControlsElement(page, '[aria-label="Play"]');
 
     expect(playButton).toBeTruthy();
 
     await playButton.click();
     await page.waitForChanges();
 
-    const pauseButton: ElementHandle = await getControlsElement(
-      page,
-      '[aria-label="Pause"]'
-    );
+    const pauseButton = await getControlsElement(page, '[aria-label="Pause"]');
 
     await pauseButton.click();
     await page.waitForChanges();
