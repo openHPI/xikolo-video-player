@@ -16,9 +16,9 @@ export class Screen {
 
   @Prop() fullscreen: boolean;
 
-  @Prop() primaryRatio: number;
+  @Prop() primaryRatio = 50;
 
-  @Prop() secondaryRatio: number;
+  @Prop() secondaryRatio = 50;
 
   private split: Split.Instance;
 

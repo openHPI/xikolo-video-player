@@ -8,7 +8,7 @@ import { Component, Element, h, Listen, Prop, State } from '@stencil/core';
 export class AspectRatioBox {
   @Element() el: HTMLXmAspectRatioBoxElement;
 
-  @Prop() ratio: number = 1;
+  @Prop() ratio: number = 0.5625;
 
   @State() fullscreen: boolean = this.isVideoInFullscreen();
 
