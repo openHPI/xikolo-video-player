@@ -213,7 +213,7 @@
     <script>
       let el = document.querySelector('xm-player');
       const log = function (e) {
-        console.log(e.type, e.detail);
+        console.debug(e.type, e.detail);
       };
 
       el.addEventListener('play', log);
@@ -227,7 +227,7 @@
       el.addEventListener('ioc:request', log);
 
       el.addEventListener('click', function (e) {
-        console.log('click', e.target);
+        console.debug('click', e.target);
       });
 
       el.addEventListener('timeupdate', log);
