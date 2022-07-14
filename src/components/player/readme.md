@@ -37,7 +37,7 @@ The user can still change the volume with the device keys.
 
 ### `disableTextTrack() => Promise<void>`
 
-
+Disable the text track
 
 #### Returns
 
@@ -47,7 +47,7 @@ Type: `Promise<void>`
 
 ### `enableTextTrack() => Promise<void>`
 
-
+Enable the text track
 
 #### Returns
 
@@ -77,7 +77,8 @@ Type: `Promise<void>`
 
 ### `pause() => Promise<void>`
 
-
+Invoke the pause function on the player.
+Also sets the internal state to mode "paused"
 
 #### Returns
 
@@ -87,7 +88,8 @@ Type: `Promise<void>`
 
 ### `play() => Promise<void>`
 
-
+Invoke the play function on the player.
+Also sets the internal state to mode "playing"
 
 #### Returns
 
@@ -97,7 +99,10 @@ Type: `Promise<void>`
 
 ### `seek(seconds: number) => Promise<void>`
 
+Invoke the seek function on the player.
 
+Sometimes seeking starts playing the video, too.
+So it will reset the state to current stored player state.
 
 #### Returns
 

@@ -386,6 +386,10 @@ export class Player {
     this.toggleFullscreen();
   }
 
+  /**
+   * Invoke the play function on the player.
+   * Also sets the internal state to mode "playing"
+   */
   @Method()
   @Listen('control:play')
   public async play() {
@@ -393,6 +397,10 @@ export class Player {
     this.status = { ...this.status, mode: Mode.PLAYING };
   }
 
+  /**
+   * Invoke the pause function on the player.
+   * Also sets the internal state to mode "paused"
+   */
   @Method()
   @Listen('control:pause')
   public async pause() {
@@ -400,11 +408,18 @@ export class Player {
     this.status = { ...this.status, mode: Mode.PAUSED };
   }
 
+  /**
+   * Invoke the seek function on the player.
+   *
+   * Sometimes seeking starts playing the video, too.
+   * So it will reset the state to current stored player state.
+   *
+   * @param seconds
+   */
   @Method()
   public async seek(seconds: number) {
     await this._invokePlayerFunction('seek', [seconds]);
-    // Sometimes seeking starts playing the video too.
-    // Reset state to current stored player state.
+
     if (this.status.mode === Mode.PLAYING) {
       this.play();
     } else {
@@ -594,6 +609,9 @@ export class Player {
     this.status = { ...this.status, showPlaybackRate: false };
   }
 
+  /**
+   * Enable the text track
+   */
   @Method()
   @Listen('control:enableTextTrack')
   public async enableTextTrack() {
@@ -610,6 +628,9 @@ export class Player {
     };
   }
 
+  /**
+   * Disable the text track
+   */
   @Method()
   @Listen('control:disableTextTrack')
   public async disableTextTrack() {

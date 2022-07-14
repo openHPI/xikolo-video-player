@@ -10,8 +10,8 @@
 | Property         | Attribute         | Description | Type      | Default     |
 | ---------------- | ----------------- | ----------- | --------- | ----------- |
 | `fullscreen`     | `fullscreen`      |             | `boolean` | `undefined` |
-| `primaryRatio`   | `primary-ratio`   |             | `number`  | `undefined` |
-| `secondaryRatio` | `secondary-ratio` |             | `number`  | `undefined` |
+| `primaryRatio`   | `primary-ratio`   |             | `number`  | `50`        |
+| `secondaryRatio` | `secondary-ratio` |             | `number`  | `50`        |
 
 
 ## Dependencies

@@ -58,7 +58,13 @@ export namespace Components {
         "volume": number;
     }
     interface XmPlayer {
+        /**
+          * Disable the text track
+         */
         "disableTextTrack": () => Promise<void>;
+        /**
+          * Enable the text track
+         */
         "enableTextTrack": () => Promise<void>;
         /**
           * Values of the keyboard keys the player listens to on the 'keydown` event
@@ -69,9 +75,19 @@ export namespace Components {
           * Sets the mute state true and the primary slot volume to 0.
          */
         "mute": () => Promise<void>;
+        /**
+          * Invoke the pause function on the player. Also sets the internal state to mode "paused"
+         */
         "pause": () => Promise<void>;
+        /**
+          * Invoke the play function on the player. Also sets the internal state to mode "playing"
+         */
         "play": () => Promise<void>;
         "playbackrate": number;
+        /**
+          * Invoke the seek function on the player.  Sometimes seeking starts playing the video, too. So it will reset the state to current stored player state.
+          * @param seconds
+         */
         "seek": (seconds: number) => Promise<void>;
         "showsubtitle": boolean;
         "slidesSrc"?: string;
