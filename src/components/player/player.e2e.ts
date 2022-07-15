@@ -119,3 +119,72 @@ describe('xm-player with xm-presentation', () => {
     });
   });
 });
+
+describe('xm-player with toggle control', () => {
+  it('can trigger an external function', async () => {
+    const page = await newE2EPage({
+      html: `
+    <xm-player>
+      <div name="ref"></div>
+      <xm-presentation reference="ref" name="single" label="Generic stream"></xm-presentation>
+
+      <xm-toggle-control
+      slot="toggleControl"
+      name="toggleControl"
+      title="Custom Control"
+    >
+      <svg slot="icon" viewBox="0 0 32 32" role="presentation" focusable="false">
+        <path
+          d="M0 2h32v4h-32zM0 8h20v4h-20zM0 20h20v4h-20zM0 14h32v4h-32zM0 26h32v4h-32z"
+        ></path>
+      </svg>
+    </xm-toggle-control>
+    </xm-player>
+
+    <div id="customControlledElement">This is a text</div>
+  `,
+    });
+
+    const player = await page.find('xm-player');
+    const customControlledElement = await page.find('#customControlledElement');
+    const toggleEvent = await player.spyOnEvent(
+      'control:changeToggleControlActiveState'
+    );
+
+    const toggleButton = await getControlsElement(
+      page,
+      'button[title="Custom Control"]'
+    );
+
+    // Attach external function to player which listens to toggle control event
+    await page.evaluate(() => {
+      const playerEl = document.querySelector('xm-player');
+      playerEl.addEventListener(
+        'control:changeToggleControlActiveState',
+        (event: any) => {
+          if (event.detail.name === 'toggleControl') {
+            customControlledElement.innerHTML = `The feature is ${
+              event.detail.active ? 'enabled' : 'disabled'
+            }`;
+          }
+        }
+      );
+    });
+
+    // Click on button inside of player to activate and deactivate feature
+
+    await toggleButton.click();
+    await page.waitForChanges();
+    let text = customControlledElement.innerHTML;
+
+    expect(text).toBe('The feature is enabled');
+    expect(toggleEvent).toHaveReceivedEventTimes(1);
+
+    await toggleButton.click();
+    await page.waitForChanges();
+    text = customControlledElement.innerHTML;
+
+    expect(text).toBe('The feature is disabled');
+    expect(toggleEvent).toHaveReceivedEventTimes(2);
+  });
+});
