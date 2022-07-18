@@ -28,8 +28,9 @@ npm install
 npm start
 ```
 
-The demo page will then be available on http://localhost:3333.
-This page is reloaded automatically when saving a file with changes.
+The demo page will then be available at `http://localhost:3333`.
+Here you can manually test both the basic functions and the advanced features.
+This page is automatically reloaded when you save a file with changes.
 
 To run the tests, run:
 
