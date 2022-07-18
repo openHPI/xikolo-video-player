@@ -13,7 +13,9 @@
       .controls__toolbar {
         .controls__playback-rate {
           &__menu {
-            bottom: 80px;
+            // Needed for matching the bottom position of the settings menu.
+            margin-bottom: -3px;
+            bottom: 60px;
           }
 
           &__button {
@@ -85,10 +87,12 @@
   &__menu {
     position: absolute;
     z-index: 1;
-    bottom: 60px;
-    right: -5px;
-    background: rgba(50, 50, 50, 0.9);
-    background: rgba(var(--vp-menu-color-rgb), 0.9);
+    // Needed for matching the bottom position of the settings menu.
+    margin-bottom: -1px;
+    bottom: 50px;
+    right: 50%;
+    transform: translateX(50%);
+    background: var(--vp-menu-color);
     font-size: 0.9em;
     line-height: 0.9em;
     padding: 0.2em;
