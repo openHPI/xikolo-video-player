@@ -35,7 +35,7 @@
     "@types/vimeo__player": "2.16.3",
     "@typescript-eslint/eslint-plugin": "5.40.1",
     "@typescript-eslint/parser": "5.40.1",
-    "autoprefixer": "10.4.12",
+    "autoprefixer": "10.4.13",
     "eslint": "8.26.0",
     "eslint-plugin-react": "7.31.10",
     "eslint-config-airbnb-typescript": "17.0.0",
