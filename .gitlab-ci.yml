@@ -71,7 +71,7 @@ pages:
 
 push:
   stage: deploy
-  image: ubuntu:22.04@sha256:34fea4f31bf187bc915536831fd0afc9d214755bf700b5cdb1336c82516d154e
+  image: ubuntu:22.04@sha256:7cfe75438fc77c9d7235ae502bf229b15ca86647ac01c844b272b56326d56184
   only:
     - master
   dependencies:
