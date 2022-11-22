@@ -2,10 +2,10 @@
 
 # Xikolo Video Player
 
-This video player is used to provide a better user experience when viewing videos in the Xikolo project.
-It provides features to control all basic video playback functions to control videos hosted on Vimeo.
+The Xikolo video player is designed to provide a better user experience when viewing videos in the Xikolo project.
+It provides features to control basic video playback functions to watch videos hosted on different video providers.
 
-The feature set includes more than the usual
+Beyond that there are more features:
 
 - Dual Stream mode (teacher view and slides) and the ability to resize streams
 - Event API for analytics
@@ -28,7 +28,7 @@ npm install
 npm start
 ```
 
-The demo page will then be available at `http://localhost:3333`.
+A demo page will be available at `http://localhost:3333`.
 Here you can manually test both the basic functions and the advanced features.
 This page is automatically reloaded when you save a file with changes.
 
@@ -64,7 +64,7 @@ As of now, only one `xm-presentation` is supported so make sure to add the defau
 
 For more configuration, consult the documention of the `xm-presentation` component.
 
-### Branding
+## Branding
 
 The video player is designed to support color customization for key components.
 You can override the following variables with your favorite colors or numbers:
@@ -80,9 +80,7 @@ You can override the following variables with your favorite colors or numbers:
   --vp-control-slider-height
 ```
 
-Components should use `currentColor` and custom CSS variables if appropriate.
-
-### Toggle Control
+## Toggle Control
 
 The video player is capable to control components outside of itself.
 
@@ -139,27 +137,23 @@ videoPlayerWithCustomControl.addEventListener(
 );
 ```
 
-## Contributing to the project
-
-### Development
+## Development
 
 The Xikolo Video Player is built with [Stencil JS](https://stenciljs.com).
 
-Stencil is a compiler for building fast web apps using Web Components.
-It combines concepts of the most popular frontend frameworks into a compile-time rather than a run-time tool.
-Stencil takes TypeScript, JSX, a tiny virtual DOM layer, efficient one-way data binding, an asynchronous rendering pipeline (similar to React Fiber), and lazy-loading out of the box, and generates 100% standards-based Web Components that run in any browser supporting the Custom Elements v1 spec.
-
-Stencil components are just Web Components, so they work in any major framework or with no framework at all.
+Stencil is a compiler for building Web Components.
+Think of it as an compile-time tool.
+At tun-time, the video player can be used like any standards-based Web Components
 
 ### Naming Components
 
-Components are named `xm-*`.
+Components are prefixed with `xm-`.
 
 ### Event Naming Conventions
 
-Internal events are prefixed depending on where they come from.
+Internal events are prefixed depending on where they are emmitted from.
 E.g. the `controls` component emits a `control:play`, the `settings-menu` a `setting:changePlaybackRate`.
-They are intended for internal use, but are also used outside, e.g. for tracking.
+They are intended for internal use, but are also used outside, e.g. for analytics tracking.
 
 Events from the `player` component itself do not have a name prefix.
 They are supposed to be only used externally.
@@ -174,26 +168,3 @@ The repo has a pre-push git hook with eslint so that new linter offenses do not 
 
 SVG icons are taken from the Xikolo font and FontAwesome imported to [icomoon.io](https://icomoon.io).
 You can easily export the icons as cleaned SVG from this page.
-
-### Deploying
-
-Commits to the `master` branch are automatically compiled and added to the `build` branch.
-Commits on this branch can be used as a target for inclusion in other projects:
-
-```json
-// In package.json:
-{
-  "dependencies": {
-    "@xikolo/video-player2019": "git+https://gitlab+deploy-token-1:secrettoken@lab.xikolo.de/xikolo/video-player#sha"
-  }
-}
-```
-
-Because the video-player project currently has no versioning policy, every commit may break the public interface, so we recommend locking the desired commit already in the `package.json`.
-
-To upgrade to a new version, pick the desired commit SHA from the `build` branch and replace the old one (everything after the `#` symbol) in `package.json`.
-Then, install the new dependency version:
-
-```bash
-yarn install
-```
