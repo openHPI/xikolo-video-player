@@ -3,7 +3,7 @@
 _First, briefly describe what this merge request does._
 
 _Then, describe the changes in more detail._
-_Make sure potential reviewers have enough information to quickly dive in and understand the changes. Check our [Confluence](<https://ares.epic.hpi.uni-potsdam.de/epicjira/confluence/x/hZEAAg#LifecycleofaDevelopmentTicket-CreateaMergeRequest(MR)>) for more details._
+_Make sure potential reviewers have enough information to quickly dive in and understand the changes._
 
 ## Decisions / Choices I made
 
@@ -21,3 +21,4 @@ Finally, feel free to @tag other developers to ask them to review your work. Alw
 
 - [ ] Your branch has no merge conflicts with master (otherwise, please rebase)
 - [ ] [All related commits are squashed together](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Squashing-Commits)
+- [ ] Documentation has been added as needed
