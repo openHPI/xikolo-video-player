@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
     />
-    <title>Stencil Component Starter</title>
+    <title>Xikolo Video Player Demo</title>
     <script type="module" src="build/xmf.esm.js"></script>
     <script nomodule src="build/xmf.js"></script>
     <style>
@@ -18,26 +18,24 @@
         box-sizing: border-box;
       }
 
-      section {
+      main {
         margin: 0 auto;
         background: #fff;
         max-width: 900px;
         padding: 1em;
       }
 
-      /* Test video-player branding */
+      /* Comment this in to test video player theming */
       /* xm-player {
-        --vps-slider-color: #cc0000;
-        --vps-gutter-color: #cc0000;
-        --vps-bg-color: #660000;
-        --vps-bg-color-rgb: 255, 0, 0;
-        --vps-main-color: #660000;
-        --vps-menu-color-rgb: 255, 50, 50;
+        --vps-slider-color: #000000;
+        --vps-gutter-color: #ffffff;
+        --vps-bg-color: #000000;
+        --vps-main-color: #000000;
       } */
     </style>
   </head>
   <body>
-    <section>
+    <main>
       <h1>Video Player Demo Page</h1>
 
       <h2>Basic feature set</h2>
@@ -170,7 +168,7 @@
           label="Switch to lecturer and slides (picture-in-picture)"
         ></xm-presentation>
       </xm-player>
-    </section>
+    </main>
     <script>
       const el = document.querySelector('xm-player');
 
