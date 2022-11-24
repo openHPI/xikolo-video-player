@@ -9,7 +9,7 @@ Beyond that there are more features:
 
 - Dual Stream mode (teacher view and slides) and the ability to resize streams
 - Event API for analytics
-- Branding
+- Theming
 - Control any other function with a custom button, see [Toggle Control](#toggle-control)
 
 ## Getting Started
@@ -64,9 +64,9 @@ As of now, only one `xm-presentation` is supported so make sure to add the defau
 
 For more configuration, consult the documention of the `xm-presentation` component.
 
-## Branding
+## Theming
 
-The video player is designed to support color customization for key components.
+The video player is designed to support customization for key components.
 You can override the following variables with your favorite colors or numbers:
 
 ```css
