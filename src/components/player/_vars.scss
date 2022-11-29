@@ -1,0 +1,10 @@
+:host {
+  --vp-slider-color: var(--vps-slider-color, orange);
+  --vp-gutter-color: var(--vps-gutter-color, #353535);
+  --vp-gutter-width: 40px;
+  --vp-main-color: var(--vps-main-color, white);
+  --vp-bg-color: var(--vps-bg-color, black);
+  --vp-bg-color-rgb: var(--vps-bg-color-rgb, 0, 0, 0);
+  --vp-menu-color: var(--vps-menu-color, #323232);
+  --vp-control-slider-height: var(--vps-control-slider-height, 0.5em);
+}

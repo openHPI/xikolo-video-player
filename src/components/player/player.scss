@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  color: white;
+  color: var(--vp-main-color);
+  background: rgba(0, 0, 0, 0.75);
+  background: rgba(var(--vp-bg-color-rgb), 0.75);
+  border: 1px solid black;
+  border-color: var(--vp-bg-color);
+
+  font-family: 
+    // Basic web for OS and iOS (ensures monospaced digits)
+    "Helvetica Neue",
+    // Safari for OS X and iOS (San Francisco)
+    -apple-system,
+    // Chrome < 56 for OS X (San Francisco)
+    BlinkMacSystemFont,
+    // Windows
+    "Segoe UI",
+    // Android
+    "Roboto",
+    // Linux
+    "Ubuntu",
+    "Cantarell",
+    // Basic web fallback
+    Helvetica,
+    Arial, sans-serif;
+}
+
+.player {
+  display: flex;
+  flex: 1 0 auto;
+  flex-flow: row nowrap;
+  flex-direction: column;
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  xm-screen {
+    flex-grow: 1;
+
+    ::slotted(*) {
+      height: 100%;
+    }
+  }
+}
+
+@import "./vars";

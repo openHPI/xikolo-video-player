@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Xikolo Video Player Demo</title>
+    <script type="module" src="build/xmf.esm.js"></script>
+    <script nomodule src="build/xmf.js"></script>
+    <style>
+      body {
+        background: #eee;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      main {
+        margin: 0 auto;
+        background: #fff;
+        max-width: 900px;
+        padding: 1em;
+      }
+
+      /* Comment this in to test video player theming */
+      /* xm-player {
+        --vps-slider-color: #000000;
+        --vps-gutter-color: #ffffff;
+        --vps-bg-color: #000000;
+        --vps-main-color: #000000;
+      } */
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Video Player Demo Page</h1>
+
+      <h2>Basic feature set</h2>
+      <ul>
+        <li>Dual Stream mode (teacher view and slides)</li>
+        <li>Ability to resize streams on separating gutter</li>
+        <li>Slide preview by hovering over the progress slider</li>
+        <li>Text tracks can be enabled in control bar</li>
+        <li>Language can be chosen in settings</li>
+      </ul>
+      <xm-player
+        slides-src='[{"thumbnail": "https://picsum.photos/360/200/?random=1", "startPosition":10},
+        { "thumbnail":"https://picsum.photos/360/200/?random=2", "startPosition":50},
+        { "thumbnail":"https://picsum.photos/360/200/?random=3", "startPosition":100},
+        { "thumbnail":"https://picsum.photos/360/200/?random=4", "startPosition":200}]'
+        data-debug="log-cue-events"
+      >
+        <xm-vimeo name="lecturer" src="104617728"></xm-vimeo>
+        <xm-vimeo name="slides" src="104609826"></xm-vimeo>
+        <xm-text-track
+          language="de"
+          src="/static/de.vtt"
+          label="Deutsch"
+        ></xm-text-track>
+        <xm-text-track
+          language="en"
+          src="/static/en.vtt"
+          label="English"
+          default
+        ></xm-text-track>
+        <xm-presentation
+          reference="lecturer,slides"
+          name="dual"
+          label="Switch to lecturer and slides (side-by-side)"
+        ></xm-presentation>
+      </xm-player>
+
+      <h2>User presets</h2>
+
+      <ul>
+        <li>Volume is at 50%</li>
+        <li>
+          Language (player UI will be in German even if your browser is in
+          English)
+        </li>
+        <li>Enabled subtitles</li>
+        <li>Playback Rate is set to double speed</li>
+      </ul>
+      <xm-player volume="0.5" lang="de" playbackrate="2" showsubtitle="true">
+        <xm-vimeo name="lecturer" src="104617728"></xm-vimeo>
+        <xm-text-track
+          language="de"
+          src="/static/de.vtt"
+          label="Deutsch"
+        ></xm-text-track>
+        <xm-text-track
+          language="en"
+          src="/static/en.vtt"
+          label="English"
+          default
+        ></xm-text-track>
+        <xm-presentation
+          reference="lecturer"
+          name="dual"
+          label="Switch to lecturer"
+        ></xm-presentation>
+      </xm-player>
+
+      <h2>Interactive Transcript</h2>
+      <ul>
+        <li>Content of text track will appear in element outside the player</li>
+        <li>In sync with video</li>
+      </ul>
+      <xm-player
+        id="video-player-with-transcript"
+        data-debug="check-cue-events"
+      >
+        <xm-vimeo name="pip" src="104617728"></xm-vimeo>
+        <xm-text-track
+          language="de"
+          src="/static/de.vtt"
+          label="Deutsch"
+          default
+        ></xm-text-track>
+        <xm-text-track
+          language="en"
+          src="/static/en.vtt"
+          label="English"
+        ></xm-text-track>
+        <xm-presentation
+          reference="pip"
+          name="single"
+          label="Switch to single stream"
+        ></xm-presentation>
+      </xm-player>
+
+      <div id="transcript-text">Transcript text will appear here</div>
+
+      <h2>Various presentation modes</h2>
+      <ul>
+        <li>Upcoming feature to be implemented</li>
+        <li>Proves backwards compatibility of configuration</li>
+        <li>
+          Later: Switch between "dual", "single" and "pip" streams in settings
+          menu
+        </li>
+      </ul>
+      <xm-player>
+        <xm-vimeo name="lecturer" src="104617728"></xm-vimeo>
+        <xm-vimeo name="slides" src="104609826"></xm-vimeo>
+        <xm-vimeo name="pip" src="104617728"></xm-vimeo>
+        <xm-presentation
+          reference="lecturer,slides"
+          name="dual"
+          label="Switch to lecturer and slides (side-by-side)"
+        ></xm-presentation>
+        <xm-presentation
+          reference="slides"
+          name="single"
+          label="Slides only"
+        ></xm-presentation>
+        <xm-presentation
+          reference="pip"
+          name="pip"
+          label="Switch to lecturer and slides (picture-in-picture)"
+        ></xm-presentation>
+      </xm-player>
+    </main>
+    <script>
+      const el = document.querySelector('xm-player');
+
+      const log = function (e) {
+        console.debug(e.type, e.detail);
+      };
+
+      el.addEventListener('play', log);
+      el.addEventListener('pause', log);
+      el.addEventListener('seeking', log);
+      el.addEventListener('seeked', log);
+      el.addEventListener('bufferstart', log);
+      el.addEventListener('bufferend', log);
+      el.addEventListener('ended', log);
+
+      el.addEventListener('ioc:request', log);
+
+      el.addEventListener('click', function (e) {
+        console.debug('click', e.target);
+      });
+
+      el.addEventListener('timeupdate', log);
+      el.addEventListener('progress', log);
+
+      const videoPlayerWithTranscript = document.querySelector(
+        '#video-player-with-transcript'
+      );
+
+      /*
+        Test for cue events
+        Events should be emitted on:
+
+        - Initial render (notifyCueListChanged)
+        - Every time the language is changed (notifyCueListChanged)
+        - Every time a cue changes playing the video (notifyActiveCuesUpdated)
+      */
+      videoPlayerWithTranscript.addEventListener('notifyCueListChanged', log);
+      videoPlayerWithTranscript.addEventListener(
+        'notifyActiveCuesUpdated',
+        log
+      );
+
+      const transcriptText = document.querySelector('#transcript-text');
+
+      videoPlayerWithTranscript.addEventListener(
+        'notifyCueListChanged',
+        (event) => {
+          transcriptText.innerHTML = `Build transcript with ${
+            event.detail.cues ? event.detail.cues.length : 'no '
+          } cues.`;
+        }
+      );
+
+      videoPlayerWithTranscript.addEventListener(
+        'notifyActiveCuesUpdated',
+        (event) => {
+          if (event.detail.cues) {
+            transcriptText.innerHTML = event.detail.cues[0].text;
+          }
+        }
+      );
+    </script>
+  </body>
+</html>

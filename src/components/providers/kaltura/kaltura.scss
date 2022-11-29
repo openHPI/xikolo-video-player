@@ -1,0 +1,10 @@
+// When in single stream and fullscreen mode, the xm-kaltura component takes
+// a height of 0px and the video does not show up.
+// In dual stream mode, the xm-aspect-ratio-box component does not fill
+// all the available space and the videos are not centered. In fullscreen mode
+// it takes a height of 0px.
+// This rule fixes all issues.
+xm-kaltura,
+xm-aspect-ratio-box {
+  height: 100%;
+}

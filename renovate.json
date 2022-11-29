@@ -1,0 +1,18 @@
+{
+  "extends": ["config:base", "schedule:weekly"],
+  "labels": ["Internal 🔨"],
+  "rangeStrategy": "bump",
+  "automerge": true,
+  "major": {
+    "automerge": false
+  },
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["digest"],
+      "schedule": ["before 3am on the first day of the month"]
+    }
+  ]
+}

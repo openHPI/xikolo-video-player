@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "lib": ["dom", "es2017"],
+    "moduleResolution": "node",
+    "module": "esnext",
+    "target": "es2017",
+    "jsx": "react",
+    "jsxFactory": "h",
+
+    // When all of these are true, we can enable full strict mode
+    "alwaysStrict": true,
+    "strictNullChecks": false,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true
+  },
+  "include": ["src", "types/jsx.d.ts"],
+  "exclude": ["node_modules"]
+}

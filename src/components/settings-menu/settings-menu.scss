@@ -1,0 +1,130 @@
+.settings-menu {
+  max-height: 90%;
+  position: absolute;
+  z-index: 1;
+  bottom: 50px;
+  right: 10px;
+  background: var(--vp-menu-color);
+  font-size: 0.9em;
+  line-height: 0.9em;
+  padding: 0.2em;
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    height: 100%;
+  }
+
+  &--fullscreen-mode {
+    @media only screen and (min-width: 992px) {
+      bottom: 60px;
+      font-size: 1em;
+
+      & .settings-menu__button {
+        font-size: 1em;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 576px) {
+    font-size: 0.8em;
+
+    & .settings-menu__button {
+      font-size: 0.8em;
+    }
+  }
+
+  &__button {
+    display: flex;
+    flex: 1 1 100%;
+    width: 100%;
+    background: transparent;
+    position: relative;
+    border: none;
+    color: white;
+    color: var(--vp-main-color);
+    padding: 0.4em;
+    cursor: pointer;
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      line-height: 1.2em;
+    }
+
+    &-value {
+      margin-left: auto;
+      padding-left: 0.6em;
+      font-weight: 600;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    &--current {
+      font-weight: 600;
+      &:before {
+        content: "\2022";
+        color: var(--vp-main-color);
+        position: absolute;
+        left: 0.7em;
+      }
+    }
+  }
+
+  &__submenu-header {
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 2px 2px 1px rgba(var(--vp-bg-color-rgb), 0.5);
+  }
+
+  &__submenu-content {
+    overflow-y: auto;
+    scrollbar-color: orange rgba(50, 50, 50, 0.5);
+    scrollbar-color: var(--vp-slider-color) rgba(var(--vp-menu-color-rgb), 0.5);
+
+    .settings-menu__button {
+      padding-left: 1.8em;
+    }
+  }
+
+  &__arrow {
+    margin-top: -1px;
+
+    &--right {
+      margin-left: 0.4em;
+      margin-right: -0.4em;
+    }
+
+    &--left {
+      margin-right: 0.4em;
+      margin-left: -0.4em;
+    }
+
+    svg,
+    .svg {
+      display: block;
+      height: 1.4em;
+      width: 1.4em;
+      fill: currentColor;
+      color: inherit;
+      vertical-align: middle;
+    }
+  }
+}
+
+.menu {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
+
+  &--open {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}

@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  flex: 1 0 auto;
+  flex-flow: row nowrap;
+  background-color: black;
+  background-color: var(--vp-bg-color);
+}
+
+xm-aspect-ratio-box {
+  flex-grow: 1;
+}
+
+iframe,
+.video-iframe,
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}

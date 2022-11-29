@@ -1,0 +1,64 @@
+:host {
+  width: 100%;
+  position: relative;
+}
+
+.slider {
+  display: flex;
+}
+
+.slider__progress {
+  flex: 1 1 100%;
+  appearance: none;
+  overflow: hidden;
+  height: 0.5em;
+  height: var(--vp-control-slider-height);
+  background: transparent;
+  // Hardcoded color values are used accross the class to support IE11
+  color: orange;
+  color: var(--vp-slider-color);
+  margin: 0;
+  border-top: 1px solid var(--vp-bg-color);
+  border-top-color: black;
+  border-bottom: 1px solid var(--vp-bg-color);
+  border-bottom-color: black;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    box-shadow: -100vw 0 0 100vw currentColor;
+    // Safari need a fixed width to display the slider thumb
+    width: 1px;
+    height: var(--vp-control-slider-height);
+  }
+
+  &::-moz-range-thumb {
+    appearance: none;
+    box-shadow: -100vw 0 0 100vw currentColor;
+    width: 0;
+    border: 0;
+  }
+
+  &::-ms-thumb {
+    appearance: none;
+    box-shadow: -100vw 0 0 100vw orange;
+    width: 0;
+    border: 0;
+  }
+
+  &::-ms-fill-upper {
+    background: #353535;
+    background: var(--vp-gutter-color);
+  }
+
+  &::-ms-track {
+    color: #353535;
+    color: var(--vp-gutter-color);
+  }
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    /* IE11 has a strange height for sliders, so we have to fix it */
+    height: inherit;
+    padding: 0px;
+  }
+}

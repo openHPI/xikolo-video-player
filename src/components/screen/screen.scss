@@ -1,0 +1,104 @@
+:host {
+  display: block;
+  background-color: black;
+  background-color: var(--vp-bg-color);
+}
+
+.landscape,
+.portrait {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+
+  &.fullscreen {
+    @media only screen and (min-width: 992px) {
+      .gutter__draggable-area {
+        width: 55px;
+      }
+      .gutter__handle {
+        height: 55px;
+      }
+      .gutter__arrow {
+        svg {
+          height: 30px;
+          width: 30px;
+        }
+      }
+    }
+  }
+}
+
+.landscape {
+  flex-direction: row;
+
+  // Hovering over the screen in landscape mode makes gutter handle appear
+  &:hover .gutter__draggable-area,
+  &:hover .gutter__handle {
+    display: block;
+  }
+}
+
+.portrait {
+  flex-direction: column;
+  width: 100%;
+}
+
+// Styles for split.js div
+// This class also applies to vertical alignment
+.gutter {
+  position: relative;
+  background-color: var(--vp-gutter-color);
+
+  &.gutter--horizontal {
+    cursor: col-resize;
+  }
+
+  // These styles apply to horizontal alignment
+  &__draggable-area,
+  &__handle {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    width: var(--vp-gutter-width);
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__handle {
+    position: relative;
+    background-color: var(--vp-gutter-color);
+    // Override height for round shape
+    height: var(--vp-gutter-width);
+    width: 100%;
+    border-radius: 50%;
+  }
+
+  &__arrow {
+    position: absolute;
+    background-color: transparent;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    &--left {
+      left: 25%;
+    }
+
+    &--right {
+      left: 75%;
+    }
+
+    svg {
+      display: block;
+      height: 20px;
+      width: 20px;
+      fill: currentcolor;
+    }
+  }
+}
+
+.pane {
+  position: relative;
+  overflow: hidden;
+}

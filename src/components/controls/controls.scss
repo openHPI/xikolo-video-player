@@ -1,0 +1,301 @@
+.controls {
+  background-color: "#353535";
+  background-color: var(--vp-gutter-color);
+  display: flex;
+  flex: 1 0 auto;
+  flex-flow: row wrap;
+
+  &--fullscreen-mode {
+    @media only screen and (min-width: 992px) {
+      .controls__subtitle-row {
+        font-size: 2.5em;
+      }
+      .controls__toolbar {
+        .controls__playback-rate {
+          &__menu {
+            // Needed for matching the bottom position of the settings menu.
+            margin-bottom: -3px;
+            bottom: 60px;
+          }
+
+          &__button {
+            font-size: 1em;
+          }
+        }
+
+        .controls__time {
+          font-size: 1.2em;
+        }
+
+        svg,
+        .svg {
+          height: 2em;
+          width: 2em;
+        }
+      }
+    }
+  }
+
+  @media only screen and (min-width: 376px) {
+    .controls__toolbar {
+      button {
+        padding: 0.6em 0.7em;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 992px) {
+    .controls__toolbar .controls__slider--volume {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 580px) {
+    .controls__subtitle {
+      bottom: 40px;
+
+      &-row {
+        font-size: 1.3em;
+        line-height: 1em;
+        padding: 5px;
+      }
+    }
+    .controls__toolbar {
+      .controls__slider--volume {
+        display: none;
+      }
+
+      .controls__time {
+        padding: inherit;
+      }
+    }
+  }
+
+  // Reduces the font size for the current time display, so it does not wrap into two lines
+  @media only screen and (max-width: 590px) {
+    .controls__toolbar {
+      .controls__time {
+        font-size: 0.75em;
+      }
+    }
+  }
+}
+
+.controls__playback-rate {
+  position: relative;
+
+  &__menu {
+    position: absolute;
+    z-index: 1;
+    // Needed for matching the bottom position of the settings menu.
+    margin-bottom: -1px;
+    bottom: 50px;
+    right: 50%;
+    transform: translateX(50%);
+    background: var(--vp-menu-color);
+    font-size: 0.9em;
+    line-height: 0.9em;
+    padding: 0.2em;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s linear, opacity 0.3s linear;
+
+    &--open {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &__button {
+    font-size: 0.9em;
+    line-height: 0.9em;
+    width: 40px;
+    box-sizing: content-box;
+    text-align: left;
+    position: relative;
+    text-indent: 1em;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    &--current {
+      font-weight: 600;
+      &:before {
+        content: "\2022";
+        color: var(--vp-main-color);
+        position: absolute;
+        left: -0.1em;
+      }
+    }
+  }
+}
+
+.controls__subtitle {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  z-index: 1;
+  bottom: 60px;
+  align-self: center;
+  text-align: center;
+  max-width: 90%;
+  margin: auto;
+
+  &-row {
+    background: rgba(50, 50, 50, 0.7);
+    padding: 10px;
+    margin: 0.2em;
+    border-radius: 10px;
+    display: inline-block;
+    white-space: pre-wrap;
+    font-size: 1.5em;
+    line-height: 1.3em;
+  }
+}
+
+.controls__slider {
+  flex: 1 1 100%;
+  appearance: none;
+  overflow: hidden;
+  height: 0.5em;
+  height: var(--vp-control-slider-height);
+  background: transparent;
+  color: orange;
+  color: var(--vp-slider-color);
+  margin: 0;
+  border-top: 1px solid black;
+  border-top-color: var(--vp-bg-color);
+  border-bottom: 1px solid black;
+  border-bottom-color: var(--vp-bg-color);
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    box-shadow: -100vw 0 0 100vw currentColor;
+    // Safari need a fixed width to display the slider thumb
+    width: 1px;
+    height: var(--vp-control-slider-height);
+  }
+
+  &::-moz-range-thumb {
+    appearance: none;
+    box-shadow: -100vw 0 0 100vw currentColor;
+    width: 0;
+    border: 0;
+  }
+
+  &::-ms-thumb {
+    appearance: none;
+    box-shadow: -100vw 0 0 100vw orange;
+    width: 0;
+    border: 0;
+  }
+
+  &::-ms-fill-upper {
+    background: #353535;
+  }
+
+  &::-ms-track {
+    color: #353535;
+  }
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    /* IE11 has a strange height for sliders, so we have to fix it */
+    height: inherit;
+    padding: 0px;
+  }
+
+  &--volume {
+    border: 1px solid black;
+
+    &:focus {
+      border: 1px solid white;
+      border-color: var(--vp-main-color);
+    }
+  }
+}
+
+.controls__toolbar {
+  margin: 1px;
+  color: inherit;
+
+  display: flex;
+  flex: 1 1 100%;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  .controls-volume {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      /* IE11 can not animate fadein / fadeout within a flexbox correctly */
+      flex: 1 1 0%;
+    }
+
+    &:hover {
+      @media only screen and (min-width: 376px) {
+        .controls__slider--volume {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .controls__time {
+    flex-grow: 1;
+    font-size: 0.9em;
+    padding: 0.6em 0.7em;
+  }
+
+  .controls__settings-icon {
+    display: block;
+    overflow: hidden;
+    transition-duration: 0.4s;
+    transition-property: transform;
+
+    &--open,
+    &:hover {
+      transform: rotate(90deg);
+    }
+  }
+
+  .controls__button-icon {
+    display: block;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease-in-out;
+
+    &--active,
+    &:hover {
+      box-shadow: 0px 2px 1px -1px rgba(231, 166, 26, 0.72);
+    }
+  }
+
+  button {
+    border: 0;
+    padding: 0.6em 0.5em;
+    margin: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+
+    &:hover {
+      & .controls__settings-icon {
+        transform: rotate(90deg);
+      }
+      & .controls__subtitle-icon {
+        box-shadow: 0px 2px 1px -1px rgba(231, 166, 26, 0.72);
+      }
+    }
+  }
+
+  svg,
+  .svg {
+    display: block;
+    height: 1.5em;
+    width: 1.5em;
+    fill: currentColor;
+    color: inherit;
+  }
+}
