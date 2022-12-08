@@ -12,26 +12,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/setup
+      - name: Install
+        uses: ./.github/actions/install
       - run: npm run build
 
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/setup
+      - name: Install
+        uses: ./.github/actions/install
       - run: npm run test
 
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/setup
+      - name: Install
+        uses: ./.github/actions/install
       - run: npm run lint
 
   prettier:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/setup
+      - name: Install
+        uses: ./.github/actions/install
       - run: npx prettier --check .
