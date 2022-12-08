@@ -13,14 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
-      - run: npm build
+      - run: npm run build
 
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
-      - run: npm test
+      - run: npm run test
 
   lint:
     runs-on: ubuntu-latest
