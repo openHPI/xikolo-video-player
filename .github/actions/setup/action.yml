@@ -8,3 +8,4 @@ runs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: ${{ runner.os }}-node-
     - run: npm install --no-audit --prefer-offline --progress=false
+      shell: bash
