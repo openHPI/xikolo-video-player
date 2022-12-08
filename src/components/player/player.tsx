@@ -172,6 +172,7 @@ export class Player {
   }
 
   render() {
+    const foo = 'bar';
     return (
       <div class="player" tabindex="0">
         {this.renderVideoContent()}

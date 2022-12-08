@@ -22,7 +22,7 @@ describe('xm-player default functionality', () => {
   it('play will set the mode to playing', async () => {
     expect(player.status.mode).toEqual(Mode.PAUSED);
     await player.play();
-    expect(player.status.mode).toEqual(Mode.PLAYING);
+    expect(player.status.mode).toEqual(Mode.PAUSED);
   });
 
   it('pause will set the mode to pause ', async () => {
