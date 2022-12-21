@@ -157,11 +157,6 @@ Events from the `player` component itself do not have a name prefix.
 They are supposed to be only used externally.
 E.g. `cueListChange`.
 
-### Code Style
-
-To organize the code structure, we follow the [proposed guideline by Stencil](https://stenciljs.com/docs/style-guide#code-organization).
-The repo has a pre-push git hook with eslint so that new linter offenses do not end up in the code base.
-
 ### SVG Icons
 
 SVG icons are taken from the Xikolo font and FontAwesome imported to [icomoon.io](https://icomoon.io).
