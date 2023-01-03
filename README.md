@@ -62,6 +62,10 @@ As of now, only one `xm-presentation` is supported so make sure to add the defau
 
 For more configuration, consult the documention of the `xm-presentation` component.
 
+## Public API
+
+The available methods and events can be found in the [player component documentation](/src/components/player/readme.md).
+
 ## Theming
 
 The video player is designed to support customization for key components.
