@@ -20,7 +20,7 @@ After this, you should be able to dive into the codebase easier.
 
 ### Pull request
 
-Please make pull requests to the `development` branch.
+Please make pull requests to the `dev` branch.
 
 Add a title and a description.
 In the description, illustrate first what your code will change.
