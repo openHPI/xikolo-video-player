@@ -343,8 +343,13 @@ export class Player {
   @bind()
   @Listen('keydown')
   private handleKeyDown(e: KeyboardEvent) {
-    const { key } = e;
+    const { key, altKey, shiftKey, ctrlKey, metaKey } = e;
     const target = e.target as Element;
+
+    // Only trigger internal functions when pressed without special key
+    if (altKey || ctrlKey || metaKey || shiftKey) {
+      return;
+    }
 
     if (hasDefaultScrollingBehavior(key, target)) {
       // Prevent default scrolling when focusing the player and pressing "Space" or "ArrowUp" / "ArrowDown"
@@ -526,7 +531,10 @@ export class Player {
   }
 
   /**
-   * Values of the keyboard keys the player listens to on the 'keydown` event
+   * Values of the keyboard keys the player listens to on the 'keydown` event.
+   *
+   * Internal functions are only triggered when key is pressed without special key
+   * (alt, ctrl, meta, shift).
    */
   @Method()
   async getShortcutKeys(): Promise<Array<string>> {
