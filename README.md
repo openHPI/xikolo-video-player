@@ -1,7 +1,7 @@
 # Xikolo Video Player
 
-The Xikolo video player is designed to provide a better user experience when viewing videos in the Xikolo project.
-It provides features to control basic video playback functions to watch videos hosted on different video providers.
+This video player is designed to provide a better user experience when viewing videos in the Xikolo project.
+It provides features to control basic video playback functions for playing videos hosted by various video providers.
 
 Beyond that there are more features:
 
@@ -12,12 +12,7 @@ Beyond that there are more features:
 
 ## Getting Started
 
-1. Clone the repository
-
-```bash
-git clone https://lab.xikolo.de/xikolo/video-player
-cd video-player
-```
+1. Clone this repository
 
 2. Install the dependencies and run the project
 

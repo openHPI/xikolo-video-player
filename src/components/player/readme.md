@@ -57,7 +57,10 @@ Type: `Promise<void>`
 
 ### `getShortcutKeys() => Promise<Array<string>>`
 
-Values of the keyboard keys the player listens to on the 'keydown` event
+Values of the keyboard keys the player listens to on the 'keydown` event.
+
+Internal functions are only triggered when key is pressed without special key
+(alt, ctrl, meta, shift).
 
 #### Returns
 
