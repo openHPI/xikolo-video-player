@@ -28,7 +28,7 @@
     "@stencil/core": "2.21.0",
     "@stencil/eslint-plugin": "0.4.0",
     "@stencil/postcss": "2.1.0",
-    "@stencil/sass": "2.0.2",
+    "@stencil/sass": "2.0.3",
     "@types/autoprefixer": "9.7.2",
     "@types/jest": "27.5.2",
     "@types/puppeteer": "5.4.7",
