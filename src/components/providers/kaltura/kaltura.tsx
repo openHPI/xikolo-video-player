@@ -14,7 +14,6 @@ import {
   TimeUpdateDetail,
   XmVideo,
   VideoAnalytics,
-  HTMLXmVideoElement,
 } from '../../../types/common';
 
 @Component({
@@ -28,7 +27,7 @@ export class Kaltura implements XmVideo, VideoAnalytics {
 
   callbacks: Function[] = [];
 
-  @Element() el: HTMLXmVideoElement;
+  @Element() el: HTMLXmKalturaElement;
 
   @Prop() active = false;
 

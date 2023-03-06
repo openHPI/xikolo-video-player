@@ -12,11 +12,7 @@ import {
 
 import type Player from '@vimeo/player';
 
-import {
-  XmVideo,
-  VideoAnalytics,
-  HTMLXmVideoElement,
-} from '../../../types/common';
+import { XmVideo, VideoAnalytics } from '../../../types/common';
 
 @Component({
   tag: 'xm-vimeo',
@@ -26,7 +22,7 @@ import {
 export class Vimeo implements XmVideo, VideoAnalytics {
   callbacks: Function[] = [];
 
-  @Element() el: HTMLXmVideoElement;
+  @Element() el: HTMLXmVimeoElement;
 
   @Prop() active = false;
 

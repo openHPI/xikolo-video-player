@@ -23,7 +23,7 @@ interface Slide {
 export class SlidePreviewBar {
   slides: Slide[] = [];
 
-  @Element() el: HTMLXmSliderElement;
+  @Element() el: HTMLXmSlidePreviewBarElement;
 
   @State()
   hover: Hover = {
