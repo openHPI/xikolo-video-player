@@ -385,12 +385,6 @@ export class Player {
     }
   }
 
-  @bind()
-  @Listen('dblclick')
-  private handleDoubleClick() {
-    this.toggleFullscreen();
-  }
-
   /**
    * Invoke the play function on the player.
    * Also sets the internal state to mode "playing"
@@ -804,6 +798,7 @@ export class Player {
     ) as HTMLXmVideoElement;
     video.setAttribute('slot', slot);
     video.setAttribute('active', 'true');
+    video.ondblclick = this.toggleFullscreen;
   };
 
   private renderControls = () => {
