@@ -33,12 +33,12 @@ export class Controls {
   /**
    * Player status
    */
-  @Prop({ mutable: true }) status: Status;
+  @Prop() status: Status;
 
   /**
    * List of text tracks
    */
-  @Prop({ mutable: true }) textTracks: TextTrackList;
+  @Prop() textTracks: TextTrackList;
 
   /**
    * JSON encoded sources for slides
@@ -48,7 +48,7 @@ export class Controls {
   /**
    * Array of toggle control configurations
    */
-  @Prop({ mutable: true }) toggleControlButtons: Array<ToggleControlProps>;
+  @Prop() toggleControlButtons: Array<ToggleControlProps>;
 
   /**
    * Emitted on play
