@@ -154,25 +154,25 @@ export class Controls {
         <div class="controls__toolbar" data-test-id="controlsToolbar">
           <Control
             status={this.status}
-            onPause={this._pause}
-            onPlay={this._play}
+            onPause={this.pause}
+            onPlay={this.play}
           />
           <Volume
             status={this.status}
-            onMute={this._mute}
-            onUnmute={this._unmute}
-            onChangeVolume={this._setVolume}
+            onMute={this.mute}
+            onUnmute={this.unmute}
+            onChangeVolume={this.setVolume}
           />
           <CurrentTime status={this.status} />
           <div class="controls__playback-rate">
             <PlaybackRate
               status={this.status}
-              onChange={this._setPlaybackRate}
+              onChange={this.setPlaybackRate}
             />
             <PlaybackRateToggleButton
               status={this.status}
-              onShow={this._showPlaybackRate}
-              onHide={this._hidePlaybackRate}
+              onShow={this.showPlaybackRate}
+              onHide={this.hidePlaybackRate}
             />
           </div>
 
@@ -180,26 +180,26 @@ export class Controls {
             this.toggleControlButtons.map((button) => (
               <CustomControlButton
                 config={button}
-                onClick={this._changeToggleControlActiveState}
+                onClick={this.changeToggleControlActiveState}
               ></CustomControlButton>
             ))}
 
           <SubtitleButton
             status={this.status}
             visible={!!this.status.subtitle.language}
-            onEnable={this._enableTextTrack}
-            onDisable={this._disableTextTrack}
+            onEnable={this.enableTextTrack}
+            onDisable={this.disableTextTrack}
           />
           <SettingsMenuToggleButton
             status={this.status}
-            onOpenSettingsMenu={this._openSettingsMenu}
-            onCloseSettingsMenu={this._closeSettingsMenu}
+            onOpenSettingsMenu={this.openSettingsMenu}
+            onCloseSettingsMenu={this.closeSettingsMenu}
             data-test-id="settingsMenuToggleButton"
           />
           <Fullscreen
             status={this.status}
-            onRequest={this._enterFullscreen}
-            onExit={this._exitFullscreen}
+            onRequest={this.enterFullscreen}
+            onExit={this.exitFullscreen}
           />
         </div>
       </div>
@@ -207,84 +207,84 @@ export class Controls {
   }
 
   @bind()
-  private _play() {
+  private play() {
     this.playEvent.emit();
   }
 
   @bind()
-  private _pause() {
+  private pause() {
     this.pauseEvent.emit();
   }
 
   @bind()
-  private _enterFullscreen() {
+  private enterFullscreen() {
     this.enterFullscreenEvent.emit();
   }
 
   @bind()
-  private _exitFullscreen() {
+  private exitFullscreen() {
     this.exitFullscreenEvent.emit();
   }
 
   @bind()
-  private _mute() {
+  private mute() {
     this.muteEvent.emit();
   }
 
   @bind()
-  private _unmute() {
+  private unmute() {
     this.unmuteEvent.emit();
   }
 
   @bind()
-  private _setVolume(volume: number) {
+  private setVolume(volume: number) {
     this.changeVolumeEvent.emit({ volume });
   }
 
   @bind()
-  private _openSettingsMenu(e: Event) {
+  private openSettingsMenu(e: Event) {
     e.stopPropagation();
     this.hidePlaybackRateEvent.emit();
     this.openSettingsMenuEvent.emit();
   }
 
   @bind()
-  private _closeSettingsMenu(e: Event) {
+  private closeSettingsMenu(e: Event) {
     e.stopPropagation();
     this.closeSettingsMenuEvent.emit();
   }
 
   @bind()
-  private _enableTextTrack() {
+  private enableTextTrack() {
     this.enableTextTrackEvent.emit();
   }
 
   @bind()
-  private _disableTextTrack() {
+  private disableTextTrack() {
     this.disableTextTrackEvent.emit();
   }
 
   @bind()
-  private _setPlaybackRate(playbackRate: number) {
+  private setPlaybackRate(playbackRate: number) {
     this.changePlaybackRateEvent.emit({ playbackRate });
     this.hidePlaybackRateEvent.emit();
   }
 
   @bind()
-  private _showPlaybackRate(e: Event) {
+  private showPlaybackRate(e: Event) {
     e.stopPropagation();
     this.closeSettingsMenuEvent.emit();
     this.showPlaybackRateEvent.emit();
   }
 
   @bind()
-  private _hidePlaybackRate(e: Event) {
+  private hidePlaybackRate(e: Event) {
     e.stopPropagation();
     this.hidePlaybackRateEvent.emit();
   }
 
   @bind()
-  private _changeToggleControlActiveState(button: ToggleControlProps) {
+  private changeToggleControlActiveState(button: ToggleControlProps) {
     button.active = !button.active;
     this.changeToggleControlActiveStateEvent.emit(button);
   }
