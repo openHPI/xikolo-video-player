@@ -41,3 +41,24 @@ export const getVideoElement = (
   el: Element,
   selector: string
 ): HTMLXmVideoElement | null => el.querySelector(selector);
+
+/**
+ * Request fullscreen on the element.
+ * Takes vendor prefixes into account to support all browsers.
+ */
+export const requestFullscreen = (element: Element) => {
+  const requestMethod =
+    element.requestFullscreen || (element as any).webkitRequestFullscreen;
+
+  return requestMethod?.call(element);
+};
+
+/**
+ * Exits fullscreen on the document.
+ * Takes vendor prefixes into account to support all browsers.
+ */
+export const exitFullscreen = () => {
+  const requestMethod =
+    document.exitFullscreen || (document as any).webkitExitFullscreen;
+  return requestMethod?.call(document);
+};

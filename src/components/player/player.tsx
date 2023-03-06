@@ -21,12 +21,14 @@ import {
   VimeoSeekedDetail,
 } from '../../utils/types';
 import {
+  exitFullscreen,
   fixDecimalPrecision,
   getPresentationNodes,
   getVideoElement,
   hasDefaultScrollingBehavior,
   isInteractiveElement,
   isSmall,
+  requestFullscreen,
 } from '../../utils/helpers';
 import {
   HTMLXmVideoElement,
@@ -139,7 +141,6 @@ export class Player {
     }
 
     document.addEventListener('fullscreenchange', this._fullscreenchange);
-    document.addEventListener('MSFullscreenChange', this._fullscreenchange);
     document.addEventListener('webkitfullscreenchange', this._fullscreenchange);
 
     document.addEventListener('click', this._hideSettingsMenuOnClickOutside);
@@ -162,7 +163,6 @@ export class Player {
       this.secondary.removeEventListener('click', this._click);
 
     document.removeEventListener('fullscreenchange', this._fullscreenchange);
-    document.removeEventListener('MSFullscreenChange', this._fullscreenchange);
     document.removeEventListener(
       'webkitfullscreenchange',
       this._fullscreenchange
@@ -445,33 +445,16 @@ export class Player {
   }
 
   @Listen('control:enterFullscreen')
-  protected async _enterFullscreen() {
-    const element = this.el as any;
-    const requestMethod =
-      element.requestFullscreen ||
-      element.webkitRequestFullScreen ||
-      element.webkitEnterFullscreen ||
-      element.mozRequestFullScreen ||
-      element.msRequestFullscreen;
-    if (requestMethod && !this.status.fullscreen) {
-      return requestMethod.call(element);
+  private enterFullscreen() {
+    if (!this.status.fullscreen) {
+      requestFullscreen(this.el);
     }
   }
 
   @Listen('control:exitFullscreen')
-  protected async _exitFullscreen() {
-    const doc = document as any;
-    const fullscreen =
-      doc.fullScreen || doc.mozFullScreen || doc.webkitIsFullScreen;
-    if (fullscreen) {
-      const requestMethod =
-        doc.exitFullscreen ||
-        doc.webkitExitFullscreen ||
-        doc.mozCancelFullScreen ||
-        doc.msExitFullscreen;
-      if (requestMethod && this.status.fullscreen) {
-        return requestMethod.call(doc);
-      }
+  private exitFullscreen() {
+    if (this.status.fullscreen) {
+      exitFullscreen();
     }
   }
 
@@ -705,9 +688,9 @@ export class Player {
   @bind()
   private toggleFullscreen() {
     if (this.status.fullscreen) {
-      this._exitFullscreen();
+      exitFullscreen();
     } else {
-      this._enterFullscreen();
+      requestFullscreen(this.el);
     }
   }
 
