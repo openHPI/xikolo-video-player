@@ -11,12 +11,27 @@ import { CueListChangeEventProps, ToggleControlProps } from "./utils/types";
 import { RatioLoadedDetail, TimeUpdateDetail } from "./types/common";
 export namespace Components {
     interface XmAspectRatioBox {
+        /**
+          * Video ratio, default is 16:9
+         */
         "ratio": number;
     }
     interface XmControls {
+        /**
+          * JSON encoded sources for slides
+         */
         "slidesSrc"?: string;
+        /**
+          * Player status
+         */
         "status": Status;
+        /**
+          * List of text tracks
+         */
         "textTracks": TextTrackList;
+        /**
+          * Array of toggle control configurations
+         */
         "toggleControlButtons": Array<ToggleControlProps>;
     }
     interface XmKaltura {
@@ -315,30 +330,87 @@ declare global {
 }
 declare namespace LocalJSX {
     interface XmAspectRatioBox {
+        /**
+          * Video ratio, default is 16:9
+         */
         "ratio"?: number;
     }
     interface XmControls {
+        /**
+          * Emitted when the playback rate is changed
+         */
         "onControl:changePlaybackRate"?: (event: XmControlsCustomEvent<any>) => void;
         /**
           * Event hook for custom control
          */
         "onControl:changeToggleControlActiveState"?: (event: XmControlsCustomEvent<ToggleControlProps>) => void;
+        /**
+          * Emitted when the volume is changed
+         */
         "onControl:changeVolume"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * Emitted when the settings menu is closed
+         */
         "onControl:closeSettingsMenu"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * Emitted when the text track is disabled
+         */
         "onControl:disableTextTrack"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * Emitted when the text track is enabled
+         */
         "onControl:enableTextTrack"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * Emitted when the full screen is entered
+         */
         "onControl:enterFullscreen"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * Emitted when the full screen is exited
+         */
         "onControl:exitFullscreen"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * Emitted when the playback rate menu is closed
+         */
         "onControl:hidePlaybackRate"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * Emitted when volume is muted
+         */
         "onControl:mute"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * Emitted when the settings menu is opened
+         */
         "onControl:openSettingsMenu"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * Emitted on pause
+         */
         "onControl:pause"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * Emitted on play
+         */
         "onControl:play"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * Emitted when the playback rate menu is opened
+         */
         "onControl:showPlaybackRate"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * Emitted when volume is unmuted
+         */
         "onControl:unmute"?: (event: XmControlsCustomEvent<any>) => void;
+        /**
+          * JSON encoded sources for slides
+         */
         "slidesSrc"?: string;
+        /**
+          * Player status
+         */
         "status"?: Status;
+        /**
+          * List of text tracks
+         */
         "textTracks"?: TextTrackList;
+        /**
+          * Array of toggle control configurations
+         */
         "toggleControlButtons"?: Array<ToggleControlProps>;
     }
     interface XmKaltura {

@@ -30,48 +30,102 @@ import { ToggleControlProps } from '../../utils/types';
 export class Controls {
   @Element() el: HTMLXmControlsElement;
 
+  /**
+   * Player status
+   */
   @Prop({ mutable: true }) status: Status;
 
+  /**
+   * List of text tracks
+   */
   @Prop({ mutable: true }) textTracks: TextTrackList;
 
+  /**
+   * JSON encoded sources for slides
+   */
   @Prop() slidesSrc?: string;
 
+  /**
+   * Array of toggle control configurations
+   */
   @Prop({ mutable: true }) toggleControlButtons: Array<ToggleControlProps>;
 
+  /**
+   * Emitted on play
+   */
   @Event({ eventName: 'control:play' }) playEvent: EventEmitter;
 
+  /**
+   * Emitted on pause
+   */
   @Event({ eventName: 'control:pause' }) pauseEvent: EventEmitter;
 
+  /**
+   * Emitted when the full screen is entered
+   */
   @Event({ eventName: 'control:enterFullscreen' })
   enterFullscreenEvent: EventEmitter;
 
+  /**
+   * Emitted when the full screen is exited
+   */
   @Event({ eventName: 'control:exitFullscreen' })
   exitFullscreenEvent: EventEmitter;
 
+  /**
+   * Emitted when volume is muted
+   */
   @Event({ eventName: 'control:mute' }) muteEvent: EventEmitter;
 
+  /**
+   * Emitted when volume is unmuted
+   */
   @Event({ eventName: 'control:unmute' }) unmuteEvent: EventEmitter;
 
+  /**
+   * Emitted when the volume is changed
+   */
   @Event({ eventName: 'control:changeVolume' }) changeVolumeEvent: EventEmitter;
 
+  /**
+   * Emitted when the text track is enabled
+   */
   @Event({ eventName: 'control:enableTextTrack' })
   enableTextTrackEvent: EventEmitter;
 
+  /**
+   * Emitted when the text track is disabled
+   */
   @Event({ eventName: 'control:disableTextTrack' })
   disableTextTrackEvent: EventEmitter;
 
+  /**
+   * Emitted when the settings menu is opened
+   */
   @Event({ eventName: 'control:openSettingsMenu' })
   openSettingsMenuEvent: EventEmitter;
 
+  /**
+   * Emitted when the settings menu is closed
+   */
   @Event({ eventName: 'control:closeSettingsMenu' })
   closeSettingsMenuEvent: EventEmitter;
 
+  /**
+   * Emitted when the playback rate is changed
+   */
   @Event({ eventName: 'control:changePlaybackRate' })
   changePlaybackRateEvent: EventEmitter;
 
+  /**
+   * Emitted when the playback rate menu is opened
+   */
   @Event({ eventName: 'control:showPlaybackRate' })
   showPlaybackRateEvent: EventEmitter;
 
+  /**
+   * Emitted when the playback rate menu is closed
+   */
   @Event({ eventName: 'control:hidePlaybackRate' })
   hidePlaybackRateEvent: EventEmitter;
 
