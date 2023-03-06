@@ -32,6 +32,8 @@
     "@stencil-community/strict-boolean-conditions": 0,
     // There is a bug: Prop() is correctly applied but the linter still complains
     "@stencil-community/no-unused-watch": 0,
+    // Results in a lot of false positives
+    "@stencil-community/own-methods-must-be-private": 0,
     "import/no-extraneous-dependencies": 0,
     "import/prefer-default-export": 0
   }
