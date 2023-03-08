@@ -421,6 +421,14 @@ declare namespace LocalJSX {
         "duration"?: number;
         "entryId"?: string;
         /**
+          * Emit when player is no longer buffering
+         */
+        "onBuffered"?: (event: XmKalturaCustomEvent<any>) => void;
+        /**
+          * Emit when player is buffering
+         */
+        "onBuffering"?: (event: XmKalturaCustomEvent<any>) => void;
+        /**
           * Emit when video has ended
          */
         "onEnded"?: (event: XmKalturaCustomEvent<any>) => void;
@@ -531,7 +539,13 @@ declare namespace LocalJSX {
     }
     interface XmVimeo {
         "active"?: boolean;
+        /**
+          * The buffered event is not handled to use the build in loading indicator.
+         */
         "onBuffered"?: (event: XmVimeoCustomEvent<any>) => void;
+        /**
+          * The buffering event is not handled to use the build in loading indicator.
+         */
         "onBuffering"?: (event: XmVimeoCustomEvent<any>) => void;
         /**
           * Emit when video has ended

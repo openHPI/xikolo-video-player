@@ -67,6 +67,10 @@ export class Kaltura implements XmVideo, VideoAnalytics {
 
   @Event({ eventName: 'seeked' }) seekedEvent: EventEmitter;
 
+  @Event({ eventName: 'buffering' }) bufferingEvent: EventEmitter;
+
+  @Event({ eventName: 'buffered' }) bufferedEvent: EventEmitter;
+
   @Watch('volume')
   async volumeChanged(volume: number) {
     if (this.playerAvailable()) {
@@ -105,6 +109,14 @@ export class Kaltura implements XmVideo, VideoAnalytics {
     this.ratioLoadedEvent.emit({
       name: this.el.getAttribute('slot'),
       ratio: this.ratio,
+    });
+
+    this.player.addEventListener('waiting', () => {
+      this.bufferingEvent.emit();
+    });
+
+    this.player.addEventListener('playing', () => {
+      this.bufferedEvent.emit();
     });
 
     this.player.addEventListener('timeupdate', () => {

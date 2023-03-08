@@ -35,6 +35,7 @@ import {
   Presentations,
   XmVideoFunctions,
 } from '../../types/common';
+import { Loading } from './elements';
 
 @Component({
   tag: 'xm-player',
@@ -153,6 +154,7 @@ export class Player {
     }
     this._setPlaybackRate(this.playbackrate);
     this.setLanguage(this.lang);
+    this.status = { ...this.status, loading: false };
   }
 
   disconnectedCallback() {
@@ -174,6 +176,7 @@ export class Player {
   render() {
     return (
       <div class="player" tabindex="0">
+        {<Loading status={this.status}></Loading>}
         {this.renderVideoContent()}
         {this.renderControls()}
       </div>
@@ -263,6 +266,16 @@ export class Player {
       this.activeCueUpdateEvent.emit({ cues });
     }
   };
+
+  @Listen('buffering')
+  handleBufferStart() {
+    this.status = { ...this.status, loading: true };
+  }
+
+  @Listen('buffered')
+  handleBufferEnd() {
+    this.status = { ...this.status, loading: false };
+  }
 
   @Listen('ratioLoaded')
   _resizeScreen(e: CustomEvent) {

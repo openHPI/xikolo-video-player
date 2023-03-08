@@ -16,8 +16,8 @@
 
 | Event         | Description                                                                                                                     | Type               |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `buffered`    |                                                                                                                                 | `CustomEvent<any>` |
-| `buffering`   |                                                                                                                                 | `CustomEvent<any>` |
+| `buffered`    | The buffered event is not handled to use the build in loading indicator.                                                        | `CustomEvent<any>` |
+| `buffering`   | The buffering event is not handled to use the build in loading indicator.                                                       | `CustomEvent<any>` |
 | `ended`       | Emit when video has ended                                                                                                       | `CustomEvent<any>` |
 | `pause`       |                                                                                                                                 | `CustomEvent<any>` |
 | `play`        |                                                                                                                                 | `CustomEvent<any>` |

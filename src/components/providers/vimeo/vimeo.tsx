@@ -53,8 +53,14 @@ export class Vimeo implements XmVideo, VideoAnalytics {
 
   @Event({ eventName: 'ended' }) endedEvent: EventEmitter;
 
+  /**
+   * The buffering event is not handled to use the build in loading indicator.
+   */
   @Event({ eventName: 'buffering' }) bufferingEvent: EventEmitter;
 
+  /**
+   * The buffered event is not handled to use the build in loading indicator.
+   */
   @Event({ eventName: 'buffered' }) bufferedEvent: EventEmitter;
 
   @Event({ eventName: 'ratioLoaded' }) ratioLoadedEvent: EventEmitter;
@@ -117,9 +123,6 @@ export class Vimeo implements XmVideo, VideoAnalytics {
     this.player.on('seeking', (e) => this.seekingEvent.emit(e));
     this.player.on('seeked', (e) => this.seekedEvent.emit(e));
     this.player.on('ended', (e) => this.endedEvent.emit(e));
-
-    this.player.on('bufferstart', (e) => this.bufferingEvent.emit(e));
-    this.player.on('bufferend', (e) => this.bufferedEvent.emit(e));
 
     // Wait for Vimeo Player to be ready to access the actual iframe element
     await this.player.ready();

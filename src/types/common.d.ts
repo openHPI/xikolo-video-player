@@ -24,6 +24,14 @@ interface XmVideoEvents {
    * Emit when video has ended
    */
   endedEvent: EventEmitter;
+  /**
+   * Emit when player is buffering
+   */
+  bufferingEvent: EventEmitter;
+  /**
+   * Emit when player is no longer buffering
+   */
+  bufferedEvent: EventEmitter;
 }
 
 interface XmVideo extends XmVideoFunctions, XmVideoEvents {

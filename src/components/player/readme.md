@@ -104,8 +104,8 @@ Type: `Promise<void>`
 
 Invoke the seek function on the player.
 
-Sometimes seeking starts playing the video, too.
-So it will reset the state to current stored player state.
+Sometimes seeking starts playing the video.
+If the player was in paused state, we manually pause again.
 
 #### Returns
 
