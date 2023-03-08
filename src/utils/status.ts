@@ -37,6 +37,7 @@ export interface Status {
   progress: Progress;
   subtitle: Subtitle;
   settings: Settings;
+  loading: boolean;
 }
 
 export const defaultStatus: Status = {
@@ -61,4 +62,5 @@ export const defaultStatus: Status = {
     playbackRate: 1,
     textTrack: textTrackDefault,
   },
+  loading: true,
 };

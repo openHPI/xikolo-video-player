@@ -20,6 +20,8 @@
 
 | Event         | Description                                                                                                                     | Type                             |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| `buffered`    | Emit when player is no longer buffering                                                                                         | `CustomEvent<any>`               |
+| `buffering`   | Emit when player is buffering                                                                                                   | `CustomEvent<any>`               |
 | `ended`       | Emit when video has ended                                                                                                       | `CustomEvent<any>`               |
 | `pause`       |                                                                                                                                 | `CustomEvent<any>`               |
 | `play`        |                                                                                                                                 | `CustomEvent<any>`               |

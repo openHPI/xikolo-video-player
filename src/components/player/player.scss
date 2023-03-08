@@ -1,3 +1,5 @@
+@import "../../utils/variables.scss";
+
 :host {
   display: block;
   color: white;
@@ -7,7 +9,7 @@
   border: 1px solid black;
   border-color: var(--vp-bg-color);
 
-  font-family: 
+  font-family:
     // Basic web for OS and iOS (ensures monospaced digits)
     "Helvetica Neue",
     // Safari for OS X and iOS (San Francisco)
@@ -46,3 +48,46 @@
 }
 
 @import "./vars";
+
+.loading {
+  animation: 0s linear 750ms forwards delayedShow;
+  visibility: hidden;
+
+  position: absolute;
+  inset: 0;
+  margin-bottom: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  z-index: $z-index-m;
+
+  &--fullscreen-mode {
+    margin-bottom: 55px;
+  }
+
+  &__spinner {
+    fill: currentColor;
+    position: relative;
+    width: 70px;
+    height: 70px;
+    animation: spinner 1.3s linear infinite;
+  }
+
+  @keyframes spinner {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes delayedShow {
+    to {
+      visibility: visible;
+    }
+  }
+}
