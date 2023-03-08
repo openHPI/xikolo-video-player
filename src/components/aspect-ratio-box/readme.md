@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default  |
-| -------- | --------- | ----------- | -------- | -------- |
-| `ratio`  | `ratio`   |             | `number` | `0.5625` |
+| Property | Attribute | Description                  | Type     | Default  |
+| -------- | --------- | ---------------------------- | -------- | -------- |
+| `ratio`  | `ratio`   | Video ratio, default is 16:9 | `number` | `0.5625` |
 
 
 ## Dependencies
