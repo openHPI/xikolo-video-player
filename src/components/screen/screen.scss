@@ -1,3 +1,5 @@
+@import "../../utils/variables.scss";
+
 :host {
   display: block;
   background-color: black;
@@ -58,7 +60,7 @@
   &__handle {
     display: none;
     position: absolute;
-    z-index: 1;
+    z-index: $z-index-s;
     width: var(--vp-gutter-width);
     height: 100%;
     left: 50%;
