@@ -1,8 +1,10 @@
+@import "../../utils/variables.scss";
+
 :host {
   position: absolute;
   // Needed to position the slider tooltip on top of subtitles
   // and menus
-  z-index: 2;
+  z-index: $z-index-m;
   // Default tooltip position (Top-center + 10 px margin)
   left: 50%;
   bottom: calc(100% + 10px);

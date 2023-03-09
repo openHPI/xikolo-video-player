@@ -1,3 +1,5 @@
+@import "../../utils/variables.scss";
+
 .controls {
   background-color: "#353535";
   background-color: var(--vp-gutter-color);
@@ -86,7 +88,7 @@
 
   &__menu {
     position: absolute;
-    z-index: 1;
+    z-index: $z-index-l;
     // Needed for matching the bottom position of the settings menu.
     margin-bottom: -1px;
     bottom: 50px;
@@ -135,7 +137,7 @@
   position: absolute;
   left: 0px;
   right: 0px;
-  z-index: 1;
+  z-index: $z-index-l;
   bottom: 60px;
   align-self: center;
   text-align: center;
