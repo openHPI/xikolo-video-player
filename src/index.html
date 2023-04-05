@@ -131,6 +131,30 @@
 
       <div id="transcript-text">Transcript text will appear here</div>
 
+      <h2>Video hosted on Kaltura</h2>
+
+      <p>
+        This example is a video hosted on Kaltura. Note: We selected a publicly
+        available example. It contains advertising for Kaltura and burned-in
+        control elements in the video, which is not ideal.
+      </p>
+
+      <xm-player>
+        <xm-kaltura
+          name="lecturer"
+          partner-id="2421271"
+          entry-id="1_23yaxsca"
+          duration="125"
+          ratio="0.5625"
+        ></xm-kaltura>
+
+        <xm-presentation
+          reference="lecturer"
+          name="single"
+          label="Switch to single stream"
+        ></xm-presentation>
+      </xm-player>
+
       <h2>Various presentation modes</h2>
       <ul>
         <li>Upcoming feature to be implemented</li>
