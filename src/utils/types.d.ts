@@ -9,9 +9,3 @@ export interface ToggleControlProps {
   title: string;
   active: boolean;
 }
-
-export interface VimeoSeekedDetail {
-  duration: number;
-  seconds: number;
-  percent: number;
-}
