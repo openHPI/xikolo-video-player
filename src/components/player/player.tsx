@@ -15,11 +15,7 @@ import { Mode, Status, defaultStatus } from '../../utils/status';
 import { TextTrackList, WebVTT } from '../../utils/webVTT';
 import { bind } from '../../utils/bind';
 import { isKnownLocale } from '../../utils/locales';
-import {
-  ToggleControlProps,
-  CueListChangeEventProps,
-  VimeoSeekedDetail,
-} from '../../utils/types';
+import { ToggleControlProps, CueListChangeEventProps } from '../../utils/types';
 import {
   exitFullscreen,
   fixDecimalPrecision,
@@ -286,24 +282,6 @@ export class Player {
     }
   }
 
-  /**
-   * Listen to a Vimeo event 'seeked' that returns updated progress.
-   * Triggered when the player seeks to a specific time. A timeupdate event will also be fired at the same time
-   * then update the status accordingly
-   */
-  @Listen('seeked')
-  private handleSeeked(e: CustomEvent<VimeoSeekedDetail>) {
-    const { seconds, percent } = e.detail;
-    this.status = {
-      ...this.status,
-      progress: {
-        seconds,
-        percent,
-      },
-    };
-    this.cueUpdate(seconds);
-  }
-
   @bind()
   @Listen('toggleControl:loaded')
   protected _addToggleControlButton(e: CustomEvent<ToggleControlProps>) {
@@ -434,6 +412,11 @@ export class Player {
 
     if (this.status.mode === Mode.PAUSED) {
       this.pause();
+      this.status = {
+        ...this.status,
+        progress: { ...this.status.progress, seconds },
+      };
+      this.cueUpdate(seconds);
     }
   }
 
