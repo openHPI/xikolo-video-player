@@ -139,7 +139,7 @@ export class Vimeo implements XmVideo, VideoAnalytics {
     // Emit one default timeupdate event to update player with duration
     this.player.getDuration().then((duration) => {
       const e = new CustomEvent('timeupdate', {
-        detail: { duration, seconds: 0, percent: 0 },
+        detail: { duration, seconds: 0 },
       });
 
       this.el.dispatchEvent(e);

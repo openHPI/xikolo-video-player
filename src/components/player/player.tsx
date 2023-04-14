@@ -217,12 +217,12 @@ export class Player {
   }
 
   private timeUpdate = async (e: Event) => {
-    const { seconds, percent, duration } = (e as CustomEvent).detail;
+    const { seconds, duration } = (e as CustomEvent).detail;
     this.cueUpdate(seconds);
     this.status = {
       ...this.status,
       duration,
-      progress: { seconds, percent },
+      progress: seconds,
     };
     if (this.secondary) {
       const currentTime = await this.secondary.currentTime();
@@ -402,7 +402,7 @@ export class Player {
       this.pause();
       this.status = {
         ...this.status,
-        progress: { ...this.status.progress, seconds },
+        progress: seconds,
       };
       this.cueUpdate(seconds);
     }
@@ -641,7 +641,7 @@ export class Player {
         cues: currentCues,
       });
       // Triggers an update for collecting active cues for the new language
-      this.cueUpdate(this.status.progress.seconds, true);
+      this.cueUpdate(this.status.progress, true);
     }
     this.status = {
       ...this.status,
@@ -705,7 +705,7 @@ export class Player {
 
   @bind()
   private skipForward() {
-    const progress = this.status.progress.seconds;
+    const progress = this.status.progress;
     const endOfVideo = this.status.duration;
     const newPosition =
       progress < endOfVideo - this.skippedSeconds
@@ -717,7 +717,7 @@ export class Player {
 
   @bind()
   private skipBackward() {
-    const progress = this.status.progress.seconds;
+    const progress = this.status.progress;
     const newPosition =
       progress < this.skippedSeconds ? 0 : progress - this.skippedSeconds;
 

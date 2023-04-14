@@ -7,7 +7,6 @@ import {
   EventEmitter,
   State,
 } from '@stencil/core';
-import { Progress } from '../../utils/status';
 import { bind } from '../../utils/bind';
 import { format } from '../../utils/duration';
 
@@ -27,7 +26,10 @@ export class Slider {
 
   @Prop() duration: number;
 
-  @Prop() progress: Progress;
+  /**
+   * Video progress in seconds
+   */
+  @Prop() progress: number;
 
   @Prop() fullscreen: boolean;
 
@@ -56,7 +58,7 @@ export class Slider {
           // Convert to string as zero (0) is otherwise ignored and
           // not rendered at all. This would show a default progress
           // bar of around 50%.
-          value={this.progress.seconds.toString()}
+          value={this.progress.toString()}
           onChange={this.onSeek}
           onInput={this.onSeek}
           onMouseMove={this.onMove}

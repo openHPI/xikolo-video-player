@@ -103,7 +103,6 @@ export class Kaltura implements XmVideo, VideoAnalytics {
     this.timeUpdateEvent.emit({
       duration: this.duration,
       seconds: 0,
-      percent: 0,
     });
 
     this.ratioLoadedEvent.emit({

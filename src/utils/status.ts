@@ -9,11 +9,6 @@ export enum Mode {
   FINISHED,
 }
 
-export interface Progress {
-  seconds: number;
-  percent: number;
-}
-
 export interface Subtitle {
   enabled: boolean;
   language: string;
@@ -34,7 +29,7 @@ export interface Status {
   mode: Mode;
   openedSettingsMenu: boolean;
   showPlaybackRate: boolean;
-  progress: Progress;
+  progress: number;
   subtitle: Subtitle;
   settings: Settings;
   loading: boolean;
@@ -49,10 +44,7 @@ export const defaultStatus: Status = {
   mode: Mode.PAUSED,
   openedSettingsMenu: false,
   showPlaybackRate: false,
-  progress: {
-    seconds: 0,
-    percent: 0,
-  },
+  progress: 0,
   subtitle: {
     enabled: false,
     language: null,

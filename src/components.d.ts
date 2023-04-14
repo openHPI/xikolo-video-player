@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Progress, Status } from "./utils/status";
+import { Status } from "./utils/status";
 import { TextTrackList } from "./utils/webVTT";
 import { CueListChangeEventProps, ToggleControlProps } from "./utils/types";
 import { RatioLoadedDetail, TimeUpdateDetail } from "./types/common";
@@ -143,7 +143,10 @@ export namespace Components {
     interface XmSlider {
         "duration": number;
         "fullscreen": boolean;
-        "progress": Progress;
+        /**
+          * Video progress in seconds
+         */
+        "progress": number;
         "slidesSrc"?: string;
     }
     interface XmTextTrack {
@@ -503,7 +506,10 @@ declare namespace LocalJSX {
         "duration"?: number;
         "fullscreen"?: boolean;
         "onSlider:seek"?: (event: XmSliderCustomEvent<any>) => void;
-        "progress"?: Progress;
+        /**
+          * Video progress in seconds
+         */
+        "progress"?: number;
         "slidesSrc"?: string;
     }
     interface XmTextTrack {

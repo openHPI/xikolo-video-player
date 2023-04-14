@@ -84,7 +84,7 @@ export const CurrentTime: FunctionalComponent<CurrentTimeProps> = (props) => {
 
   return (
     <span class="controls__time" title={`Time left of ${format(duration)}s`}>
-      {format(progress.seconds)} / {format(duration)}
+      {format(progress)} / {format(duration)}
     </span>
   );
 };
