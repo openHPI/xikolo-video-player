@@ -9,6 +9,10 @@ import { Status } from "./utils/status";
 import { TextTrackList } from "./utils/webVTT";
 import { CueListChangeEventProps, ToggleControlProps } from "./utils/types";
 import { RatioLoadedDetail, TimeUpdateDetail } from "./types/common";
+export { Status } from "./utils/status";
+export { TextTrackList } from "./utils/webVTT";
+export { CueListChangeEventProps, ToggleControlProps } from "./utils/types";
+export { RatioLoadedDetail, TimeUpdateDetail } from "./types/common";
 export namespace Components {
     interface XmAspectRatioBox {
         /**
