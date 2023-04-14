@@ -55,10 +55,7 @@ export class Slider {
           max={this.duration}
           step="any"
           autocomplete="off"
-          // Convert to string as zero (0) is otherwise ignored and
-          // not rendered at all. This would show a default progress
-          // bar of around 50%.
-          value={this.progress.toString()}
+          value={this.progress}
           onChange={this.onSeek}
           onInput={this.onSeek}
           onMouseMove={this.onMove}
