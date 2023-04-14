@@ -31,7 +31,6 @@
     "@stencil/sass": "2.0.4",
     "@types/autoprefixer": "9.7.2",
     "@types/jest": "27.5.2",
-    "@types/puppeteer": "5.4.7",
     "@types/vimeo__player": "2.16.3",
     "@typescript-eslint/eslint-plugin": "5.47.1",
     "@typescript-eslint/parser": "5.47.1",
