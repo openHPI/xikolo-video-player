@@ -140,8 +140,6 @@ export class Player {
     document.addEventListener('fullscreenchange', this._fullscreenchange);
     document.addEventListener('webkitfullscreenchange', this._fullscreenchange);
 
-    document.addEventListener('click', this._hideSettingsMenuOnClickOutside);
-
     // On small devices the volume slider is hidden
     // So the user can only change it via the device buttons
     // That's why the player's initial state for 'volume' will remain the default 100%
@@ -165,8 +163,6 @@ export class Player {
       'webkitfullscreenchange',
       this._fullscreenchange
     );
-
-    document.removeEventListener('click', this._hideSettingsMenuOnClickOutside);
   }
 
   render() {
@@ -217,14 +213,6 @@ export class Player {
         default:
           return this.pause();
       }
-    }
-  }
-
-  @bind()
-  protected async _hideSettingsMenuOnClickOutside() {
-    if (this.status.openedSettingsMenu || this.status.showPlaybackRate) {
-      this._closeSettingsMenu();
-      this._hidePlaybackRate();
     }
   }
 

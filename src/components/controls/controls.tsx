@@ -5,6 +5,7 @@ import {
   Prop,
   EventEmitter,
   Event,
+  Listen,
 } from '@stencil/core';
 import {
   Fullscreen,
@@ -134,6 +135,12 @@ export class Controls {
    */
   @Event({ eventName: 'control:changeToggleControlActiveState' })
   changeToggleControlActiveStateEvent: EventEmitter<ToggleControlProps>;
+
+  @Listen('click', { target: 'document' })
+  hideMenus(e: Event) {
+    this.closeSettingsMenu(e);
+    this.hidePlaybackRate(e);
+  }
 
   public render() {
     return (
