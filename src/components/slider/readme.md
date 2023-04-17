@@ -7,12 +7,12 @@
 
 ## Properties
 
-| Property     | Attribute    | Description | Type       | Default     |
-| ------------ | ------------ | ----------- | ---------- | ----------- |
-| `duration`   | `duration`   |             | `number`   | `undefined` |
-| `fullscreen` | `fullscreen` |             | `boolean`  | `undefined` |
-| `progress`   | --           |             | `Progress` | `undefined` |
-| `slidesSrc`  | `slides-src` |             | `string`   | `undefined` |
+| Property     | Attribute    | Description               | Type      | Default     |
+| ------------ | ------------ | ------------------------- | --------- | ----------- |
+| `duration`   | `duration`   |                           | `number`  | `undefined` |
+| `fullscreen` | `fullscreen` |                           | `boolean` | `undefined` |
+| `progress`   | `progress`   | Video progress in seconds | `number`  | `undefined` |
+| `slidesSrc`  | `slides-src` |                           | `string`  | `undefined` |
 
 
 ## Events
