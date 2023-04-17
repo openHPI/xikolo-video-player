@@ -40,7 +40,7 @@
     "eslint-config-airbnb-typescript": "17.0.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-react": "7.31.11",
+    "eslint-plugin-react": "7.32.2",
     "husky": "8.0.3",
     "jest": "27.5.1",
     "jest-cli": "27.5.1",
