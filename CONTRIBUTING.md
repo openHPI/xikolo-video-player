@@ -18,6 +18,11 @@ The video player is build with Stencil.
 A good way to start is to read the official [introduction to Stencil](https://stenciljs.com/docs/introduction).
 After this, you should be able to dive into the codebase easier.
 
+### Commit messages
+
+If you are working in the HPI team,
+please make sure to include the ticket number in the commit message.
+
 ### Pull request
 
 Please make pull requests to the `dev` branch.
@@ -30,5 +35,4 @@ This is very useful for reviewers to quickly get an overview and understand what
 ### Code Style
 
 We follow the [proposed guideline by Stencil](https://stenciljs.com/docs/style-guide#code-organization).
-
 The repo has a pre-push git hook with eslint so that new linter offenses do not end up in the code base.

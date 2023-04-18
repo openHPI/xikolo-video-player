@@ -13,8 +13,7 @@ Beyond that there are more features:
 ## Getting Started
 
 1. Clone this repository
-
-2. Install the dependencies and run the project
+2. Install dependencies and run the project
 
 ```bash
 npm install
@@ -47,7 +46,7 @@ A basic markup to get started may look like this:
 There is support for videos hosted on Vimeo and Kaltura.
 The `name` property must match a `reference` property of a `xm-presentation`.
 
-For more configuration, consult the documention of the `xm-vimeo` or `xm-kaltura` component.
+For more configuration, consult the documentation of the `xm-vimeo` or `xm-kaltura` component.
 
 ## Presentation modes
 
@@ -55,7 +54,7 @@ At least one `xm-presentation` component is required.
 The `reference` property must match the `name` property of a provider.
 As of now, only one `xm-presentation` is supported so make sure to add the default mode first in the DOM.
 
-For more configuration, consult the documention of the `xm-presentation` component.
+For more configuration, consult the documentation of the `xm-presentation` component.
 
 ## Public API
 
@@ -148,15 +147,10 @@ Components are prefixed with `xm-`.
 
 ### Event Naming Conventions
 
-Internal events are prefixed depending on where they are emmitted from.
+Internal events are prefixed depending on where they are emitted from.
 E.g. the `controls` component emits a `control:play`, the `settings-menu` a `setting:changePlaybackRate`.
 They are intended for internal use, but are also used outside, e.g. for analytics tracking.
 
 Events from the `player` component itself do not have a name prefix.
 They are supposed to be only used externally.
 E.g. `cueListChange`.
-
-### SVG Icons
-
-SVG icons are taken from the Xikolo font and FontAwesome imported to [icomoon.io](https://icomoon.io).
-You can easily export the icons as cleaned SVG from this page.
