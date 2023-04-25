@@ -86,6 +86,10 @@ export namespace Components {
          */
         "enableTextTrack": () => Promise<void>;
         /**
+          * Get the current video progress
+         */
+        "getProgress": () => Promise<number>;
+        /**
           * Values of the keyboard keys the player listens to on the 'keydown` event.  Internal functions are only triggered when key is pressed without special key (alt, ctrl, meta, shift).
          */
         "getShortcutKeys": () => Promise<Array<string>>;

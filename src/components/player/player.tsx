@@ -408,6 +408,15 @@ export class Player {
     }
   }
 
+  /**
+   * Get the current video progress
+   *
+   */
+  @Method()
+  async getProgress(): Promise<number> {
+    return this.status.progress;
+  }
+
   @bind()
   protected async _ended() {
     this.status = { ...this.status, mode: Mode.FINISHED };
