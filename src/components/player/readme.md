@@ -55,6 +55,16 @@ Type: `Promise<void>`
 
 
 
+### `getProgress() => Promise<number>`
+
+Get the current video progress
+
+#### Returns
+
+Type: `Promise<number>`
+
+
+
 ### `getShortcutKeys() => Promise<Array<string>>`
 
 Values of the keyboard keys the player listens to on the 'keydown` event.
