@@ -32,6 +32,11 @@ In the description, illustrate first what your code will change.
 Please add a section on decisions and choices you made next.
 This is very useful for reviewers to quickly get an overview and understand what the PR is about.
 
+You should include a commit in your PR with the `package.json` and `package-lock.json` update.
+
+To define the release type and number, please refer to the [semantic versioning](https://docs.npmjs.com/about-semantic-versioning)
+documentation.
+
 ### Code Style
 
 We follow the [proposed guideline by Stencil](https://stenciljs.com/docs/style-guide#code-organization).
