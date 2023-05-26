@@ -1,5 +1,4 @@
 import { E2EPage } from '@stencil/core/testing';
-import { ElementHandle } from 'puppeteer';
 
 // Testing Helper Functions: Getter
 //
@@ -14,44 +13,36 @@ import { ElementHandle } from 'puppeteer';
 // There is a workaround:
 // https://github.com/Esri/calcite-components/pull/1103
 
-export async function getSettingsMenuElement(
-  page: E2EPage,
-  selector: string
-): Promise<ElementHandle> {
+export async function getSettingsMenuElement(page: E2EPage, selector: string) {
   return (
     await page.waitForFunction(
-      (shadowDomSelector: string) =>
+      (shadowDomSelector) =>
         document
           .querySelector('xm-player')
           ?.shadowRoot?.querySelector('xm-controls')
           ?.shadowRoot?.querySelector('xm-settings-menu')
-          ?.shadowRoot?.querySelector(shadowDomSelector),
+          ?.shadowRoot?.querySelector(shadowDomSelector[0]),
       {},
       [selector]
     )
   ).asElement()!;
 }
 
-export async function getControlsElement(
-  page: E2EPage,
-  selector: string
-): Promise<ElementHandle> {
+export async function getControlsElement(page: E2EPage, selector: string) {
   return (
     await page.waitForFunction(
-      (shadowDomSelector: string) =>
+      (shadowDomSelector) =>
         document
           .querySelector('xm-player')
           ?.shadowRoot?.querySelector('xm-controls')
-          ?.shadowRoot?.querySelector(shadowDomSelector),
+          ?.shadowRoot?.querySelector(shadowDomSelector[0]),
       {},
       [selector]
     )
   ).asElement()!;
 }
 
-export const getSettingsMenu = async (
-  page: E2EPage
-): Promise<ElementHandle> => {
+export const getSettingsMenu = async (page: E2EPage) => {
   const settingsMenu = (
     await page.waitForFunction(() =>
       document
