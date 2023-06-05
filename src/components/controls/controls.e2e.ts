@@ -181,7 +181,11 @@ describe('controls', () => {
     );
 
     // Change playback rate value
-    await page.evaluate((btn) => btn.click(), playbackRateValueButton);
+    await page.evaluate(
+      // Call click function on playback rate button
+      (button: any) => button.click(),
+      playbackRateValueButton
+    );
     await page.waitForChanges();
     expect(changePlaybackRateEvent).toHaveReceivedEvent();
 
