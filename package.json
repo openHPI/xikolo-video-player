@@ -63,7 +63,7 @@
     "regenerator-runtime": "^0.13.11"
   },
   "engines": {
-    "node": ">= 18",
+    "node": ">= v18.16.1",
     "npm": ">= 9"
   }
 }
