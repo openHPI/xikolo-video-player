@@ -43,7 +43,7 @@
     "husky": "8.0.3",
     "jest": "27.5.1",
     "jest-cli": "27.5.1",
-    "lint-staged": "13.2.2",
+    "lint-staged": "13.2.3",
     "node-webvtt": "1.9.4",
     "prettier": "2.8.8",
     "puppeteer": "^20.7.4",
