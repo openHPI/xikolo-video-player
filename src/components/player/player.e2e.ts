@@ -148,12 +148,12 @@ describe('xm-player with toggle control', () => {
     const player = await page.find('xm-player');
     const customControlledElement = await page.find('#customControlledElement');
     const toggleEvent = await player.spyOnEvent(
-      'control:changeToggleControlActiveState'
+      'control:changeToggleControlActiveState',
     );
 
     const toggleButton = await getControlsElement(
       page,
-      'button[title="Custom Control"]'
+      'button[title="Custom Control"]',
     );
 
     // Attach external function to player which listens to toggle control event
@@ -167,7 +167,7 @@ describe('xm-player with toggle control', () => {
               event.detail.active ? 'enabled' : 'disabled'
             }`;
           }
-        }
+        },
       );
     });
 

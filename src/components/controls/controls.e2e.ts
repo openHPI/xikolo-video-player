@@ -29,7 +29,7 @@ describe('controls', () => {
   it('should render a controls toolbar', async () => {
     const controls: E2EElement = await page.find('xm-player >>> xm-controls');
     const controlsToolbar: HTMLElement = controls.shadowRoot.querySelector(
-      '[data-test-id="controlsToolbar"]'
+      '[data-test-id="controlsToolbar"]',
     )!;
     expect(controlsToolbar).toBeTruthy();
   });
@@ -40,7 +40,7 @@ describe('controls', () => {
   it('should render the play button', async () => {
     const controls: E2EElement = await page.find('xm-player >>> xm-controls');
     const playButton: HTMLElement = controls.shadowRoot.querySelector(
-      '[aria-label="Play"]'
+      '[aria-label="Play"]',
     )!;
     expect(playButton).toBeTruthy();
   });
@@ -48,7 +48,7 @@ describe('controls', () => {
   it('should render a settings menu toggle button', async () => {
     const controls: E2EElement = await page.find('xm-player >>> xm-controls');
     const settingsButton: HTMLElement = controls.shadowRoot.querySelector(
-      '[aria-label="Settings"]'
+      '[aria-label="Settings"]',
     )!;
     expect(settingsButton).toBeTruthy();
   });
@@ -61,7 +61,7 @@ describe('controls', () => {
   it('should not render the textrack button', async () => {
     const controls: E2EElement = await page.find('xm-player >>> xm-controls');
     const texTrackButton: HTMLElement = controls.shadowRoot.querySelector(
-      '[aria-label="Enable subtitles"]'
+      '[aria-label="Enable subtitles"]',
     )!;
     expect(texTrackButton).toBeFalsy();
   });
@@ -74,7 +74,7 @@ describe('controls', () => {
     const player: E2EElement = await page.find('xm-player');
     const settingsButton: ElementHandle = await getControlsElement(
       page,
-      '[aria-label="Settings"]'
+      '[aria-label="Settings"]',
     );
 
     const openMenuEvent = await player.spyOnEvent('control:openSettingsMenu');
@@ -108,11 +108,11 @@ describe('controls', () => {
     const player: E2EElement = await page.find('xm-player');
     const fullscreenButton = await getControlsElement(
       page,
-      '[aria-label="Enter full screen"]'
+      '[aria-label="Enter full screen"]',
     );
 
     const enterFullscreenEvent = await player.spyOnEvent(
-      'control:enterFullscreen'
+      'control:enterFullscreen',
     );
 
     // Enable fullscreen via Button
@@ -131,11 +131,11 @@ describe('controls', () => {
     const player: E2EElement = await page.find('xm-player');
     const playbackRateButton = await getControlsElement(
       page,
-      '[aria-label="Playback rate"]'
+      '[aria-label="Playback rate"]',
     );
 
     const showPlaybackRateEvent = await player.spyOnEvent(
-      'control:showPlaybackRate'
+      'control:showPlaybackRate',
     );
 
     // Show playback rate menu via Button
@@ -144,7 +144,7 @@ describe('controls', () => {
     expect(showPlaybackRateEvent).toHaveReceivedEvent();
 
     const hidePlaybackRateEvent = await player.spyOnEvent(
-      'control:hidePlaybackRate'
+      'control:hidePlaybackRate',
     );
 
     // Hide playback rate menu via Button
@@ -158,7 +158,7 @@ describe('controls', () => {
 
     const playbackRateButton = await getControlsElement(
       page,
-      '[aria-label="Playback rate"]'
+      '[aria-label="Playback rate"]',
     );
 
     // Open playback rate menu
@@ -168,23 +168,23 @@ describe('controls', () => {
     // Select first playback rate value on the list and save value
     const playbackRateValueButton = await getControlsElement(
       page,
-      '.controls__playback-rate__button'
+      '.controls__playback-rate__button',
     );
 
     const playbackRateValue = await page.evaluate(
       (btn) => btn.textContent,
-      playbackRateValueButton
+      playbackRateValueButton,
     );
 
     const changePlaybackRateEvent = await player.spyOnEvent(
-      'control:changePlaybackRate'
+      'control:changePlaybackRate',
     );
 
     // Change playback rate value
     await page.evaluate(
       // Call click function on playback rate button
       (button: any) => button.click(),
-      playbackRateValueButton
+      playbackRateValueButton,
     );
     await page.waitForChanges();
     expect(changePlaybackRateEvent).toHaveReceivedEvent();
@@ -199,7 +199,7 @@ describe('controls', () => {
 
     const volumeSlider = await getControlsElement(
       page,
-      '[aria-label="Control volume"]'
+      '[aria-label="Control volume"]',
     );
     const changeVolumeEvent = await player.spyOnEvent('control:changeVolume');
 
@@ -236,7 +236,7 @@ describe('controls with text track', () => {
   it('should render the textrack button', async () => {
     const controls: E2EElement = await page.find('xm-player >>> xm-controls');
     const texTrackButton: HTMLElement = controls.shadowRoot.querySelector(
-      '[aria-label="Enable subtitles"]'
+      '[aria-label="Enable subtitles"]',
     )!;
     expect(texTrackButton).toBeTruthy();
   });
@@ -248,11 +248,11 @@ describe('controls with text track', () => {
     const player: E2EElement = await page.find('xm-player');
     const textTrackButton = await getControlsElement(
       page,
-      '[aria-label="Enable subtitles"]'
+      '[aria-label="Enable subtitles"]',
     );
 
     const enableTextTrackEvent = await player.spyOnEvent(
-      'control:enableTextTrack'
+      'control:enableTextTrack',
     );
 
     // Enable subtitles via Button
@@ -261,7 +261,7 @@ describe('controls with text track', () => {
     expect(enableTextTrackEvent).toHaveReceivedEvent();
 
     const disableTextTrackEvent = await player.spyOnEvent(
-      'control:disableTextTrack'
+      'control:disableTextTrack',
     );
 
     // Disable subtitles via Button

@@ -30,7 +30,7 @@ describe('settings-menu', () => {
     // First step: open the settings menu
     const settingsButton: ElementHandle = await getControlsElement(
       page,
-      '[aria-label="Settings"]'
+      '[aria-label="Settings"]',
     );
     const openMenuEvent = await player.spyOnEvent('control:openSettingsMenu');
     await settingsButton.click();
@@ -39,18 +39,18 @@ describe('settings-menu', () => {
     // Second step: open the subtitles submenu
     const subtitleButton: ElementHandle = await getSettingsMenuElement(
       page,
-      '[aria-label="Subtitles"]'
+      '[aria-label="Subtitles"]',
     );
     expect(subtitleButton).toBeTruthy();
     await subtitleButton.click();
     await page.waitForChanges();
     // Third step: click on an other language as the default 'German' one
     const changeTextTrackEvent = await player.spyOnEvent(
-      'setting:changeTextTrack'
+      'setting:changeTextTrack',
     );
     const englishButton: ElementHandle = await getSettingsMenuElement(
       page,
-      '[aria-label="English"]'
+      '[aria-label="English"]',
     );
     expect(englishButton).toBeTruthy();
     await englishButton.click();
@@ -84,6 +84,6 @@ describe.skip('text track', () => {
     `);
       await page.waitForEvent('texttrack:loaded');
       expect(true).toBeTruthy();
-    }
+    },
   );
 });

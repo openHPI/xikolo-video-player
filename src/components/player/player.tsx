@@ -120,7 +120,7 @@ export class Player {
     });
 
     this.activePresentationMode = Object.getOwnPropertyNames(
-      this.presentations
+      this.presentations,
     )[0];
   }
 
@@ -161,7 +161,7 @@ export class Player {
     document.removeEventListener('fullscreenchange', this._fullscreenchange);
     document.removeEventListener(
       'webkitfullscreenchange',
-      this._fullscreenchange
+      this._fullscreenchange,
     );
   }
 
@@ -185,13 +185,13 @@ export class Player {
   @bind()
   private async _invokePlayerFunction(
     functionName: keyof XmVideoFunctions,
-    params?: any
+    params?: any,
   ) {
     if (!this.primary[functionName]) return;
     return Promise.all([
       this.primary[functionName].apply<HTMLXmVideoElement, any, Promise<any>>(
         this.primary,
-        params
+        params,
       ),
       this.secondary
         ? this.secondary[functionName].apply<
@@ -282,7 +282,7 @@ export class Player {
   @bind()
   @Listen('control:changeToggleControlActiveState')
   protected _changeToggleControlActiveState(
-    e: CustomEvent<ToggleControlProps>
+    e: CustomEvent<ToggleControlProps>,
   ) {
     const newToggleControlProps: ToggleControlProps = e.detail;
 
@@ -292,7 +292,7 @@ export class Player {
         if (toggleControl.name === newToggleControlProps.name)
           return newToggleControlProps;
         return toggleControl;
-      }
+      },
     );
   }
 
@@ -768,7 +768,7 @@ export class Player {
 
   private renderVideoByRef = (ref: string, slot: string) => {
     const video = this.el.querySelector(
-      `[name='${ref}']`
+      `[name='${ref}']`,
     ) as HTMLXmVideoElement;
     video.setAttribute('slot', slot);
     video.setAttribute('active', 'true');

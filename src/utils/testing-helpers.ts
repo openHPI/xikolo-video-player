@@ -23,7 +23,7 @@ export async function getSettingsMenuElement(page: E2EPage, selector: string) {
           ?.shadowRoot?.querySelector('xm-settings-menu')
           ?.shadowRoot?.querySelector(shadowDomSelector[0]),
       {},
-      [selector]
+      [selector],
     )
   ).asElement()!;
 }
@@ -37,18 +37,19 @@ export async function getControlsElement(page: E2EPage, selector: string) {
           ?.shadowRoot?.querySelector('xm-controls')
           ?.shadowRoot?.querySelector(shadowDomSelector[0]),
       {},
-      [selector]
+      [selector],
     )
   ).asElement()!;
 }
 
 export const getSettingsMenu = async (page: E2EPage) => {
   const settingsMenu = (
-    await page.waitForFunction(() =>
-      document
-        .querySelector('xm-player')
-        ?.shadowRoot?.querySelector('xm-controls')
-        ?.shadowRoot?.querySelector('xm-settings-menu')
+    await page.waitForFunction(
+      () =>
+        document
+          .querySelector('xm-player')
+          ?.shadowRoot?.querySelector('xm-controls')
+          ?.shadowRoot?.querySelector('xm-settings-menu'),
     )
   ).asElement()!;
   return settingsMenu;
