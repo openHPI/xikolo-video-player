@@ -35,7 +35,7 @@ export class TextTrack {
         if (this.vtt.valid) {
           // Determines the index position of the current text track component in the HTML.
           const textTrackCollection = Array.from(
-            this.el.parentNode.children
+            this.el.parentNode.children,
           ).filter((element) => element.hasAttribute('language'));
           this.vtt.index = textTrackCollection.indexOf(this.el);
           this.textTrackLoadedEvent.emit({
@@ -45,7 +45,7 @@ export class TextTrack {
           });
         } else {
           console.error(
-            `Failed to load text track file: Check the meta data of the VTT file ${this.src} or set the <xm-text-track> attributes label and language.`
+            `Failed to load text track file: Check the meta data of the VTT file ${this.src} or set the <xm-text-track> attributes label and language.`,
           );
           this.textTrackLoadedEvent.emit({ webVTT: null });
         }
@@ -70,7 +70,7 @@ export class TextTrack {
       } else this.vtt.valid = false;
     } else {
       console.error(
-        `Failed to load text track file: File ${this.src} is not valid`
+        `Failed to load text track file: File ${this.src} is not valid`,
       );
     }
   }

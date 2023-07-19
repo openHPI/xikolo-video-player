@@ -192,7 +192,7 @@ interface SubtitleButtonProps {
 }
 
 export const SubtitleButton: FunctionalComponent<SubtitleButtonProps> = (
-  props
+  props,
 ) => {
   if (!props.visible) return;
   if (props.status.subtitle.enabled) {
@@ -247,7 +247,7 @@ interface ICustomControlButton {
 }
 
 export const CustomControlButton: FunctionalComponent<ICustomControlButton> = (
-  props
+  props,
 ) => (
   <button
     class="controls__button"

@@ -83,7 +83,7 @@ export const SubmenuToggleButton: FunctionalComponent<
       {props.setting.valueLabels
         ? props.setting.valueLabels[
             props.setting.values.findIndex(
-              (value) => props.setting.currentValue === value
+              (value) => props.setting.currentValue === value,
             )
           ]
         : props.setting.currentValue}

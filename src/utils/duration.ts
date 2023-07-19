@@ -27,6 +27,6 @@ export function format(seconds: number): string {
   const h = Math.floor(secs / 3600);
 
   return `${negative ? '-' : ''}${h > 0 ? `${lzpad(h)}:` : ''}${lzpad(
-    m
+    m,
   )}:${lzpad(s)}`;
 }

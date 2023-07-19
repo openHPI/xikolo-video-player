@@ -4,7 +4,7 @@ import { HTMLXmVideoElement } from '../types/common';
   Breakpoint test to check if device is small
  */
 export const isSmall = window.matchMedia(
-  'only screen and (max-width: 376px)'
+  'only screen and (max-width: 376px)',
 ).matches;
 
 export const fixDecimalPrecision = (number: number): number => {
@@ -25,7 +25,7 @@ export const isInteractiveElement = (target: Element): boolean => {
 
 export const hasDefaultScrollingBehavior = (
   key: string,
-  target: Element
+  target: Element,
 ): boolean => {
   return (
     (key === ' ' && !isInteractiveElement(target)) ||
@@ -39,7 +39,7 @@ export const getPresentationNodes = (el: Element) =>
 
 export const getVideoElement = (
   el: Element,
-  selector: string
+  selector: string,
 ): HTMLXmVideoElement | null => el.querySelector(selector);
 
 /**

@@ -23,7 +23,7 @@ describe('Slide Preview Bar', () => {
 
   it('should render provided slides', async () => {
     const slidePreviewBar = await page.body.querySelector(
-      'xm-slide-preview-bar'
+      'xm-slide-preview-bar',
     );
     const slides = slidePreviewBar.shadowRoot.querySelectorAll('.slide');
 

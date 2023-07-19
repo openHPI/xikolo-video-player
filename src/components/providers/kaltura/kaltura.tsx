@@ -134,10 +134,10 @@ export class Kaltura implements XmVideo, VideoAnalytics {
      */
     this.player.addEventListener('play', (e: Event) => this.playEvent.emit(e));
     this.player.addEventListener('pause', (e: Event) =>
-      this.pauseEvent.emit(e)
+      this.pauseEvent.emit(e),
     );
     this.player.addEventListener('seeked', (e: Event) =>
-      this.seekedEvent.emit(e)
+      this.seekedEvent.emit(e),
     );
 
     // Call all functions collected before the player was ready

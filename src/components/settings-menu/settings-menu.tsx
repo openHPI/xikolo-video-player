@@ -91,14 +91,14 @@ export class SettingsMenu {
   @bind()
   private _getSetting(settingName: SettingNames): Setting<any> {
     const setting = settingList.find(
-      (settingItem) => settingItem.name === settingName
+      (settingItem) => settingItem.name === settingName,
     );
     setting.currentValue = this.status.settings[settingName];
     setting.label = locales[this.status.language][settingName];
     if (settingName === SettingNames.TEXTTRACK) {
       setting.values = this.textTracks.getTextTrackValues();
       setting.valueLabels = this.textTracks.getTextTrackLabels(
-        this.status.language
+        this.status.language,
       );
     }
     return setting;

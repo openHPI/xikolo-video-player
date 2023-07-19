@@ -155,7 +155,7 @@ describe('xm-player with subtitle props', () => {
     expect(page.root.shadowRoot.querySelector('xm-controls')).toBeTruthy();
     expect(page.root.getAttribute('showsubtitle')).toBe('true');
     expect(
-      controls.shadowRoot.querySelector('.controls__button')
+      controls.shadowRoot.querySelector('.controls__button'),
     ).not.toBeTruthy();
     // Mock a loaded textTrack file
     const vtt: WebVTT = {

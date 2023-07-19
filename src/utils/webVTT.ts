@@ -77,7 +77,7 @@ export class TextTrackList {
   public getActiveCues(seconds: number) {
     if (this.currentCues === null) return null;
     const cues: Array<Cue> = this.currentCues.filter(
-      (cue) => cue.start <= seconds && cue.end >= seconds
+      (cue) => cue.start <= seconds && cue.end >= seconds,
     );
     return cues.length ? cues : null;
   }
@@ -92,13 +92,13 @@ export class TextTrackList {
 
   public getTextTrackValues() {
     return [textTrackDefault].concat(
-      this.textTracks.map((meta) => meta.language)
+      this.textTracks.map((meta) => meta.language),
     );
   }
 
   public getTextTrackLabels(language: KnownLocale): string[] {
     return [locales[language].textTrackDefault as string].concat(
-      this.textTracks.map((meta) => meta.label)
+      this.textTracks.map((meta) => meta.label),
     );
   }
 

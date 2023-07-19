@@ -129,7 +129,7 @@ videoPlayerWithCustomControl.addEventListener(
         event.detail.active ? ' active' : ' not active'
       }`;
     }
-  }
+  },
 );
 ```
 

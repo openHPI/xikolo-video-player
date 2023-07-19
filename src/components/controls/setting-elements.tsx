@@ -46,7 +46,7 @@ interface PlaybackRateProps {
 
 export const PlaybackRate: FunctionalComponent<PlaybackRateProps> = (props) => {
   const playbackRateSetting = settingList.find(
-    (setting) => setting.name === SettingNames.PLAYBACKRATE
+    (setting) => setting.name === SettingNames.PLAYBACKRATE,
   )!;
   playbackRateSetting.currentValue =
     props.status.settings[SettingNames.PLAYBACKRATE];

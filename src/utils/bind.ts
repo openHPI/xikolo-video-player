@@ -5,7 +5,7 @@ export function bind() {
   return function <T extends Function>(
     target: Object,
     property: string,
-    descriptor: TypedPropertyDescriptor<T>
+    descriptor: TypedPropertyDescriptor<T>,
   ): TypedPropertyDescriptor<T> | void {
     return {
       configurable: true,
