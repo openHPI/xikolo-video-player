@@ -47,9 +47,7 @@
     "node-webvtt": "1.9.4",
     "prettier": "3.0.2",
     "puppeteer": "^18.2.1",
-    "split.js": "1.6.5",
-    "stencil-inline-svg": "1.1.0",
-    "typescript": "4.9.5"
+    "split.js": "1.6.5"
   },
   "license": "MIT",
   "lint-staged": {
