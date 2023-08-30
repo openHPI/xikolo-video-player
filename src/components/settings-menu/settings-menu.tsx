@@ -38,10 +38,10 @@ export class SettingsMenu {
   private submenuStatus: SettingsSubmenuStatus = defaultSettingsSubmenuStatus;
 
   @Event({ eventName: 'setting:changePlaybackRate' })
-  changePlaybackRateEvent: EventEmitter;
+  changePlaybackRateEvent: EventEmitter<{ playbackRate: number }>;
 
   @Event({ eventName: 'setting:changeTextTrack' })
-  changeTextTrackEvent: EventEmitter;
+  changeTextTrackEvent: EventEmitter<{ textTrack: string }>;
 
   public render() {
     let classes = 'settings-menu menu';

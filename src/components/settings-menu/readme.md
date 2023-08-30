@@ -15,10 +15,10 @@
 
 ## Events
 
-| Event                        | Description | Type               |
-| ---------------------------- | ----------- | ------------------ |
-| `setting:changePlaybackRate` |             | `CustomEvent<any>` |
-| `setting:changeTextTrack`    |             | `CustomEvent<any>` |
+| Event                        | Description | Type                                     |
+| ---------------------------- | ----------- | ---------------------------------------- |
+| `setting:changePlaybackRate` |             | `CustomEvent<{ playbackRate: number; }>` |
+| `setting:changeTextTrack`    |             | `CustomEvent<{ textTrack: string; }>`    |
 
 
 ## Dependencies

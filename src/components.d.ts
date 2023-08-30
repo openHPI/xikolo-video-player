@@ -500,8 +500,8 @@ declare namespace LocalJSX {
         "secondaryRatio"?: number;
     }
     interface XmSettingsMenu {
-        "onSetting:changePlaybackRate"?: (event: XmSettingsMenuCustomEvent<any>) => void;
-        "onSetting:changeTextTrack"?: (event: XmSettingsMenuCustomEvent<any>) => void;
+        "onSetting:changePlaybackRate"?: (event: XmSettingsMenuCustomEvent<{ playbackRate: number }>) => void;
+        "onSetting:changeTextTrack"?: (event: XmSettingsMenuCustomEvent<{ textTrack: string }>) => void;
         "status"?: Status;
         "textTracks"?: TextTrackList;
     }
