@@ -45,7 +45,7 @@
     "jest-cli": "27.5.1",
     "lint-staged": "13.2.3",
     "node-webvtt": "1.9.4",
-    "prettier": "3.0.2",
+    "prettier": "3.0.3",
     "puppeteer": "^18.2.1",
     "split.js": "1.6.5"
   },
