@@ -10,6 +10,7 @@
     "target": "es2017",
     "jsx": "react",
     "jsxFactory": "h",
+    "skipLibCheck": true,
 
     // When all of these are true, we can enable full strict mode
     "alwaysStrict": true,
