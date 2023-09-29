@@ -22,6 +22,6 @@
     "noImplicitThis": true,
     "useUnknownInCatchVariables": true
   },
-  "include": ["src", "types/jsx.d.ts"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }
