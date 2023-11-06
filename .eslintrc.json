@@ -23,16 +23,13 @@
     // There is an open issue regarding this rule: https://github.com/ionic-team/stencil-eslint/issues/10
     // In essence, nobody understands why this rule is in place and the Stencil team did not answer yet
     "@stencil-community/prefer-vdom-listener": 1,
-    // Our decorators are in the right place.
-    // There is an open issues with that rule: https://github.com/ionic-team/stencil-eslint/issues/60
-    "@stencil-community/decorators-context": 0,
     // Conflicts with prettier: sometimes the line gets too long and it puts it on the next
     "@stencil-community/decorators-style": 0,
     // We use that a lot and it works fine
     "@stencil-community/strict-boolean-conditions": 0,
     // There is a bug: Prop() is correctly applied but the linter still complains
     "@stencil-community/no-unused-watch": 0,
-    // Results in a lot of false positives
+    // Results in false positives
     "@stencil-community/own-methods-must-be-private": 0,
     "import/no-extraneous-dependencies": 0,
     "import/prefer-default-export": 0
