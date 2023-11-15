@@ -27,7 +27,7 @@
   "devDependencies": {
     "@stencil-community/eslint-plugin": "0.6.0",
     "@stencil-community/postcss": "2.2.0",
-    "@stencil/core": "4.4.1",
+    "@stencil/core": "4.7.2",
     "@stencil/sass": "3.0.7",
     "@types/autoprefixer": "9.7.2",
     "@types/jest": "27.5.2",
