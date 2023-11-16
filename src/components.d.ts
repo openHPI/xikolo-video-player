@@ -251,19 +251,74 @@ declare global {
         prototype: HTMLXmAspectRatioBoxElement;
         new (): HTMLXmAspectRatioBoxElement;
     };
+    interface HTMLXmControlsElementEventMap {
+        "control:play": any;
+        "control:pause": any;
+        "control:enterFullscreen": any;
+        "control:exitFullscreen": any;
+        "control:mute": any;
+        "control:unmute": any;
+        "control:changeVolume": any;
+        "control:enableTextTrack": any;
+        "control:disableTextTrack": any;
+        "control:openSettingsMenu": any;
+        "control:closeSettingsMenu": any;
+        "control:changePlaybackRate": any;
+        "control:showPlaybackRate": any;
+        "control:hidePlaybackRate": any;
+        "control:changeToggleControlActiveState": ToggleControlProps;
+    }
     interface HTMLXmControlsElement extends Components.XmControls, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLXmControlsElementEventMap>(type: K, listener: (this: HTMLXmControlsElement, ev: XmControlsCustomEvent<HTMLXmControlsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLXmControlsElementEventMap>(type: K, listener: (this: HTMLXmControlsElement, ev: XmControlsCustomEvent<HTMLXmControlsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLXmControlsElement: {
         prototype: HTMLXmControlsElement;
         new (): HTMLXmControlsElement;
     };
+    interface HTMLXmKalturaElementEventMap {
+        "timeupdate": TimeUpdateDetail;
+        "ratioLoaded": RatioLoadedDetail;
+        "ended": any;
+        "play": any;
+        "pause": any;
+        "seeked": any;
+        "buffering": any;
+        "buffered": any;
+    }
     interface HTMLXmKalturaElement extends Components.XmKaltura, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLXmKalturaElementEventMap>(type: K, listener: (this: HTMLXmKalturaElement, ev: XmKalturaCustomEvent<HTMLXmKalturaElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLXmKalturaElementEventMap>(type: K, listener: (this: HTMLXmKalturaElement, ev: XmKalturaCustomEvent<HTMLXmKalturaElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLXmKalturaElement: {
         prototype: HTMLXmKalturaElement;
         new (): HTMLXmKalturaElement;
     };
+    interface HTMLXmPlayerElementEventMap {
+        "notifyCueListChanged": CueListChangeEventProps;
+        "notifyActiveCuesUpdated": CueListChangeEventProps;
+    }
     interface HTMLXmPlayerElement extends Components.XmPlayer, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLXmPlayerElementEventMap>(type: K, listener: (this: HTMLXmPlayerElement, ev: XmPlayerCustomEvent<HTMLXmPlayerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLXmPlayerElementEventMap>(type: K, listener: (this: HTMLXmPlayerElement, ev: XmPlayerCustomEvent<HTMLXmPlayerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLXmPlayerElement: {
         prototype: HTMLXmPlayerElement;
@@ -281,7 +336,19 @@ declare global {
         prototype: HTMLXmScreenElement;
         new (): HTMLXmScreenElement;
     };
+    interface HTMLXmSettingsMenuElementEventMap {
+        "setting:changePlaybackRate": { playbackRate: number };
+        "setting:changeTextTrack": { textTrack: string };
+    }
     interface HTMLXmSettingsMenuElement extends Components.XmSettingsMenu, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLXmSettingsMenuElementEventMap>(type: K, listener: (this: HTMLXmSettingsMenuElement, ev: XmSettingsMenuCustomEvent<HTMLXmSettingsMenuElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLXmSettingsMenuElementEventMap>(type: K, listener: (this: HTMLXmSettingsMenuElement, ev: XmSettingsMenuCustomEvent<HTMLXmSettingsMenuElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLXmSettingsMenuElement: {
         prototype: HTMLXmSettingsMenuElement;
@@ -293,19 +360,52 @@ declare global {
         prototype: HTMLXmSlidePreviewBarElement;
         new (): HTMLXmSlidePreviewBarElement;
     };
+    interface HTMLXmSliderElementEventMap {
+        "slider:seek": any;
+    }
     interface HTMLXmSliderElement extends Components.XmSlider, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLXmSliderElementEventMap>(type: K, listener: (this: HTMLXmSliderElement, ev: XmSliderCustomEvent<HTMLXmSliderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLXmSliderElementEventMap>(type: K, listener: (this: HTMLXmSliderElement, ev: XmSliderCustomEvent<HTMLXmSliderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLXmSliderElement: {
         prototype: HTMLXmSliderElement;
         new (): HTMLXmSliderElement;
     };
+    interface HTMLXmTextTrackElementEventMap {
+        "texttrack:loaded": any;
+    }
     interface HTMLXmTextTrackElement extends Components.XmTextTrack, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLXmTextTrackElementEventMap>(type: K, listener: (this: HTMLXmTextTrackElement, ev: XmTextTrackCustomEvent<HTMLXmTextTrackElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLXmTextTrackElementEventMap>(type: K, listener: (this: HTMLXmTextTrackElement, ev: XmTextTrackCustomEvent<HTMLXmTextTrackElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLXmTextTrackElement: {
         prototype: HTMLXmTextTrackElement;
         new (): HTMLXmTextTrackElement;
     };
+    interface HTMLXmToggleControlElementEventMap {
+        "toggleControl:loaded": ToggleControlProps;
+    }
     interface HTMLXmToggleControlElement extends Components.XmToggleControl, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLXmToggleControlElementEventMap>(type: K, listener: (this: HTMLXmToggleControlElement, ev: XmToggleControlCustomEvent<HTMLXmToggleControlElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLXmToggleControlElementEventMap>(type: K, listener: (this: HTMLXmToggleControlElement, ev: XmToggleControlCustomEvent<HTMLXmToggleControlElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLXmToggleControlElement: {
         prototype: HTMLXmToggleControlElement;
@@ -317,7 +417,27 @@ declare global {
         prototype: HTMLXmTooltipElement;
         new (): HTMLXmTooltipElement;
     };
+    interface HTMLXmVimeoElementEventMap {
+        "play": any;
+        "pause": any;
+        "timeupdate": any;
+        "progress": any;
+        "seeking": any;
+        "seeked": any;
+        "ended": any;
+        "buffering": any;
+        "buffered": any;
+        "ratioLoaded": any;
+    }
     interface HTMLXmVimeoElement extends Components.XmVimeo, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLXmVimeoElementEventMap>(type: K, listener: (this: HTMLXmVimeoElement, ev: XmVimeoCustomEvent<HTMLXmVimeoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLXmVimeoElementEventMap>(type: K, listener: (this: HTMLXmVimeoElement, ev: XmVimeoCustomEvent<HTMLXmVimeoElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLXmVimeoElement: {
         prototype: HTMLXmVimeoElement;
