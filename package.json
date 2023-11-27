@@ -25,7 +25,7 @@
     "lint": "eslint src/**/*{.ts,.tsx}"
   },
   "devDependencies": {
-    "@stencil-community/eslint-plugin": "0.6.0",
+    "@stencil-community/eslint-plugin": "0.7.1",
     "@stencil-community/postcss": "2.2.0",
     "@stencil/core": "4.7.2",
     "@stencil/sass": "3.0.7",
