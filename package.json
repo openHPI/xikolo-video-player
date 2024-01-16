@@ -58,7 +58,7 @@
     "@playkit-js/ovp-provider": "^1.1.0",
     "@playkit-js/playkit-js": "^0.84.1",
     "@vimeo/player": "2.20.1",
-    "regenerator-runtime": "^0.14.0"
+    "regenerator-runtime": "^0.14.1"
   },
   "engines": {
     "node": ">= 20",
