@@ -117,6 +117,12 @@ Invoke the seek function on the player.
 Sometimes seeking starts playing the video.
 If the player was in paused state, we manually pause again.
 
+#### Parameters
+
+| Name      | Type     | Description |
+| --------- | -------- | ----------- |
+| `seconds` | `number` |             |
+
 #### Returns
 
 Type: `Promise<void>`

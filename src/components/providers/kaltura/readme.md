@@ -78,6 +78,12 @@ Call seek on the Kaltura player
 If the player is not initialized, it will save the function
 so it can be applied once the player is ready.
 
+#### Parameters
+
+| Name      | Type     | Description |
+| --------- | -------- | ----------- |
+| `seconds` | `number` |             |
+
 #### Returns
 
 Type: `Promise<number>`
@@ -90,6 +96,12 @@ Call setPlaybackRate on the Kaltura player
 
 If the player is not initialized, it will save the function
 so it can be applied once the player is ready.
+
+#### Parameters
+
+| Name           | Type     | Description |
+| -------------- | -------- | ----------- |
+| `playbackRate` | `number` |             |
 
 #### Returns
 
