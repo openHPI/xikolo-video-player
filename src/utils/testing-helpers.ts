@@ -39,12 +39,11 @@ export async function getControlsElement(page: E2EPage, selector: string) {
 }
 
 export const getSettingsMenu = async (page: E2EPage) => {
-  const settingsMenu = (await page.waitForFunction(
-    () =>
-      document
-        .querySelector('xm-player')
-        ?.shadowRoot?.querySelector('xm-controls')
-        ?.shadowRoot?.querySelector('xm-settings-menu'),
+  const settingsMenu = (await page.waitForFunction(() =>
+    document
+      .querySelector('xm-player')
+      ?.shadowRoot?.querySelector('xm-controls')
+      ?.shadowRoot?.querySelector('xm-settings-menu'),
   ))!;
   return settingsMenu;
 };
