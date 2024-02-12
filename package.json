@@ -46,7 +46,7 @@
     "lint-staged": "15.2.0",
     "node-webvtt": "1.9.4",
     "prettier": "3.2.5",
-    "puppeteer": "^21.3.6",
+    "puppeteer": "^21.11.0",
     "split.js": "1.6.5"
   },
   "license": "MIT",
