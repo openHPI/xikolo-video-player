@@ -2,10 +2,10 @@
 
 exports[`xm-controls should render opened settings-menu with openedSettingsMenu status 1`] = `
 <xm-controls>
-  <mock:shadow-root>
+  <template shadowrootmode="open">
     <div class="controls">
       <xm-settings-menu>
-        <mock:shadow-root>
+        <template shadowrootmode="open">
           <div class="menu settings-menu" data-test-id="settingsMenu" role="menu" tabindex="0">
             <div class="settings-menu__content show">
               <button aria-label="Subtitles" class="settings-menu__button">
@@ -40,7 +40,7 @@ exports[`xm-controls should render opened settings-menu with openedSettingsMenu 
               </button>
             </div>
           </div>
-        </mock:shadow-root>
+        </template>
       </xm-settings-menu>
       <xm-slider progress="0"></xm-slider>
       <div class="controls__toolbar" data-test-id="controlsToolbar">
@@ -98,16 +98,16 @@ exports[`xm-controls should render opened settings-menu with openedSettingsMenu 
         </button>
       </div>
     </div>
-  </mock:shadow-root>
+  </template>
 </xm-controls>
 `;
 
 exports[`xm-controls should render opened settings-menu with openedSettingsMenu status 2`] = `
 <xm-controls>
-  <mock:shadow-root>
+  <template shadowrootmode="open">
     <div class="controls">
       <xm-settings-menu>
-        <mock:shadow-root>
+        <template shadowrootmode="open">
           <div class="menu menu--open settings-menu" data-test-id="settingsMenu" role="menu" tabindex="0">
             <div class="settings-menu__content show">
               <button aria-label="Subtitles" class="settings-menu__button">
@@ -142,7 +142,7 @@ exports[`xm-controls should render opened settings-menu with openedSettingsMenu 
               </button>
             </div>
           </div>
-        </mock:shadow-root>
+        </template>
       </xm-settings-menu>
       <xm-slider progress="0"></xm-slider>
       <div class="controls__toolbar" data-test-id="controlsToolbar">
@@ -200,16 +200,16 @@ exports[`xm-controls should render opened settings-menu with openedSettingsMenu 
         </button>
       </div>
     </div>
-  </mock:shadow-root>
+  </template>
 </xm-controls>
 `;
 
 exports[`xm-controls should show a list of texttracks 1`] = `
 <xm-controls>
-  <mock:shadow-root>
+  <template shadowrootmode="open">
     <div class="controls">
       <xm-settings-menu>
-        <mock:shadow-root>
+        <template shadowrootmode="open">
           <div class="menu settings-menu" data-test-id="settingsMenu" role="menu" tabindex="0">
             <div class="settings-menu__content show">
               <button aria-label="Subtitles" class="settings-menu__button">
@@ -244,7 +244,7 @@ exports[`xm-controls should show a list of texttracks 1`] = `
               </button>
             </div>
           </div>
-        </mock:shadow-root>
+        </template>
       </xm-settings-menu>
       <xm-slider progress="0"></xm-slider>
       <div class="controls__toolbar" data-test-id="controlsToolbar">
@@ -302,16 +302,16 @@ exports[`xm-controls should show a list of texttracks 1`] = `
         </button>
       </div>
     </div>
-  </mock:shadow-root>
+  </template>
 </xm-controls>
 `;
 
 exports[`xm-controls should show a list of texttracks 2`] = `
 <xm-controls>
-  <mock:shadow-root>
+  <template shadowrootmode="open">
     <div class="controls">
       <xm-settings-menu>
-        <mock:shadow-root>
+        <template shadowrootmode="open">
           <div class="menu settings-menu" data-test-id="settingsMenu" role="menu" tabindex="0">
             <div class="settings-menu__content show">
               <button aria-label="Subtitles" class="settings-menu__button">
@@ -346,7 +346,7 @@ exports[`xm-controls should show a list of texttracks 2`] = `
               </button>
             </div>
           </div>
-        </mock:shadow-root>
+        </template>
       </xm-settings-menu>
       <xm-slider progress="0"></xm-slider>
       <div class="controls__toolbar" data-test-id="controlsToolbar">
@@ -411,13 +411,13 @@ exports[`xm-controls should show a list of texttracks 2`] = `
         </button>
       </div>
     </div>
-  </mock:shadow-root>
+  </template>
 </xm-controls>
 `;
 
 exports[`xm-controls with control-toggle should match snapshot 1`] = `
 <xm-controls>
-  <mock:shadow-root>
+  <template shadowrootmode="open">
     <div class="controls">
       <xm-settings-menu></xm-settings-menu>
       <xm-slider progress="0"></xm-slider>
@@ -481,6 +481,6 @@ exports[`xm-controls with control-toggle should match snapshot 1`] = `
         </button>
       </div>
     </div>
-  </mock:shadow-root>
+  </template>
 </xm-controls>
 `;

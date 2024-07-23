@@ -2,14 +2,14 @@
 
 exports[`xm-player with props should fall back to English when the page has an unknown language 1`] = `
 <xm-player lang="en" playbackrate="2" volume="0.3">
-  <mock:shadow-root>
+  <template shadowrootmode="open">
     <div class="player" tabindex="0">
       <xm-screen>
         <slot name="primary" slot="primary"></slot>
         <slot name="secondary" slot="secondary"></slot>
       </xm-screen>
       <xm-controls>
-        <mock:shadow-root>
+        <template shadowrootmode="open">
           <div class="controls">
             <xm-settings-menu></xm-settings-menu>
             <xm-slider progress="0"></xm-slider>
@@ -68,10 +68,10 @@ exports[`xm-player with props should fall back to English when the page has an u
               </button>
             </div>
           </div>
-        </mock:shadow-root>
+        </template>
       </xm-controls>
     </div>
-  </mock:shadow-root>
+  </template>
   <div active="true" name="first-source" slot="primary"></div>
   <div active="true" name="second-source" slot="secondary"></div>
 </xm-player>
@@ -79,14 +79,14 @@ exports[`xm-player with props should fall back to English when the page has an u
 
 exports[`xm-player with props should render 1`] = `
 <xm-player lang="en" playbackrate="2" volume="0.3">
-  <mock:shadow-root>
+  <template shadowrootmode="open">
     <div class="player" tabindex="0">
       <xm-screen>
         <slot name="primary" slot="primary"></slot>
         <slot name="secondary" slot="secondary"></slot>
       </xm-screen>
       <xm-controls>
-        <mock:shadow-root>
+        <template shadowrootmode="open">
           <div class="controls">
             <xm-settings-menu></xm-settings-menu>
             <xm-slider progress="0"></xm-slider>
@@ -145,10 +145,10 @@ exports[`xm-player with props should render 1`] = `
               </button>
             </div>
           </div>
-        </mock:shadow-root>
+        </template>
       </xm-controls>
     </div>
-  </mock:shadow-root>
+  </template>
   <div active="true" name="first-source" slot="primary"></div>
   <div active="true" name="second-source" slot="secondary"></div>
 </xm-player>
@@ -156,14 +156,14 @@ exports[`xm-player with props should render 1`] = `
 
 exports[`xm-player with props should render with playback rate change 1`] = `
 <xm-player lang="en" playbackrate="2" volume="0.3">
-  <mock:shadow-root>
+  <template shadowrootmode="open">
     <div class="player" tabindex="0">
       <xm-screen>
         <slot name="primary" slot="primary"></slot>
         <slot name="secondary" slot="secondary"></slot>
       </xm-screen>
       <xm-controls>
-        <mock:shadow-root>
+        <template shadowrootmode="open">
           <div class="controls">
             <xm-settings-menu></xm-settings-menu>
             <xm-slider progress="0"></xm-slider>
@@ -222,10 +222,10 @@ exports[`xm-player with props should render with playback rate change 1`] = `
               </button>
             </div>
           </div>
-        </mock:shadow-root>
+        </template>
       </xm-controls>
     </div>
-  </mock:shadow-root>
+  </template>
   <div active="true" name="first-source" slot="primary"></div>
   <div active="true" name="second-source" slot="secondary"></div>
 </xm-player>
@@ -233,14 +233,14 @@ exports[`xm-player with props should render with playback rate change 1`] = `
 
 exports[`xm-player with props should render with ui language change 1`] = `
 <xm-player lang="en" playbackrate="2" volume="0.3">
-  <mock:shadow-root>
+  <template shadowrootmode="open">
     <div class="player" tabindex="0">
       <xm-screen>
         <slot name="primary" slot="primary"></slot>
         <slot name="secondary" slot="secondary"></slot>
       </xm-screen>
       <xm-controls>
-        <mock:shadow-root>
+        <template shadowrootmode="open">
           <div class="controls">
             <xm-settings-menu></xm-settings-menu>
             <xm-slider progress="0"></xm-slider>
@@ -299,10 +299,10 @@ exports[`xm-player with props should render with ui language change 1`] = `
               </button>
             </div>
           </div>
-        </mock:shadow-root>
+        </template>
       </xm-controls>
     </div>
-  </mock:shadow-root>
+  </template>
   <div active="true" name="first-source" slot="primary"></div>
   <div active="true" name="second-source" slot="secondary"></div>
 </xm-player>
@@ -310,14 +310,14 @@ exports[`xm-player with props should render with ui language change 1`] = `
 
 exports[`xm-player with subtitle props should render with default text track and an active subtitle button 1`] = `
 <xm-player lang="en" showsubtitle="true">
-  <mock:shadow-root>
+  <template shadowrootmode="open">
     <div class="player" tabindex="0">
       <xm-screen>
         <slot name="primary" slot="primary"></slot>
         <slot name="secondary" slot="secondary"></slot>
       </xm-screen>
       <xm-controls>
-        <mock:shadow-root>
+        <template shadowrootmode="open">
           <div class="controls">
             <xm-settings-menu></xm-settings-menu>
             <xm-slider progress="0"></xm-slider>
@@ -383,10 +383,10 @@ exports[`xm-player with subtitle props should render with default text track and
               </button>
             </div>
           </div>
-        </mock:shadow-root>
+        </template>
       </xm-controls>
     </div>
-  </mock:shadow-root>
+  </template>
   <div active="true" name="first-source" slot="primary"></div>
   <div active="true" name="second-source" slot="secondary"></div>
   <xm-text-track default="" label="Deutsch" language="de" src="../../static/de.vtt"></xm-text-track>
