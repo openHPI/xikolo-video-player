@@ -21,7 +21,7 @@
     "test": "stencil test --spec --e2e --silent",
     "test.watch": "stencil test --spec --e2e --watch --silent",
     "prettier": "prettier --write .",
-    "prepare": "husky install",
+    "prepare": "husky",
     "lint": "eslint src/**/*{.ts,.tsx}"
   },
   "devDependencies": {
