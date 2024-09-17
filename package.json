@@ -1,6 +1,6 @@
 {
   "name": "@openhpi/xikolo-video-player",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Xikolo Video Player",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
