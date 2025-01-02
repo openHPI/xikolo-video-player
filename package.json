@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "@playkit-js/ovp-provider": "^1.1.0",
-    "@playkit-js/playkit-js": "^0.84.16",
+    "@playkit-js/playkit-js": "^0.84.19",
     "@vimeo/player": "2.24.0",
     "regenerator-runtime": "^0.14.1"
   },
