@@ -27,7 +27,7 @@
   "devDependencies": {
     "@stencil-community/eslint-plugin": "0.8.0",
     "@stencil-community/postcss": "2.2.0",
-    "@stencil/core": "4.21.0",
+    "@stencil/core": "4.31.0",
     "@stencil/sass": "3.0.12",
     "@types/jest": "27.5.2",
     "@types/vimeo__player": "2.18.3",
