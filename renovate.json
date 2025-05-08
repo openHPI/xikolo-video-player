@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base", "schedule:weekly"],
+  "extends": ["config:recommended", "schedule:weekly"],
   "baseBranches": ["dev"],
   "labels": ["Internal 🔨"],
   "rangeStrategy": "bump",
