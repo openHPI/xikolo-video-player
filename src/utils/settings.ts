@@ -19,7 +19,7 @@ export const settingList: Array<Setting<any>> = [
   {
     name: SettingNames.PLAYBACKRATE,
     label: locales.en.playbackRate,
-    values: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
+    values: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.50, 2.75, 3, 3.25, 3.50, 3.75, 4],
     currentValue: 1,
   },
   {
