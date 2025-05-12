@@ -65,12 +65,10 @@ describe('settings-menu', () => {
  * Does not work at the moment, tbd later
  */
 describe.skip('text track', () => {
-  it.todo(
-    'should load and emit a `texttrack:loaded` event on load',
-    async () => {
-      const page = await newE2EPage();
-      // const loadedEvent = await page.spyOnEvent('texttrack:loaded');
-      await page.setContent(`
+  it.skip('should load and emit a `texttrack:loaded` event on load', async () => {
+    const page = await newE2EPage();
+    // const loadedEvent = await page.spyOnEvent('texttrack:loaded');
+    await page.setContent(`
       <xm-player lang="en">
         <div slot="primary"></div>
         <xm-text-track
@@ -82,8 +80,7 @@ describe.skip('text track', () => {
         </xm-text-track>
       </xm-player>
     `);
-      await page.waitForEvent('texttrack:loaded');
-      expect(true).toBeTruthy();
-    },
-  );
+    await page.waitForEvent('texttrack:loaded');
+    expect(true).toBeTruthy();
+  });
 });
