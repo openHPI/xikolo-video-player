@@ -1,4 +1,5 @@
-@import "../../utils/variables.scss";
+@use "sass:meta";
+@use "../../utils/variables.scss";
 
 :host {
   display: block;
@@ -48,7 +49,7 @@
   }
 }
 
-@import "./vars";
+@include meta.load-css("vars");
 
 .loading {
   animation: 0s linear 750ms forwards delayedShow;
@@ -63,7 +64,7 @@
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 
-  z-index: $z-index-m;
+  z-index: variables.$z-index-m;
 
   &--fullscreen-mode {
     margin-bottom: 55px;

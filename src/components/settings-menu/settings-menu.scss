@@ -1,9 +1,9 @@
-@import "../../utils/variables.scss";
+@use "../../utils/variables.scss";
 
 .settings-menu {
   max-height: 90%;
   position: absolute;
-  z-index: $z-index-l;
+  z-index: variables.$z-index-l;
   bottom: 50px;
   right: 10px;
   background: var(--vp-menu-color);

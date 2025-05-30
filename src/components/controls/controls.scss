@@ -1,4 +1,4 @@
-@import "../../utils/variables.scss";
+@use "../../utils/variables.scss";
 
 .controls {
   background-color: "#353535";
@@ -88,7 +88,7 @@
 
   &__menu {
     position: absolute;
-    z-index: $z-index-l;
+    z-index: variables.$z-index-l;
     // Needed for matching the bottom position of the settings menu.
     margin-bottom: -1px;
     bottom: 50px;
@@ -139,7 +139,7 @@
   position: absolute;
   left: 0px;
   right: 0px;
-  z-index: $z-index-l;
+  z-index: variables.$z-index-l;
   bottom: 60px;
   align-self: center;
   text-align: center;
