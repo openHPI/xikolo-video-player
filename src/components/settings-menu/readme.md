@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property     | Attribute | Description | Type            | Default     |
-| ------------ | --------- | ----------- | --------------- | ----------- |
-| `status`     | --        |             | `Status`        | `undefined` |
-| `textTracks` | --        |             | `TextTrackList` | `undefined` |
+| Property     | Attribute     | Description | Type            | Default     |
+| ------------ | ------------- | ----------- | --------------- | ----------- |
+| `status`     | `status`      |             | `Status`        | `undefined` |
+| `textTracks` | `text-tracks` |             | `TextTrackList` | `undefined` |
 
 
 ## Events

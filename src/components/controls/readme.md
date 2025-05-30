@@ -7,12 +7,12 @@
 
 ## Properties
 
-| Property               | Attribute    | Description                            | Type                   | Default     |
-| ---------------------- | ------------ | -------------------------------------- | ---------------------- | ----------- |
-| `slidesSrc`            | `slides-src` | JSON encoded sources for slides        | `string`               | `undefined` |
-| `status`               | --           | Player status                          | `Status`               | `undefined` |
-| `textTracks`           | --           | List of text tracks                    | `TextTrackList`        | `undefined` |
-| `toggleControlButtons` | --           | Array of toggle control configurations | `ToggleControlProps[]` | `undefined` |
+| Property               | Attribute                | Description                            | Type                   | Default     |
+| ---------------------- | ------------------------ | -------------------------------------- | ---------------------- | ----------- |
+| `slidesSrc`            | `slides-src`             | JSON encoded sources for slides        | `string`               | `undefined` |
+| `status`               | `status`                 | Player status                          | `Status`               | `undefined` |
+| `textTracks`           | `text-tracks`            | List of text tracks                    | `TextTrackList`        | `undefined` |
+| `toggleControlButtons` | `toggle-control-buttons` | Array of toggle control configurations | `ToggleControlProps[]` | `undefined` |
 
 
 ## Events

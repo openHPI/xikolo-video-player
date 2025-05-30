@@ -10,7 +10,7 @@
 | Property    | Attribute    | Description | Type                        | Default     |
 | ----------- | ------------ | ----------- | --------------------------- | ----------- |
 | `duration`  | `duration`   |             | `number`                    | `undefined` |
-| `onSeek`    | --           |             | `(seconds: number) => void` | `undefined` |
+| `onSeek`    | `on-seek`    |             | `(seconds: number) => void` | `undefined` |
 | `slidesSrc` | `slides-src` |             | `string`                    | `undefined` |
 
 
