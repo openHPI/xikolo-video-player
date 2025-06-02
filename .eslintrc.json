@@ -10,11 +10,7 @@
       }
     }
   },
-  "extends": [
-    "airbnb-typescript/base",
-    "plugin:@stencil-community/recommended",
-    "prettier"
-  ],
+  "extends": ["plugin:@stencil-community/recommended", "prettier"],
   "rules": {
     // The following two rules are set to warnings because we use this technique in our implementation.
     // However, it is considered a bad practice
