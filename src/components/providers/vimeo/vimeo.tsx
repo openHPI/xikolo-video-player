@@ -20,7 +20,7 @@ import { XmVideo, VideoAnalytics } from '../../../types/common';
   shadow: true,
 })
 export class Vimeo implements XmVideo, VideoAnalytics {
-  callbacks: Function[] = [];
+  private callbacks: Function[] = [];
 
   @Element() el: HTMLXmVimeoElement;
 

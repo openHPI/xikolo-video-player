@@ -21,11 +21,11 @@ import {
   styleUrl: 'kaltura.scss',
 })
 export class Kaltura implements XmVideo, VideoAnalytics {
-  player: any;
+  private player: any;
 
-  playerContainer: HTMLXmAspectRatioBoxElement;
+  private playerContainer: HTMLXmAspectRatioBoxElement;
 
-  callbacks: Function[] = [];
+  private callbacks: Function[] = [];
 
   @Element() el: HTMLXmKalturaElement;
 

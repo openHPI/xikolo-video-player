@@ -21,7 +21,7 @@ interface Slide {
   shadow: true,
 })
 export class SlidePreviewBar {
-  slides: Slide[] = [];
+  private slides: Slide[] = [];
 
   @Element() el: HTMLXmSlidePreviewBarElement;
 

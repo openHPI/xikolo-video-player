@@ -42,12 +42,12 @@ export class Player {
   /**
    * Used on key control to skip the video forwards and backwards
    */
-  skippedSeconds = 5;
+  private skippedSeconds = 5;
 
   /**
    * List of keyboard keys the player listens to on the 'keydown` event
    */
-  shortcutKeys = {
+  private shortcutKeys = {
     Space: ' ',
     Enter: 'Enter',
     ArrowUp: 'ArrowUp',
