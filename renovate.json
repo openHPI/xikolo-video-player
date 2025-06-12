@@ -1,6 +1,6 @@
 {
   "extends": ["config:recommended", "schedule:weekly"],
-  "baseBranches": ["dev"],
+  "baseBranches": ["main"],
   "labels": ["Internal 🔨"],
   "rangeStrategy": "bump",
   "lockFileMaintenance": {

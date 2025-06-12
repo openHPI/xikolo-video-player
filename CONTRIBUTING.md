@@ -25,7 +25,7 @@ please make sure to include the ticket number in the commit message.
 
 ### Pull request
 
-Please make pull requests to the `dev` branch.
+Please make pull requests to the `main` branch.
 
 Add a title and a description.
 In the description, illustrate first what your code will change.
