@@ -21,10 +21,7 @@ export const PlaybackRateToggleButton: FunctionalComponent<
         title={locales[props.status.language].playbackRate}
         aria-label={locales[props.status.language].playbackRate}
       >
-        <span
-          class="controls__button-icon controls__button-icon--active svg"
-          innerHTML={icon.Speed}
-        />
+        <span class="controls__button-icon svg" innerHTML={icon.Speed} />
       </button>
     );
   }
