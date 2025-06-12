@@ -3,12 +3,9 @@
 
 :host {
   display: block;
-  color: white;
   color: var(--vp-main-color);
-  background: rgba(0, 0, 0, 0.75);
   background: rgba(var(--vp-bg-color-rgb), 0.75);
-  border: 1px solid black;
-  border-color: var(--vp-bg-color);
+  border: 1px solid var(--vp-bg-color);
 
   font-family:
     // Basic web for OS and iOS (ensures monospaced digits)

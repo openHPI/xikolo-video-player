@@ -1,7 +1,6 @@
 @use "../../utils/variables.scss";
 
 .controls {
-  background-color: "#353535";
   background-color: var(--vp-gutter-color);
   display: flex;
   flex: 1 0 auto;
@@ -162,10 +161,8 @@
   flex: 1 1 100%;
   appearance: none;
   overflow: hidden;
-  height: 0.5em;
   height: var(--vp-control-slider-height);
   background: transparent;
-  color: orange;
   color: var(--vp-slider-color);
   margin: 0;
   border-top: 1px solid black;
@@ -189,33 +186,11 @@
     border: 0;
   }
 
-  &::-ms-thumb {
-    appearance: none;
-    box-shadow: -100vw 0 0 100vw orange;
-    width: 0;
-    border: 0;
-  }
-
-  &::-ms-fill-upper {
-    background: #353535;
-  }
-
-  &::-ms-track {
-    color: #353535;
-  }
-
-  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-    /* IE11 has a strange height for sliders, so we have to fix it */
-    height: inherit;
-    padding: 0px;
-  }
-
   &--volume {
     border: 1px solid black;
 
     &:focus {
-      border: 1px solid white;
-      border-color: var(--vp-main-color);
+      border: 1px solid var(--vp-main-color);
     }
   }
 }
@@ -233,10 +208,6 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-      /* IE11 can not animate fadein / fadeout within a flexbox correctly */
-      flex: 1 1 0%;
-    }
 
     &:hover {
       @media only screen and (min-width: 376px) {

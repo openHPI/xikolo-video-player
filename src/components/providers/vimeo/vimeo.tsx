@@ -70,9 +70,7 @@ export class Vimeo implements XmVideo, VideoAnalytics {
 
     return (
       <xm-aspect-ratio-box ratio={this.ratio}>
-        <div ref={(el) => (this.container = el)}>
-          <iframe class="video-iframe" />
-        </div>
+        <div ref={(el) => (this.container = el)}></div>
 
         <div class="overlay" tabindex="0">
           <slot name="overlay" />
@@ -83,16 +81,6 @@ export class Vimeo implements XmVideo, VideoAnalytics {
 
   async componentDidLoad() {
     if (!this.active) return;
-    /**
-     * IE11 hack:
-     * We need to save the given stencil 'magic' class from our placeholder to
-     * place it to the new js generated iframe.
-     */
-    const iframePlaceholder = this.container.querySelector('iframe');
-    const classesForIE11 = iframePlaceholder.getAttribute('class');
-    if (iframePlaceholder) {
-      iframePlaceholder.remove();
-    }
 
     const { default: Player } = await import('@vimeo/player');
     this.player = new Player(this.container, {
@@ -126,12 +114,6 @@ export class Vimeo implements XmVideo, VideoAnalytics {
 
     // Wait for Vimeo Player to be ready to access the actual iframe element
     await this.player.ready();
-
-    // add classes for IE11
-    const iframe = this.container.querySelector('iframe');
-    if (iframe) {
-      iframe.className += ` ${classesForIE11}`;
-    }
 
     // Sometimes vimeo videos has texttrack enabled per default
     await this.player.disableTextTrack();
