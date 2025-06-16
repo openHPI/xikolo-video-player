@@ -30,8 +30,8 @@
 
         svg,
         .svg {
-          height: 2em;
-          width: 2em;
+          height: 25px;
+          width: 25px;
         }
       }
     }
@@ -40,7 +40,7 @@
   @media only screen and (min-width: 376px) {
     .controls__toolbar {
       button {
-        padding: 0.6em 0.7em;
+        padding: 10px;
       }
     }
   }
@@ -254,8 +254,8 @@
   svg,
   .svg {
     display: block;
-    height: 1.5em;
-    width: 1.5em;
+    height: 20px;
+    width: 20px;
     fill: currentColor;
     color: inherit;
   }
