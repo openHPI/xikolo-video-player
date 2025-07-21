@@ -17,6 +17,7 @@ export namespace Components {
     interface XmAspectRatioBox {
         /**
           * Video ratio, default is 16:9
+          * @default 0.5625
          */
         "ratio": number;
     }
@@ -39,6 +40,9 @@ export namespace Components {
         "toggleControlButtons": Array<ToggleControlProps>;
     }
     interface XmKaltura {
+        /**
+          * @default false
+         */
         "active": boolean;
         /**
           * Call getCurrentTime on the Kaltura player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
@@ -106,18 +110,27 @@ export namespace Components {
           * Invoke the play function on the player. Also sets the internal state to mode "playing"
          */
         "play": () => Promise<void>;
+        /**
+          * @default defaultStatus.settings.playbackRate
+         */
         "playbackrate": number;
         /**
           * Invoke the seek function on the player.  Sometimes seeking starts playing the video. If the player was in paused state, we manually pause again.
           * @param seconds
          */
         "seek": (seconds: number) => Promise<void>;
+        /**
+          * @default defaultStatus.subtitle.enabled
+         */
         "showsubtitle": boolean;
         "slidesSrc"?: string;
         /**
           * Sets the mute state false and resets the primary slot video volume.
          */
         "unmute": () => Promise<void>;
+        /**
+          * @default defaultStatus.volume
+         */
         "volume": number;
     }
     interface XmPresentation {
@@ -136,7 +149,13 @@ export namespace Components {
     }
     interface XmScreen {
         "fullscreen": boolean;
+        /**
+          * @default 50
+         */
         "primaryRatio": number;
+        /**
+          * @default 50
+         */
         "secondaryRatio": number;
     }
     interface XmSettingsMenu {
@@ -184,6 +203,9 @@ export namespace Components {
         "show": boolean;
     }
     interface XmVimeo {
+        /**
+          * @default false
+         */
         "active": boolean;
         /**
           * Call getCurrentTime on the Vimeo player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
@@ -463,6 +485,7 @@ declare namespace LocalJSX {
     interface XmAspectRatioBox {
         /**
           * Video ratio, default is 16:9
+          * @default 0.5625
          */
         "ratio"?: number;
     }
@@ -545,6 +568,9 @@ declare namespace LocalJSX {
         "toggleControlButtons"?: Array<ToggleControlProps>;
     }
     interface XmKaltura {
+        /**
+          * @default false
+         */
         "active"?: boolean;
         /**
           * Duration of the video in seconds
@@ -595,9 +621,18 @@ declare namespace LocalJSX {
           * Emits list of cues of currently selected language.
          */
         "onNotifyCueListChanged"?: (event: XmPlayerCustomEvent<CueListChangeEventProps>) => void;
+        /**
+          * @default defaultStatus.settings.playbackRate
+         */
         "playbackrate"?: number;
+        /**
+          * @default defaultStatus.subtitle.enabled
+         */
         "showsubtitle"?: boolean;
         "slidesSrc"?: string;
+        /**
+          * @default defaultStatus.volume
+         */
         "volume"?: number;
     }
     interface XmPresentation {
@@ -616,7 +651,13 @@ declare namespace LocalJSX {
     }
     interface XmScreen {
         "fullscreen"?: boolean;
+        /**
+          * @default 50
+         */
         "primaryRatio"?: number;
+        /**
+          * @default 50
+         */
         "secondaryRatio"?: number;
     }
     interface XmSettingsMenu {
@@ -672,6 +713,9 @@ declare namespace LocalJSX {
         "show"?: boolean;
     }
     interface XmVimeo {
+        /**
+          * @default false
+         */
         "active"?: boolean;
         /**
           * The buffered event is not handled to use the build in loading indicator.
