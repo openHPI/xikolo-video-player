@@ -31,7 +31,7 @@ exports[`xm-player with props should fall back to English when the page has an u
                 </button>
                 <input aria-label="Control volume" class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="0.3">
               </div>
-              <span class="controls__time" title="Time left of 00:00s">
+              <span class="controls__time">
                 00:00 / 00:00
               </span>
               <div class="controls__playback-rate">
@@ -108,7 +108,7 @@ exports[`xm-player with props should render 1`] = `
                 </button>
                 <input aria-label="Control volume" class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="0.3">
               </div>
-              <span class="controls__time" title="Time left of 00:00s">
+              <span class="controls__time">
                 00:00 / 00:00
               </span>
               <div class="controls__playback-rate">
@@ -185,7 +185,7 @@ exports[`xm-player with props should render with playback rate change 1`] = `
                 </button>
                 <input aria-label="Control volume" class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="0.3">
               </div>
-              <span class="controls__time" title="Time left of 00:00s">
+              <span class="controls__time">
                 00:00 / 00:00
               </span>
               <div class="controls__playback-rate">
@@ -262,7 +262,7 @@ exports[`xm-player with props should render with ui language change 1`] = `
                 </button>
                 <input aria-label="Lautstärke ändern" class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="0.3">
               </div>
-              <span class="controls__time" title="Time left of 00:00s">
+              <span class="controls__time">
                 00:00 / 00:00
               </span>
               <div class="controls__playback-rate">
@@ -339,7 +339,7 @@ exports[`xm-player with subtitle props should render with default text track and
                 </button>
                 <input aria-label="Control volume" class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="1">
               </div>
-              <span class="controls__time" title="Time left of 00:00s">
+              <span class="controls__time">
                 00:00 / 00:00
               </span>
               <div class="controls__playback-rate">

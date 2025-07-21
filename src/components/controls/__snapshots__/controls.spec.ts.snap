@@ -61,7 +61,7 @@ exports[`xm-controls should render opened settings-menu with openedSettingsMenu 
           </button>
           <input aria-label="Control volume" class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="1">
         </div>
-        <span class="controls__time" title="Time left of 00:00s">
+        <span class="controls__time">
           00:00 / 00:00
         </span>
         <div class="controls__playback-rate">
@@ -163,7 +163,7 @@ exports[`xm-controls should render opened settings-menu with openedSettingsMenu 
           </button>
           <input aria-label="Control volume" class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="1">
         </div>
-        <span class="controls__time" title="Time left of 00:00s">
+        <span class="controls__time">
           00:00 / 00:00
         </span>
         <div class="controls__playback-rate">
@@ -265,7 +265,7 @@ exports[`xm-controls should show a list of texttracks 1`] = `
           </button>
           <input aria-label="Control volume" class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="1">
         </div>
-        <span class="controls__time" title="Time left of 00:00s">
+        <span class="controls__time">
           00:00 / 00:00
         </span>
         <div class="controls__playback-rate">
@@ -367,7 +367,7 @@ exports[`xm-controls should show a list of texttracks 2`] = `
           </button>
           <input aria-label="Control volume" class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="1">
         </div>
-        <span class="controls__time" title="Time left of 00:00s">
+        <span class="controls__time">
           00:00 / 00:00
         </span>
         <div class="controls__playback-rate">
@@ -439,7 +439,7 @@ exports[`xm-controls with control-toggle should match snapshot 1`] = `
           </button>
           <input aria-label="Control volume" class="controls__slider controls__slider--volume" max="1" min="0" step="0.1" type="range" value="1">
         </div>
-        <span class="controls__time" title="Time left of 00:00s">
+        <span class="controls__time">
           00:00 / 00:00
         </span>
         <div class="controls__playback-rate">
