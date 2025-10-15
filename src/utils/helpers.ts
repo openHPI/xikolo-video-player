@@ -77,5 +77,6 @@ export const exitFullscreen = (element: Element) => {
 
   // Remove fallback to emulate fullscreen via CSS
   element.classList.remove('player--pseudo-fullscreen');
+
   return Promise.resolve();
 };

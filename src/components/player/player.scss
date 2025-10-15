@@ -48,29 +48,27 @@
 
 :host(.player--pseudo-fullscreen) {
   position: fixed;
+
   // Respect iOS safe areas
-  top: env(safe-area-inset-top);
-  right: env(safe-area-inset-right);
-  bottom: env(safe-area-inset-bottom);
-  left: env(safe-area-inset-left);
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
 
-  // Fall back for older engines
-  width: calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right));
-  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
 
-  // Prefer dynamic viewport units when supported (prevents address bar jumps)
-  @supports (height: 100dvh) {
-    width: calc(
-      100dvw - env(safe-area-inset-left) - env(safe-area-inset-right)
-    );
-    height: calc(
-      100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom)
-    );
-  }
+  max-width: calc(
+    100vw - env(safe-area-inset-left) - env(safe-area-inset-right)
+  );
+  max-height: calc(
+    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+  );
 
-  z-index: 2147483647; // on top
-  background: #000;
-  touch-action: none;
+  z-index: variables.$z-index-top;
+  background: black;
 }
 
 @include meta.load-css("vars");
