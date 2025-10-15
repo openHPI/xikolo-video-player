@@ -137,9 +137,6 @@ export class Player {
       this.secondary.volume = 0;
     }
 
-    document.addEventListener('fullscreenchange', this._fullscreenchange);
-    document.addEventListener('webkitfullscreenchange', this._fullscreenchange);
-
     // On small devices the volume slider is hidden
     // So the user can only change it via the device buttons
     // That's why the player's initial state for 'volume' will remain the default 100%
@@ -157,12 +154,6 @@ export class Player {
     this.primary.removeEventListener('ended', this._ended);
     if (this.secondary)
       this.secondary.removeEventListener('click', this._click);
-
-    document.removeEventListener('fullscreenchange', this._fullscreenchange);
-    document.removeEventListener(
-      'webkitfullscreenchange',
-      this._fullscreenchange,
-    );
   }
 
   render() {
@@ -422,14 +413,6 @@ export class Player {
     this.status = { ...this.status, mode: Mode.FINISHED };
   }
 
-  @bind()
-  protected _fullscreenchange() {
-    const doc = document as any;
-    const fullscreen =
-      doc.fullScreen || doc.mozFullScreen || doc.webkitIsFullScreen;
-    this.status = { ...this.status, fullscreen };
-  }
-
   @Listen('slider:seek')
   protected async _seek(e: CustomEvent) {
     await this.seek(e.detail.seconds);
@@ -439,6 +422,7 @@ export class Player {
   private enterFullscreen() {
     if (!this.status.fullscreen) {
       requestFullscreen(this.el);
+      this.status = { ...this.status, fullscreen: true };
     }
   }
 
@@ -446,6 +430,7 @@ export class Player {
   private exitFullscreen() {
     if (this.status.fullscreen) {
       exitFullscreen();
+      this.status = { ...this.status, fullscreen: false };
     }
   }
 
@@ -679,9 +664,11 @@ export class Player {
   @bind()
   private toggleFullscreen() {
     if (this.status.fullscreen) {
-      exitFullscreen();
+      exitFullscreen(this.el);
+      this.status = { ...this.status, fullscreen: false };
     } else {
       requestFullscreen(this.el);
+      this.status = { ...this.status, fullscreen: true };
     }
   }
 
