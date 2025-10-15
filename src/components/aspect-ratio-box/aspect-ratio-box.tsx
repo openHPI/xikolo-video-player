@@ -13,36 +13,13 @@ export class AspectRatioBox {
    */
   @Prop() ratio: number = 0.5625;
 
-  @State() fullscreen: boolean = this.isVideoInFullscreen();
-
-  @Listen('fullscreenchange', { target: 'window' })
-  @Listen('webkitfullscreenchange', { target: 'window' })
-  handleFullscreenChange() {
-    this.fullscreen = this.isVideoInFullscreen();
-  }
-
   render() {
     return (
-      <div
-        class="bx"
-        style={
-          !this.fullscreen ? { 'padding-bottom': `${this.ratio * 100}%` } : {}
-        }
-      >
+      <div class="bx" data-ratio={this.ratio === 0.75 ? '4:3' : ''}>
         <div class="ct">
           <slot />
         </div>
       </div>
     );
-  }
-
-  private isVideoInFullscreen() {
-    const fullScreenElement =
-      document.fullscreenElement || (document as any).webkitFullscreenElement;
-
-    if (fullScreenElement) {
-      return true;
-    }
-    return false;
   }
 }
