@@ -46,6 +46,33 @@
   }
 }
 
+:host(.player--pseudo-fullscreen) {
+  position: fixed;
+  // Respect iOS safe areas
+  top: env(safe-area-inset-top);
+  right: env(safe-area-inset-right);
+  bottom: env(safe-area-inset-bottom);
+  left: env(safe-area-inset-left);
+
+  // Fall back for older engines
+  width: calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right));
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+
+  // Prefer dynamic viewport units when supported (prevents address bar jumps)
+  @supports (height: 100dvh) {
+    width: calc(
+      100dvw - env(safe-area-inset-left) - env(safe-area-inset-right)
+    );
+    height: calc(
+      100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+    );
+  }
+
+  z-index: 2147483647; // on top
+  background: #000;
+  touch-action: none;
+}
+
 @include meta.load-css("vars");
 
 .loading {

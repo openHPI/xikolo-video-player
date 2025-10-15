@@ -429,7 +429,7 @@ export class Player {
   @Listen('control:exitFullscreen')
   private exitFullscreen() {
     if (this.status.fullscreen) {
-      exitFullscreen();
+      exitFullscreen(this.el);
       this.status = { ...this.status, fullscreen: false };
     }
   }

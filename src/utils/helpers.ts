@@ -1,3 +1,4 @@
+import { Status } from '../components';
 import { HTMLXmVideoElement } from '../types/common';
 
 /*
@@ -45,20 +46,36 @@ export const getVideoElement = (
 /**
  * Request fullscreen on the element.
  * Takes vendor prefixes into account to support all browsers.
+ * If no fullscreen API is available, adds the pseudo-fullscreen class.
  */
 export const requestFullscreen = (element: Element) => {
   const requestMethod =
     element.requestFullscreen || (element as any).webkitRequestFullscreen;
 
-  return requestMethod?.call(element);
+  if (requestMethod) {
+    return requestMethod.call(element);
+  }
+
+  // Add fallback to emulate fullscreen via CSS
+  element.classList.add('player--pseudo-fullscreen');
+
+  return Promise.resolve();
 };
 
 /**
  * Exits fullscreen on the document.
  * Takes vendor prefixes into account to support all browsers.
+ * If no fullscreen API is available, removes the pseudo-fullscreen class.
  */
-export const exitFullscreen = () => {
+export const exitFullscreen = (element: Element) => {
   const requestMethod =
     document.exitFullscreen || (document as any).webkitExitFullscreen;
-  return requestMethod?.call(document);
+
+  if (requestMethod) {
+    return requestMethod.call(document);
+  }
+
+  // Remove fallback to emulate fullscreen via CSS
+  element.classList.remove('player--pseudo-fullscreen');
+  return Promise.resolve();
 };
