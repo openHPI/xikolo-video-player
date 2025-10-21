@@ -67,17 +67,21 @@ export class Screen {
       this.split.destroy();
     }
 
-    // Mobile view is vertical
-    if (window.innerWidth < 768) {
+    const options = {
+      sizes: [this.secondaryRatio, this.primaryRatio],
+      gutterSize: 6,
+      minSize: [0, 0],
+      snapOffset: 100,
+    };
+
+    if (this.hasSmallScreenWidth()) {
       this.split = Split([this.primary, this.secondary], {
-        sizes: [this.secondaryRatio, this.primaryRatio],
-        gutterSize: 6,
+        ...options,
         direction: 'vertical',
       });
     } else {
       this.split = Split([this.primary, this.secondary], {
-        sizes: [this.secondaryRatio, this.primaryRatio],
-        gutterSize: 6,
+        ...options,
         direction: 'horizontal',
         gutter: this.gutter,
       });
