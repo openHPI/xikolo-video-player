@@ -235,6 +235,22 @@ export class Vimeo implements XmVideo, VideoAnalytics {
     }
   }
 
+  /**
+   * Enter Fullscreen on the Vimeo player
+   */
+  @Method()
+  async enterFullscreen() {
+    return this.player.requestFullscreen();
+  }
+
+  /**
+   * Exit Fullscreen on the Vimeo player
+   */
+  @Method()
+  async exitFullscreen() {
+    return this.player.exitFullscreen();
+  }
+
   private playerAvailable() {
     return this.player != null;
   }

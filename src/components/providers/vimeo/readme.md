@@ -43,6 +43,26 @@ Type: `Promise<number>`
 
 
 
+### `enterFullscreen() => Promise<void>`
+
+Enter Fullscreen on the Vimeo player
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `exitFullscreen() => Promise<void>`
+
+Exit Fullscreen on the Vimeo player
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 ### `pause() => Promise<void>`
 
 Call pause on the Vimeo player
