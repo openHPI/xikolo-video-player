@@ -8,6 +8,8 @@ interface XmVideoFunctions {
   seek(seconds: number): Promise<number>;
   setPlaybackRate(playbackRate: number): Promise<number>;
   volumeChanged(volume: number): Promise<number>;
+  enterFullscreen(): Promise<void>;
+  exitFullscreen(): Promise<void>;
 }
 
 interface XmVideoEvents {

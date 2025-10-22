@@ -21,6 +21,10 @@ import {
   styleUrl: 'kaltura.scss',
 })
 export class Kaltura implements XmVideo, VideoAnalytics {
+  /**
+   * Kaltura Player API
+   * https://github.com/kaltura/playkit-js/blob/master/docs/api.md
+   */
   private player: any;
 
   private playerContainer: HTMLXmAspectRatioBoxElement;
@@ -220,6 +224,30 @@ export class Kaltura implements XmVideo, VideoAnalytics {
       return (this.player.playbackRate = playbackRate);
     } else {
       this.addToCallBacks(() => (this.player.playbackRate = playbackRate));
+    }
+  }
+
+  /**
+   * Enter Fullscreen on the Kaltura player
+   */
+  @Method()
+  async enterFullscreen() {
+    if (this.playerAvailable()) {
+      this.player.requestFullscreen();
+    } else {
+      this.addToCallBacks(() => this.player.requestFullscreen());
+    }
+  }
+
+  /**
+   * Exit Fullscreen on the Kaltura player
+   */
+  @Method()
+  async exitFullscreen() {
+    if (this.playerAvailable()) {
+      this.player.exitFullscreen();
+    } else {
+      this.addToCallBacks(() => this.player.exitFullscreen());
     }
   }
 

@@ -52,7 +52,15 @@ export namespace Components {
           * Duration of the video in seconds
          */
         "duration": number;
+        /**
+          * Enter Fullscreen on the Kaltura player
+         */
+        "enterFullscreen": () => Promise<void>;
         "entryId": string;
+        /**
+          * Exit Fullscreen on the Kaltura player
+         */
+        "exitFullscreen": () => Promise<void>;
         "partnerId": number;
         /**
           * Call pause on the Kaltura player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
@@ -211,6 +219,14 @@ export namespace Components {
           * Call getCurrentTime on the Vimeo player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
          */
         "currentTime": () => Promise<number>;
+        /**
+          * Enter Fullscreen on the Vimeo player
+         */
+        "enterFullscreen": () => Promise<void>;
+        /**
+          * Exit Fullscreen on the Vimeo player
+         */
+        "exitFullscreen": () => Promise<void>;
         /**
           * Call pause on the Vimeo player  If the player is not initialized, it will save the function so it can be applied once the player is ready.
          */
