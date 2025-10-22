@@ -78,12 +78,13 @@ export class Screen {
       this.split = Split([this.primary, this.secondary], {
         ...options,
         direction: 'vertical',
+        gutter: this.gutterVertical,
       });
     } else {
       this.split = Split([this.primary, this.secondary], {
         ...options,
         direction: 'horizontal',
-        gutter: this.gutter,
+        gutter: this.gutterHorizontal,
       });
     }
   }
@@ -92,7 +93,7 @@ export class Screen {
    * Override of gutter creation function for horizontal alignment
    * See: https://github.com/nathancahill/split/tree/master/packages/splitjs#gutter
    */
-  private gutter() {
+  private gutterHorizontal() {
     const gutter = document.createElement('div');
     gutter.className = `gutter gutter--horizontal`;
 
@@ -101,6 +102,26 @@ export class Screen {
         <span class="gutter__handle">
           <span class="gutter__arrow gutter__arrow--left">${icon.ArrowLeft}</span>
           <span class="gutter__arrow gutter__arrow--right">${icon.ArrowRight}</span>
+        </span>
+      </span>
+      `;
+    gutter.innerHTML = handlerTemplate;
+
+    return gutter;
+  }
+
+  /**
+   * Override of gutter creation function for vertical alignment
+   */
+  private gutterVertical() {
+    const gutter = document.createElement('div');
+    gutter.className = `gutter gutter--vertical`;
+
+    const handlerTemplate = `
+      <span class="gutter__draggable-area">
+        <span class="gutter__handle">
+          <span class="gutter__arrow gutter__arrow--up">${icon.ArrowUp}</span>
+          <span class="gutter__arrow gutter__arrow--down">${icon.ArrowDown}</span>
         </span>
       </span>
       `;

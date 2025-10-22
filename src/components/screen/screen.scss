@@ -26,6 +26,12 @@
         }
       }
     }
+
+    // Hovering over the screen in portrait mode makes gutter handle appear
+    &:hover .gutter__draggable-area,
+    &:hover .gutter__handle {
+      display: block;
+    }
   }
 }
 
@@ -52,6 +58,10 @@
 
   &.gutter--horizontal {
     cursor: col-resize;
+  }
+
+  &.gutter--vertical {
+    cursor: row-resize;
   }
 
   // These styles apply to horizontal alignment
@@ -88,6 +98,16 @@
 
     &--right {
       left: 75%;
+    }
+
+    &--up {
+      left: 50%;
+      top: 40%;
+    }
+
+    &--down {
+      left: 50%;
+      top: 60%;
     }
 
     svg {
