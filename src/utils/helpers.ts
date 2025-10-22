@@ -44,21 +44,25 @@ export const getVideoElement = (
 
 /**
  * Request fullscreen on the element.
- * Takes vendor prefixes into account to support all browsers.
+ * If the fullscreen API is not supported,
+ * fallback to the video enterFullscreen method.
  */
-export const requestFullscreen = (element: Element) => {
-  const requestMethod =
-    element.requestFullscreen || (element as any).webkitRequestFullscreen;
+export const requestFullscreen = (
+  element: HTMLXmPlayerElement,
+  video: HTMLXmVideoElement,
+) => {
+  const requestMethod = element.requestFullscreen;
 
-  return requestMethod?.call(element);
+  return requestMethod?.call(element) ?? video.enterFullscreen();
 };
 
 /**
  * Exits fullscreen on the document.
- * Takes vendor prefixes into account to support all browsers.
+ * If the fullscreen API is not supported,
+ * fallback to the video exitFullscreen method.
  */
-export const exitFullscreen = () => {
-  const requestMethod =
-    document.exitFullscreen || (document as any).webkitExitFullscreen;
-  return requestMethod?.call(document);
+export const exitFullscreen = (video: HTMLXmVideoElement) => {
+  const requestMethod = document.exitFullscreen;
+
+  return requestMethod?.call(document) ?? video.exitFullscreen();
 };

@@ -438,14 +438,14 @@ export class Player {
   @Listen('control:enterFullscreen')
   private enterFullscreen() {
     if (!this.status.fullscreen) {
-      requestFullscreen(this.el);
+      requestFullscreen(this.el, this.primary);
     }
   }
 
   @Listen('control:exitFullscreen')
   private exitFullscreen() {
     if (this.status.fullscreen) {
-      exitFullscreen();
+      exitFullscreen(this.primary);
     }
   }
 
@@ -679,9 +679,9 @@ export class Player {
   @bind()
   private toggleFullscreen() {
     if (this.status.fullscreen) {
-      exitFullscreen();
+      exitFullscreen(this.primary);
     } else {
-      requestFullscreen(this.el);
+      requestFullscreen(this.el, this.primary);
     }
   }
 
