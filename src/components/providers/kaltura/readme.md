@@ -47,7 +47,7 @@ Type: `Promise<any>`
 
 ### `enterFullscreen() => Promise<void>`
 
-Enter Fullscreen on the Vimeo player
+Enter Fullscreen on the Kaltura player
 
 #### Returns
 
@@ -57,7 +57,7 @@ Type: `Promise<void>`
 
 ### `exitFullscreen() => Promise<void>`
 
-Exit Fullscreen on the Vimeo player
+Exit Fullscreen on the Kaltura player
 
 #### Returns
 
