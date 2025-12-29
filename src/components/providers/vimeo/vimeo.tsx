@@ -71,10 +71,6 @@ export class Vimeo implements XmVideo, VideoAnalytics {
     return (
       <xm-aspect-ratio-box ratio={this.ratio}>
         <div ref={(el) => (this.container = el)}></div>
-
-        <div class="overlay" tabindex="0">
-          <slot name="overlay" />
-        </div>
       </xm-aspect-ratio-box>
     );
   }
