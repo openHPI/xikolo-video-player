@@ -128,12 +128,10 @@ export class Player {
     this.primary = getVideoElement(this.el, '[slot=primary]')!;
     this.secondary = getVideoElement(this.el, '[slot=secondary]');
 
-    this.primary.addEventListener('click', this._click);
     this.primary.addEventListener('timeupdate', this.timeUpdate);
     this.primary.addEventListener('ended', this._ended);
 
     if (this.secondary) {
-      this.secondary.addEventListener('click', this._click);
       this.secondary.volume = 0;
     }
 
@@ -152,11 +150,8 @@ export class Player {
   }
 
   disconnectedCallback() {
-    this.primary.removeEventListener('click', this._click);
     this.primary.removeEventListener('timeupdate', this.timeUpdate);
     this.primary.removeEventListener('ended', this._ended);
-    if (this.secondary)
-      this.secondary.removeEventListener('click', this._click);
 
     document.removeEventListener('fullscreenchange', this._fullscreenchange);
     document.removeEventListener(
@@ -201,19 +196,6 @@ export class Player {
           >(this.secondary, params)
         : null,
     ]);
-  }
-
-  @bind()
-  protected async _click() {
-    if (!this.status.openedSettingsMenu && !this.status.showPlaybackRate) {
-      switch (this.status.mode) {
-        case Mode.PAUSED:
-        case Mode.FINISHED:
-          return this.play();
-        default:
-          return this.pause();
-      }
-    }
   }
 
   private timeUpdate = async (e: Event) => {
@@ -772,7 +754,6 @@ export class Player {
     ) as HTMLXmVideoElement;
     video.setAttribute('slot', slot);
     video.setAttribute('active', 'true');
-    video.ondblclick = this.toggleFullscreen;
   };
 
   private renderControls = () => {
