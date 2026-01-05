@@ -351,6 +351,7 @@ export class Player {
    * Also sets the internal state to mode "playing"
    */
   @Method()
+  @Listen('play')
   @Listen('control:play')
   public async play() {
     await this._invokePlayerFunction('play');
@@ -362,6 +363,7 @@ export class Player {
    * Also sets the internal state to mode "paused"
    */
   @Method()
+  @Listen('pause')
   @Listen('control:pause')
   public async pause() {
     await this._invokePlayerFunction('pause');
