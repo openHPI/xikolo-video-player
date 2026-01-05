@@ -39,6 +39,19 @@ describe('xm-player', () => {
     expect(playEvent).toHaveReceivedEvent();
   });
 
+  test('should handle external play event', async () => {
+    const externalPlayEvent = await player.spyOnEvent('play');
+
+    await page.evaluate(() => {
+      const playerEl = document.querySelector('xm-player');
+      const event = new CustomEvent('play');
+      playerEl?.dispatchEvent(event);
+    });
+    await page.waitForChanges();
+
+    expect(externalPlayEvent).toHaveReceivedEvent();
+  });
+
   test('should fire pause event if it was playing before', async () => {
     const pauseEvent = await player.spyOnEvent('control:pause');
 
@@ -57,8 +70,21 @@ describe('xm-player', () => {
     expect(pauseEvent).toHaveReceivedEvent();
   });
 
-  it.todo('should fire seek event');
+  test('should handle external pause event', async () => {
+    const externalPauseEvent = await player.spyOnEvent('pause');
+
+    await page.evaluate(() => {
+      const playerEl = document.querySelector('xm-player');
+      const event = new CustomEvent('pause');
+      playerEl?.dispatchEvent(event);
+    });
+    await page.waitForChanges();
+
+    expect(externalPauseEvent).toHaveReceivedEvent();
+  });
 });
+
+it.todo('should fire seek event');
 
 describe('xm-player with xm-presentation', () => {
   describe('configured as single stream', () => {

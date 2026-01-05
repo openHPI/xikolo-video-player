@@ -351,7 +351,6 @@ export class Player {
    * Also sets the internal state to mode "playing"
    */
   @Method()
-  @Listen('play')
   @Listen('control:play')
   public async play() {
     await this._invokePlayerFunction('play');
@@ -363,7 +362,6 @@ export class Player {
    * Also sets the internal state to mode "paused"
    */
   @Method()
-  @Listen('pause')
   @Listen('control:pause')
   public async pause() {
     await this._invokePlayerFunction('pause');
@@ -480,6 +478,16 @@ export class Player {
   @Listen('control:changeVolume')
   public async _changeVolume(e: CustomEvent) {
     this._setVolume(e.detail.volume);
+  }
+
+  @Listen('play')
+  private handleExternalPlayEvent() {
+    this.status = { ...this.status, mode: Mode.PLAYING };
+  }
+
+  @Listen('pause')
+  private handleExternalPauseEvent() {
+    this.status = { ...this.status, mode: Mode.PAUSED };
   }
 
   /**
