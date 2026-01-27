@@ -9,6 +9,7 @@ export const config: Config = {
   plugins: [sass(), postcss({ plugins: [autoprefixer()] })],
   buildEs5: 'prod',
   outputTargets: [
+    { type: 'dist-custom-elements' },
     { type: 'dist', esmLoaderPath: '../loader' },
     {
       type: 'docs-readme',
