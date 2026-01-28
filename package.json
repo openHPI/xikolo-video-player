@@ -28,7 +28,7 @@
     "@stencil-community/eslint-plugin": "0.8.0",
     "@stencil-community/postcss": "2.2.0",
     "@stencil/core": "4.38.2",
-    "@stencil/sass": "3.2.2",
+    "@stencil/sass": "3.2.3",
     "@types/jest": "29.5.14",
     "@types/vimeo__player": "2.18.3",
     "@typescript-eslint/eslint-plugin": "5.62.0",
