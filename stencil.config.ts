@@ -1,12 +1,10 @@
 import { Config } from '@stencil/core';
-import { postcss } from '@stencil-community/postcss';
 import { sass } from '@stencil/sass';
-
-import autoprefixer from 'autoprefixer';
 
 export const config: Config = {
   namespace: 'xmf',
-  plugins: [sass(), postcss({ plugins: [autoprefixer()] })],
+  plugins: [sass()],
+  autoprefixCss: true,
   buildEs5: 'prod',
   outputTargets: [
     {
