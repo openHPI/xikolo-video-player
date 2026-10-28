@@ -12,6 +12,13 @@
 | `ratio`  | `ratio`   | Video ratio, default is 16:9 | `number` | `0.5625` |
 
 
+## Slots
+
+| Slot | Description      |
+| ---- | ---------------- |
+|      | The default slot |
+
+
 ## Dependencies
 
 ### Used by

@@ -21,6 +21,13 @@
 | `toggleControl:loaded` | Emitted on componentDidLoad. Used in player to init CustomControlButton | `CustomEvent<ToggleControlProps>` |
 
 
+## Slots
+
+| Slot     | Description |
+| -------- | ----------- |
+| `"icon"` |             |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

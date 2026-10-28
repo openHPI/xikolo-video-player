@@ -22,7 +22,7 @@ The user can still change the volume with the device keys.
 | `playbackrate` | `playbackrate` |             | `number`  | `defaultStatus.settings.playbackRate` |
 | `showsubtitle` | `showsubtitle` |             | `boolean` | `defaultStatus.subtitle.enabled`      |
 | `slidesSrc`    | `slides-src`   |             | `string`  | `undefined`                           |
-| `volume`       | `volume`       |             | `number`  | `defaultStatus.volume`                |
+| `volume`       | `volume`       |             | `number`  | `1.0`                                 |
 
 
 ## Events
@@ -138,6 +138,14 @@ Sets the mute state false and resets the primary slot video volume.
 Type: `Promise<void>`
 
 
+
+
+## Slots
+
+| Slot          | Description |
+| ------------- | ----------- |
+| `"primary"`   |             |
+| `"secondary"` |             |
 
 
 ## Dependencies

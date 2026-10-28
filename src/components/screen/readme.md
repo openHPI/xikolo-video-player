@@ -14,6 +14,14 @@
 | `secondaryRatio` | `secondary-ratio` |             | `number`  | `50`        |
 
 
+## Slots
+
+| Slot          | Description |
+| ------------- | ----------- |
+| `"primary"`   |             |
+| `"secondary"` |             |
+
+
 ## Dependencies
 
 ### Used by

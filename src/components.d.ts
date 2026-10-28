@@ -137,7 +137,7 @@ export namespace Components {
          */
         "unmute": () => Promise<void>;
         /**
-          * @default defaultStatus.volume
+          * @default 1.0
          */
         "volume": number;
     }
@@ -647,7 +647,7 @@ declare namespace LocalJSX {
         "showsubtitle"?: boolean;
         "slidesSrc"?: string;
         /**
-          * @default defaultStatus.volume
+          * @default 1.0
          */
         "volume"?: number;
     }
@@ -764,39 +764,105 @@ declare namespace LocalJSX {
         "src"?: number;
         "volume"?: number;
     }
+
+    interface XmAspectRatioBoxAttributes {
+        "ratio": number;
+    }
+    interface XmControlsAttributes {
+        "slidesSrc": string;
+    }
+    interface XmKalturaAttributes {
+        "active": boolean;
+        "ratio": number;
+        "duration": number;
+        "entryId": string;
+        "partnerId": number;
+        "poster": string;
+        "volume": number;
+    }
+    interface XmPlayerAttributes {
+        "volume": number;
+        "playbackrate": number;
+        "showsubtitle": boolean;
+        "lang": string;
+        "slidesSrc": string;
+    }
+    interface XmPresentationAttributes {
+        "reference": string;
+        "name": string;
+        "label": string;
+    }
+    interface XmScreenAttributes {
+        "fullscreen": boolean;
+        "primaryRatio": number;
+        "secondaryRatio": number;
+    }
+    interface XmSlidePreviewBarAttributes {
+        "duration": number;
+        "slidesSrc": string;
+    }
+    interface XmSliderAttributes {
+        "duration": number;
+        "progress": number;
+        "fullscreen": boolean;
+        "slidesSrc": string;
+    }
+    interface XmTextTrackAttributes {
+        "language": string;
+        "src": string;
+        "label": string;
+        "default": boolean;
+    }
+    interface XmToggleControlAttributes {
+        "name": string;
+        "title": string;
+        "active": boolean;
+    }
+    interface XmTooltipAttributes {
+        "show": boolean;
+        "content": string;
+        "image": string;
+        "positionX": number;
+    }
+    interface XmVimeoAttributes {
+        "active": boolean;
+        "src": number;
+        "volume": number;
+    }
+
     interface IntrinsicElements {
-        "xm-aspect-ratio-box": XmAspectRatioBox;
-        "xm-controls": XmControls;
-        "xm-kaltura": XmKaltura;
-        "xm-player": XmPlayer;
-        "xm-presentation": XmPresentation;
-        "xm-screen": XmScreen;
+        "xm-aspect-ratio-box": Omit<XmAspectRatioBox, keyof XmAspectRatioBoxAttributes> & { [K in keyof XmAspectRatioBox & keyof XmAspectRatioBoxAttributes]?: XmAspectRatioBox[K] } & { [K in keyof XmAspectRatioBox & keyof XmAspectRatioBoxAttributes as `attr:${K}`]?: XmAspectRatioBoxAttributes[K] } & { [K in keyof XmAspectRatioBox & keyof XmAspectRatioBoxAttributes as `prop:${K}`]?: XmAspectRatioBox[K] };
+        "xm-controls": Omit<XmControls, keyof XmControlsAttributes> & { [K in keyof XmControls & keyof XmControlsAttributes]?: XmControls[K] } & { [K in keyof XmControls & keyof XmControlsAttributes as `attr:${K}`]?: XmControlsAttributes[K] } & { [K in keyof XmControls & keyof XmControlsAttributes as `prop:${K}`]?: XmControls[K] };
+        "xm-kaltura": Omit<XmKaltura, keyof XmKalturaAttributes> & { [K in keyof XmKaltura & keyof XmKalturaAttributes]?: XmKaltura[K] } & { [K in keyof XmKaltura & keyof XmKalturaAttributes as `attr:${K}`]?: XmKalturaAttributes[K] } & { [K in keyof XmKaltura & keyof XmKalturaAttributes as `prop:${K}`]?: XmKaltura[K] };
+        "xm-player": Omit<XmPlayer, keyof XmPlayerAttributes> & { [K in keyof XmPlayer & keyof XmPlayerAttributes]?: XmPlayer[K] } & { [K in keyof XmPlayer & keyof XmPlayerAttributes as `attr:${K}`]?: XmPlayerAttributes[K] } & { [K in keyof XmPlayer & keyof XmPlayerAttributes as `prop:${K}`]?: XmPlayer[K] };
+        "xm-presentation": Omit<XmPresentation, keyof XmPresentationAttributes> & { [K in keyof XmPresentation & keyof XmPresentationAttributes]?: XmPresentation[K] } & { [K in keyof XmPresentation & keyof XmPresentationAttributes as `attr:${K}`]?: XmPresentationAttributes[K] } & { [K in keyof XmPresentation & keyof XmPresentationAttributes as `prop:${K}`]?: XmPresentation[K] };
+        "xm-screen": Omit<XmScreen, keyof XmScreenAttributes> & { [K in keyof XmScreen & keyof XmScreenAttributes]?: XmScreen[K] } & { [K in keyof XmScreen & keyof XmScreenAttributes as `attr:${K}`]?: XmScreenAttributes[K] } & { [K in keyof XmScreen & keyof XmScreenAttributes as `prop:${K}`]?: XmScreen[K] };
         "xm-settings-menu": XmSettingsMenu;
-        "xm-slide-preview-bar": XmSlidePreviewBar;
-        "xm-slider": XmSlider;
-        "xm-text-track": XmTextTrack;
-        "xm-toggle-control": XmToggleControl;
-        "xm-tooltip": XmTooltip;
-        "xm-vimeo": XmVimeo;
+        "xm-slide-preview-bar": Omit<XmSlidePreviewBar, keyof XmSlidePreviewBarAttributes> & { [K in keyof XmSlidePreviewBar & keyof XmSlidePreviewBarAttributes]?: XmSlidePreviewBar[K] } & { [K in keyof XmSlidePreviewBar & keyof XmSlidePreviewBarAttributes as `attr:${K}`]?: XmSlidePreviewBarAttributes[K] } & { [K in keyof XmSlidePreviewBar & keyof XmSlidePreviewBarAttributes as `prop:${K}`]?: XmSlidePreviewBar[K] };
+        "xm-slider": Omit<XmSlider, keyof XmSliderAttributes> & { [K in keyof XmSlider & keyof XmSliderAttributes]?: XmSlider[K] } & { [K in keyof XmSlider & keyof XmSliderAttributes as `attr:${K}`]?: XmSliderAttributes[K] } & { [K in keyof XmSlider & keyof XmSliderAttributes as `prop:${K}`]?: XmSlider[K] };
+        "xm-text-track": Omit<XmTextTrack, keyof XmTextTrackAttributes> & { [K in keyof XmTextTrack & keyof XmTextTrackAttributes]?: XmTextTrack[K] } & { [K in keyof XmTextTrack & keyof XmTextTrackAttributes as `attr:${K}`]?: XmTextTrackAttributes[K] } & { [K in keyof XmTextTrack & keyof XmTextTrackAttributes as `prop:${K}`]?: XmTextTrack[K] };
+        "xm-toggle-control": Omit<XmToggleControl, keyof XmToggleControlAttributes> & { [K in keyof XmToggleControl & keyof XmToggleControlAttributes]?: XmToggleControl[K] } & { [K in keyof XmToggleControl & keyof XmToggleControlAttributes as `attr:${K}`]?: XmToggleControlAttributes[K] } & { [K in keyof XmToggleControl & keyof XmToggleControlAttributes as `prop:${K}`]?: XmToggleControl[K] };
+        "xm-tooltip": Omit<XmTooltip, keyof XmTooltipAttributes> & { [K in keyof XmTooltip & keyof XmTooltipAttributes]?: XmTooltip[K] } & { [K in keyof XmTooltip & keyof XmTooltipAttributes as `attr:${K}`]?: XmTooltipAttributes[K] } & { [K in keyof XmTooltip & keyof XmTooltipAttributes as `prop:${K}`]?: XmTooltip[K] };
+        "xm-vimeo": Omit<XmVimeo, keyof XmVimeoAttributes> & { [K in keyof XmVimeo & keyof XmVimeoAttributes]?: XmVimeo[K] } & { [K in keyof XmVimeo & keyof XmVimeoAttributes as `attr:${K}`]?: XmVimeoAttributes[K] } & { [K in keyof XmVimeo & keyof XmVimeoAttributes as `prop:${K}`]?: XmVimeo[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "xm-aspect-ratio-box": LocalJSX.XmAspectRatioBox & JSXBase.HTMLAttributes<HTMLXmAspectRatioBoxElement>;
-            "xm-controls": LocalJSX.XmControls & JSXBase.HTMLAttributes<HTMLXmControlsElement>;
-            "xm-kaltura": LocalJSX.XmKaltura & JSXBase.HTMLAttributes<HTMLXmKalturaElement>;
-            "xm-player": LocalJSX.XmPlayer & JSXBase.HTMLAttributes<HTMLXmPlayerElement>;
-            "xm-presentation": LocalJSX.XmPresentation & JSXBase.HTMLAttributes<HTMLXmPresentationElement>;
-            "xm-screen": LocalJSX.XmScreen & JSXBase.HTMLAttributes<HTMLXmScreenElement>;
-            "xm-settings-menu": LocalJSX.XmSettingsMenu & JSXBase.HTMLAttributes<HTMLXmSettingsMenuElement>;
-            "xm-slide-preview-bar": LocalJSX.XmSlidePreviewBar & JSXBase.HTMLAttributes<HTMLXmSlidePreviewBarElement>;
-            "xm-slider": LocalJSX.XmSlider & JSXBase.HTMLAttributes<HTMLXmSliderElement>;
-            "xm-text-track": LocalJSX.XmTextTrack & JSXBase.HTMLAttributes<HTMLXmTextTrackElement>;
-            "xm-toggle-control": LocalJSX.XmToggleControl & JSXBase.HTMLAttributes<HTMLXmToggleControlElement>;
-            "xm-tooltip": LocalJSX.XmTooltip & JSXBase.HTMLAttributes<HTMLXmTooltipElement>;
-            "xm-vimeo": LocalJSX.XmVimeo & JSXBase.HTMLAttributes<HTMLXmVimeoElement>;
+            "xm-aspect-ratio-box": LocalJSX.IntrinsicElements["xm-aspect-ratio-box"] & JSXBase.HTMLAttributes<HTMLXmAspectRatioBoxElement>;
+            "xm-controls": LocalJSX.IntrinsicElements["xm-controls"] & JSXBase.HTMLAttributes<HTMLXmControlsElement>;
+            "xm-kaltura": LocalJSX.IntrinsicElements["xm-kaltura"] & JSXBase.HTMLAttributes<HTMLXmKalturaElement>;
+            "xm-player": LocalJSX.IntrinsicElements["xm-player"] & JSXBase.HTMLAttributes<HTMLXmPlayerElement>;
+            "xm-presentation": LocalJSX.IntrinsicElements["xm-presentation"] & JSXBase.HTMLAttributes<HTMLXmPresentationElement>;
+            "xm-screen": LocalJSX.IntrinsicElements["xm-screen"] & JSXBase.HTMLAttributes<HTMLXmScreenElement>;
+            "xm-settings-menu": LocalJSX.IntrinsicElements["xm-settings-menu"] & JSXBase.HTMLAttributes<HTMLXmSettingsMenuElement>;
+            "xm-slide-preview-bar": LocalJSX.IntrinsicElements["xm-slide-preview-bar"] & JSXBase.HTMLAttributes<HTMLXmSlidePreviewBarElement>;
+            "xm-slider": LocalJSX.IntrinsicElements["xm-slider"] & JSXBase.HTMLAttributes<HTMLXmSliderElement>;
+            "xm-text-track": LocalJSX.IntrinsicElements["xm-text-track"] & JSXBase.HTMLAttributes<HTMLXmTextTrackElement>;
+            "xm-toggle-control": LocalJSX.IntrinsicElements["xm-toggle-control"] & JSXBase.HTMLAttributes<HTMLXmToggleControlElement>;
+            "xm-tooltip": LocalJSX.IntrinsicElements["xm-tooltip"] & JSXBase.HTMLAttributes<HTMLXmTooltipElement>;
+            "xm-vimeo": LocalJSX.IntrinsicElements["xm-vimeo"] & JSXBase.HTMLAttributes<HTMLXmVimeoElement>;
         }
     }
 }
