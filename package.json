@@ -29,7 +29,7 @@
     "@stencil/core": "4.45.2",
     "@stencil/sass": "3.3.3",
     "@types/jest": "29.5.14",
-    "@types/vimeo__player": "2.18.3",
+    "@types/vimeo__player": "2.29.4",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
     "eslint": "8.57.1",
